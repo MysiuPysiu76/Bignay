@@ -1,0 +1,23 @@
+modLoader = "javafml"
+loaderVersion = "${loader_version_range}"
+license = "${mod_license}"
+[[mods]]
+modId = "bignay"
+version = "0.0.0"
+displayName = "Bignay"
+authors = "Mysiu Pysiu"
+description = '''Small things, improving Minecraft bit by bit'''
+
+[[dependencies.${ mod_id }]]
+    modId = "forge"
+    mandatory = true
+    versionRange = "${forge_version_range}"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.${ mod_id }]]
+    modId = "minecraft"
+    mandatory = true
+    versionRange = "${minecraft_version_range}"
+    ordering = "NONE"
+    side = "BOTH"
