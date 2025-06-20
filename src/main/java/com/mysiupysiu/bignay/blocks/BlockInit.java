@@ -41,8 +41,7 @@ public class BlockInit {
     }
 
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey().equals(CreativeModeTabs.NATURAL_BLOCKS))
-        {
+        if (event.getTabKey().equals(CreativeModeTabs.NATURAL_BLOCKS)) {
             NATURAL_TAB_ITEMS.forEach(event::accept);
         }
     }

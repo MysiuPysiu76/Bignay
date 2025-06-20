@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "bignay:wax"
+    }
+  },
+  "result": {
+    "item": "bignay:wax_block",
+    "count": 1
+  }
+}
