@@ -21,6 +21,7 @@ public class ItemInit {
 
     public static final RegistryObject<Item> WAX = registerItem("wax", DefaultItem::new);
     public static final RegistryObject<Item> WITHER_BONE = registerItem("wither_bone", DefaultItem::new);
+    public static final RegistryObject<Item> WITHER_BONE_MEAL = registerItem("wither_bone_meal", WitherBoneMealItem::new);
 
     private static RegistryObject<Item> registerItem(String name, Supplier<Item> supplier) {
         RegistryObject<Item> item = ITEMS.register(name, supplier);

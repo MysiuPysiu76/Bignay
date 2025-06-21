@@ -1,6 +1,7 @@
 {
   "block.bignay.wax_block": "Wax Block",
-  "block.bignay.wither_bone_block": "Wither bone block",
+  "block.bignay.wither_bone_block": "Wither Bone Block",
   "item.bignay.wax": "Wax",
-  "item.bignay.wither_bone": "Wither bone"
+  "item.bignay.wither_bone": "Wither Bone",
+  "item.bignay.wither_bone_meal": "Wither Bone Meal"
 }
