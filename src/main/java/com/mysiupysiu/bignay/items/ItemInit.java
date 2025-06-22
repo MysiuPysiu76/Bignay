@@ -19,7 +19,7 @@ public class ItemInit {
 
     private static final List<RegistryObject<Item>> INGREDIENTS_TAB_ITEMS = new ArrayList<>();
 
-    public static final RegistryObject<Item> WAX = registerItem("wax", DefaultItem::new);
+    public static final RegistryObject<Item> WAX = registerItem("wax", WaxItem::new);
     public static final RegistryObject<Item> WITHER_BONE = registerItem("wither_bone", DefaultItem::new);
     public static final RegistryObject<Item> WITHER_BONE_MEAL = registerItem("wither_bone_meal", WitherBoneMealItem::new);
 

@@ -25,13 +25,13 @@ public class WitherBoneMealItem extends Item {
         BlockState state = level.getBlockState(pos);
 
         if (!level.isClientSide && state.getBlock() == Blocks.NETHER_WART) {
-            Integer age = state.getValue(NetherWartBlock.AGE);
+            int age = state.getValue(NetherWartBlock.AGE);
 
             if (age < 3) {
                 level.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0f, 1.0f);
                 context.getItemInHand().shrink(1);
 
-                if(level.random.nextFloat() < 0.8f) {
+                if (level.random.nextFloat() < 0.4f) {
                     level.setBlock(pos, state.setValue(NetherWartBlock.AGE, age + 1), 2);
                     return InteractionResult.SUCCESS;
                 }
