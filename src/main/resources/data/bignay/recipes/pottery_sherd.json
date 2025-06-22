@@ -6,9 +6,7 @@
     "##"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:brick"
-    }
+    "#": "minecraft:brick"
   },
   "result": {
     "item": "bignay:pottery_sherd",
