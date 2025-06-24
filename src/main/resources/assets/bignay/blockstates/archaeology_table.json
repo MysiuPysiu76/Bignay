@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "bignay:block/archaeology_table",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "bignay:block/archaeology_table",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "bignay:block/archaeology_table",
+      "y": 0
+    },
+    "facing=west": {
+      "model": "bignay:block/archaeology_table",
+      "y": 90
+    }
+  }
+}

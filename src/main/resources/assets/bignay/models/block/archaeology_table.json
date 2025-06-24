@@ -1,0 +1,9 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "bignay:block/archaeology_table_top",
+    "front": "bignay:block/archaeology_table_side",
+    "side": "bignay:block/archaeology_table_side",
+    "bottom": "bignay:block/archaeology_table_bottom"
+  }
+}
