@@ -27,7 +27,7 @@ public class BlockInit {
 
     public static final RegistryObject<Block> WAX_BLOCK = registerBlock("wax_block", WaxBlock::new);
     public static final RegistryObject<Block> WITHER_BONE_BLOCK = registerBlock("wither_bone_block", WitherBoneBlock::new);
-    public static final RegistryObject<Block> ARCHAEOLOGY_TABLE = registerBlock("archaeology_table", ArchaeologyTable::new);
+    public static final RegistryObject<Block> ARCHAEOLOGY_TABLE = registerBlock("archaeology_table", ArchaeologyTableBlock::new);
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);

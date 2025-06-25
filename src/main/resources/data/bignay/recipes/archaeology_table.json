@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#OF",
+    "III",
+    "III"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:flint"
+    },
+    "O": {
+      "item": "minecraft:orange_wool"
+    },
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "I": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "bignay:archaeology_table",
+    "count": 1
+  }
+}

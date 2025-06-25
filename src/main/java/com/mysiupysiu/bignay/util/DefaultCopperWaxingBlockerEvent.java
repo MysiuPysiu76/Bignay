@@ -1,5 +1,6 @@
-package com.mysiupysiu.bignay;
+package com.mysiupysiu.bignay.util;
 
+import com.mysiupysiu.bignay.BignayMod;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
