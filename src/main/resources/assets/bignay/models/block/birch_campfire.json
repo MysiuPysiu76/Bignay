@@ -1,0 +1,8 @@
+{
+  "parent": "bignay:block/template_campfire",
+  "textures": {
+    "fire": "minecraft:block/campfire_fire",
+    "lit_log": "bignay:block/birch_campfire_log_lit",
+    "log": "bignay:block/birch_campfire_log"
+  }
+}
