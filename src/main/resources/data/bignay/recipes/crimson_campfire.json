@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " / ",
+    "/C/",
+    "OOO"
+  ],
+  "key": {
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "tag": "minecraft:coals"
+    },
+    "O": {
+      "item": "minecraft:crimson_stem"
+    }
+  },
+  "result": {
+    "item": "bignay:crimson_campfire",
+    "count": 1
+  }
+}

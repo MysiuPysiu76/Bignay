@@ -7,6 +7,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -163,5 +164,23 @@ public class CustomCampfireBlock extends CampfireBlock {
         }
 
         return InteractionResult.PASS;
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (!state.is(newState.getBlock())) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof CustomCampfireBlockEntity campfireEntity) {
+                for (int i = 0; i < 4; ++i) {
+                    ItemStack itemstack = campfireEntity.getItem(i);
+                    if (!itemstack.isEmpty()) {
+                        Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), itemstack);
+                    }
+                }
+                level.updateNeighbourForOutputSignal(pos, this);
+            }
+
+            super.onRemove(state, level, pos, newState, isMoving);
+        }
     }
 }

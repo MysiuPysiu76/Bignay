@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import javax.annotation.Nullable;
 import java.util.Map;
 
-public class CustomCampfireBlockEntity extends BlockEntity  {
+public class CustomCampfireBlockEntity extends BlockEntity {
 
     private static final Map<Block, BlockEntityType<CustomCampfireBlockEntity>> ENTITY_TYPES = Map.of(
             BlockInit.ACACIA_CAMPFIRE.get(), BlockEntityInit.ACACIA_CAMPFIRE.get(),
