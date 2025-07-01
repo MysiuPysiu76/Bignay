@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " / ",
+    "/C/",
+    "OOO"
+  ],
+  "key": {
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "tag": "minecraft:soul_fire_base_blocks"
+    },
+    "O": {
+      "item": "minecraft:warped_stem"
+    }
+  },
+  "result": {
+    "item": "bignay:soul_warped_campfire",
+    "count": 1
+  }
+}

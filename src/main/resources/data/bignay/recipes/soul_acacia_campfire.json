@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " / ",
+    "/C/",
+    "OOO"
+  ],
+  "key": {
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "tag": "minecraft:soul_fire_base_blocks"
+    },
+    "O": {
+      "item": "minecraft:acacia_log"
+    }
+  },
+  "result": {
+    "item": "bignay:soul_acacia_campfire",
+    "count": 1
+  }
+}
