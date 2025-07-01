@@ -1,7 +1,10 @@
 package com.mysiupysiu.bignay.blocks;
 
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -23,7 +26,43 @@ public class BlockEntityInit {
     public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> SPRUCE_CAMPFIRE = BLOCK_ENTITIES.register("spruce_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.SPRUCE_CAMPFIRE.get()).build(null));
     public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> WARPED_CAMPFIRE = BLOCK_ENTITIES.register("warped_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.WARPED_CAMPFIRE.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> SOUL_ACACIA_CAMPFIRE = BLOCK_ENTITIES.register("soul_acacia_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.SOUL_ACACIA_CAMPFIRE.get()).build(null));
+    public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> SOUL_BIRCH_CAMPFIRE = BLOCK_ENTITIES.register("soul_birch_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.SOUL_BIRCH_CAMPFIRE.get()).build(null));
+    public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> SOUL_CHERRY_CAMPFIRE = BLOCK_ENTITIES.register("soul_cherry_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.SOUL_CHERRY_CAMPFIRE.get()).build(null));
+    public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> SOUL_CRIMSON_CAMPFIRE = BLOCK_ENTITIES.register("soul_crimson_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.SOUL_CRIMSON_CAMPFIRE.get()).build(null));
+    public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> SOUL_DARK_OAK_CAMPFIRE = BLOCK_ENTITIES.register("soul_dark_oak_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.SOUL_DARK_OAK_CAMPFIRE.get()).build(null));
+    public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> SOUL_JUNGLE_CAMPFIRE = BLOCK_ENTITIES.register("soul_jungle_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.SOUL_JUNGLE_CAMPFIRE.get()).build(null));
+    public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> SOUL_MANGROVE_CAMPFIRE = BLOCK_ENTITIES.register("soul_mangrove_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.SOUL_MANGROVE_CAMPFIRE.get()).build(null));
+    public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> SOUL_OAK_CAMPFIRE = BLOCK_ENTITIES.register("soul_oak_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.SOUL_OAK_CAMPFIRE.get()).build(null));
+    public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> SOUL_SPRUCE_CAMPFIRE = BLOCK_ENTITIES.register("soul_spruce_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.SOUL_SPRUCE_CAMPFIRE.get()).build(null));
+    public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> SOUL_WARPED_CAMPFIRE = BLOCK_ENTITIES.register("soul_warped_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.SOUL_WARPED_CAMPFIRE.get()).build(null));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
+    }
+
+    @SubscribeEvent
+    public static void onClientSetup(FMLClientSetupEvent event) {
+        BlockEntityRenderers.register(ACACIA_CAMPFIRE.get(), CustomCampfireRenderer::new);
+        BlockEntityRenderers.register(BIRCH_CAMPFIRE.get(), CustomCampfireRenderer::new);
+        BlockEntityRenderers.register(CHERRY_CAMPFIRE.get(), CustomCampfireRenderer::new);
+        BlockEntityRenderers.register(CRIMSON_CAMPFIRE.get(), CustomCampfireRenderer::new);
+        BlockEntityRenderers.register(DARK_OAK_CAMPFIRE.get(), CustomCampfireRenderer::new);
+        BlockEntityRenderers.register(JUNGLE_CAMPFIRE.get(), CustomCampfireRenderer::new);
+        BlockEntityRenderers.register(MANGROVE_CAMPFIRE.get(), CustomCampfireRenderer::new);
+        BlockEntityRenderers.register(OAK_CAMPFIRE.get(), CustomCampfireRenderer::new);
+        BlockEntityRenderers.register(SPRUCE_CAMPFIRE.get(), CustomCampfireRenderer::new);
+        BlockEntityRenderers.register(WARPED_CAMPFIRE.get(), CustomCampfireRenderer::new);
+
+        BlockEntityRenderers.register(SOUL_ACACIA_CAMPFIRE.get(), CustomCampfireRenderer::new);
+        BlockEntityRenderers.register(SOUL_BIRCH_CAMPFIRE.get(), CustomCampfireRenderer::new);
+        BlockEntityRenderers.register(SOUL_CHERRY_CAMPFIRE.get(), CustomCampfireRenderer::new);
+        BlockEntityRenderers.register(SOUL_CRIMSON_CAMPFIRE.get(), CustomCampfireRenderer::new);
+        BlockEntityRenderers.register(SOUL_DARK_OAK_CAMPFIRE.get(), CustomCampfireRenderer::new);
+        BlockEntityRenderers.register(SOUL_JUNGLE_CAMPFIRE.get(), CustomCampfireRenderer::new);
+        BlockEntityRenderers.register(SOUL_MANGROVE_CAMPFIRE.get(), CustomCampfireRenderer::new);
+        BlockEntityRenderers.register(SOUL_OAK_CAMPFIRE.get(), CustomCampfireRenderer::new);
+        BlockEntityRenderers.register(SOUL_SPRUCE_CAMPFIRE.get(), CustomCampfireRenderer::new);
+        BlockEntityRenderers.register(SOUL_WARPED_CAMPFIRE.get(), CustomCampfireRenderer::new);
     }
 }

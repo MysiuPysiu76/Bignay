@@ -39,6 +39,17 @@ public class BlockInit {
     public static final RegistryObject<Block> SPRUCE_CAMPFIRE = registerBlock("spruce_campfire", () -> new CustomCampfireBlock(BlockBehaviour.Properties.copy(Blocks.CAMPFIRE)));
     public static final RegistryObject<Block> WARPED_CAMPFIRE = registerBlock("warped_campfire", () -> new CustomCampfireBlock(BlockBehaviour.Properties.copy(Blocks.CAMPFIRE)));
 
+    public static final RegistryObject<Block> SOUL_ACACIA_CAMPFIRE = registerBlock("soul_acacia_campfire", () -> new CustomCampfireBlock(BlockBehaviour.Properties.copy(Blocks.SOUL_CAMPFIRE)));
+    public static final RegistryObject<Block> SOUL_BIRCH_CAMPFIRE = registerBlock("soul_birch_campfire", () -> new CustomCampfireBlock(BlockBehaviour.Properties.copy(Blocks.SOUL_CAMPFIRE)));
+    public static final RegistryObject<Block> SOUL_CHERRY_CAMPFIRE = registerBlock("soul_cherry_campfire", () -> new CustomCampfireBlock(BlockBehaviour.Properties.copy(Blocks.SOUL_CAMPFIRE)));
+    public static final RegistryObject<Block> SOUL_CRIMSON_CAMPFIRE = registerBlock("soul_crimson_campfire", () -> new CustomCampfireBlock(BlockBehaviour.Properties.copy(Blocks.SOUL_CAMPFIRE)));
+    public static final RegistryObject<Block> SOUL_DARK_OAK_CAMPFIRE = registerBlock("soul_dark_oak_campfire", () -> new CustomCampfireBlock(BlockBehaviour.Properties.copy(Blocks.SOUL_CAMPFIRE)));
+    public static final RegistryObject<Block> SOUL_JUNGLE_CAMPFIRE = registerBlock("soul_jungle_campfire", () -> new CustomCampfireBlock(BlockBehaviour.Properties.copy(Blocks.SOUL_CAMPFIRE)));
+    public static final RegistryObject<Block> SOUL_MANGROVE_CAMPFIRE = registerBlock("soul_mangrove_campfire", () -> new CustomCampfireBlock(BlockBehaviour.Properties.copy(Blocks.SOUL_CAMPFIRE)));
+    public static final RegistryObject<Block> SOUL_OAK_CAMPFIRE = registerBlock("soul_oak_campfire", () -> new CustomCampfireBlock(BlockBehaviour.Properties.copy(Blocks.SOUL_CAMPFIRE)));
+    public static final RegistryObject<Block> SOUL_SPRUCE_CAMPFIRE = registerBlock("soul_spruce_campfire", () -> new CustomCampfireBlock(BlockBehaviour.Properties.copy(Blocks.SOUL_CAMPFIRE)));
+    public static final RegistryObject<Block> SOUL_WARPED_CAMPFIRE = registerBlock("soul_warped_campfire", () -> new CustomCampfireBlock(BlockBehaviour.Properties.copy(Blocks.SOUL_CAMPFIRE)));
+
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
         RegistryObject<Item> blockItem = ITEMS.register(name,

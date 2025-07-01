@@ -2,7 +2,6 @@ package com.mysiupysiu.bignay;
 
 import com.mysiupysiu.bignay.blocks.BlockEntityInit;
 import com.mysiupysiu.bignay.blocks.BlockInit;
-import com.mysiupysiu.bignay.blocks.ClientModEvents;
 import com.mysiupysiu.bignay.items.ItemInit;
 import com.mysiupysiu.bignay.menu.MenuInit;
 import net.minecraftforge.fml.common.Mod;
@@ -24,6 +23,6 @@ public class BignayMod {
         modEventBus.addListener(BlockInit::addCreative);
         modEventBus.addListener(ItemInit::addCreative);
         modEventBus.addListener(MenuInit::onClientSetup);
-        modEventBus.addListener(ClientModEvents::onClientSetup);
+        modEventBus.addListener(BlockEntityInit::onClientSetup);
     }
 }

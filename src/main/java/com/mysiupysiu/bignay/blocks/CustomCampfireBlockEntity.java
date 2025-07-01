@@ -18,25 +18,21 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 public class CustomCampfireBlockEntity extends BlockEntity {
 
-    private static final Map<Block, BlockEntityType<CustomCampfireBlockEntity>> ENTITY_TYPES = Map.of(
-            BlockInit.ACACIA_CAMPFIRE.get(), BlockEntityInit.ACACIA_CAMPFIRE.get(),
-            BlockInit.BIRCH_CAMPFIRE.get(), BlockEntityInit.BIRCH_CAMPFIRE.get(),
-            BlockInit.CHERRY_CAMPFIRE.get(), BlockEntityInit.CHERRY_CAMPFIRE.get(),
-            BlockInit.CRIMSON_CAMPFIRE.get(), BlockEntityInit.CRIMSON_CAMPFIRE.get(),
-            BlockInit.DARK_OAK_CAMPFIRE.get(), BlockEntityInit.DARK_OAK_CAMPFIRE.get(),
-            BlockInit.JUNGLE_CAMPFIRE.get(), BlockEntityInit.JUNGLE_CAMPFIRE.get(),
-            BlockInit.MANGROVE_CAMPFIRE.get(), BlockEntityInit.MANGROVE_CAMPFIRE.get(),
-            BlockInit.OAK_CAMPFIRE.get(), BlockEntityInit.OAK_CAMPFIRE.get(),
-            BlockInit.SPRUCE_CAMPFIRE.get(), BlockEntityInit.SPRUCE_CAMPFIRE.get(),
-            BlockInit.WARPED_CAMPFIRE.get(), BlockEntityInit.WARPED_CAMPFIRE.get());
+    private static final Map<Block, BlockEntityType<CustomCampfireBlockEntity>> ENTITY_TYPES = new HashMap<>();
 
     private final NonNullList<ItemStack> items = NonNullList.withSize(4, ItemStack.EMPTY);
     private final int[] cookingProgress = new int[4];
     private final int[] cookingTimeTotal = new int[4];
+
+    static {
+        registerEntityTypes();
+    }
 
     public CustomCampfireBlockEntity(BlockPos pos, BlockState state) {
         super(getEntityType(state.getBlock()), pos, state);
@@ -71,6 +67,34 @@ public class CustomCampfireBlockEntity extends BlockEntity {
                 }
             }
         }
+    }
+
+    public static void registerEntityTypes() {
+        add(BlockInit.ACACIA_CAMPFIRE, BlockEntityInit.ACACIA_CAMPFIRE);
+        add(BlockInit.BIRCH_CAMPFIRE, BlockEntityInit.BIRCH_CAMPFIRE);
+        add(BlockInit.CHERRY_CAMPFIRE, BlockEntityInit.CHERRY_CAMPFIRE);
+        add(BlockInit.CRIMSON_CAMPFIRE, BlockEntityInit.CRIMSON_CAMPFIRE);
+        add(BlockInit.DARK_OAK_CAMPFIRE, BlockEntityInit.DARK_OAK_CAMPFIRE);
+        add(BlockInit.JUNGLE_CAMPFIRE, BlockEntityInit.JUNGLE_CAMPFIRE);
+        add(BlockInit.MANGROVE_CAMPFIRE, BlockEntityInit.MANGROVE_CAMPFIRE);
+        add(BlockInit.OAK_CAMPFIRE, BlockEntityInit.OAK_CAMPFIRE);
+        add(BlockInit.SPRUCE_CAMPFIRE, BlockEntityInit.SPRUCE_CAMPFIRE);
+        add(BlockInit.WARPED_CAMPFIRE, BlockEntityInit.WARPED_CAMPFIRE);
+
+        add(BlockInit.SOUL_ACACIA_CAMPFIRE, BlockEntityInit.SOUL_ACACIA_CAMPFIRE);
+        add(BlockInit.SOUL_BIRCH_CAMPFIRE, BlockEntityInit.SOUL_BIRCH_CAMPFIRE);
+        add(BlockInit.SOUL_CHERRY_CAMPFIRE, BlockEntityInit.SOUL_CHERRY_CAMPFIRE);
+        add(BlockInit.SOUL_CRIMSON_CAMPFIRE, BlockEntityInit.SOUL_CRIMSON_CAMPFIRE);
+        add(BlockInit.SOUL_DARK_OAK_CAMPFIRE, BlockEntityInit.SOUL_DARK_OAK_CAMPFIRE);
+        add(BlockInit.SOUL_JUNGLE_CAMPFIRE, BlockEntityInit.SOUL_JUNGLE_CAMPFIRE);
+        add(BlockInit.SOUL_MANGROVE_CAMPFIRE, BlockEntityInit.SOUL_MANGROVE_CAMPFIRE);
+        add(BlockInit.SOUL_OAK_CAMPFIRE, BlockEntityInit.SOUL_OAK_CAMPFIRE);
+        add(BlockInit.SOUL_SPRUCE_CAMPFIRE, BlockEntityInit.SOUL_SPRUCE_CAMPFIRE);
+        add(BlockInit.SOUL_WARPED_CAMPFIRE, BlockEntityInit.SOUL_WARPED_CAMPFIRE);
+    }
+
+    private static void add(Supplier<Block> blockSupplier, Supplier<BlockEntityType<CustomCampfireBlockEntity>> entitySupplier) {
+        ENTITY_TYPES.put(blockSupplier.get(), entitySupplier.get());
     }
 
     public boolean placeFood(ItemStack stack, int slot) {
