@@ -1,0 +1,19 @@
+{
+  "feature": "bignay:empty",
+  "placement": [
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "count": 0,
+      "type": "minecraft:count"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "MOTION_BLOCKING"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}
