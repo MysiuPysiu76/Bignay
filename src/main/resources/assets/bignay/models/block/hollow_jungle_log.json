@@ -1,0 +1,8 @@
+{
+	"parent": "bignay:block/hollow_log",
+	"textures": {
+		"outer": "minecraft:block/jungle_log",
+		"top": "minecraft:block/jungle_log_top",
+		"inner": "minecraft:block/stripped_jungle_log"
+	}
+}

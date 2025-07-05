@@ -1,0 +1,8 @@
+{
+	"parent": "bignay:block/hollow_log",
+	"textures": {
+		"outer": "minecraft:block/acacia_log",
+		"top": "minecraft:block/acacia_log_top",
+		"inner": "minecraft:block/stripped_acacia_log"
+	}
+}
