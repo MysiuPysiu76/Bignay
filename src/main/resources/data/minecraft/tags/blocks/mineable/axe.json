@@ -106,6 +106,17 @@
     "bignay:soul_mangrove_campfire",
     "bignay:soul_oak_campfire",
     "bignay:soul_spruce_campfire",
-    "bignay:soul_warped_campfire"
+    "bignay:soul_warped_campfire",
+    "bignay:hollow_acacia_log",
+    "bignay:hollow_birch_log",
+    "bignay:hollow_cherry_log",
+    "bignay:hollow_crimson_stem",
+    "bignay:hollow_dark_oak_log",
+    "bignay:hollow_jungle_log",
+    "bignay:hollow_mangrove_log",
+    "bignay:hollow_oak_log",
+    "bignay:hollow_spruce_log",
+    "bignay:hollow_warped_stem"
+
   ]
 }

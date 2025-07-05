@@ -7,6 +7,16 @@
   "block.bignay.cherry_campfire": "Cherry Campfire",
   "block.bignay.crimson_campfire": "Crimson Campfire",
   "block.bignay.dark_oak_campfire": "Dark Oak Campfire",
+  "block.bignay.hollow_acacia_log": "Hollow Acacia Log",
+  "block.bignay.hollow_birch_log": "Hollow Birch Log",
+  "block.bignay.hollow_cherry_log": "Hollow Cherry Log",
+  "block.bignay.hollow_crimson_stem": "Hollow Crimson Stem",
+  "block.bignay.hollow_dark_oak_log": "Hollow Dark Oak Log",
+  "block.bignay.hollow_jungle_log": "Hollow Jungle Log",
+  "block.bignay.hollow_mangrove_log": "Hollow Mangrove Log",
+  "block.bignay.hollow_oak_log": "Hollow Oak Log",
+  "block.bignay.hollow_spruce_log": "Hollow Spruce Log",
+  "block.bignay.hollow_warped_stem": "Hollow Warped Stem",
   "block.bignay.jungle_campfire": "Jungle Campfire",
   "block.bignay.mangrove_campfire": "Mangrove Campfire",
   "block.bignay.oak_campfire": "Oak Campfire",
@@ -27,5 +37,5 @@
   "item.bignay.wither_bone": "Wither Bone",
   "item.bignay.wither_bone_meal": "Wither Bone Meal",
   "tooltip.bignay.archaeology_table.pottery_sherd_to_duplicate": "Pottery Sherd To Duplicate",
-  "tooltip.bignay.archaeology_table.empty_pottery_sherd": "Empty Pottery Pherd"
+  "tooltip.bignay.archaeology_table.empty_pottery_sherd": "Empty Pottery Sherd"
 }
