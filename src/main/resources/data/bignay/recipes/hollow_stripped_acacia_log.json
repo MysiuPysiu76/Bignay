@@ -7,11 +7,11 @@
   ],
   "key": {
     "#": {
-      "item": "minecraft:spruce_log"
+      "item": "minecraft:stripped_acacia_log"
     }
   },
   "result": {
-    "item": "bignay:hollow_spruce_log",
+    "item": "bignay:hollow_stripped_acacia_log",
     "count": 8
   }
 }
