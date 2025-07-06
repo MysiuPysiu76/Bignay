@@ -1,0 +1,8 @@
+{
+	"parent": "bignay:block/hollow_log",
+	"textures": {
+		"outer": "minecraft:block/stripped_cherry_log",
+		"top": "minecraft:block/stripped_cherry_log_top",
+		"inner": "minecraft:block/stripped_cherry_log"
+	}
+}
