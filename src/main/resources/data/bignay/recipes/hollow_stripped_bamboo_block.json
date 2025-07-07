@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stripped_bamboo_block"
+    }
+  },
+  "result": {
+    "item": "bignay:hollow_stripped_bamboo_block",
+    "count": 8
+  }
+}

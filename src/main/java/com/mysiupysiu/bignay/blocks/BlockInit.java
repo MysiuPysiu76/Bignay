@@ -51,6 +51,7 @@ public class BlockInit {
     public static final RegistryObject<Block> SOUL_WARPED_CAMPFIRE = registerBlock("soul_warped_campfire", () -> new CustomCampfireBlock(BlockBehaviour.Properties.copy(Blocks.SOUL_CAMPFIRE)));
 
     public static final RegistryObject<Block> HOLLOW_ACACIA_LOG = registerBlock("hollow_acacia_log", HollowLogBlock::new);
+    public static final RegistryObject<Block> HOLLOW_BAMBOO_BLOCK = registerBlock("hollow_bamboo_block", HollowLogBlock::new);
     public static final RegistryObject<Block> HOLLOW_BIRCH_LOG = registerBlock("hollow_birch_log", HollowLogBlock::new);
     public static final RegistryObject<Block> HOLLOW_CHERRY_LOG = registerBlock("hollow_cherry_log", HollowLogBlock::new);
     public static final RegistryObject<Block> HOLLOW_CRIMSON_STEM = registerBlock("hollow_crimson_stem", HollowLogBlock::new);
@@ -62,6 +63,7 @@ public class BlockInit {
     public static final RegistryObject<Block> HOLLOW_WARPED_STEM = registerBlock("hollow_warped_stem", HollowLogBlock::new);
 
     public static final RegistryObject<Block> HOLLOW_STRIPPED_ACACIA_LOG = registerBlock("hollow_stripped_acacia_log", HollowLogBlock::new);
+    public static final RegistryObject<Block> HOLLOW_STRIPPED_BAMBOO_BLOCK = registerBlock("hollow_stripped_bamboo_block", HollowLogBlock::new);
     public static final RegistryObject<Block> HOLLOW_STRIPPED_BIRCH_LOG = registerBlock("hollow_stripped_birch_log", HollowLogBlock::new);
     public static final RegistryObject<Block> HOLLOW_STRIPPED_CHERRY_LOG = registerBlock("hollow_stripped_cherry_log", HollowLogBlock::new);
     public static final RegistryObject<Block> HOLLOW_STRIPPED_CRIMSON_STEM = registerBlock("hollow_stripped_crimson_stem", HollowLogBlock::new);

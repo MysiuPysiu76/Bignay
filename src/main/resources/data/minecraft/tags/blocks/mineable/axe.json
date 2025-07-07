@@ -126,6 +126,8 @@
     "bignay:hollow_stripped_mangrove_log",
     "bignay:hollow_stripped_oak_log",
     "bignay:hollow_stripped_spruce_log",
-    "bignay:hollow_stripped_warped_stem"
+    "bignay:hollow_stripped_warped_stem",
+    "bignay:hollow_bamboo_block",
+    "bignay:hollow_stripped_bamboo_block"
   ]
 }

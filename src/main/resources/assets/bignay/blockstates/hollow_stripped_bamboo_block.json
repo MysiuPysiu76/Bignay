@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "bignay:block/hollow_stripped_bamboo_block"
+    },
+    "axis=x": {
+      "model": "bignay:block/hollow_stripped_bamboo_block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=z": {
+      "model": "bignay:block/hollow_stripped_bamboo_block",
+      "x": 90
+    }
+  }
+}
