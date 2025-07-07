@@ -331,6 +331,8 @@
     "minecraft:packed_mud",
     "bignay:wither_bone_block",
     "bignay:cracked_stone_brick_stairs",
-    "bignay:cracked_stone_brick_slab"
+    "bignay:cracked_deepslate_brick_stairs",
+    "bignay:cracked_stone_brick_slab",
+    "bignay:cracked_deepslate_brick_slab"
   ]
 }
