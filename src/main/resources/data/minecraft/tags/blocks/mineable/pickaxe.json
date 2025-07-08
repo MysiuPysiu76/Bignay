@@ -340,6 +340,9 @@
     "bignay:cracked_deepslate_brick_slab",
     "bignay:cracked_deepslate_tile_stairs",
     "bignay:smooth_stone_stairs",
-    "bignay:cracked_deepslate_tile_slab"
+    "bignay:cracked_deepslate_tile_slab",
+    "bignay:cracked_stone_brick_wall",
+    "bignay:cracked_deepslate_tile_wall",
+    "bignay:cracked_deepslate_brick_wall"
   ]
 }
