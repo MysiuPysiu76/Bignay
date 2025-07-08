@@ -335,6 +335,8 @@
     "bignay:cracked_polished_blackstone_brick_stairs",
     "bignay:cracked_polished_blackstone_brick_slab",
     "bignay:cracked_deepslate_brick_stairs",
-    "bignay:cracked_deepslate_brick_slab"
+    "bignay:cracked_deepslate_brick_slab",
+    "bignay:cracked_deepslate_tile_stairs",
+    "bignay:cracked_deepslate_tile_slab"
   ]
 }

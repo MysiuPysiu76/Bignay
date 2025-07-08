@@ -78,6 +78,8 @@ public class BlockInit {
     public static final RegistryObject<Block> CRACKED_STONE_BRICK_SLAB = registerBlock("cracked_stone_brick_slab", SlabsBlock::new);
     public static final RegistryObject<Block> CRACKED_DEEPSLATE_BRICK_STAIRS = registerBlock("cracked_deepslate_brick_stairs", StairsBlock::new);
     public static final RegistryObject<Block> CRACKED_DEEPSLATE_BRICK_SLAB = registerBlock("cracked_deepslate_brick_slab", SlabsBlock::new);
+    public static final RegistryObject<Block> CRACKED_DEEPSLATE_TILE_STAIRS = registerBlock("cracked_deepslate_tile_stairs", StairsBlock::new);
+    public static final RegistryObject<Block> CRACKED_DEEPSLATE_TILE_SLAB = registerBlock("cracked_deepslate_tile_slab", SlabsBlock::new);
     public static final RegistryObject<Block> CRACKED_POLISHED_BLACKSTONE_STAIRS = registerBlock("cracked_polished_blackstone_brick_stairs", StairsBlock::new);
     public static final RegistryObject<Block> CRACKED_POLISHED_BLACKSTONE_BRICK_SLAB = registerBlock("cracked_polished_blackstone_brick_slab", SlabsBlock::new);
 
