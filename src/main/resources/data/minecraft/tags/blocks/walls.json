@@ -24,6 +24,9 @@
     "minecraft:mud_brick_wall",
     "bignay:cracked_stone_brick_wall",
     "bignay:cracked_deepslate_brick_wall",
-    "bignay:cracked_deepslate_tile_wall"
+    "bignay:cracked_deepslate_tile_wall",
+    "bignay:stone_wall",
+    "bignay:cracked_polished_blackstone_brick_wall",
+    "bignay:cracked_nether_brick_wall"
   ]
 }
