@@ -95,9 +95,12 @@ public class BlockInit {
     public static final RegistryObject<Block> STONE_WALL = registerBlock("stone_wall", WallsBlock::new);
 
     public static final RegistryObject<Block> VERTICAL_ACACIA_PLANKS = registerBlock("vertical_acacia_planks", VerticalPlanksBlock::new);
+    public static final RegistryObject<Block> VERTICAL_BAMBOO_PLANKS = registerBlock("vertical_bamboo_planks", () -> new VerticalPlanksBlock(Blocks.BAMBOO_PLANKS));
     public static final RegistryObject<Block> VERTICAL_BIRCH_PLANKS = registerBlock("vertical_birch_planks", VerticalPlanksBlock::new);
     public static final RegistryObject<Block> VERTICAL_CHERRY_PLANKS = registerBlock("vertical_cherry_planks", VerticalPlanksBlock::new);
     public static final RegistryObject<Block> VERTICAL_DARK_OAK_PLANKS = registerBlock("vertical_dark_oak_planks", VerticalPlanksBlock::new);
+    public static final RegistryObject<Block> VERTICAL_JUNGLE_PLANKS = registerBlock("vertical_jungle_planks", VerticalPlanksBlock::new);
+    public static final RegistryObject<Block> VERTICAL_MANGROVE_PLANKS = registerBlock("vertical_mangrove_planks", VerticalPlanksBlock::new);
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);

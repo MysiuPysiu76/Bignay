@@ -9,4 +9,8 @@ public class VerticalPlanksBlock extends Block {
     public VerticalPlanksBlock() {
         super(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS));
     }
+
+    public VerticalPlanksBlock(BlockBehaviour blockBehaviour) {
+        super(BlockBehaviour.Properties.copy(blockBehaviour));
+    }
 }
