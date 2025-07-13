@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "bignay:block/verdant_stem_top",
+    "side": "bignay:block/verdant_stem"
+  }
+}
