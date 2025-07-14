@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bignay:block/verdant_slab"
+    },
+    "type=double": {
+      "model": "bignay:block/verdant_planks"
+    },
+    "type=top": {
+      "model": "bignay:block/verdant_slab_top"
+    }
+  }
+}
