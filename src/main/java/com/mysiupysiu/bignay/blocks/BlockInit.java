@@ -6,7 +6,10 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -117,6 +120,8 @@ public class BlockInit {
     public static final RegistryObject<Block> VERTICAL_VERDANT_PLANKS = registerBlock("vertical_verdant_planks", VerticalPlanksBlock::new);
     public static final RegistryObject<Block> VERDANT_STAIRS = registerBlock("verdant_stairs", StairsBlock::new);
     public static final RegistryObject<Block> VERDANT_SLAB = registerBlock("verdant_slab", SlabsBlock::new);
+    public static final RegistryObject<Block> VERDANT_FENCE = registerBlock("verdant_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE_GATE)));
+    public static final RegistryObject<Block> VERDANT_FENCE_GATE = registerBlock("verdant_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE_GATE), WoodType.ACACIA));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
