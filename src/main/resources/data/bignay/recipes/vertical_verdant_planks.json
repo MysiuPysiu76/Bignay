@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "bignay:verdant_planks"
+    }
+  },
+  "result": {
+    "item": "bignay:vertical_verdant_planks",
+    "count": 9
+  }
+}

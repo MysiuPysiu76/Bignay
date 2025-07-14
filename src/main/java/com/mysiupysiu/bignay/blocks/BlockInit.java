@@ -113,6 +113,8 @@ public class BlockInit {
     public static final RegistryObject<Block> STRIPPED_VERDANT_HYPHAE = registerBlock("stripped_verdant_hyphae", () -> new NetherStemBlock(MapColor.COLOR_GREEN));
     public static final RegistryObject<Block> HOLLOW_VERDANT_STEM = registerBlock("hollow_verdant_stem", HollowLogBlock::new);
     public static final RegistryObject<Block> HOLLOW_STRIPPED_VERDANT_STEM = registerBlock("hollow_stripped_verdant_stem", HollowLogBlock::new);
+    public static final RegistryObject<Block> VERDANT_PLANKS = registerBlock("verdant_planks", VerticalPlanksBlock::new);
+    public static final RegistryObject<Block> VERTICAL_VERDANT_PLANKS = registerBlock("vertical_verdant_planks", VerticalPlanksBlock::new);
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);

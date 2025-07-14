@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "bignay:verdant_stems"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "bignay:verdant_planks"
+  }
+}
