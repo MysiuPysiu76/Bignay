@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "bignay:block/verdant_hyphae",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "bignay:block/verdant_hyphae"
+    },
+    "axis=z": {
+      "model": "bignay:block/verdant_hyphae",
+      "x": 90
+    }
+  }
+}
