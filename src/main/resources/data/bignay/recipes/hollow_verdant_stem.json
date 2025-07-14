@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "bignay:verdant_stem"
+    }
+  },
+  "result": {
+    "item": "bignay:hollow_verdant_stem",
+    "count": 8
+  }
+}
