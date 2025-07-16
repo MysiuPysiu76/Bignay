@@ -153,6 +153,8 @@
     "bignay:verdant_fence",
     "bignay:verdant_fence_gate",
     "bignay:verdant_trapdoor",
-    "bignay:verdant_door"
+    "bignay:verdant_door",
+    "bignay:verdant_pressure_plate",
+    "bignay:verdant_button"
   ]
 }
