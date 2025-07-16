@@ -120,6 +120,7 @@ public class BlockInit {
     public static final RegistryObject<Block> VERDANT_SLAB = registerBlock("verdant_slab", SlabsBlock::new);
     public static final RegistryObject<Block> VERDANT_FENCE = registerBlock("verdant_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE_GATE)));
     public static final RegistryObject<Block> VERDANT_FENCE_GATE = registerBlock("verdant_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE_GATE), WoodType.ACACIA));
+    public static final RegistryObject<Block> VERDANT_DOOR = registerBlock("verdant_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.WARPED_TRAPDOOR).noOcclusion(), BlockSetType.CRIMSON));
     public static final RegistryObject<Block> VERDANT_TRAPDOOR = registerBlock("verdant_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.WARPED_TRAPDOOR).noOcclusion(), BlockSetType.CRIMSON));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {

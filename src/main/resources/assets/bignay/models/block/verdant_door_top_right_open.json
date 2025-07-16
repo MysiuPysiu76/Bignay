@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_right_open",
+  "textures": {
+    "bottom": "bignay:block/verdant_door_bottom",
+    "top": "bignay:block/verdant_door_top"
+  }
+}
