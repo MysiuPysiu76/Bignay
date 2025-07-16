@@ -13,11 +13,11 @@
       "tag": "minecraft:soul_fire_base_blocks"
     },
     "O": {
-      "item": "minecraft:oak_log"
+      "item": "bignay:verdant_stem"
     }
   },
   "result": {
-    "item": "bignay:soul_mangrove_campfire",
+    "item": "bignay:soul_verdant_campfire",
     "count": 1
   }
 }

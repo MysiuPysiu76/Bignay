@@ -155,6 +155,8 @@
     "bignay:verdant_trapdoor",
     "bignay:verdant_door",
     "bignay:verdant_pressure_plate",
-    "bignay:verdant_button"
+    "bignay:verdant_button",
+    "bignay:verdant_campfire",
+    "bignay:soul_verdant_campfire"
   ]
 }

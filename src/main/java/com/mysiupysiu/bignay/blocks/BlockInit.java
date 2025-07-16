@@ -124,6 +124,8 @@ public class BlockInit {
     public static final RegistryObject<Block> VERDANT_TRAPDOOR = registerBlock("verdant_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.WARPED_TRAPDOOR).noOcclusion(), BlockSetType.CRIMSON));
     public static final RegistryObject<Block> VERDANT_PRESSURE_PLATE = registerBlock("verdant_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.CRIMSON_PRESSURE_PLATE), BlockSetType.CRIMSON));
     public static final RegistryObject<Block> VERDANT_BUTTON = registerBlock("verdant_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_BUTTON), BlockSetType.CRIMSON, 30, false));
+    public static final RegistryObject<Block> VERDANT_CAMPFIRE = registerBlock("verdant_campfire", () -> new CustomCampfireBlock(BlockBehaviour.Properties.copy(Blocks.CAMPFIRE)));
+    public static final RegistryObject<Block> SOUL_VERDANT_CAMPFIRE = registerBlock("soul_verdant_campfire", () -> new CustomCampfireBlock(BlockBehaviour.Properties.copy(Blocks.SOUL_CAMPFIRE)));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);

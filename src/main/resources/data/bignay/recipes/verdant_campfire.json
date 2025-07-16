@@ -10,14 +10,14 @@
       "item": "minecraft:stick"
     },
     "C": {
-      "tag": "minecraft:soul_fire_base_blocks"
+      "tag": "minecraft:coals"
     },
     "O": {
-      "item": "minecraft:oak_log"
+      "item": "bignay:verdant_stem"
     }
   },
   "result": {
-    "item": "bignay:soul_mangrove_campfire",
+    "item": "bignay:verdant_campfire",
     "count": 1
   }
 }
