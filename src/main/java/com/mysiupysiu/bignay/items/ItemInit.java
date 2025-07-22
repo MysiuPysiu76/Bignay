@@ -1,8 +1,10 @@
 package com.mysiupysiu.bignay.items;
 
 import com.mysiupysiu.bignay.BignayMod;
+import com.mysiupysiu.bignay.blocks.BlockInit;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SignItem;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -23,6 +25,8 @@ public class ItemInit {
     public static final RegistryObject<Item> WITHER_BONE = registerItem("wither_bone", DefaultItem::new);
     public static final RegistryObject<Item> WITHER_BONE_MEAL = registerItem("wither_bone_meal", WitherBoneMealItem::new);
     public static final RegistryObject<Item> POTTER_SHERD = registerItem("pottery_sherd", DefaultItem::new);
+
+    public static final RegistryObject<Item> VERDANT_SIGN = registerItem("verdant_sign", () -> new SignItem(new Item.Properties().stacksTo(16), BlockInit.VERDANT_SIGN.get(), BlockInit.VERDANT_WALL_SIGN.get()));
 
     private static RegistryObject<Item> registerItem(String name, Supplier<Item> supplier) {
         RegistryObject<Item> item = ITEMS.register(name, supplier);

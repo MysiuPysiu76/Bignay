@@ -7,7 +7,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -119,20 +118,25 @@ public class BlockInit {
     public static final RegistryObject<Block> VERDANT_STAIRS = registerBlock("verdant_stairs", StairsBlock::new);
     public static final RegistryObject<Block> VERDANT_SLAB = registerBlock("verdant_slab", SlabsBlock::new);
     public static final RegistryObject<Block> VERDANT_FENCE = registerBlock("verdant_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE_GATE)));
-    public static final RegistryObject<Block> VERDANT_FENCE_GATE = registerBlock("verdant_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE_GATE), WoodType.ACACIA));
+    public static final RegistryObject<Block> VERDANT_FENCE_GATE = registerBlock("verdant_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE_GATE), BignayWoodType.VERDANT));
     public static final RegistryObject<Block> VERDANT_DOOR = registerBlock("verdant_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.WARPED_TRAPDOOR).noOcclusion(), BlockSetType.CRIMSON));
     public static final RegistryObject<Block> VERDANT_TRAPDOOR = registerBlock("verdant_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.WARPED_TRAPDOOR).noOcclusion(), BlockSetType.CRIMSON));
     public static final RegistryObject<Block> VERDANT_PRESSURE_PLATE = registerBlock("verdant_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.CRIMSON_PRESSURE_PLATE), BlockSetType.CRIMSON));
     public static final RegistryObject<Block> VERDANT_BUTTON = registerBlock("verdant_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_BUTTON), BlockSetType.CRIMSON, 30, false));
     public static final RegistryObject<Block> VERDANT_CAMPFIRE = registerBlock("verdant_campfire", () -> new CustomCampfireBlock(BlockBehaviour.Properties.copy(Blocks.CAMPFIRE)));
     public static final RegistryObject<Block> SOUL_VERDANT_CAMPFIRE = registerBlock("soul_verdant_campfire", () -> new CustomCampfireBlock(BlockBehaviour.Properties.copy(Blocks.SOUL_CAMPFIRE)));
+    public static final RegistryObject<Block> VERDANT_SIGN = registerBlockOnly("verdant_sign", () -> new SignsBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SIGN), BignayWoodType.VERDANT));
+    public static final RegistryObject<Block> VERDANT_WALL_SIGN = registerBlockOnly("verdant_wall_sign", () -> new WallSignsBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_SIGN), BignayWoodType.VERDANT));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
-        RegistryObject<Item> blockItem = ITEMS.register(name,
-                () -> new BlockItem(block.get(), new Item.Properties()));
+        RegistryObject<Item> blockItem = ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
         NATURAL_TAB_ITEMS.add(blockItem);
         return block;
+    }
+
+    private static RegistryObject<Block> registerBlockOnly(String name, Supplier<Block> blockSupplier) {
+        return BLOCKS.register(name, blockSupplier);
     }
 
     public static void register(IEventBus eventBus) {

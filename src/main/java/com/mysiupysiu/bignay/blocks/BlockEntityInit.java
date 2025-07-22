@@ -37,6 +37,8 @@ public class BlockEntityInit {
     public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> SOUL_SPRUCE_CAMPFIRE = BLOCK_ENTITIES.register("soul_spruce_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.SOUL_SPRUCE_CAMPFIRE.get()).build(null));
     public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> SOUL_WARPED_CAMPFIRE = BLOCK_ENTITIES.register("soul_warped_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.SOUL_WARPED_CAMPFIRE.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<SignsBlockEntity>> VERDANT_SIGN = BLOCK_ENTITIES.register("verdant_sign", () -> BlockEntityType.Builder.of(SignsBlockEntity::new, BlockInit.VERDANT_SIGN.get(), BlockInit.VERDANT_WALL_SIGN.get()).build(null));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }
