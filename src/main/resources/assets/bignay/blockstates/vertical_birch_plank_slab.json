@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bignay:block/vertical_birch_plank_slab"
+    },
+    "type=double": {
+      "model": "bignay:block/vertical_birch_planks"
+    },
+    "type=top": {
+      "model": "bignay:block/vertical_birch_plank_slab_top"
+    }
+  }
+}
