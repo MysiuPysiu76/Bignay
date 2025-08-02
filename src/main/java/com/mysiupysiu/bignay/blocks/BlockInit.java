@@ -130,6 +130,10 @@ public class BlockInit {
     public static final RegistryObject<Block> VERDANT_HANGING_SIGN = registerBlockOnly("verdant_hanging_sign", () -> new CustomHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_HANGING_SIGN), BignayWoodType.VERDANT));
     public static final RegistryObject<Block> VERDANT_WALL_HANGING_SIGN = registerBlockOnly("verdant_wall_hanging_sign", () -> new CustomWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_WALL_HANGING_SIGN), BignayWoodType.VERDANT));
 
+    public static final RegistryObject<Block> VERTICAL_ACACIA_PLANKS_STAIRS = registerBlock("vertical_acacia_plank_stairs", StairsBlock::new);
+
+    public static final RegistryObject<Block> VERTICAL_ACACIA_PLANKS_SLAB = registerBlock("vertical_acacia_plank_slab", SlabsBlock::new);
+
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
         RegistryObject<Item> blockItem = ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
