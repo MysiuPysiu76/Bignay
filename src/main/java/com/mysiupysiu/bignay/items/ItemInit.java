@@ -27,6 +27,7 @@ public class ItemInit {
     public static final RegistryObject<Item> POTTER_SHERD = registerItem("pottery_sherd", DefaultItem::new);
 
     public static final RegistryObject<Item> VERDANT_SIGN = registerItem("verdant_sign", () -> new SignItem(new Item.Properties().stacksTo(16), BlockInit.VERDANT_SIGN.get(), BlockInit.VERDANT_WALL_SIGN.get()));
+    public static final RegistryObject<Item> VERDANT_HANGING_SIGN = registerItem("verdant_hanging_sign", () -> new SignItem(new Item.Properties().stacksTo(16), BlockInit.VERDANT_HANGING_SIGN.get(), BlockInit.VERDANT_WALL_HANGING_SIGN.get()));
 
     private static RegistryObject<Item> registerItem(String name, Supplier<Item> supplier) {
         RegistryObject<Item> item = ITEMS.register(name, supplier);

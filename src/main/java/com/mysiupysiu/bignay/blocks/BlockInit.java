@@ -125,8 +125,10 @@ public class BlockInit {
     public static final RegistryObject<Block> VERDANT_BUTTON = registerBlock("verdant_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_BUTTON), BlockSetType.CRIMSON, 30, false));
     public static final RegistryObject<Block> VERDANT_CAMPFIRE = registerBlock("verdant_campfire", () -> new CustomCampfireBlock(BlockBehaviour.Properties.copy(Blocks.CAMPFIRE)));
     public static final RegistryObject<Block> SOUL_VERDANT_CAMPFIRE = registerBlock("soul_verdant_campfire", () -> new CustomCampfireBlock(BlockBehaviour.Properties.copy(Blocks.SOUL_CAMPFIRE)));
-    public static final RegistryObject<Block> VERDANT_SIGN = registerBlockOnly("verdant_sign", () -> new SignsBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SIGN), BignayWoodType.VERDANT));
-    public static final RegistryObject<Block> VERDANT_WALL_SIGN = registerBlockOnly("verdant_wall_sign", () -> new WallSignsBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_SIGN), BignayWoodType.VERDANT));
+    public static final RegistryObject<Block> VERDANT_SIGN = registerBlockOnly("verdant_sign", () -> new SignsBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_SIGN), BignayWoodType.VERDANT));
+    public static final RegistryObject<Block> VERDANT_WALL_SIGN = registerBlockOnly("verdant_wall_sign", () -> new WallSignsBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_WALL_SIGN), BignayWoodType.VERDANT));
+    public static final RegistryObject<Block> VERDANT_HANGING_SIGN = registerBlockOnly("verdant_hanging_sign", () -> new CustomHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_HANGING_SIGN), BignayWoodType.VERDANT));
+    public static final RegistryObject<Block> VERDANT_WALL_HANGING_SIGN = registerBlockOnly("verdant_wall_hanging_sign", () -> new CustomWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_WALL_HANGING_SIGN), BignayWoodType.VERDANT));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);

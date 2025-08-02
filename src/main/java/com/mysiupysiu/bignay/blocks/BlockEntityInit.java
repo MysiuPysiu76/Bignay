@@ -4,11 +4,11 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = "bignay")
 public class BlockEntityInit {
@@ -38,6 +38,7 @@ public class BlockEntityInit {
     public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> SOUL_WARPED_CAMPFIRE = BLOCK_ENTITIES.register("soul_warped_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.SOUL_WARPED_CAMPFIRE.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<SignsBlockEntity>> VERDANT_SIGN = BLOCK_ENTITIES.register("verdant_sign", () -> BlockEntityType.Builder.of(SignsBlockEntity::new, BlockInit.VERDANT_SIGN.get(), BlockInit.VERDANT_WALL_SIGN.get()).build(null));
+    public static final RegistryObject<BlockEntityType<CustomHangingSignBlockEntity>> VERDANT_HANGING_SIGN = BLOCK_ENTITIES.register("verdant_hanging_sign", () -> BlockEntityType.Builder.of(CustomHangingSignBlockEntity::new, BlockInit.VERDANT_HANGING_SIGN.get(), BlockInit.VERDANT_WALL_HANGING_SIGN.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
