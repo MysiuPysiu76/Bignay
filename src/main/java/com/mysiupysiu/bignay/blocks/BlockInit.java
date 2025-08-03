@@ -141,6 +141,7 @@ public class BlockInit {
     public static final RegistryObject<Block> VERTICAL_OAK_PLANK_STAIRS = registerBlock("vertical_oak_plank_stairs", StairsBlock::new);
     public static final RegistryObject<Block> VERTICAL_SPRUCE_PLANK_STAIRS = registerBlock("vertical_spruce_plank_stairs", StairsBlock::new);
     public static final RegistryObject<Block> VERTICAL_VERDANT_PLANK_STAIRS = registerBlock("vertical_verdant_plank_stairs", StairsBlock::new);
+    public static final RegistryObject<Block> VERTICAL_WARPED_PLANK_STAIRS = registerBlock("vertical_warped_plank_stairs", StairsBlock::new);
 
     public static final RegistryObject<Block> VERTICAL_ACACIA_PLANK_SLAB = registerBlock("vertical_acacia_plank_slab", SlabsBlock::new);
     public static final RegistryObject<Block> VERTICAL_BAMBOO_PLANK_SLAB = registerBlock("vertical_bamboo_plank_slab", SlabsBlock::new);
@@ -153,6 +154,7 @@ public class BlockInit {
     public static final RegistryObject<Block> VERTICAL_OAK_PLANK_SLAB = registerBlock("vertical_oak_plank_slab", SlabsBlock::new);
     public static final RegistryObject<Block> VERTICAL_SPRUCE_PLANK_SLAB = registerBlock("vertical_spruce_plank_slab", SlabsBlock::new);
     public static final RegistryObject<Block> VERTICAL_VERDANT_PLANK_SLAB = registerBlock("vertical_verdant_plank_slab", SlabsBlock::new);
+    public static final RegistryObject<Block> VERTICAL_WARPED_PLANK_SLAB = registerBlock("vertical_warped_plank_slab", SlabsBlock::new);
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
