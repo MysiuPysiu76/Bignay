@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bignay:block/vertical_jungle_plank_slab"
+    },
+    "type=double": {
+      "model": "bignay:block/vertical_jungle_planks"
+    },
+    "type=top": {
+      "model": "bignay:block/vertical_jungle_plank_slab_top"
+    }
+  }
+}
