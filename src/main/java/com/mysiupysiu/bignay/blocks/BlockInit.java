@@ -161,6 +161,7 @@ public class BlockInit {
 
     public static final RegistryObject<Block> VERDANT_NYLIUM = registerBlock("verdant_nylium", () -> new NyliumBlock(BlockBehaviour.Properties.of().mapColor(MapColor.CRIMSON_NYLIUM).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(0.4F).sound(SoundType.NYLIUM).randomTicks()));
     public static final RegistryObject<Block> VERDANT_FUNGUS = registerBlock("verdant_fungus", () -> new FungusBlock(BlockBehaviour.Properties.of().mapColor(MapColor.NETHER).instabreak().noCollission().sound(SoundType.FUNGUS).pushReaction(PushReaction.DESTROY), TreeFeatures.CRIMSON_FUNGUS_PLANTED, VERDANT_NYLIUM.get()));
+    public static final RegistryObject<Block> WARPED_ROOTS = registerBlock("verdant_roots", ()-> new RootsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).replaceable().noCollission().instabreak().sound(SoundType.ROOTS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
