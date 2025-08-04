@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:cracked_deepslate_brick_wall"
+          "name": "bignay:cracked_deepslate_brick_wall"
         }
       ],
       "rolls": 1.0
