@@ -7,6 +7,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -155,6 +156,8 @@ public class BlockInit {
     public static final RegistryObject<Block> VERTICAL_SPRUCE_PLANK_SLAB = registerBlock("vertical_spruce_plank_slab", SlabsBlock::new);
     public static final RegistryObject<Block> VERTICAL_VERDANT_PLANK_SLAB = registerBlock("vertical_verdant_plank_slab", SlabsBlock::new);
     public static final RegistryObject<Block> VERTICAL_WARPED_PLANK_SLAB = registerBlock("vertical_warped_plank_slab", SlabsBlock::new);
+
+    public static final RegistryObject<Block> VERDANT_NYLIUM = registerBlock("verdant_nylium", () -> new NyliumBlock(BlockBehaviour.Properties.of().mapColor(MapColor.CRIMSON_NYLIUM).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(0.4F).sound(SoundType.NYLIUM).randomTicks()));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
