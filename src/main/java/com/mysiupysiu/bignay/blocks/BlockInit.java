@@ -1,7 +1,7 @@
 package com.mysiupysiu.bignay.blocks;
 
 import com.mysiupysiu.bignay.BignayMod;
-import net.minecraft.data.worldgen.features.TreeFeatures;
+import com.mysiupysiu.bignay.worldgen.ModConfiguredFeatures;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -160,7 +160,7 @@ public class BlockInit {
     public static final RegistryObject<Block> VERTICAL_WARPED_PLANK_SLAB = registerBlock("vertical_warped_plank_slab", SlabsBlock::new);
 
     public static final RegistryObject<Block> VERDANT_NYLIUM = registerBlock("verdant_nylium", () -> new NyliumBlock(BlockBehaviour.Properties.of().mapColor(MapColor.CRIMSON_NYLIUM).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(0.4F).sound(SoundType.NYLIUM).randomTicks()));
-    public static final RegistryObject<Block> VERDANT_FUNGUS = registerBlock("verdant_fungus", () -> new FungusBlock(BlockBehaviour.Properties.of().mapColor(MapColor.NETHER).instabreak().noCollission().sound(SoundType.FUNGUS).pushReaction(PushReaction.DESTROY), TreeFeatures.CRIMSON_FUNGUS_PLANTED, VERDANT_NYLIUM.get()));
+    public static final RegistryObject<Block> VERDANT_FUNGUS = registerBlock("verdant_fungus", () -> new FungusBlock(BlockBehaviour.Properties.of().mapColor(MapColor.NETHER).instabreak().noCollission().sound(SoundType.FUNGUS).pushReaction(PushReaction.DESTROY), ModConfiguredFeatures.VERDANT_FUNGUS, VERDANT_NYLIUM.get()));
     public static final RegistryObject<Block> VERDANT_ROOTS = registerBlock("verdant_roots", ()-> new RootsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).replaceable().noCollission().instabreak().sound(SoundType.ROOTS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)));
     public static final RegistryObject<Block> VERDANT_WART_BLOCK = registerBlock("verdant_wart_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(1.0F).sound(SoundType.WART_BLOCK)));
 
