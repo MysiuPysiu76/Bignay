@@ -7,6 +7,8 @@ import com.mysiupysiu.bignay.menu.MenuInit;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -39,6 +41,8 @@ public class BignayMod {
             event.enqueueWork(() -> {
                 BlockEntityRenderers.register(BlockEntityInit.VERDANT_SIGN.get(), SignRenderer::new);
                 BlockEntityRenderers.register(BlockEntityInit.VERDANT_HANGING_SIGN.get(), HangingSignRenderer::new);
+
+                ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(BlockInit.VERDANT_FUNGUS.getId(), BlockInit.POTTED_VERDANT_FUNGUS);
             });
         }
     }

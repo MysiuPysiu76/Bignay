@@ -2,6 +2,7 @@ package com.mysiupysiu.bignay.blocks;
 
 import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.worldgen.ModConfiguredFeatures;
+import net.minecraft.world.flag.FeatureFlag;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -163,6 +164,7 @@ public class BlockInit {
     public static final RegistryObject<Block> VERDANT_FUNGUS = registerBlock("verdant_fungus", () -> new FungusBlock(BlockBehaviour.Properties.of().mapColor(MapColor.NETHER).instabreak().noCollission().sound(SoundType.FUNGUS).pushReaction(PushReaction.DESTROY), ModConfiguredFeatures.VERDANT_FUNGUS, VERDANT_NYLIUM.get()));
     public static final RegistryObject<Block> VERDANT_ROOTS = registerBlock("verdant_roots", ()-> new RootsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).replaceable().noCollission().instabreak().sound(SoundType.ROOTS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)));
     public static final RegistryObject<Block> VERDANT_WART_BLOCK = registerBlock("verdant_wart_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(1.0F).sound(SoundType.WART_BLOCK)));
+    public static final RegistryObject<Block> POTTED_VERDANT_FUNGUS = registerBlockOnly("potted_verdant_fungus", () -> flowerPot(VERDANT_FUNGUS.get()));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
@@ -178,6 +180,16 @@ public class BlockInit {
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
         ITEMS.register(eventBus);
+    }
+
+    // Code from net.minecraft.world.level.block.Blocks
+    private static FlowerPotBlock flowerPot(Block p_278261_, FeatureFlag... p_278322_) {
+        BlockBehaviour.Properties blockbehaviour$properties = BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY);
+        if (p_278322_.length > 0) {
+            blockbehaviour$properties = blockbehaviour$properties.requiredFeatures(p_278322_);
+        }
+
+        return new FlowerPotBlock(p_278261_, blockbehaviour$properties);
     }
 
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
