@@ -43,6 +43,7 @@ public class BignayMod {
                 BlockEntityRenderers.register(BlockEntityInit.VERDANT_HANGING_SIGN.get(), HangingSignRenderer::new);
 
                 ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(BlockInit.VERDANT_FUNGUS.getId(), BlockInit.POTTED_VERDANT_FUNGUS);
+                ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(BlockInit.VERDANT_ROOTS.getId(), BlockInit.POTTED_VERDANT_ROOTS);
             });
         }
     }

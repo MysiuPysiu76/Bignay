@@ -165,6 +165,7 @@ public class BlockInit {
     public static final RegistryObject<Block> VERDANT_ROOTS = registerBlock("verdant_roots", ()-> new RootsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).replaceable().noCollission().instabreak().sound(SoundType.ROOTS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)));
     public static final RegistryObject<Block> VERDANT_WART_BLOCK = registerBlock("verdant_wart_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(1.0F).sound(SoundType.WART_BLOCK)));
     public static final RegistryObject<Block> POTTED_VERDANT_FUNGUS = registerBlockOnly("potted_verdant_fungus", () -> flowerPot(VERDANT_FUNGUS.get()));
+    public static final RegistryObject<Block> POTTED_VERDANT_ROOTS = registerBlockOnly("potted_verdant_roots", () -> flowerPot(VERDANT_ROOTS.get()));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
