@@ -2,12 +2,16 @@ package com.mysiupysiu.bignay.blocks;
 
 import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.worldgen.ModConfiguredFeatures;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlag;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
@@ -169,6 +173,7 @@ public class BlockInit {
     public static final RegistryObject<Block> VERDANT_SPROUTS = registerBlock("verdant_sprouts", () -> new NetherSproutsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).replaceable().noCollission().instabreak().sound(SoundType.NETHER_SPROUTS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)));
 
     public static final RegistryObject<Block> PALE_PUMPKIN = registerBlock("pale_pumpkin", () -> new PumpkinBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.DIDGERIDOO).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY)));
+    public static final RegistryObject<Block> CARVED_PALE_PUMPKIN = registerBlock("carved_pale_pumpkin", () -> new EquipableCarvedPumpkinBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).strength(1.0F).sound(SoundType.WOOD).isValidSpawn(BlockInit::always).pushReaction(PushReaction.DESTROY)));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
@@ -200,5 +205,9 @@ public class BlockInit {
         if (event.getTabKey().equals(CreativeModeTabs.NATURAL_BLOCKS)) {
             NATURAL_TAB_ITEMS.forEach(event::accept);
         }
+    }
+
+    private static Boolean always(BlockState p_50810_, BlockGetter p_50811_, BlockPos p_50812_, EntityType<?> p_50813_) {
+        return true;
     }
 }
