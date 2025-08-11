@@ -11,14 +11,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.CarvedPumpkinBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 
-public class PumpkinBlock extends Block {
+public class PumpkinBlock extends StemGrownBlock {
 
     public PumpkinBlock(BlockBehaviour.Properties p_55284_) {
         super(p_55284_);
@@ -43,5 +42,15 @@ public class PumpkinBlock extends Block {
         } else {
             return super.use(p_55289_, p_55290_, p_55291_, p_55292_, p_55293_, p_55294_);
         }
+    }
+
+    @Override
+    public StemBlock getStem() {
+        return (StemBlock) BlockInit.PALE_PUMPKIN_STEM.get();
+    }
+
+    @Override
+    public AttachedStemBlock getAttachedStem() {
+        return (AttachedStemBlock) BlockInit.ATTACHED_PALE_PUMPKIN_STEM.get();
     }
 }

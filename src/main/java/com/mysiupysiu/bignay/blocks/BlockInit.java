@@ -1,6 +1,7 @@
 package com.mysiupysiu.bignay.blocks;
 
 import com.mysiupysiu.bignay.BignayMod;
+import com.mysiupysiu.bignay.items.ItemInit;
 import com.mysiupysiu.bignay.worldgen.ModConfiguredFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
@@ -175,6 +176,8 @@ public class BlockInit {
 
     public static final RegistryObject<Block> PALE_PUMPKIN = registerBlock("pale_pumpkin", () -> new PumpkinBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.DIDGERIDOO).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY)));
     public static final RegistryObject<Block> CARVED_PALE_PUMPKIN = registerBlock("carved_pale_pumpkin", () -> new EquipableCarvedPumpkinBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).strength(1.0F).sound(SoundType.WOOD).isValidSpawn(BlockInit::always).pushReaction(PushReaction.DESTROY)));
+    public static final RegistryObject<Block> PALE_PUMPKIN_STEM = registerBlockOnly("pale_pumpkin_stem", () -> new StemBlock((StemGrownBlock) PALE_PUMPKIN.get(), ItemInit.PALE_PUMPKIN_SEEDS, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.HARD_CROP).pushReaction(PushReaction.DESTROY)));
+    public static final RegistryObject<Block> ATTACHED_PALE_PUMPKIN_STEM = registerBlockOnly("attached_pale_pumpkin_stem", () -> new AttachedStemBlock((StemGrownBlock) PALE_PUMPKIN.get(), ItemInit.PALE_PUMPKIN_SEEDS, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY)));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);

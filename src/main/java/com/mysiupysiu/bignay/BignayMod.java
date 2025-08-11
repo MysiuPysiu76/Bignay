@@ -4,9 +4,13 @@ import com.mysiupysiu.bignay.blocks.BlockEntityInit;
 import com.mysiupysiu.bignay.blocks.BlockInit;
 import com.mysiupysiu.bignay.items.ItemInit;
 import com.mysiupysiu.bignay.menu.MenuInit;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.color.block.BlockColors;
+import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
+import net.minecraft.world.level.GrassColor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.api.distmarker.Dist;
@@ -44,6 +48,9 @@ public class BignayMod {
 
                 ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(BlockInit.VERDANT_FUNGUS.getId(), BlockInit.POTTED_VERDANT_FUNGUS);
                 ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(BlockInit.VERDANT_ROOTS.getId(), BlockInit.POTTED_VERDANT_ROOTS);
+
+                BlockColors blockColors = Minecraft.getInstance().getBlockColors();
+                blockColors.register((state, world, pos, tintIndex) -> { return BiomeColors.getAverageFoliageColor(world, pos); }, BlockInit.PALE_PUMPKIN_STEM.get(), BlockInit.ATTACHED_PALE_PUMPKIN_STEM.get());
             });
         }
     }

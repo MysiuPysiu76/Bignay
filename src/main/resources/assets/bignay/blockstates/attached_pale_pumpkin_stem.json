@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "bignay:block/attached_pale_pumpkin_stem",
+      "y": 180
+    },
+    "facing=north": {
+      "model": "bignay:block/attached_pale_pumpkin_stem",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "bignay:block/attached_pale_pumpkin_stem",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "bignay:block/attached_pale_pumpkin_stem"
+    }
+  }
+}
