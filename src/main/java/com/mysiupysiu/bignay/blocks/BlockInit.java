@@ -168,6 +168,8 @@ public class BlockInit {
     public static final RegistryObject<Block> POTTED_VERDANT_ROOTS = registerBlockOnly("potted_verdant_roots", () -> flowerPot(VERDANT_ROOTS.get()));
     public static final RegistryObject<Block> VERDANT_SPROUTS = registerBlock("verdant_sprouts", () -> new NetherSproutsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).replaceable().noCollission().instabreak().sound(SoundType.NETHER_SPROUTS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)));
 
+    public static final RegistryObject<Block> PALE_PUMPKIN = registerBlock("pale_pumpkin", () -> new PumpkinBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.DIDGERIDOO).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY)));
+
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
         RegistryObject<Item> blockItem = ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
