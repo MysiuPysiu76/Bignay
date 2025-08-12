@@ -183,6 +183,10 @@
     "bignay:vertical_verdant_plank_slab",
     "bignay:vertical_warped_plank_slab",
     "bignay:verdant_fungus",
-    "bignay:pale_pumpkin"
+    "bignay:pale_pumpkin",
+    "bignay:carved_pale_pumpkin",
+    "bignay:pale_jack_o_lantern",
+    "bignay:soul_jack_o_lantern",
+    "bignay:pale_soul_jack_o_lantern"
   ]
 }

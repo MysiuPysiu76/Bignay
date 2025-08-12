@@ -51,6 +51,11 @@
     "minecraft:chorus_plant",
     "minecraft:chorus_flower",
     "bignay:verdant_fungus",
-    "bignay:verdant_roots"
+    "bignay:verdant_roots",
+    "bignay:pale_pumpkin",
+    "bignay:carved_pale_pumpkin",
+    "bignay:pale_jack_o_lantern",
+    "bignay:soul_jack_o_lantern",
+    "bignay:pale_soul_jack_o_lantern"
   ]
 }
