@@ -1,5 +1,6 @@
 package com.mysiupysiu.bignay.blocks;
 
+import com.mysiupysiu.bignay.items.ItemInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -7,6 +8,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -34,6 +36,9 @@ public class PumpkinBlock extends StemGrownBlock {
                 itemstack.hurtAndBreak(1, p_55292_, (p_55287_) -> {
                     p_55287_.broadcastBreakEvent(p_55293_);
                 });
+                ItemEntity itementity = new ItemEntity(p_55290_, (double)p_55291_.getX() + 0.5D + (double)direction1.getStepX() * 0.65D, (double)p_55291_.getY() + 0.1D, (double)p_55291_.getZ() + 0.5D + (double)direction1.getStepZ() * 0.65D, new ItemStack(ItemInit.PALE_PUMPKIN_SEEDS.get(), 4));
+                itementity.setDeltaMovement(0.05D * (double)direction1.getStepX() + p_55290_.random.nextDouble() * 0.02D, 0.05D, 0.05D * (double)direction1.getStepZ() + p_55290_.random.nextDouble() * 0.02D);
+                p_55290_.addFreshEntity(itementity);
                 p_55290_.gameEvent(p_55292_, GameEvent.SHEAR, p_55291_);
                 p_55292_.awardStat(Stats.ITEM_USED.get(Items.SHEARS));
             }
