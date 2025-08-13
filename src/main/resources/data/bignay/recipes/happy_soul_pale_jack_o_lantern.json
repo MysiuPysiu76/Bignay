@@ -3,10 +3,10 @@
   "category": "building",
   "key": {
     "A": {
-      "item": "bignay:carved_pale_pumpkin"
+      "item": "bignay:happy_soul_pale_carved_pumpkin"
     },
     "B": {
-      "item": "minecraft:soul_torch"
+      "item": "minecraft:torch"
     }
   },
   "pattern": [
@@ -14,7 +14,7 @@
     "B"
   ],
   "result": {
-    "item": "bignay:pale_soul_jack_o_lantern"
+    "item": "bignay:happy_soul_pale_jack_o_lantern"
   },
   "show_notification": true
 }

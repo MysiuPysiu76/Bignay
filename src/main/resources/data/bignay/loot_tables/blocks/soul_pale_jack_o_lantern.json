@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "bignay:pale_soul_jack_o_lantern"
+          "name": "bignay:soul_pale_jack_o_lantern"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "bignay:blocks/pale_soul_jack_o_lantern"
+  "random_sequence": "bignay:blocks/soul_pale_jack_o_lantern"
 }
