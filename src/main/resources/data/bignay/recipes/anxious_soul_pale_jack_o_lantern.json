@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "A": {
-      "item": "bignay:anxious_carved_pale_pumpkin"
+      "item": "bignay:anxious_soul_pale_carved_pumpkin"
     },
     "B": {
       "item": "minecraft:torch"
@@ -14,7 +14,7 @@
     "B"
   ],
   "result": {
-    "item": "bignay:anxious_pale_jack_o_lantern"
+    "item": "bignay:anxious_soul_pale_jack_o_lantern"
   },
   "show_notification": true
 }
