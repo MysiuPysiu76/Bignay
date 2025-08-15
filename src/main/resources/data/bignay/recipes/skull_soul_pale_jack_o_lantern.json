@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "A": {
-      "item": "bignay:skull_carved_pumpkin"
+      "item": "bignay:skull_carved_pale_pumpkin"
     },
     "B": {
       "item": "minecraft:soul_torch"
@@ -14,7 +14,7 @@
     "B"
   ],
   "result": {
-    "item": "bignay:skull_soul_jack_o_lantern"
+    "item": "bignay:skull_soul_pale_jack_o_lantern"
   },
   "show_notification": true
 }
