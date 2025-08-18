@@ -206,6 +206,7 @@ public class BlockInit {
     public static final RegistryObject<Block> DERPY_SOUL_PALE_JACK_O_LANTERN = registerBlock("derpy_soul_pale_jack_o_lantern", () -> new CarvedPumpkinBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(1.0F).sound(SoundType.WOOD).lightLevel((p_50870_) -> { return 10; }).isValidSpawn(BlockInit::always).pushReaction(PushReaction.DESTROY)));
     public static final RegistryObject<Block> ANGRY_CARVED_PUMPKIN = registerBlock("angry_carved_pumpkin", () -> new EquipableCarvedPumpkinBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(1.0F).sound(SoundType.WOOD).isValidSpawn(BlockInit::always).pushReaction(PushReaction.DESTROY)));
     public static final RegistryObject<Block> ANGRY_CARVED_PALE_PUMPKIN = registerBlock("angry_carved_pale_pumpkin", () -> new EquipableCarvedPumpkinBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).strength(1.0F).sound(SoundType.WOOD).isValidSpawn(BlockInit::always).pushReaction(PushReaction.DESTROY)));
+    public static final RegistryObject<Block> ANGRY_JACK_O_LANTERN = registerBlock("angry_jack_o_lantern", () -> new CarvedPumpkinBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(1.0F).sound(SoundType.WOOD).lightLevel((p_50870_) -> { return 15; }).isValidSpawn(BlockInit::always).pushReaction(PushReaction.DESTROY)));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
