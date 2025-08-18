@@ -2,11 +2,7 @@ package com.mysiupysiu.bignay.items;
 
 import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.blocks.BlockInit;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemNameBlockItem;
-import net.minecraft.world.item.SignItem;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.item.*;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -27,6 +23,7 @@ public class ItemInit {
     public static final RegistryObject<Item> WITHER_BONE = registerItem("wither_bone", DefaultItem::new);
     public static final RegistryObject<Item> WITHER_BONE_MEAL = registerItem("wither_bone_meal", WitherBoneMealItem::new);
     public static final RegistryObject<Item> POTTER_SHERD = registerItem("pottery_sherd", DefaultItem::new);
+    public static final RegistryObject<Item> TOTEM_OF_KEEPING_INVENTORY = registerItem("totem_of_keeping_inventory", TotemOfKeepingInventory::new);
 
     public static final RegistryObject<Item> VERDANT_SIGN = registerItem("verdant_sign", () -> new SignItem(new Item.Properties().stacksTo(16), BlockInit.VERDANT_SIGN.get(), BlockInit.VERDANT_WALL_SIGN.get()));
     public static final RegistryObject<Item> VERDANT_HANGING_SIGN = registerItem("verdant_hanging_sign", () -> new SignItem(new Item.Properties().stacksTo(16), BlockInit.VERDANT_HANGING_SIGN.get(), BlockInit.VERDANT_WALL_HANGING_SIGN.get()));
@@ -38,6 +35,7 @@ public class ItemInit {
         INGREDIENTS_TAB_ITEMS.add(item);
         return item;
     }
+
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
