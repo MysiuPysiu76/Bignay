@@ -25,6 +25,7 @@ public class BlockEntityInit {
     public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> OAK_CAMPFIRE = BLOCK_ENTITIES.register("oak_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.OAK_CAMPFIRE.get()).build(null));
     public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> SPRUCE_CAMPFIRE = BLOCK_ENTITIES.register("spruce_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.SPRUCE_CAMPFIRE.get()).build(null));
     public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> WARPED_CAMPFIRE = BLOCK_ENTITIES.register("warped_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.WARPED_CAMPFIRE.get()).build(null));
+    public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> VERDANT_CAMPFIRE = BLOCK_ENTITIES.register("verdant_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.VERDANT_CAMPFIRE.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> SOUL_ACACIA_CAMPFIRE = BLOCK_ENTITIES.register("soul_acacia_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.SOUL_ACACIA_CAMPFIRE.get()).build(null));
     public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> SOUL_BIRCH_CAMPFIRE = BLOCK_ENTITIES.register("soul_birch_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.SOUL_BIRCH_CAMPFIRE.get()).build(null));
@@ -36,6 +37,7 @@ public class BlockEntityInit {
     public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> SOUL_OAK_CAMPFIRE = BLOCK_ENTITIES.register("soul_oak_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.SOUL_OAK_CAMPFIRE.get()).build(null));
     public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> SOUL_SPRUCE_CAMPFIRE = BLOCK_ENTITIES.register("soul_spruce_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.SOUL_SPRUCE_CAMPFIRE.get()).build(null));
     public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> SOUL_WARPED_CAMPFIRE = BLOCK_ENTITIES.register("soul_warped_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.SOUL_WARPED_CAMPFIRE.get()).build(null));
+    public static final RegistryObject<BlockEntityType<CustomCampfireBlockEntity>> SOUL_VERDANT_CAMPFIRE = BLOCK_ENTITIES.register("soul_verdant_campfire", () -> BlockEntityType.Builder.of(CustomCampfireBlockEntity::new, BlockInit.SOUL_VERDANT_CAMPFIRE.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<SignsBlockEntity>> VERDANT_SIGN = BLOCK_ENTITIES.register("verdant_sign", () -> BlockEntityType.Builder.of(SignsBlockEntity::new, BlockInit.VERDANT_SIGN.get(), BlockInit.VERDANT_WALL_SIGN.get()).build(null));
     public static final RegistryObject<BlockEntityType<CustomHangingSignBlockEntity>> VERDANT_HANGING_SIGN = BLOCK_ENTITIES.register("verdant_hanging_sign", () -> BlockEntityType.Builder.of(CustomHangingSignBlockEntity::new, BlockInit.VERDANT_HANGING_SIGN.get(), BlockInit.VERDANT_WALL_HANGING_SIGN.get()).build(null));
@@ -56,6 +58,7 @@ public class BlockEntityInit {
         BlockEntityRenderers.register(OAK_CAMPFIRE.get(), CustomCampfireRenderer::new);
         BlockEntityRenderers.register(SPRUCE_CAMPFIRE.get(), CustomCampfireRenderer::new);
         BlockEntityRenderers.register(WARPED_CAMPFIRE.get(), CustomCampfireRenderer::new);
+        BlockEntityRenderers.register(VERDANT_CAMPFIRE.get(), CustomCampfireRenderer::new);
 
         BlockEntityRenderers.register(SOUL_ACACIA_CAMPFIRE.get(), CustomCampfireRenderer::new);
         BlockEntityRenderers.register(SOUL_BIRCH_CAMPFIRE.get(), CustomCampfireRenderer::new);
@@ -67,5 +70,6 @@ public class BlockEntityInit {
         BlockEntityRenderers.register(SOUL_OAK_CAMPFIRE.get(), CustomCampfireRenderer::new);
         BlockEntityRenderers.register(SOUL_SPRUCE_CAMPFIRE.get(), CustomCampfireRenderer::new);
         BlockEntityRenderers.register(SOUL_WARPED_CAMPFIRE.get(), CustomCampfireRenderer::new);
+        BlockEntityRenderers.register(SOUL_VERDANT_CAMPFIRE.get(), CustomCampfireRenderer::new);
     }
 }

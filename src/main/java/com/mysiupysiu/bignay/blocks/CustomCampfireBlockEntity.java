@@ -80,6 +80,7 @@ public class CustomCampfireBlockEntity extends BlockEntity {
         add(BlockInit.OAK_CAMPFIRE, BlockEntityInit.OAK_CAMPFIRE);
         add(BlockInit.SPRUCE_CAMPFIRE, BlockEntityInit.SPRUCE_CAMPFIRE);
         add(BlockInit.WARPED_CAMPFIRE, BlockEntityInit.WARPED_CAMPFIRE);
+        add(BlockInit.VERDANT_CAMPFIRE, BlockEntityInit.VERDANT_CAMPFIRE);
 
         add(BlockInit.SOUL_ACACIA_CAMPFIRE, BlockEntityInit.SOUL_ACACIA_CAMPFIRE);
         add(BlockInit.SOUL_BIRCH_CAMPFIRE, BlockEntityInit.SOUL_BIRCH_CAMPFIRE);
@@ -91,6 +92,7 @@ public class CustomCampfireBlockEntity extends BlockEntity {
         add(BlockInit.SOUL_OAK_CAMPFIRE, BlockEntityInit.SOUL_OAK_CAMPFIRE);
         add(BlockInit.SOUL_SPRUCE_CAMPFIRE, BlockEntityInit.SOUL_SPRUCE_CAMPFIRE);
         add(BlockInit.SOUL_WARPED_CAMPFIRE, BlockEntityInit.SOUL_WARPED_CAMPFIRE);
+        add(BlockInit.SOUL_VERDANT_CAMPFIRE, BlockEntityInit.SOUL_VERDANT_CAMPFIRE);
     }
 
     private static void add(Supplier<Block> blockSupplier, Supplier<BlockEntityType<CustomCampfireBlockEntity>> entitySupplier) {
