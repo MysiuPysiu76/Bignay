@@ -215,6 +215,7 @@ public class BlockInit {
     public static final RegistryObject<Block> BASALT_BRICK_SLAB = registerBlock("basalt_brick_slab", SlabsBlock::new);
     public static final RegistryObject<Block> BASALT_BRICK_STAIRS = registerBlock("basalt_brick_stairs", StairsBlock::new);
     public static final RegistryObject<Block> BASALT_BRICK_WALL = registerBlock("basalt_brick_wall", WallsBlock::new);
+    public static final RegistryObject<Block> BASALT_PILLAR = registerBlock("basalt_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.25F, 4.2F).sound(SoundType.BASALT)));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
