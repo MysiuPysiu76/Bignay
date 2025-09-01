@@ -212,6 +212,7 @@ public class BlockInit {
     public static final RegistryObject<Block> ANGRY_SOUL_PALE_JACK_O_LANTERN = registerBlock("angry_soul_pale_jack_o_lantern", () -> new CarvedPumpkinBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(1.0F).sound(SoundType.WOOD).lightLevel((p_50870_) -> { return 10; }).isValidSpawn(BlockInit::always).pushReaction(PushReaction.DESTROY)));
 
     public static final RegistryObject<Block> BASALT_BRICKS = registerBlock("basalt_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.BASALT)));
+    public static final RegistryObject<Block> BASALT_BRICK_SLAB = registerBlock("basalt_brick_slab", SlabsBlock::new);
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
