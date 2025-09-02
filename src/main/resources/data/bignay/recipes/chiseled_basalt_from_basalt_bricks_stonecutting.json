@@ -1,0 +1,8 @@
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": {
+        "item": "bignay:basalt_bricks"
+    },
+    "result": "bignay:chiseled_basalt",
+    "count": 1
+}

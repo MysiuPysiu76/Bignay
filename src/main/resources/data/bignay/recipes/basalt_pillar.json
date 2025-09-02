@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#",
+        "#"
+    ],
+    "key": {
+        "#": {
+            "item": "bignay:basalt_bricks"
+        }
+    },
+    "result": {
+        "item": "bignay:basalt_pillar",
+        "count": 2
+    }
+}

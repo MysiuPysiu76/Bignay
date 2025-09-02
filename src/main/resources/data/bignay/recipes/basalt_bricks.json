@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "##",
+        "##"
+    ],
+    "key": {
+        "#": {
+            "item": "bignay:cobbled_basalt"
+        }
+    },
+    "result": {
+        "item": "bignay:basalt_bricks",
+        "count": 4
+    }
+}

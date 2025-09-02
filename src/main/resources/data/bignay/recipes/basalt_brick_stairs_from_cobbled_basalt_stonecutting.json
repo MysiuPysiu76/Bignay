@@ -1,0 +1,8 @@
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": {
+        "item": "bignay:cobbled_basalt"
+    },
+    "result": "bignay:basalt_brick_stairs",
+    "count": 1
+}

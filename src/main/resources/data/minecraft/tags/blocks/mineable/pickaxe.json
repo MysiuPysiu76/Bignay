@@ -347,6 +347,15 @@
     "bignay:stone_wall",
     "bignay:cracked_polished_blackstone_brick_wall",
     "bignay:cracked_nether_brick_wall",
-    "bignay:verdant_nylium"
+    "bignay:verdant_nylium",
+    "bignay:basalt_bricks",
+    "bignay:basalt_brick_slab",
+    "bignay:basalt_brick_stairs",
+    "bignay:basalt_brick_wall",
+    "bignay:chiseled_basalt",
+    "bignay:basalt_pillar",
+    "bignay:smooth_basalt_stairs",
+    "bignay:smooth_basalt_slab",
+    "bignay:cobbled_basalt"
   ]
 }
