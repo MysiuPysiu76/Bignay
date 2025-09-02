@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "bignay:block/cobbled_basalt_top",
+    "side": "bignay:block/cobbled_basalt_side"
+  }
+}
