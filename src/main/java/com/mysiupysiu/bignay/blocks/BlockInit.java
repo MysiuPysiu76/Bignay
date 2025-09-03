@@ -220,6 +220,7 @@ public class BlockInit {
     public static final RegistryObject<Block> SMOOTH_BASALT_STAIRS = registerBlock("smooth_basalt_stairs", StairsBlock::new);
     public static final RegistryObject<Block> SMOOTH_BASALT_SLAB = registerBlock("smooth_basalt_slab", SlabsBlock::new);
     public static final RegistryObject<Block> COBBLED_BASALT = registerBlock("cobbled_basalt", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.25F, 4.2F).sound(SoundType.BASALT)));
+    public static final RegistryObject<Block> CRACKED_BASALT_BRICKS = registerBlock("cracked_basalt_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.BASALT)));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
