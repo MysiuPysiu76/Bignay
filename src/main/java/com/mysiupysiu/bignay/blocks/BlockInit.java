@@ -223,6 +223,7 @@ public class BlockInit {
     public static final RegistryObject<Block> CRACKED_BASALT_BRICKS = registerBlock("cracked_basalt_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.BASALT)));
     public static final RegistryObject<Block> CRACKED_BASALT_BRICK_SLAB = registerBlock("cracked_basalt_brick_slab", SlabsBlock::new);
     public static final RegistryObject<Block> CRACKED_BASALT_BRICK_STAIRS = registerBlock("cracked_basalt_brick_stairs", StairsBlock::new);
+    public static final RegistryObject<Block> CRACKED_BASALT_BRICK_WALL = registerBlock("cracked_basalt_brick_wall", WallsBlock::new);
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
