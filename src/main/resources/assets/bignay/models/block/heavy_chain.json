@@ -1,0 +1,30 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "particle": "bignay:block/heavy_chain",
+    "all": "bignay:block/heavy_chain"
+  },
+  "render_type": "cutout",
+	"elements": [
+      {
+        "from": [8, 0, 4],
+		"to": [8, 16, 12],
+		"shade": false,
+		"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
+		"faces": {
+			"east": {"uv": [0, 0, 8, 16], "texture": "#all"},
+			"west": {"uv": [8, 0, 0, 16], "texture": "#all"}
+	    }
+      },
+      {
+        "from": [4, 0, 8],
+        "to": [12, 16, 8],
+          "shade": false,
+          "rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
+          "faces": {
+            "north": {"uv": [16, 0, 8, 16], "texture": "#all"},
+            "south": {"uv": [8, 0, 16, 16], "texture": "#all"}
+          }
+      }
+	]
+}

@@ -225,6 +225,8 @@ public class BlockInit {
     public static final RegistryObject<Block> CRACKED_BASALT_BRICK_STAIRS = registerBlock("cracked_basalt_brick_stairs", StairsBlock::new);
     public static final RegistryObject<Block> CRACKED_BASALT_BRICK_WALL = registerBlock("cracked_basalt_brick_wall", WallsBlock::new);
 
+    public static final RegistryObject<Block> HEAVY_CHAIN = registerBlock("heavy_chain", HeavyChainBlock::new);
+
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
         RegistryObject<Item> blockItem = ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
