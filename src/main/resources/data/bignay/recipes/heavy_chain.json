@@ -1,16 +1,20 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        "i",
-        "I",
-        "i"
+        "/",
+        "o",
+        "/"
     ],
     "key": {
-        "i": "minecraft:iron_ingot",
-        "I": "minecraft:iron_nugget"
+        "/": {
+          "item": "minecraft:iron_ingot"
+        },
+        "o": {
+          "item": "minecraft:iron_nugget"
+        }
     },
     "result": {
-        "id": "bignay:heavy_chain",
+        "item": "bignay:heavy_chain",
         "count": 1
     }
 }
