@@ -361,6 +361,10 @@
     "bignay:cracked_basalt_brick_stairs",
     "bignay:cracked_basalt_brick_wall",
     "bignay:cracked_basalt_brick_slab",
-    "bignay:heavy_chain"
+    "bignay:heavy_chain",
+    "blue_nether_brick_wall",
+    "blue_nether_brick_slab",
+    "blue_nether_brick_stairs",
+    "blue_nether_bricks"
   ]
 }
