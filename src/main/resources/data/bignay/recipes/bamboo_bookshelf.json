@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "#": {
-      "tag": "bignay:bamboo_planks"
+      "item": "minecraft:bamboo_planks"
     },
     "X": {
       "item": "minecraft:book"

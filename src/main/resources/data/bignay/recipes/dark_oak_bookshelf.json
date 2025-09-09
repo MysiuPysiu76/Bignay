@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "#": {
-      "tag": "bignay:dark_oak_planks"
+      "item": "minecraft:dark_oak_planks"
     },
     "X": {
       "item": "minecraft:book"

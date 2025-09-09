@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "#": {
-      "tag": "bignay:warped_planks"
+      "item": "minecraft:warped_planks"
     },
     "X": {
       "item": "minecraft:book"

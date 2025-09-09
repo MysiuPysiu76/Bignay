@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "#": {
-      "tag": "bignay:birch_planks"
+      "item": "minecraft:birch_planks"
     },
     "X": {
       "item": "minecraft:book"

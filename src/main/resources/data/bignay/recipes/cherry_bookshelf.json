@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "#": {
-      "tag": "bignay:cherry_planks"
+      "item": "minecraft:cherry_planks"
     },
     "X": {
       "item": "minecraft:book"

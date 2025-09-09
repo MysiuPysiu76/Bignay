@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "#": {
-      "tag": "bignay:verdant_planks"
+      "item": "bignay:verdant_planks"
     },
     "X": {
       "item": "minecraft:book"
