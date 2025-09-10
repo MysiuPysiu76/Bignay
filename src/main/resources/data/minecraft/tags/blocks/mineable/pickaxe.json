@@ -365,6 +365,10 @@
     "blue_nether_brick_wall",
     "blue_nether_brick_slab",
     "blue_nether_brick_stairs",
-    "blue_nether_bricks"
+    "blue_nether_bricks",
+    "green_nether_bricks",
+    "green_nether_brick_slab",
+    "green_nether_brick_stairs",
+    "green_nether_brick_wall"
   ]
 }
