@@ -250,6 +250,7 @@ public class BlockInit {
     public static final RegistryObject<Block> GREEN_NETHER_BRICK_WALL = registerBlock("green_nether_brick_wall", WallsBlock::new);
 
     public static final RegistryObject<Block> MOSSY_STONE = registerBlock("mossy_stone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+    public static final RegistryObject<Block> MOSSY_STONE_STAIRS = registerBlock("mossy_stone_stairs", StairsBlock::new);
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "bignay:block/mossy_stone",
+    "side": "bignay:block/mossy_stone",
+    "top": "bignay:block/mossy_stone"
+  }
+}
