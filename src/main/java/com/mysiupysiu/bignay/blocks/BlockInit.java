@@ -252,6 +252,7 @@ public class BlockInit {
     public static final RegistryObject<Block> MOSSY_STONE = registerBlock("mossy_stone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
     public static final RegistryObject<Block> MOSSY_STONE_STAIRS = registerBlock("mossy_stone_stairs", StairsBlock::new);
     public static final RegistryObject<Block> MOSSY_STONE_SLAB = registerBlock("mossy_stone_slab", SlabsBlock::new);
+    public static final RegistryObject<Block> MOSSY_STONE_WALL = registerBlock("mossy_stone_wall", WallsBlock::new);
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
