@@ -362,13 +362,14 @@
     "bignay:cracked_basalt_brick_wall",
     "bignay:cracked_basalt_brick_slab",
     "bignay:heavy_chain",
-    "blue_nether_brick_wall",
-    "blue_nether_brick_slab",
-    "blue_nether_brick_stairs",
-    "blue_nether_bricks",
-    "green_nether_bricks",
-    "green_nether_brick_slab",
-    "green_nether_brick_stairs",
-    "green_nether_brick_wall"
+    "bignay:blue_nether_brick_wall",
+    "bignay:blue_nether_brick_slab",
+    "bignay:blue_nether_brick_stairs",
+    "bignay:blue_nether_bricks",
+    "bignay:green_nether_bricks",
+    "bignay:green_nether_brick_slab",
+    "bignay:green_nether_brick_stairs",
+    "bignay:green_nether_brick_wall",
+    "bignay:mossy_stone"
   ]
 }
