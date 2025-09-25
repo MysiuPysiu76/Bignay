@@ -255,6 +255,7 @@ public class BlockInit {
     public static final RegistryObject<Block> MOSSY_STONE_WALL = registerBlock("mossy_stone_wall", WallsBlock::new);
 
     public static final RegistryObject<Block> ACACIA_LOG_FENCE = registerBlock("acacia_wood_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_FENCE)));
+    public static final RegistryObject<Block> BIRCH_LOG_FENCE = registerBlock("birch_wood_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_FENCE)));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
