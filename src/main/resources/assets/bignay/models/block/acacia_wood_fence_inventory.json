@@ -1,0 +1,7 @@
+{
+  "parent": "bignay:block/wood_fence_inventory",
+  "textures": {
+    "texture": "minecraft:block/acacia_log",
+    "rotated": "bignay:block/acacia_log_rotated"
+  }
+}
