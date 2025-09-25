@@ -1,0 +1,7 @@
+{
+  "parent": "bignay:block/wood_fence_inventory",
+  "textures": {
+    "texture": "minecraft:block/mangrove_log",
+    "rotated": "bignay:block/mangrove_log_rotated"
+  }
+}
