@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_side",
+  "textures": {
+    "texture": "bignay:block/bamboo_block_rotated"
+  }
+}
