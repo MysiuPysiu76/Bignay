@@ -271,6 +271,7 @@ public class BlockInit {
     public static final RegistryObject<Block> STRIPPED_BIRCH_WOOD_FENCE = registerBlock("stripped_birch_wood_fence", () -> new WoodFenceBlock(Blocks.BIRCH_FENCE));
     public static final RegistryObject<Block> STRIPPED_CHERRY_WOOD_FENCE = registerBlock("stripped_cherry_wood_fence", () -> new WoodFenceBlock(Blocks.CHERRY_FENCE));
     public static final RegistryObject<Block> STRIPPED_CRIMSON_HYPHAE_FENCE = registerBlock("stripped_crimson_hyphae_fence", () -> new WoodFenceBlock(Blocks.CRIMSON_FENCE));
+    public static final RegistryObject<Block> STRIPPED_DARK_OAK_WOOD_FENCE = registerBlock("stripped_dark_oak_wood_fence", () -> new WoodFenceBlock(Blocks.DARK_OAK_FENCE));
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
         RegistryObject<Item> blockItem = ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
