@@ -254,18 +254,18 @@ public class BlockInit {
     public static final RegistryObject<Block> MOSSY_STONE_SLAB = registerBlock("mossy_stone_slab", SlabsBlock::new);
     public static final RegistryObject<Block> MOSSY_STONE_WALL = registerBlock("mossy_stone_wall", WallsBlock::new);
 
-    public static final RegistryObject<Block> ACACIA_LOG_FENCE = registerBlock("acacia_wood_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_FENCE)));
-    public static final RegistryObject<Block> BAMBOO_BLOCK_FENCE = registerBlock("bamboo_block_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_FENCE)));
-    public static final RegistryObject<Block> BIRCH_LOG_FENCE = registerBlock("birch_wood_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.BIRCH_FENCE)));
-    public static final RegistryObject<Block> CHERRY_LOG_FENCE = registerBlock("cherry_wood_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_FENCE)));
-    public static final RegistryObject<Block> CRIMSON_HYPHAE_FENCE = registerBlock("crimson_hyphae_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE)));
-    public static final RegistryObject<Block> DARK_OAK_WOOD_FENCE = registerBlock("dark_oak_wood_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.DARK_OAK_FENCE)));
-    public static final RegistryObject<Block> JUNGLE_WOOD_FENCE = registerBlock("jungle_wood_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.JUNGLE_FENCE)));
-    public static final RegistryObject<Block> MANGROVE_WOOD_FENCE = registerBlock("mangrove_wood_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.MANGROVE_FENCE)));
-    public static final RegistryObject<Block> OAK_WOOD_FENCE = registerBlock("oak_wood_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE)));
-    public static final RegistryObject<Block> SPRUCE_WOOD_FENCE = registerBlock("spruce_wood_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_FENCE)));
-    public static final RegistryObject<Block> VERDANT_HYPHAE_FENCE = registerBlock("verdant_hyphae_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE)));
-    public static final RegistryObject<Block> WARPED_HYPHAE_FENCE = registerBlock("warped_hyphae_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.WARPED_FENCE)));
+    public static final RegistryObject<Block> ACACIA_WOOD_FENCE = registerBlock("acacia_wood_fence", () -> new WoodFenceBlock(Blocks.ACACIA_FENCE));
+    public static final RegistryObject<Block> BAMBOO_BLOCK_FENCE = registerBlock("bamboo_block_fence", () -> new WoodFenceBlock(Blocks.BAMBOO_FENCE));
+    public static final RegistryObject<Block> BIRCH_WOOD_FENCE = registerBlock("birch_wood_fence", () -> new WoodFenceBlock(Blocks.BIRCH_FENCE));
+    public static final RegistryObject<Block> CHERRY_WOOD_FENCE = registerBlock("cherry_wood_fence", () -> new WoodFenceBlock(Blocks.CHERRY_FENCE));
+    public static final RegistryObject<Block> CRIMSON_HYPHAE_FENCE = registerBlock("crimson_hyphae_fence", () -> new WoodFenceBlock(Blocks.CRIMSON_FENCE));
+    public static final RegistryObject<Block> DARK_OAK_WOOD_FENCE = registerBlock("dark_oak_wood_fence", () -> new WoodFenceBlock(Blocks.DARK_OAK_FENCE));
+    public static final RegistryObject<Block> JUNGLE_WOOD_FENCE = registerBlock("jungle_wood_fence", () -> new WoodFenceBlock(Blocks.JUNGLE_FENCE));
+    public static final RegistryObject<Block> MANGROVE_WOOD_FENCE = registerBlock("mangrove_wood_fence", () -> new WoodFenceBlock(Blocks.MANGROVE_FENCE));
+    public static final RegistryObject<Block> OAK_WOOD_FENCE = registerBlock("oak_wood_fence", () -> new WoodFenceBlock(Blocks.OAK_FENCE));
+    public static final RegistryObject<Block> SPRUCE_WOOD_FENCE = registerBlock("spruce_wood_fence", () -> new WoodFenceBlock(Blocks.SPRUCE_FENCE));
+    public static final RegistryObject<Block> VERDANT_HYPHAE_FENCE = registerBlock("verdant_hyphae_fence", () -> new WoodFenceBlock(VERDANT_FENCE.get()));
+    public static final RegistryObject<Block> WARPED_HYPHAE_FENCE = registerBlock("warped_hyphae_fence", () -> new WoodFenceBlock(Blocks.WARPED_FENCE));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
