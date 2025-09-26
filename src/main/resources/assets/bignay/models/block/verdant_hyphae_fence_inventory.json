@@ -1,0 +1,7 @@
+{
+  "parent": "bignay:block/wood_fence_inventory",
+  "textures": {
+    "texture": "bignay:block/verdant_stem",
+    "rotated": "bignay:block/verdant_stem_rotated"
+  }
+}
