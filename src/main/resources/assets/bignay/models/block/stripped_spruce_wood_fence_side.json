@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_side",
+  "textures": {
+    "texture": "bignay:block/stripped_spruce_log_rotated"
+  }
+}
