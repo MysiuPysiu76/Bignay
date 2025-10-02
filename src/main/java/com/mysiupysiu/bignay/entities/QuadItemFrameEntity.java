@@ -302,14 +302,6 @@ public class QuadItemFrameEntity extends HangingEntity {
         };
     }
 
-    public OptionalInt getFramedMapId() {
-        for (int i = 0; i < 4; i++) {
-            OptionalInt id = this.getFramedMapId(this.getItem(i));
-            if (id.isPresent()) return id;
-        }
-        return OptionalInt.empty();
-    }
-
     public void setItem(ItemStack p_31806_) {
         this.setItem(0, p_31806_, true);
     }

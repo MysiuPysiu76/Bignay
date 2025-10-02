@@ -18,7 +18,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class QuadItemFrameRenderer extends EntityRenderer<QuadItemFrameEntity> {
 
-    private final QuadItemFrameModel model;
+    protected QuadItemFrameModel model;
 
     public QuadItemFrameRenderer(EntityRendererProvider.Context ctx) {
         super(ctx);
@@ -69,7 +69,10 @@ public class QuadItemFrameRenderer extends EntityRenderer<QuadItemFrameEntity> {
             }
         }
 
-        VertexConsumer vc = buffer.getBuffer(RenderType.entityCutout(QuadItemFrameModel.TEXTURE));
+        boolean isGlow = entity instanceof GlowQuadItemFrameEntity;
+
+        VertexConsumer vc = buffer.getBuffer(isGlow ? RenderType.entityShadow(GlowQuadItemFrameModel.TEXTURE) : RenderType.entityCutout(QuadItemFrameModel.TEXTURE));
+
         this.model.renderToBuffer(poseStack, vc, packedLight, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 1f);
 
         final float quadOffset = 0.18f;
@@ -101,10 +104,11 @@ public class QuadItemFrameRenderer extends EntityRenderer<QuadItemFrameEntity> {
             float rotDeg = (rot % QuadItemFrameEntity.NUM_ROTATIONS) * 45.0F;
             poseStack.mulPose(Axis.ZP.rotationDegrees(rotDeg));
 
+            int light = isGlow ? 0xF00080 : packedLight;
             Minecraft.getInstance().getItemRenderer().renderStatic(
                     stack,
                     ItemDisplayContext.FIXED,
-                    packedLight,
+                    light,
                     OverlayTexture.NO_OVERLAY,
                     poseStack,
                     buffer,

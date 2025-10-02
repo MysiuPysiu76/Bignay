@@ -2,9 +2,7 @@ package com.mysiupysiu.bignay;
 
 import com.mysiupysiu.bignay.blocks.BlockEntityInit;
 import com.mysiupysiu.bignay.blocks.BlockInit;
-import com.mysiupysiu.bignay.entities.EntityInit;
-import com.mysiupysiu.bignay.entities.QuadItemFrameModel;
-import com.mysiupysiu.bignay.entities.QuadItemFrameRenderer;
+import com.mysiupysiu.bignay.entities.*;
 import com.mysiupysiu.bignay.items.ItemInit;
 import com.mysiupysiu.bignay.menu.MenuInit;
 import com.mysiupysiu.bignay.util.ModelLayers;
@@ -49,6 +47,7 @@ public class BignayMod {
     public static class ClientModEvents {
 
         public static final ModelLayerLocation QUAD_ITEM_FRAME_LAYER = new ModelLayerLocation(new ResourceLocation("bignay", "quad_item_frame"), "main");
+        public static final ModelLayerLocation GLOW_QUAD_ITEM_FRAME_LAYER = new ModelLayerLocation(new ResourceLocation("bignay", "glow_quad_item_frame"), "main");
 
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
@@ -69,11 +68,13 @@ public class BignayMod {
         @SubscribeEvent
         public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
             event.registerEntityRenderer(EntityInit.QUAD_ITEM_FRAME.get(), QuadItemFrameRenderer::new);
+            event.registerEntityRenderer(EntityInit.GLOW_QUAD_ITEM_FRAME.get(), GlowQuadItemFrameRenderer::new);
         }
 
         @SubscribeEvent
         public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
             event.registerLayerDefinition(ModelLayers.QUAD_ITEM_FRAME, QuadItemFrameModel::createBodyLayer);
+            event.registerLayerDefinition(ModelLayers.GLOW_QUAD_ITEM_FRAME, GlowQuadItemFrameModel::createBodyLayer);
         }
     }
 }

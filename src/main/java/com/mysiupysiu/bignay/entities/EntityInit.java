@@ -13,7 +13,10 @@ public class EntityInit {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, BignayMod.MODID);
 
     public static final RegistryObject<EntityType<QuadItemFrameEntity>> QUAD_ITEM_FRAME = ENTITIES.register("quad_item_frame", () -> EntityType.Builder.<QuadItemFrameEntity>of(QuadItemFrameEntity::new, MobCategory.MISC)
-                            .sized(0.5F, 0.5F).clientTrackingRange(10).build("quad_item_frame"));
+            .sized(0.5F, 0.5F).clientTrackingRange(10).build("quad_item_frame"));
+
+    public static final RegistryObject<EntityType<GlowQuadItemFrameEntity>> GLOW_QUAD_ITEM_FRAME = ENTITIES.register("glow_quad_item_frame", () -> EntityType.Builder.<GlowQuadItemFrameEntity>of(GlowQuadItemFrameEntity::new, MobCategory.MISC)
+            .sized(0.5F, 0.5F).clientTrackingRange(10).build("glow_quad_item_frame"));
 
     public static void register(IEventBus bus) {
         ENTITIES.register(bus);

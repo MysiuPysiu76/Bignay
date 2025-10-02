@@ -2,6 +2,7 @@ package com.mysiupysiu.bignay.items;
 
 import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.blocks.BlockInit;
+import com.mysiupysiu.bignay.entities.GlowQuadItemFrameItem;
 import com.mysiupysiu.bignay.entities.QuadItemFrameItem;
 import net.minecraft.world.item.*;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -26,7 +27,8 @@ public class ItemInit {
     public static final RegistryObject<Item> POTTER_SHERD = registerItem("pottery_sherd", DefaultItem::new);
     public static final RegistryObject<Item> TOTEM_OF_KEEPING_INVENTORY = registerItem("totem_of_keeping_inventory", TotemOfKeepingInventory::new);
     public static final RegistryObject<Item> RAVAGER_HIDE = registerItem("ravager_hide", DefaultItem::new);
-    public static final RegistryObject<Item> QUAD_ITEM_FRAME = registerItem("quad_item_frame", () -> new QuadItemFrameItem(new Item.Properties().stacksTo(63)));
+    public static final RegistryObject<Item> QUAD_ITEM_FRAME = registerItem("quad_item_frame", () -> new QuadItemFrameItem(new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> GLOW_QUAD_ITEM_FRAME = registerItem("glow_quad_item_frame", () -> new GlowQuadItemFrameItem(new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> VERDANT_SIGN = registerItem("verdant_sign", () -> new SignItem(new Item.Properties().stacksTo(16), BlockInit.VERDANT_SIGN.get(), BlockInit.VERDANT_WALL_SIGN.get()));
     public static final RegistryObject<Item> VERDANT_HANGING_SIGN = registerItem("verdant_hanging_sign", () -> new SignItem(new Item.Properties().stacksTo(16), BlockInit.VERDANT_HANGING_SIGN.get(), BlockInit.VERDANT_WALL_HANGING_SIGN.get()));
