@@ -40,6 +40,7 @@ public class ItemInit {
     public static final RegistryObject<Item> BLAZE_HEAD = registerItem("blaze_head", () -> new HeadItem(BlockInit.BLAZE_HEAD.get(), BlockInit.BLAZE_WALL_HEAD.get()));
     public static final RegistryObject<Item> HUSK_HEAD = registerItem("husk_head", () -> new HeadItem(BlockInit.HUSK_HEAD.get(), BlockInit.HUSK_WALL_HEAD.get()));
     public static final RegistryObject<Item> SLIME_HEAD = registerItem("slime_head", () -> new HeadItem(BlockInit.SLIME_HEAD.get(), BlockInit.SLIME_WALL_HEAD.get()));
+    public static final RegistryObject<Item> CAVE_SPIDER_HEAD = registerItem("cave_spider_head", () -> new HeadItem(BlockInit.CAVE_SPIDER_HEAD.get(), BlockInit.CAVE_SPIDER_WALL_HEAD.get()));
 
     private static RegistryObject<Item> registerItem(String name, Supplier<Item> supplier) {
         RegistryObject<Item> item = ITEMS.register(name, supplier);

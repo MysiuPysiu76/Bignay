@@ -1,0 +1,6 @@
+{
+  "parent": "bignay:block/head_2",
+  "textures": {
+    "texture": "bignay:block/cave_spider_head"
+  }
+}
