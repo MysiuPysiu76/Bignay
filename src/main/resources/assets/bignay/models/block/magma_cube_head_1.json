@@ -1,0 +1,6 @@
+{
+  "parent": "bignay:block/head_1",
+  "textures": {
+    "texture": "bignay:block/magma_cube_head"
+  }
+}
