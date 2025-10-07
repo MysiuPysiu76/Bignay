@@ -1,0 +1,6 @@
+{
+  "parent": "bignay:block/head_3",
+  "textures": {
+    "texture": "bignay:block/blaze_head"
+  }
+}
