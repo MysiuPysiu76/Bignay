@@ -1,0 +1,6 @@
+{
+  "parent": "bignay:block/wall_head",
+  "textures": {
+    "texture": "bignay:block/husk_head"
+  }
+}
