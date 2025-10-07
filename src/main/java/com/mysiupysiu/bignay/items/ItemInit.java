@@ -5,7 +5,6 @@ import com.mysiupysiu.bignay.blocks.BlockInit;
 import com.mysiupysiu.bignay.entities.GlowQuadItemFrameItem;
 import com.mysiupysiu.bignay.entities.QuadItemFrameItem;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -37,6 +36,7 @@ public class ItemInit {
     public static final RegistryObject<Item> PALE_PUMPKIN_SEEDS = registerItem("pale_pumpkin_seeds", () -> new ItemNameBlockItem(BlockInit.PALE_PUMPKIN_STEM.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ENDERMAN_HEAD = registerItem("enderman_head", () -> new HeadItem(BlockInit.ENDERMAN_HEAD.get(), BlockInit.ENDERMAN_WALL_HEAD.get()));
+    public static final RegistryObject<Item> SPIDER_HEAD = registerItem("spider_head", () -> new HeadItem(BlockInit.SPIDER_HEAD.get(), BlockInit.SPIDER_WALL_HEAD.get()));
 
     private static RegistryObject<Item> registerItem(String name, Supplier<Item> supplier) {
         RegistryObject<Item> item = ITEMS.register(name, supplier);

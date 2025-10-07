@@ -1,0 +1,6 @@
+{
+  "parent": "bignay:block/head_inventory",
+  "textures": {
+    "texture": "bignay:block/spider_head"
+  }
+}

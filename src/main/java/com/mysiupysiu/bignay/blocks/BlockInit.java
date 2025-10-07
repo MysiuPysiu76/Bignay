@@ -281,6 +281,8 @@ public class BlockInit {
 
     public static final RegistryObject<Block> ENDERMAN_HEAD = registerBlockOnly("enderman_head", () -> new HeadBlock(BlockBehaviour.Properties.copy(Blocks.CREEPER_HEAD)));
     public static final RegistryObject<Block> ENDERMAN_WALL_HEAD = registerBlockOnly("enderman_wall_head", () -> new WallHeadBlock(BlockBehaviour.Properties.copy(Blocks.CREEPER_WALL_HEAD)));
+    public static final RegistryObject<Block> SPIDER_HEAD = registerBlockOnly("spider_head", () -> new HeadBlock(BlockBehaviour.Properties.copy(Blocks.CREEPER_HEAD)));
+    public static final RegistryObject<Block> SPIDER_WALL_HEAD = registerBlockOnly("spider_wall_head", () -> new WallHeadBlock(BlockBehaviour.Properties.copy(Blocks.CREEPER_WALL_HEAD)));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
