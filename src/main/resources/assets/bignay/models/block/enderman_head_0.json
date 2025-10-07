@@ -1,0 +1,6 @@
+{
+  "parent": "bignay:block/head_0",
+  "textures": {
+    "texture": "bignay:block/enderman_head"
+  }
+}

@@ -279,6 +279,9 @@ public class BlockInit {
     public static final RegistryObject<Block> STRIPPED_VERDANT_HYPHAE_FENCE = registerBlock("stripped_verdant_hyphae_fence", () -> new WoodFenceBlock(VERDANT_FENCE.get()));
     public static final RegistryObject<Block> STRIPPED_WARPED_HYPHAE_FENCE = registerBlock("stripped_warped_hyphae_fence", () -> new WoodFenceBlock(Blocks.WARPED_FENCE));
 
+    public static final RegistryObject<Block> ENDERMAN_HEAD = registerBlockOnly("enderman_head", () -> new HeadBlock(BlockBehaviour.Properties.copy(Blocks.CREEPER_HEAD)));
+    public static final RegistryObject<Block> ENDERMAN_WALL_HEAD = registerBlockOnly("enderman_wall_head", () -> new WallHeadBlock(BlockBehaviour.Properties.copy(Blocks.CREEPER_WALL_HEAD)));
+
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
         RegistryObject<Item> blockItem = ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
