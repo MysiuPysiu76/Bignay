@@ -303,6 +303,7 @@ public class BlockInit {
     public static final RegistryObject<Block> DARK_OAK_MOSAIC = registerBlock("dark_oak_mosaic", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DARK_OAK_PLANKS)));
     public static final RegistryObject<Block> JUNGLE_MOSAIC = registerBlock("jungle_mosaic", () -> new Block(BlockBehaviour.Properties.copy(Blocks.JUNGLE_PLANKS)));
     public static final RegistryObject<Block> MANGROVE_MOSAIC = registerBlock("mangrove_mosaic", () -> new Block(BlockBehaviour.Properties.copy(Blocks.MANGROVE_PLANKS)));
+    public static final RegistryObject<Block> OAK_MOSAIC = registerBlock("oak_mosaic", () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
