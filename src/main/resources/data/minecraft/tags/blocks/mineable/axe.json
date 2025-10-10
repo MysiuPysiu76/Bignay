@@ -187,7 +187,7 @@
     "bignay:carved_pale_pumpkin",
     "bignay:pale_jack_o_lantern",
     "bignay:soul_jack_o_lantern",
-    "bignay:pale_soul_jack_o_lantern",
+    "bignay:soul_pale_jack_o_lantern",
     "bignay:acacia_bookshelf",
     "bignay:bamboo_bookshelf",
     "bignay:birch_bookshelf",
@@ -222,6 +222,10 @@
     "bignay:spruce_wood_fence",
     "bignay:oak_wood_fence",
     "bignay:dark_oak_wood_fence",
-    "bignay:cherry_wood_fence"
+    "bignay:cherry_wood_fence",
+    "minecraft:bamboo_mosaic",
+    "minecraft:bamboo_mosaic_stairs",
+    "minecraft:bamboo_mosaic_slab",
+    "bignay:acacia_mosaic"
   ]
 }

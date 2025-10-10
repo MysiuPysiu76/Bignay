@@ -296,6 +296,8 @@ public class BlockInit {
     public static final RegistryObject<Block> DROWNED_HEAD = registerBlockOnly("drowned_head", () -> new HeadBlock(BlockBehaviour.Properties.copy(Blocks.CREEPER_HEAD)));
     public static final RegistryObject<Block> DROWNED_WALL_HEAD = registerBlockOnly("drowned_wall_head", () -> new WallHeadBlock(BlockBehaviour.Properties.copy(Blocks.CREEPER_WALL_HEAD)));
 
+    public static final RegistryObject<Block> ACACIA_MOSAIC = registerBlock("acacia_mosaic", () -> new Block(BlockBehaviour.Properties.copy(Blocks.ACACIA_PLANKS)));
+
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
         RegistryObject<Item> blockItem = ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
