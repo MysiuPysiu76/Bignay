@@ -10,3 +10,5 @@ The **Happy, Angry, Derpy, Skull and Anxious Carved Pumpkin** texture variants, 
 The **Cobbled Basalt, Basalt Bricks, Chiseled Basalt and Basalt Pillar, Acacia, Birch, Crimson, Dark Oak, Jungle, Spruce, Warped Bookshelf** texture was created by [MCjossic](https://www.reddit.com/user/MCjossic/).  
 
 Used in the Bignay mod with permission from the original creator - many thanks for allowing me to use them!
+
+The mosaic blocks were inspired by the work of people on Reddit and other mods, viewed on Google Images
