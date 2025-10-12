@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bignay:block/acacia_mosaic_slab"
+    },
+    "type=double": {
+      "model": "bignay:block/acacia_mosaics"
+    },
+    "type=top": {
+      "model": "bignay:block/acacia_mosaic_slab_top"
+    }
+  }
+}
