@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bignay:block/crimson_mosaic_slab"
+    },
+    "type=double": {
+      "model": "bignay:block/crimson_mosaics"
+    },
+    "type=top": {
+      "model": "bignay:block/crimson_mosaic_slab_top"
+    }
+  }
+}
