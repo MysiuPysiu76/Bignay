@@ -309,8 +309,10 @@ public class BlockInit {
     public static final RegistryObject<Block> WARPED_MOSAIC = registerBlock("warped_mosaic", () -> new Block(BlockBehaviour.Properties.copy(Blocks.WARPED_PLANKS)));
 
     public static final RegistryObject<Block> ACACIA_MOSAIC_STAIRS = registerBlock("acacia_mosaic_stairs", StairsBlock::new);
+    public static final RegistryObject<Block> BIRCH_MOSAIC_STAIRS = registerBlock("birch_mosaic_stairs", StairsBlock::new);
 
     public static final RegistryObject<Block> ACACIA_MOSAIC_SLAB = registerBlock("acacia_mosaic_slab", SlabsBlock::new);
+    public static final RegistryObject<Block> BIRCH_MOSAIC_SLAB = registerBlock("birch_mosaic_slab", SlabsBlock::new);
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);

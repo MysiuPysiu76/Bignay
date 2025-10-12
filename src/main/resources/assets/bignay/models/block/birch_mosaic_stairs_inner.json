@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "bignay:block/birch_mosaic",
+    "side": "bignay:block/birch_mosaic",
+    "top": "bignay:block/birch_mosaic"
+  }
+}
