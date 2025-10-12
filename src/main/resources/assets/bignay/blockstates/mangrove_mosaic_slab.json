@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bignay:block/mangrove_mosaic_slab"
+    },
+    "type=double": {
+      "model": "bignay:block/mangrove_mosaics"
+    },
+    "type=top": {
+      "model": "bignay:block/mangrove_mosaic_slab_top"
+    }
+  }
+}
