@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bignay:block/spruce_mosaic_slab"
+    },
+    "type=double": {
+      "model": "bignay:block/spruce_mosaics"
+    },
+    "type=top": {
+      "model": "bignay:block/spruce_mosaic_slab_top"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "bignay:block/spruce_mosaic",
+    "side": "bignay:block/spruce_mosaic",
+    "top": "bignay:block/spruce_mosaic"
+  }
+}
