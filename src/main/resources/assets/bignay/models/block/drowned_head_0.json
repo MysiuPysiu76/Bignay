@@ -1,6 +1,36 @@
 {
-  "parent": "bignay:block/head_0",
+  "texture_size": [32, 32],
+  "render_type": "cutout",
   "textures": {
-    "texture": "bignay:block/drowned_head"
-  }
+    "0": "bignay:block/drowned_head",
+    "particle": "bignay:block/drowned_head"
+  },
+  "elements": [
+    {
+      "from": [4.25, 0.25, 4.25],
+      "to": [11.75, 7.75, 11.75],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+      "faces": {
+        "north": {"uv": [4, 12, 8, 16], "texture": "#0"},
+        "east": {"uv": [0, 12, 4, 16], "texture": "#0"},
+        "south": {"uv": [12, 12, 16, 16], "texture": "#0"},
+        "west": {"uv": [8, 12, 12, 16], "texture": "#0"},
+        "up": {"uv": [4, 8, 8, 12], "texture": "#0"},
+        "down": {"uv": [8, 8, 12, 12], "texture": "#0"}
+      }
+    },
+    {
+      "from": [4, 0, 4],
+      "to": [12, 8, 12],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "north": {"uv": [4, 4, 8, 8], "texture": "#0"},
+        "east": {"uv": [0, 4, 4, 8], "texture": "#0"},
+        "south": {"uv": [12, 4, 16, 8], "texture": "#0"},
+        "west": {"uv": [8, 4, 12, 8], "texture": "#0"},
+        "up": {"uv": [4, 0, 8, 4], "texture": "#0"},
+        "down": {"uv": [8, 0, 12, 4], "texture": "#0"}
+      }
+    }
+  ]
 }

@@ -4,14 +4,14 @@
       "model": "bignay:block/drowned_head_0"
     },
     "rotation=1": {
-      "model": "bignay:block/drowned_head_1"
+      "model": "bignay:block/drowned_head_3"
     },
     "rotation=2": {
       "model": "bignay:block/drowned_head_2",
       "y": 90
     },
     "rotation=3": {
-      "model": "bignay:block/drowned_head_3",
+      "model": "bignay:block/drowned_head_1",
       "y": 90
     },
     "rotation=4": {
@@ -19,7 +19,7 @@
       "y": 90
     },
     "rotation=5": {
-      "model": "bignay:block/drowned_head_1",
+      "model": "bignay:block/drowned_head_3",
       "y": 90
     },
     "rotation=6": {
@@ -27,7 +27,7 @@
       "y": 180
     },
     "rotation=7": {
-      "model": "bignay:block/drowned_head_3",
+      "model": "bignay:block/drowned_head_1",
       "y": 180
     },
     "rotation=8": {
@@ -35,7 +35,7 @@
       "y": 180
     },
     "rotation=9": {
-      "model": "bignay:block/drowned_head_1",
+      "model": "bignay:block/drowned_head_3",
       "y": 180
     },
     "rotation=10": {
@@ -43,7 +43,7 @@
       "y": 270
     },
     "rotation=11": {
-      "model": "bignay:block/drowned_head_3",
+      "model": "bignay:block/drowned_head_1",
       "y": 270
     },
     "rotation=12": {
@@ -51,14 +51,14 @@
       "y": 270
     },
     "rotation=13": {
-      "model": "bignay:block/drowned_head_1",
+      "model": "bignay:block/drowned_head_3",
       "y": 270
     },
     "rotation=14": {
       "model": "bignay:block/drowned_head_2"
     },
     "rotation=15": {
-      "model": "bignay:block/drowned_head_3"
+      "model": "bignay:block/drowned_head_1"
     }
   }
 }
