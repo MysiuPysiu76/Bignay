@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bignay:block/verdant_mosaic_slab"
+    },
+    "type=double": {
+      "model": "bignay:block/verdant_mosaics"
+    },
+    "type=top": {
+      "model": "bignay:block/verdant_mosaic_slab_top"
+    }
+  }
+}

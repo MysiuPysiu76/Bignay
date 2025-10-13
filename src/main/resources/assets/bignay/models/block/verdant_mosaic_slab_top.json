@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "bignay:block/verdant_mosaic",
+    "side": "bignay:block/verdant_mosaic",
+    "top": "bignay:block/verdant_mosaic"
+  }
+}
