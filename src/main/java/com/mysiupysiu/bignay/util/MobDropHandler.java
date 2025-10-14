@@ -37,17 +37,24 @@ public class MobDropHandler {
         if (USED_CREEPERS.contains(creeper.getId())) return;
         USED_CREEPERS.add(creeper.getId());
 
-        ItemStack dropStack = switch (mob) {
-            case EnderMan enderMan -> new ItemStack(ItemInit.ENDERMAN_HEAD.get());
-            case CaveSpider caveSpider -> new ItemStack(ItemInit.CAVE_SPIDER_HEAD.get());
-            case Spider spider -> new ItemStack(ItemInit.SPIDER_HEAD.get());
-            case MagmaCube magma -> new ItemStack(ItemInit.MAGMA_CUBE_HEAD.get());
-            case Drowned drowned -> new ItemStack(ItemInit.DROWNED_HEAD.get());
-            case Husk husk -> new ItemStack(ItemInit.HUSK_HEAD.get());
-            case Blaze blaze -> new ItemStack(ItemInit.BLAZE_HEAD.get());
-            case Slime slime -> new ItemStack(ItemInit.SLIME_HEAD.get());
-            default -> null;
-        };
+        ItemStack dropStack = null;
+        if (mob instanceof EnderMan) {
+            dropStack = new ItemStack(ItemInit.ENDERMAN_HEAD.get());
+        } else if (mob instanceof CaveSpider) {
+            dropStack = new ItemStack(ItemInit.CAVE_SPIDER_HEAD.get());
+        } else if (mob instanceof Spider) {
+            dropStack = new ItemStack(ItemInit.SPIDER_HEAD.get());
+        } else if (mob instanceof MagmaCube) {
+            dropStack = new ItemStack(ItemInit.MAGMA_CUBE_HEAD.get());
+        } else if (mob instanceof Drowned) {
+            dropStack = new ItemStack(ItemInit.DROWNED_HEAD.get());
+        } else if (mob instanceof Husk) {
+            dropStack = new ItemStack(ItemInit.HUSK_HEAD.get());
+        } else if (mob instanceof Blaze) {
+            dropStack = new ItemStack(ItemInit.BLAZE_HEAD.get());
+        } else if (mob instanceof Slime) {
+            dropStack = new ItemStack(ItemInit.SLIME_HEAD.get());
+        }
 
         if (dropStack == null) return;
 
