@@ -269,5 +269,7 @@
   "item.bignay.wither_bone": "Wither Bone",
   "item.bignay.wither_bone_meal": "Wither Bone Meal",
   "tooltip.bignay.archaeology_table.pottery_sherd_to_duplicate": "Pottery Sherd To Duplicate",
-  "tooltip.bignay.archaeology_table.empty_pottery_sherd": "Empty Pottery Sherd"
+  "tooltip.bignay.archaeology_table.empty_pottery_sherd": "Empty Pottery Sherd",
+  "fileChooser.title": "Choose File",
+  "fileChooser.confirm": "Confirm"
 }
