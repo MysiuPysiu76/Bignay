@@ -272,5 +272,7 @@
   "tooltip.bignay.archaeology_table.empty_pottery_sherd": "Empty Pottery Sherd",
   "fileChooser.title": "Choose File",
   "fileChooser.confirm": "Confirm",
-  "fileChooser.up": "Up"
+  "fileChooser.up": "Up",
+  "fileChooser.hidden_files_on": "Hidden Files: ON",
+  "fileChooser.hidden_files_off": "Hidden Files: OFF"
 }
