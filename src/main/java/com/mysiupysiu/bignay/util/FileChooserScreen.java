@@ -36,20 +36,6 @@ public class FileChooserScreen extends Screen {
         reloadEntries();
     }
 
-    private void reloadEntries() {
-        File dir = currentDir.toFile();
-        File[] files = dir.listFiles();
-        if (files == null) files = new File[0];
-
-        entries = Arrays.stream(files)
-                .sorted(Comparator.comparing((File f) -> !f.isDirectory())
-                        .thenComparing(File::getName, String.CASE_INSENSITIVE_ORDER))
-                .collect(Collectors.toList());
-
-        scroll = 0;
-        selectedIndex = -1;
-    }
-
     @Override
     protected void init() {
         super.init();
@@ -63,6 +49,14 @@ public class FileChooserScreen extends Screen {
         int listEndY = listY + VISIBLE_LINES * LINE_HEIGHT;
 
         int confirmY = listEndY + 10;
+        int center = this.width / 2;
+        int btnY = MARGIN + 4;
+
+        int totalWidth = btnWidth * 4 + 30;
+        int startX = center + totalWidth / 2;
+
+        this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.up"), b -> goUp()).bounds(startX, btnY, btnWidth, btnHeight).build());
+
         this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.confirm"), b -> {
                     if (selectedIndex >= 0 && selectedIndex < entries.size()) {
                         File chosenFile = entries.get(selectedIndex);
@@ -72,8 +66,7 @@ public class FileChooserScreen extends Screen {
                         Minecraft.getInstance().setScreen(null);
                     }
                 })
-                .bounds(centerX - btnWidth / 2, confirmY, btnWidth, btnHeight)
-                .build());
+                .bounds(centerX - btnWidth / 2, confirmY, btnWidth, btnHeight).build());
     }
 
     @Override
@@ -181,5 +174,25 @@ public class FileChooserScreen extends Screen {
 
     public void setOnConfirm(Consumer<File> onConfirm) {
         this.onConfirm = onConfirm;
+    }
+
+    private void goUp() {
+        Path parent = currentDir.getParent();
+        if (parent != null) {
+            currentDir = parent;
+            reloadEntries();
+        }
+    }
+
+    private void reloadEntries() {
+        File dir = currentDir.toFile();
+        File[] files = dir.listFiles();
+        if (files == null) files = new File[0];
+
+        entries = Arrays.stream(files).sorted(Comparator.comparing((File f) -> !f.isDirectory())
+                        .thenComparing(File::getName, String.CASE_INSENSITIVE_ORDER)).collect(Collectors.toList());
+
+        scroll = 0;
+        selectedIndex = -1;
     }
 }

@@ -271,5 +271,6 @@
   "tooltip.bignay.archaeology_table.pottery_sherd_to_duplicate": "Pottery Sherd To Duplicate",
   "tooltip.bignay.archaeology_table.empty_pottery_sherd": "Empty Pottery Sherd",
   "fileChooser.title": "Choose File",
-  "fileChooser.confirm": "Confirm"
+  "fileChooser.confirm": "Confirm",
+  "fileChooser.up": "Up"
 }
