@@ -276,5 +276,9 @@
   "fileChooser.hidden_files_on": "Hidden Files: ON",
   "fileChooser.hidden_files_off": "Hidden Files: OFF",
   "fileChooser.cancel": "Cancel",
-  "fileChooser.home": "Home"
+  "fileChooser.home": "Home",
+  "fileChooser.home.description": "Open home folder",
+  "fileChooser.up.description": "Open parent folder",
+  "fileChooser.refresh": "Refresh",
+  "fileChooser.refresh.description": "Refresh current directory"
 }

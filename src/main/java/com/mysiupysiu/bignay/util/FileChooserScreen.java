@@ -2,6 +2,7 @@ package com.mysiupysiu.bignay.util;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -20,17 +21,22 @@ public class FileChooserScreen extends Screen {
     private static final int LINE_HEIGHT = 11;
     private static final int VISIBLE_LINES = 15;
 
+    private Screen previousScreen;
     private Path currentDir;
     private List<File> entries;
     private Consumer<File> onConfirm;
+
     private int scroll = 0;
     private int selectedIndex = -1;
+    private boolean showHidden = false;
 
     private long lastClickTime = 0;
     private int lastClickedIndex = -1;
 
-    private boolean showHidden = false;
+    private Button refreshButton;
     private Button hiddenToggleButton;
+    private Button homeButton;
+    private Button upButton;
 
     public FileChooserScreen() {
         super(Component.translatable("fileChooser.title"));
@@ -51,28 +57,35 @@ public class FileChooserScreen extends Screen {
         int upX = hiddenX - btnWidth - spacing;
         int homeX = upX - btnWidth - spacing;
 
-        this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.home"), b -> goHome()).bounds(homeX, btnY, btnWidth, btnHeight).build());
+        refreshButton = Button.builder(Component.translatable("fileChooser.refresh"), b -> reloadEntries()).bounds(MARGIN * 2, btnY, btnWidth, btnHeight).build();
+        this.addRenderableWidget(refreshButton);
 
-        this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.up"), b -> goUp()).bounds(upX, btnY, btnWidth, btnHeight).build());
+        homeButton = Button.builder(Component.translatable("fileChooser.home"), b -> goHome()).bounds(homeX, btnY, btnWidth, btnHeight).build();
+        this.addRenderableWidget(homeButton);
+
+        upButton = Button.builder(Component.translatable("fileChooser.up"), b -> goUp()).bounds(upX, btnY, btnWidth, btnHeight).build();
+        this.addRenderableWidget(upButton);
 
         hiddenToggleButton = Button.builder(getHiddenFilesButtonLabel(), b -> toggleHiddenFiles()).bounds(hiddenX, btnY, btnWidth, btnHeight).build();
         this.addRenderableWidget(hiddenToggleButton);
 
         int listY = MARGIN + 48;
         int listEndY = listY + VISIBLE_LINES * LINE_HEIGHT;
-        int confirmY = listEndY + 10;
+        int confirmY = listEndY + 30;
 
         this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.confirm"), b -> {
-                    if (selectedIndex >= 0 && selectedIndex < entries.size()) {
-                        File chosenFile = entries.get(selectedIndex);
-                        if (onConfirm != null) {
-                            onConfirm.accept(chosenFile);
+                    if (onConfirm != null) {
+                        if (selectedIndex >= 0 && selectedIndex < entries.size()) {
+                            onConfirm.accept(entries.get(selectedIndex));
+                        } else {
+                            onConfirm.accept(currentDir.toFile());
                         }
                     }
                 }).bounds(hiddenX, confirmY, btnWidth, btnHeight).build());
 
-        this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.cancel"), b -> Minecraft.getInstance().setScreen(null))
-                .bounds(upX, confirmY, btnWidth, btnHeight).build());
+        this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.cancel"), b -> {
+            Minecraft.getInstance().setScreen(previousScreen);
+        }).bounds(upX, confirmY, btnWidth, btnHeight).build());
     }
 
     @Override
@@ -81,6 +94,15 @@ public class FileChooserScreen extends Screen {
         graphics.drawCenteredString(this.font, this.title, this.width / 2, MARGIN - 10, 0xFFFFFF);
 
         graphics.drawString(this.font, "Current path: " + currentDir.toString(), MARGIN, MARGIN + 28, 0xAAAAAA, false);
+
+        refreshButton.setTooltip(Tooltip.create(Component.translatable("fileChooser.refresh.description")));
+        refreshButton.setTooltipDelay(200);
+
+        homeButton.setTooltip(Tooltip.create(Component.translatable("fileChooser.home.description")));
+        homeButton.setTooltipDelay(200);
+
+        upButton.setTooltip(Tooltip.create(Component.translatable("fileChooser.up.description")));
+        upButton.setTooltipDelay(200);
 
         int listX = MARGIN;
         int listY = MARGIN + 48;
@@ -158,6 +180,10 @@ public class FileChooserScreen extends Screen {
             if (selectedIndex < scroll) scroll = selectedIndex;
             return true;
         }
+        if (keyCode == 256) { // ESC
+            Minecraft.getInstance().setScreen(previousScreen);
+            return true;
+        }
         if (keyCode == 264) { // down
             selectedIndex = Math.min(entries.size() - 1, selectedIndex + 1);
             if (selectedIndex >= scroll + VISIBLE_LINES) scroll = selectedIndex - VISIBLE_LINES + 1;
@@ -206,6 +232,14 @@ public class FileChooserScreen extends Screen {
         showHidden = !showHidden;
         reloadEntries();
         hiddenToggleButton.setMessage(getHiddenFilesButtonLabel());
+    }
+
+    public Screen getPreviousScreen() {
+        return previousScreen;
+    }
+
+    public void setPreviousScreen(Screen previousScreen) {
+        this.previousScreen = previousScreen;
     }
 
     private Component getHiddenFilesButtonLabel() {
