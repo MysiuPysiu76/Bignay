@@ -65,7 +65,8 @@ public class FileChooserScreen extends Screen {
         int listY = MARGIN + 48;
         int listEndY = listY + VISIBLE_LINES * LINE_HEIGHT;
         int confirmY = listEndY + 10;
-        int centerX = this.width / 2;
+        int confirmX = this.width - MARGIN - btnWidth;
+        int cancelX = confirmX - btnWidth - spacing;
 
         this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.confirm"), b -> {
                     if (selectedIndex >= 0 && selectedIndex < entries.size()) {
@@ -75,9 +76,11 @@ public class FileChooserScreen extends Screen {
                         }
                         Minecraft.getInstance().setScreen(null);
                     }
-                })
-                .bounds(centerX - btnWidth / 2, confirmY, btnWidth, btnHeight)
-                .build());
+                }).bounds(confirmX, confirmY, btnWidth, btnHeight).build());
+
+        this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.cancel"), b -> {
+                    Minecraft.getInstance().setScreen(null);})
+                .bounds(cancelX, confirmY, btnWidth, btnHeight).build());
     }
 
     @Override
