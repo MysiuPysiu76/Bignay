@@ -275,5 +275,6 @@
   "fileChooser.up": "Up",
   "fileChooser.hidden_files_on": "Hidden Files: ON",
   "fileChooser.hidden_files_off": "Hidden Files: OFF",
-  "fileChooser.cancel": "Cancel"
+  "fileChooser.cancel": "Cancel",
+  "fileChooser.home": "Home"
 }

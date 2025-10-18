@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class FileChooserScreen extends Screen {
     private static final int MARGIN = 20;
     private static final int LINE_HEIGHT = 11;
-    private static final int VISIBLE_LINES = 16;
+    private static final int VISIBLE_LINES = 15;
 
     private Path currentDir;
     private List<File> entries;
@@ -34,8 +34,7 @@ public class FileChooserScreen extends Screen {
 
     public FileChooserScreen() {
         super(Component.translatable("fileChooser.title"));
-        String home = System.getProperty("user.home", ".");
-        currentDir = Paths.get(home);
+        this.goHome();
         reloadEntries();
     }
 
@@ -43,30 +42,25 @@ public class FileChooserScreen extends Screen {
     protected void init() {
         super.init();
 
-        int btnWidth = 90;
+        int btnWidth = 98;
         int btnHeight = 20;
         int btnY = MARGIN + 4;
-
         int spacing = 10;
 
         int hiddenX = this.width - MARGIN - btnWidth - 20;
-
         int upX = hiddenX - btnWidth - spacing;
+        int homeX = upX - btnWidth - spacing;
 
-        this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.up"), b -> goUp())
-                .bounds(upX, btnY, btnWidth, btnHeight)
-                .build());
+        this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.home"), b -> goHome()).bounds(homeX, btnY, btnWidth, btnHeight).build());
 
-        hiddenToggleButton = Button.builder(getHiddenFilesButtonLabel(), b -> toggleHiddenFiles())
-                .bounds(hiddenX, btnY, btnWidth + 20, btnHeight)
-                .build();
+        this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.up"), b -> goUp()).bounds(upX, btnY, btnWidth, btnHeight).build());
+
+        hiddenToggleButton = Button.builder(getHiddenFilesButtonLabel(), b -> toggleHiddenFiles()).bounds(hiddenX, btnY, btnWidth, btnHeight).build();
         this.addRenderableWidget(hiddenToggleButton);
 
         int listY = MARGIN + 48;
         int listEndY = listY + VISIBLE_LINES * LINE_HEIGHT;
         int confirmY = listEndY + 10;
-        int confirmX = this.width - MARGIN - btnWidth;
-        int cancelX = confirmX - btnWidth - spacing;
 
         this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.confirm"), b -> {
                     if (selectedIndex >= 0 && selectedIndex < entries.size()) {
@@ -74,13 +68,11 @@ public class FileChooserScreen extends Screen {
                         if (onConfirm != null) {
                             onConfirm.accept(chosenFile);
                         }
-                        Minecraft.getInstance().setScreen(null);
                     }
-                }).bounds(confirmX, confirmY, btnWidth, btnHeight).build());
+                }).bounds(hiddenX, confirmY, btnWidth, btnHeight).build());
 
-        this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.cancel"), b -> {
-                    Minecraft.getInstance().setScreen(null);})
-                .bounds(cancelX, confirmY, btnWidth, btnHeight).build());
+        this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.cancel"), b -> Minecraft.getInstance().setScreen(null))
+                .bounds(upX, confirmY, btnWidth, btnHeight).build());
     }
 
     @Override
@@ -218,5 +210,10 @@ public class FileChooserScreen extends Screen {
 
     private Component getHiddenFilesButtonLabel() {
         return Component.translatable("fileChooser.hidden_files_" + (showHidden ? "on" : "off"));
+    }
+
+    private void goHome() {
+        currentDir = Paths.get(System.getProperty("user.home", "."));
+        reloadEntries();
     }
 }
