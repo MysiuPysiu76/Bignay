@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.util;
+package com.mysiupysiu.bignay.screen;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -10,13 +10,13 @@ import net.minecraft.network.chat.Component;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class FileChooserScreen extends Screen {
+abstract class AbstractFileChooserScreen extends Screen {
     private static final int MARGIN = 20;
     private static final int LINE_HEIGHT = 11;
     private static final int VISIBLE_LINES = 15;
@@ -29,6 +29,7 @@ public class FileChooserScreen extends Screen {
     private int scroll = 0;
     private int selectedIndex = -1;
     private boolean showHidden = false;
+    private final boolean requireDirectory = isRequireDirectory();
 
     private long lastClickTime = 0;
     private int lastClickedIndex = -1;
@@ -38,11 +39,15 @@ public class FileChooserScreen extends Screen {
     private Button homeButton;
     private Button upButton;
 
-    public FileChooserScreen() {
-        super(Component.translatable("fileChooser.title"));
+    public AbstractFileChooserScreen(Component component) {
+        super(component);
         this.goHome();
         reloadEntries();
     }
+
+    protected abstract Stream<File> getFiles(File[] files);
+
+    protected abstract boolean isRequireDirectory();
 
     @Override
     protected void init() {
@@ -57,7 +62,7 @@ public class FileChooserScreen extends Screen {
         int upX = hiddenX - btnWidth - spacing;
         int homeX = upX - btnWidth - spacing;
 
-        refreshButton = Button.builder(Component.translatable("fileChooser.refresh"), b -> reloadEntries()).bounds(MARGIN * 2, btnY, btnWidth, btnHeight).build();
+        refreshButton = Button.builder(Component.translatable("fileChooser.refresh"), b -> reloadEntries()).bounds(MARGIN, btnY, btnWidth, btnHeight).build();
         this.addRenderableWidget(refreshButton);
 
         homeButton = Button.builder(Component.translatable("fileChooser.home"), b -> goHome()).bounds(homeX, btnY, btnWidth, btnHeight).build();
@@ -75,10 +80,19 @@ public class FileChooserScreen extends Screen {
 
         this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.confirm"), b -> {
                     if (onConfirm != null) {
-                        if (selectedIndex >= 0 && selectedIndex < entries.size()) {
-                            onConfirm.accept(entries.get(selectedIndex));
+                        File target = (selectedIndex >= 0 && selectedIndex < entries.size()) ? entries.get(selectedIndex) : currentDir.toFile();
+
+                        boolean isDirectory = target.isDirectory();
+
+                        if (isDirectory) {
+                            if (!requireDirectory) {
+                                currentDir = target.toPath();
+                                reloadEntries();
+                            } else {
+                                onConfirm.accept(target);
+                            }
                         } else {
-                            onConfirm.accept(currentDir.toFile());
+                            onConfirm.accept(target);
                         }
                     }
                 }).bounds(hiddenX, confirmY, btnWidth, btnHeight).build());
@@ -98,10 +112,10 @@ public class FileChooserScreen extends Screen {
         refreshButton.setTooltip(Tooltip.create(Component.translatable("fileChooser.refresh.description")));
         refreshButton.setTooltipDelay(200);
 
-        homeButton.setTooltip(Tooltip.create(Component.translatable("fileChooser.home.description")));
+        homeButton.setTooltip(Tooltip.create(Component.translatable("fileChooser.up.description")));
         homeButton.setTooltipDelay(200);
 
-        upButton.setTooltip(Tooltip.create(Component.translatable("fileChooser.up.description")));
+        upButton.setTooltip(Tooltip.create(Component.translatable("fileChooser.home.description")));
         upButton.setTooltipDelay(200);
 
         int listX = MARGIN;
@@ -161,7 +175,7 @@ public class FileChooserScreen extends Screen {
                         currentDir = f.toPath();
                         reloadEntries();
                     } else {
-                        Minecraft.getInstance().setScreen(null);
+                        onConfirm.accept(entries.get(selectedIndex));
                     }
                 } else {
                     selectedIndex = idx;
@@ -221,7 +235,7 @@ public class FileChooserScreen extends Screen {
         File[] files = dir.listFiles();
         if (files == null) files = new File[0];
 
-        entries = Arrays.stream(files).filter(f -> !f.isHidden() || showHidden).sorted(Comparator.comparing((File f) -> !f.isDirectory())
+        entries = getFiles(files).filter(f -> !f.isHidden() || showHidden).sorted(Comparator.comparing((File f) -> !f.isDirectory())
                         .thenComparing(File::getName, String.CASE_INSENSITIVE_ORDER)).collect(Collectors.toList());
 
         scroll = 0;

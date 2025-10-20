@@ -270,7 +270,7 @@
   "item.bignay.wither_bone_meal": "Wither Bone Meal",
   "tooltip.bignay.archaeology_table.pottery_sherd_to_duplicate": "Pottery Sherd To Duplicate",
   "tooltip.bignay.archaeology_table.empty_pottery_sherd": "Empty Pottery Sherd",
-  "fileChooser.title": "Choose File",
+  "fileChooser.choose_file": "Choose File",
   "fileChooser.confirm": "Confirm",
   "fileChooser.up": "Up",
   "fileChooser.hidden_files_on": "Hidden Files: ON",
@@ -280,5 +280,6 @@
   "fileChooser.home.description": "Open home folder",
   "fileChooser.up.description": "Open parent folder",
   "fileChooser.refresh": "Refresh",
-  "fileChooser.refresh.description": "Refresh current directory"
+  "fileChooser.refresh.description": "Refresh current directory",
+  "fileChooser.choose_folder": "Choose folder"
 }
