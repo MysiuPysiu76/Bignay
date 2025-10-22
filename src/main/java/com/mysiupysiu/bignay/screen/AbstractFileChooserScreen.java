@@ -95,6 +95,7 @@ abstract class AbstractFileChooserScreen extends Screen {
                             onConfirm.accept(target);
                         }
                     }
+                    Minecraft.getInstance().setScreen(previousScreen);
                 }).bounds(hiddenX, confirmY, btnWidth, btnHeight).build());
 
         this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.cancel"), b -> {
