@@ -287,5 +287,7 @@
   "fileChooser.up.description": "Open parent folder",
   "fileChooser.refresh": "Refresh",
   "fileChooser.refresh.description": "Refresh current directory",
-  "fileChooser.choose_folder": "Choose folder"
+  "fileChooser.choose_folder": "Choose folder",
+  "exportWorld.exportPlayerData.on": "Export Player Data: ON",
+  "exportWorld.exportPlayerData.off": "Export Player Data: OFF"
 }

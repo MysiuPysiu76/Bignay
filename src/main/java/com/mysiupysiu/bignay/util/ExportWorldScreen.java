@@ -15,6 +15,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -26,6 +27,7 @@ public class ExportWorldScreen extends Screen {
     private File destinationFile;
     private File sourceWorld;
     private long worldSizeBytes;
+    private boolean exportPlayerData = true;
 
     private EditBox nameField;
     private Button selectDestButton;
@@ -59,6 +61,12 @@ public class ExportWorldScreen extends Screen {
         nameField.setMaxLength(128);
         this.addRenderableWidget(nameField);
 
+        Button exportPlayerDataButton = Button.builder(getExportPlayerDataLabel(), b -> {
+            exportPlayerData = !exportPlayerData;
+            b.setMessage(getExportPlayerDataLabel());
+        }).bounds(inputX, nameFieldY + rowGap + 50, inputWidth, 20).build();
+        this.addRenderableWidget(exportPlayerDataButton);
+
         selectDestButton = Button.builder(Component.translatable("exportWorld.choose"), b -> {
             FolderChooserScreen folderChooser = new FolderChooserScreen();
             folderChooser.setOnConfirm(this::setDestinationFile);
@@ -70,13 +78,13 @@ public class ExportWorldScreen extends Screen {
         int btnY = this.height - 40;
         cancelButton = Button.builder(Component.translatable("gui.cancel"), b -> {
             Minecraft.getInstance().setScreen(previousScreen);
-        }).bounds(centerX - 130, btnY, 120, 20).build();
+        }).bounds(centerX + 10, btnY, 120, 20).build();
         this.addRenderableWidget(cancelButton);
 
         exportButton = Button.builder(Component.translatable("exportWorld.export"), b -> {
             exportWorld(nameField.getValue());
             Minecraft.getInstance().setScreen(null);
-        }).bounds(centerX + 10, btnY, 120, 20).build();
+        }).bounds(centerX - 130, btnY, 120, 20).build();
 
         exportButton.active = (destinationFile != null);
         this.addRenderableWidget(exportButton);
@@ -142,10 +150,6 @@ public class ExportWorldScreen extends Screen {
         return String.format("%.1f %sB", bytes / Math.pow(1024, exp), pre);
     }
 
-    public File getDestinationFile() {
-        return destinationFile;
-    }
-
     public void setDestinationFile(File destinationFile) {
         this.destinationFile = destinationFile;
         if (this.exportButton != null) this.exportButton.active = (destinationFile != null);
@@ -154,8 +158,7 @@ public class ExportWorldScreen extends Screen {
     private void exportWorld(String name) {
         File outputZip = new File(destinationFile, name + ".zip");
 
-        try (FileOutputStream fos = new FileOutputStream(outputZip);
-             ZipOutputStream zos = new ZipOutputStream(fos)) {
+        try (FileOutputStream fos = new FileOutputStream(outputZip); ZipOutputStream zos = new ZipOutputStream(fos)) {
             zipFolderRecursive(sourceWorld, sourceWorld.getName(), zos);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -166,26 +169,37 @@ public class ExportWorldScreen extends Screen {
         File[] files = folder.listFiles();
         if (files == null) return;
 
+        Set<String> playerDataFolders = Set.of("advancements", "playerdata", "stats");
+
         for (File file : files) {
             String entryName = parentPath + "/" + file.getName();
+
+            if (file.isDirectory() && !exportPlayerData && playerDataFolders.contains(file.getName().toLowerCase())) {
+                continue;
+            }
 
             if (file.isDirectory()) {
                 zos.putNextEntry(new ZipEntry(entryName + "/"));
                 zos.closeEntry();
+
                 zipFolderRecursive(file, entryName, zos);
             } else {
                 try (FileInputStream fis = new FileInputStream(file)) {
-                    ZipEntry entry = new ZipEntry(entryName);
-                    zos.putNextEntry(entry);
+                    zos.putNextEntry(new ZipEntry(entryName));
 
                     byte[] buffer = new byte[4096];
                     int len;
                     while ((len = fis.read(buffer)) != -1) {
-                        zos.write(buffer);
+                        zos.write(buffer, 0, len);
                     }
+
                     zos.closeEntry();
                 }
             }
         }
+    }
+
+    private Component getExportPlayerDataLabel() {
+        return exportPlayerData ? Component.translatable("exportWorld.exportPlayerData.on") : Component.translatable("exportWorld.exportPlayerData.off");
     }
 }
