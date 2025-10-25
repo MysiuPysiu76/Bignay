@@ -273,7 +273,7 @@
   "selectWorld.edit.export": "Export world",
   "exportWorld.chosen-destination": "Chosen destination: ",
   "exportWorld.chosen-destination.none": "not selected",
-  "exportWorld.size": "Size: %s",
+  "exportWorld.size": "World Size: %s",
   "exportWorld.export": "Export",
   "exportWorld.choose": "Choose",
   "fileChooser.choose_file": "Choose File",

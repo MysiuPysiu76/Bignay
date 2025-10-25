@@ -1,5 +1,6 @@
 package com.mysiupysiu.bignay.screen;
 
+import com.mysiupysiu.bignay.util.FileType;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
@@ -11,7 +12,9 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -25,6 +28,7 @@ abstract class AbstractFileChooserScreen extends Screen {
     private Path currentDir;
     private List<File> entries;
     private Consumer<File> onConfirm;
+    protected Set<FileType> fileTypes;
 
     private int scroll = 0;
     private int selectedIndex = -1;
@@ -41,6 +45,7 @@ abstract class AbstractFileChooserScreen extends Screen {
 
     public AbstractFileChooserScreen(Component component) {
         super(component);
+        this.fileTypes = new LinkedHashSet<>();
         this.goHome();
         reloadEntries();
     }
@@ -88,6 +93,7 @@ abstract class AbstractFileChooserScreen extends Screen {
                             if (!requireDirectory) {
                                 currentDir = target.toPath();
                                 reloadEntries();
+                                return;
                             } else {
                                 onConfirm.accept(target);
                             }
@@ -113,10 +119,10 @@ abstract class AbstractFileChooserScreen extends Screen {
         refreshButton.setTooltip(Tooltip.create(Component.translatable("fileChooser.refresh.description")));
         refreshButton.setTooltipDelay(200);
 
-        homeButton.setTooltip(Tooltip.create(Component.translatable("fileChooser.up.description")));
+        homeButton.setTooltip(Tooltip.create(Component.translatable("fileChooser.home.description")));
         homeButton.setTooltipDelay(200);
 
-        upButton.setTooltip(Tooltip.create(Component.translatable("fileChooser.home.description")));
+        upButton.setTooltip(Tooltip.create(Component.translatable("fileChooser.up.description")));
         upButton.setTooltipDelay(200);
 
         int listX = MARGIN;
@@ -231,7 +237,7 @@ abstract class AbstractFileChooserScreen extends Screen {
         }
     }
 
-    private void reloadEntries() {
+    protected void reloadEntries() {
         File dir = currentDir.toFile();
         File[] files = dir.listFiles();
         if (files == null) files = new File[0];
