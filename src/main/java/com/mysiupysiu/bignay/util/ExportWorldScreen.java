@@ -33,6 +33,7 @@ public class ExportWorldScreen extends Screen {
     private Button selectDestButton;
     private Button exportButton;
     private Button cancelButton;
+    private String worldName;
 
     public ExportWorldScreen(Screen previousScreen, LevelStorageSource.LevelStorageAccess levelAccess) throws IOException, NoSuchFieldException, IllegalAccessException {
         super(Component.translatable("selectWorld.edit.export"));
@@ -40,6 +41,8 @@ public class ExportWorldScreen extends Screen {
         this.previousScreen = previousScreen;
         this.sourceWorld = new File(levelAccess.getWorldDir().toFile().getCanonicalPath(), levelAccess.getLevelId());
         this.worldSizeBytes = computeFolderSize(sourceWorld.toPath());
+        this.worldName = levelAccess.getSummary().getLevelName();
+
     }
 
     @Override
@@ -52,8 +55,6 @@ public class ExportWorldScreen extends Screen {
         int rowGap = 28;
         int inputWidth = 260;
         int inputX = centerX - inputWidth / 2;
-
-        String worldName = levelAccess.getSummary().getLevelName();
 
         int nameFieldY = y + rowGap + 12;
         nameField = new EditBox(this.font, inputX, nameFieldY, inputWidth, 18, Component.translatable("selectWorld.enterName"));
@@ -71,6 +72,7 @@ public class ExportWorldScreen extends Screen {
             FolderChooserScreen folderChooser = new FolderChooserScreen();
             folderChooser.setOnConfirm(this::setDestinationFile);
             folderChooser.setPreviousScreen(this);
+            worldName = nameField.getValue();
             Minecraft.getInstance().setScreen(folderChooser);
         }).bounds(inputX + inputWidth - 98, nameFieldY + rowGap + 20, 98, 20).build();
         this.addRenderableWidget(selectDestButton);
@@ -83,6 +85,11 @@ public class ExportWorldScreen extends Screen {
 
         exportButton = Button.builder(Component.translatable("exportWorld.export"), b -> {
             exportWorld(nameField.getValue());
+            try {
+                levelAccess.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             Minecraft.getInstance().setScreen(null);
         }).bounds(centerX - 130, btnY, 120, 20).build();
 
@@ -142,7 +149,7 @@ public class ExportWorldScreen extends Screen {
         }
     }
 
-    private static String humanReadableByteCount(long bytes) {
+    public static String humanReadableByteCount(long bytes) {
         if (bytes < 0) return "-";
         if (bytes < 1024) return bytes + " B";
         int exp = (int) (Math.log(bytes) / Math.log(1024));
@@ -152,6 +159,7 @@ public class ExportWorldScreen extends Screen {
 
     public void setDestinationFile(File destinationFile) {
         this.destinationFile = destinationFile;
+        Minecraft.getInstance().setScreen(this);
         if (this.exportButton != null) this.exportButton.active = (destinationFile != null);
     }
 

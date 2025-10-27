@@ -289,5 +289,7 @@
   "fileChooser.refresh.description": "Refresh current directory",
   "fileChooser.choose_folder": "Choose folder",
   "exportWorld.exportPlayerData.on": "Export Player Data: ON",
-  "exportWorld.exportPlayerData.off": "Export Player Data: OFF"
+  "exportWorld.exportPlayerData.off": "Export Player Data: OFF",
+  "importWorld.title": "Import World",
+  "importWorld.import": "Import"
 }

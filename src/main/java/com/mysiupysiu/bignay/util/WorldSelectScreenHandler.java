@@ -1,0 +1,52 @@
+package com.mysiupysiu.bignay.util;
+
+import com.mysiupysiu.bignay.screen.FileChooserScreen;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ScreenEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
+import net.minecraft.client.gui.components.Button;
+
+import java.lang.reflect.Method;
+
+@Mod.EventBusSubscriber(modid = "bignay", bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+public class WorldSelectScreenHandler {
+
+    @SubscribeEvent
+    public static void onInitScreen(ScreenEvent.Init.Post event) throws ReflectiveOperationException {
+        if (!(event.getScreen() instanceof SelectWorldScreen screen)) return;
+
+        Button recreateButton = event.getListenersList().stream()
+                .filter(w -> w instanceof Button)
+                .map(w -> (Button) w)
+                .filter(b -> b.getMessage().equals(Component.translatable("selectWorld.recreate")))
+                .toList()
+                .get(0);
+
+        int[] pos = {recreateButton.getX(), recreateButton.getY(), recreateButton.getWidth(), recreateButton.getHeight()};
+
+        event.removeListener(recreateButton);
+
+        Button importButton = Button.builder(Component.translatable("importWorld.import"), b -> {
+            FileChooserScreen fileChooser = new FileChooserScreen();
+            fileChooser.addFilter(FileType.ZIP);
+            fileChooser.setOnConfirm(file -> {
+                ImportWorldScreen importWorld = new ImportWorldScreen(file);
+                if (importWorld.isValidWorld()) {
+                    Minecraft.getInstance().setScreen(importWorld);
+                }
+            });
+            fileChooser.setPreviousScreen(screen);
+            Minecraft.getInstance().setScreen(fileChooser);
+        }).bounds(pos[0], pos[1], pos[2], pos[3]).build();
+
+        Method addRenderableWidget = Screen.class.getDeclaredMethod("addRenderableWidget", GuiEventListener.class);
+        addRenderableWidget.setAccessible(true);
+        addRenderableWidget.invoke(screen, importButton);
+    }
+}
