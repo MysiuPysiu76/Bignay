@@ -291,5 +291,12 @@
   "exportWorld.exportPlayerData.on": "Export Player Data: ON",
   "exportWorld.exportPlayerData.off": "Export Player Data: OFF",
   "importWorld.title": "Import World",
-  "importWorld.import": "Import"
+  "importWorld.import": "Import",
+  "importWorld.file": "File: %s",
+  "importWorld.version": "Version: %s",
+  "importWorld.gamemode": "Gamemode: %s",
+  "importWorld.difficulty": "Difficulty: %s",
+  "importWorld.seed": "Seed: %s",
+  "importWorld.days": "Days: %s",
+  "importWorld.size": "Size: %s"
 }
