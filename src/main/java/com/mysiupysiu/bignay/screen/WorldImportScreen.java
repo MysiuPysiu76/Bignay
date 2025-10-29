@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.util;
+package com.mysiupysiu.bignay.screen;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -20,7 +20,7 @@ import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-public class ImportWorldScreen extends Screen {
+public class WorldImportScreen extends Screen {
 
     private final File source;
     private EditBox nameInput;
@@ -32,7 +32,7 @@ public class ImportWorldScreen extends Screen {
     private long seed;
     private long daysPlayed;
 
-    public ImportWorldScreen(File source) {
+    public WorldImportScreen(File source) {
         super(Component.translatable("importWorld.title"));
         this.source = source;
     }
@@ -77,7 +77,7 @@ public class ImportWorldScreen extends Screen {
         gui.drawString(this.font, Component.translatable("importWorld.difficulty", difficulty), leftX, lineY + dy * 3, 0xFFFFFF);
         gui.drawString(this.font, Component.translatable("importWorld.seed", seed), rightX, lineY + dy, 0xFFFFFF);
         gui.drawString(this.font, Component.translatable("importWorld.days", daysPlayed), rightX, lineY + dy * 2, 0xFFFFFF);
-        gui.drawString(this.font, Component.translatable("importWorld.size", ExportWorldScreen.humanReadableByteCount(source.length())), rightX, lineY + dy * 3, 0xFFFFFF);
+        gui.drawString(this.font, Component.translatable("importWorld.size", WorldExportScreen.humanReadableByteCount(source.length())), rightX, lineY + dy * 3, 0xFFFFFF);
 
         super.render(gui, mouseX, mouseY, delta);
     }

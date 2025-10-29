@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.util;
+package com.mysiupysiu.bignay.events;
 
 import com.mysiupysiu.bignay.BignayMod;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

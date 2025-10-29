@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.util;
+package com.mysiupysiu.bignay.utils;
 
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.ResourceLocation;

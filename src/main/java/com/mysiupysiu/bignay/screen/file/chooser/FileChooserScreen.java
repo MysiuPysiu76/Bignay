@@ -1,7 +1,7 @@
-package com.mysiupysiu.bignay.screen;
+package com.mysiupysiu.bignay.screen.file.chooser;
 
-import com.mysiupysiu.bignay.util.FileType;
-import com.mysiupysiu.bignay.util.FileUtils;
+import com.mysiupysiu.bignay.utils.FileType;
+import com.mysiupysiu.bignay.utils.FileUtils;
 import net.minecraft.network.chat.Component;
 
 import java.io.File;

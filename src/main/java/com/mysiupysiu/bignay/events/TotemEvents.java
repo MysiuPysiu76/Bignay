@@ -1,7 +1,6 @@
-package com.mysiupysiu.bignay.util;
+package com.mysiupysiu.bignay.events;
 
 import com.mysiupysiu.bignay.BignayMod;
-import com.mysiupysiu.bignay.items.TotemOfKeepingInventory;
 import com.mysiupysiu.bignay.items.ItemInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

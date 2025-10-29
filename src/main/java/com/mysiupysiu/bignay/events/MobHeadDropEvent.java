@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.util;
+package com.mysiupysiu.bignay.events;
 
 import com.mysiupysiu.bignay.items.ItemInit;
 import net.minecraft.world.damagesource.DamageSource;
@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class MobDropHandler {
+public class MobHeadDropEvent {
 
     private static final Set<Integer> USED_CREEPERS = new HashSet<>();
 

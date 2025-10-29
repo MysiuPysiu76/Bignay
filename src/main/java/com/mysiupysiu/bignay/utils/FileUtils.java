@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.util;
+package com.mysiupysiu.bignay.utils;
 
 import java.io.File;
 

@@ -1,6 +1,6 @@
-package com.mysiupysiu.bignay.util;
+package com.mysiupysiu.bignay.screen;
 
-import com.mysiupysiu.bignay.screen.FolderChooserScreen;
+import com.mysiupysiu.bignay.screen.file.chooser.FolderChooserScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-public class ExportWorldScreen extends Screen {
+public class WorldExportScreen extends Screen {
 
     private LevelStorageSource.LevelStorageAccess levelAccess;
     private Screen previousScreen;
@@ -35,14 +35,13 @@ public class ExportWorldScreen extends Screen {
     private Button cancelButton;
     private String worldName;
 
-    public ExportWorldScreen(Screen previousScreen, LevelStorageSource.LevelStorageAccess levelAccess) throws IOException, NoSuchFieldException, IllegalAccessException {
+    public WorldExportScreen(Screen previousScreen, LevelStorageSource.LevelStorageAccess levelAccess) throws IOException, NoSuchFieldException, IllegalAccessException {
         super(Component.translatable("selectWorld.edit.export"));
         this.levelAccess = levelAccess;
         this.previousScreen = previousScreen;
         this.sourceWorld = new File(levelAccess.getWorldDir().toFile().getCanonicalPath(), levelAccess.getLevelId());
         this.worldSizeBytes = computeFolderSize(sourceWorld.toPath());
         this.worldName = levelAccess.getSummary().getLevelName();
-
     }
 
     @Override

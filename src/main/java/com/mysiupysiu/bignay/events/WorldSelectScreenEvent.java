@@ -1,6 +1,8 @@
-package com.mysiupysiu.bignay.util;
+package com.mysiupysiu.bignay.events;
 
-import com.mysiupysiu.bignay.screen.FileChooserScreen;
+import com.mysiupysiu.bignay.screen.file.chooser.FileChooserScreen;
+import com.mysiupysiu.bignay.screen.WorldImportScreen;
+import com.mysiupysiu.bignay.utils.FileType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
@@ -15,7 +17,7 @@ import net.minecraft.client.gui.components.Button;
 import java.lang.reflect.Method;
 
 @Mod.EventBusSubscriber(modid = "bignay", bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
-public class WorldSelectScreenHandler {
+public class WorldSelectScreenEvent {
 
     @SubscribeEvent
     public static void onInitScreen(ScreenEvent.Init.Post event) throws ReflectiveOperationException {
@@ -36,7 +38,7 @@ public class WorldSelectScreenHandler {
             FileChooserScreen fileChooser = new FileChooserScreen();
             fileChooser.addFilter(FileType.ZIP);
             fileChooser.setOnConfirm(file -> {
-                ImportWorldScreen importWorld = new ImportWorldScreen(file);
+                WorldImportScreen importWorld = new WorldImportScreen(file);
                 if (importWorld.isValidWorld()) {
                     Minecraft.getInstance().setScreen(importWorld);
                 }

@@ -1,5 +1,6 @@
-package com.mysiupysiu.bignay.util;
+package com.mysiupysiu.bignay.events;
 
+import com.mysiupysiu.bignay.screen.WorldExportScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -14,7 +15,7 @@ import net.minecraftforge.fml.common.Mod;
 import java.lang.reflect.Field;
 
 @Mod.EventBusSubscriber(modid = "bignay", bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
-public class WorldOptionsHandler {
+public class WorldOptionsEvent {
 
     @SubscribeEvent
     public static void onScreenInit(ScreenEvent.Init.Post event) {
@@ -40,7 +41,7 @@ public class WorldOptionsHandler {
                         Field field = EditWorldScreen.class.getDeclaredField("levelAccess");
                         field.setAccessible(true);
                         LevelStorageSource.LevelStorageAccess levelStorageAccess = (LevelStorageSource.LevelStorageAccess) field.get(screen);
-                        Minecraft.getInstance().setScreen(new ExportWorldScreen(screen, levelStorageAccess));
+                        Minecraft.getInstance().setScreen(new WorldExportScreen(screen, levelStorageAccess));
                     } catch (Exception e) {
                         Minecraft.getInstance().setScreen(null);
                     }

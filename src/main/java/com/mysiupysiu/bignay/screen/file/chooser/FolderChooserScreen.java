@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.screen;
+package com.mysiupysiu.bignay.screen.file.chooser;
 
 import net.minecraft.network.chat.Component;
 

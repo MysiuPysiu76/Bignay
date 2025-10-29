@@ -5,7 +5,7 @@ import com.mysiupysiu.bignay.blocks.BlockInit;
 import com.mysiupysiu.bignay.entities.*;
 import com.mysiupysiu.bignay.items.ItemInit;
 import com.mysiupysiu.bignay.menu.MenuInit;
-import com.mysiupysiu.bignay.util.ModelLayers;
+import com.mysiupysiu.bignay.utils.ModelLayers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.model.geom.ModelLayerLocation;

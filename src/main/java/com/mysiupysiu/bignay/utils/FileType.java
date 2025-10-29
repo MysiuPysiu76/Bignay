@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.util;
+package com.mysiupysiu.bignay.utils;
 
 public enum FileType {
     ZIP("zip");

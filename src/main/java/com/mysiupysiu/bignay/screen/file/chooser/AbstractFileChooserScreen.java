@@ -1,6 +1,6 @@
-package com.mysiupysiu.bignay.screen;
+package com.mysiupysiu.bignay.screen.file.chooser;
 
-import com.mysiupysiu.bignay.util.FileType;
+import com.mysiupysiu.bignay.utils.FileType;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
