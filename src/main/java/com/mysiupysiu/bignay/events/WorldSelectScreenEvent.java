@@ -3,6 +3,7 @@ package com.mysiupysiu.bignay.events;
 import com.mysiupysiu.bignay.screen.file.chooser.FileChooserScreen;
 import com.mysiupysiu.bignay.screen.WorldImportScreen;
 import com.mysiupysiu.bignay.utils.FileType;
+import com.mysiupysiu.bignay.utils.WorldImporter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
@@ -39,7 +40,7 @@ public class WorldSelectScreenEvent {
             fileChooser.addFilter(FileType.ZIP);
             fileChooser.setOnConfirm(file -> {
                 WorldImportScreen importWorld = new WorldImportScreen(file);
-                if (importWorld.isValidWorld()) {
+                if (WorldImporter.isValidWorld(file)) {
                     Minecraft.getInstance().setScreen(importWorld);
                 }
             });

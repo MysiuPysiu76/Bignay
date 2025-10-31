@@ -1,5 +1,6 @@
 package com.mysiupysiu.bignay.screen;
 
+import com.mysiupysiu.bignay.utils.WorldImporter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -15,8 +16,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.*;
 import java.util.Enumeration;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -48,7 +47,11 @@ public class WorldImportScreen extends Screen {
         this.nameInput.setValue(levelName);
         this.addRenderableWidget(nameInput);
 
-        Button importButton = Button.builder(Component.translatable("importWorld.import"), b -> importWorld()).bounds(centerX - 110, y, 100, 20).build();
+        Button importButton = Button.builder(Component.translatable("importWorld.import"), b -> {
+            WorldImporter importer = new WorldImporter(source);
+            importer.setWorldName(nameInput.getValue().trim());
+            importer.execute();
+        }).bounds(centerX - 110, y, 100, 20).build();
         this.addRenderableWidget(importButton);
 
         Button cancelButton = Button.builder(Component.translatable("gui.cancel"), b -> Minecraft.getInstance().setScreen(new SelectWorldScreen(this))).bounds(centerX + 10, y, 100, 20).build();
@@ -80,68 +83,6 @@ public class WorldImportScreen extends Screen {
         gui.drawString(this.font, Component.translatable("importWorld.size", WorldExportScreen.humanReadableByteCount(source.length())), rightX, lineY + dy * 3, 0xFFFFFF);
 
         super.render(gui, mouseX, mouseY, delta);
-    }
-
-    private void importWorld() {
-        String worldName = nameInput.getValue().trim();
-        if (worldName.isEmpty()) return;
-
-        Path targetDir = Paths.get(System.getProperty("user.dir"), "saves", worldName);
-
-        try (ZipFile zip = new ZipFile(source)) {
-            String topFolder = null;
-
-            Enumeration<? extends ZipEntry> entries = zip.entries();
-            while (entries.hasMoreElements()) {
-                ZipEntry entry = entries.nextElement();
-                String name = entry.getName();
-
-                if (name.equals("level.dat")) {
-                    topFolder = "";
-                    break;
-                }
-
-                int slash = name.indexOf('/');
-                if (slash > 0) {
-                    topFolder = name.substring(0, slash + 1);
-                }
-            }
-
-            entries = zip.entries();
-            while (entries.hasMoreElements()) {
-                ZipEntry entry = entries.nextElement();
-                String name = entry.getName();
-
-                if (topFolder != null && !topFolder.isEmpty() && name.startsWith(topFolder)) {
-                    name = name.substring(topFolder.length());
-                }
-
-                if (name.isEmpty()) continue;
-
-                Path outPath = targetDir.resolve(name).normalize();
-
-                if (entry.isDirectory()) {
-                    Files.createDirectories(outPath);
-                } else {
-                    Files.createDirectories(outPath.getParent());
-                    try (InputStream is = zip.getInputStream(entry)) {
-                        Files.copy(is, outPath, StandardCopyOption.REPLACE_EXISTING);
-                    }
-                }
-            }
-
-            Path levelDatPath = targetDir.resolve("level.dat");
-
-            CompoundTag levelData = NbtIo.readCompressed(Files.newInputStream(levelDatPath));
-            CompoundTag data = levelData.getCompound("Data");
-
-            data.putString("LevelName", worldName);
-
-            NbtIo.writeCompressed(levelData, Files.newOutputStream(levelDatPath, StandardOpenOption.WRITE));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Minecraft.getInstance().setScreen(new SelectWorldScreen(this));
     }
 
     private void readLevelDat() {
@@ -205,35 +146,6 @@ public class WorldImportScreen extends Screen {
             this.seed = 0;
             this.daysPlayed = 0;
             this.version = "Unknown";
-        }
-    }
-
-    public boolean isValidWorld() {
-        try (ZipFile zip = new ZipFile(source)) {
-            Set<String> topLevelFolders = new HashSet<>();
-
-            Enumeration<? extends ZipEntry> entries = zip.entries();
-            while (entries.hasMoreElements()) {
-                ZipEntry entry = entries.nextElement();
-                String name = entry.getName();
-
-                if (name.equals("level.dat")) {
-                    return true;
-                }
-
-                int slash = name.indexOf('/');
-                if (slash > 0) {
-                    String folder = name.substring(0, slash + 1);
-                    topLevelFolders.add(folder);
-                }
-            }
-
-            if (topLevelFolders.size() != 1) return false;
-
-            String onlyFolder = topLevelFolders.iterator().next();
-            return zip.getEntry(onlyFolder + "level.dat") != null;
-        } catch (IOException e) {
-            return false;
         }
     }
 

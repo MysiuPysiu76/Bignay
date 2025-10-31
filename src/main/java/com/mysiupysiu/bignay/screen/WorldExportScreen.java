@@ -1,6 +1,7 @@
 package com.mysiupysiu.bignay.screen;
 
 import com.mysiupysiu.bignay.screen.file.chooser.FolderChooserScreen;
+import com.mysiupysiu.bignay.utils.WorldExporter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -10,29 +11,23 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.storage.LevelStorageSource;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Set;
 import java.util.stream.Stream;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 public class WorldExportScreen extends Screen {
 
-    private LevelStorageSource.LevelStorageAccess levelAccess;
-    private Screen previousScreen;
+    private final LevelStorageSource.LevelStorageAccess levelAccess;
+    private final Screen previousScreen;
     private File destinationFile;
-    private File sourceWorld;
-    private long worldSizeBytes;
+    private final File sourceWorld;
+    private final long worldSizeBytes;
     private boolean exportPlayerData = true;
 
     private EditBox nameField;
     private Button selectDestButton;
     private Button exportButton;
-    private Button cancelButton;
     private String worldName;
 
     public WorldExportScreen(Screen previousScreen, LevelStorageSource.LevelStorageAccess levelAccess) throws IOException, NoSuchFieldException, IllegalAccessException {
@@ -77,13 +72,18 @@ public class WorldExportScreen extends Screen {
         this.addRenderableWidget(selectDestButton);
 
         int btnY = this.height - 40;
-        cancelButton = Button.builder(Component.translatable("gui.cancel"), b -> {
+        Button cancelButton = Button.builder(Component.translatable("gui.cancel"), b -> {
             Minecraft.getInstance().setScreen(previousScreen);
         }).bounds(centerX + 10, btnY, 120, 20).build();
         this.addRenderableWidget(cancelButton);
 
         exportButton = Button.builder(Component.translatable("exportWorld.export"), b -> {
-            exportWorld(nameField.getValue());
+            WorldExporter exporter = new WorldExporter(this.sourceWorld);
+            exporter.setDestination(this.destinationFile);
+            exporter.setExportPlayerData(this.exportPlayerData);
+            exporter.setWorldName(this.worldName);
+            exporter.execute();
+
             try {
                 levelAccess.close();
             } catch (IOException e) {
@@ -160,50 +160,6 @@ public class WorldExportScreen extends Screen {
         this.destinationFile = destinationFile;
         Minecraft.getInstance().setScreen(this);
         if (this.exportButton != null) this.exportButton.active = (destinationFile != null);
-    }
-
-    private void exportWorld(String name) {
-        File outputZip = new File(destinationFile, name + ".zip");
-
-        try (FileOutputStream fos = new FileOutputStream(outputZip); ZipOutputStream zos = new ZipOutputStream(fos)) {
-            zipFolderRecursive(sourceWorld, sourceWorld.getName(), zos);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void zipFolderRecursive(File folder, String parentPath, ZipOutputStream zos) throws IOException {
-        File[] files = folder.listFiles();
-        if (files == null) return;
-
-        Set<String> playerDataFolders = Set.of("advancements", "playerdata", "stats");
-
-        for (File file : files) {
-            String entryName = parentPath + "/" + file.getName();
-
-            if (file.isDirectory() && !exportPlayerData && playerDataFolders.contains(file.getName().toLowerCase())) {
-                continue;
-            }
-
-            if (file.isDirectory()) {
-                zos.putNextEntry(new ZipEntry(entryName + "/"));
-                zos.closeEntry();
-
-                zipFolderRecursive(file, entryName, zos);
-            } else {
-                try (FileInputStream fis = new FileInputStream(file)) {
-                    zos.putNextEntry(new ZipEntry(entryName));
-
-                    byte[] buffer = new byte[4096];
-                    int len;
-                    while ((len = fis.read(buffer)) != -1) {
-                        zos.write(buffer, 0, len);
-                    }
-
-                    zos.closeEntry();
-                }
-            }
-        }
     }
 
     private Component getExportPlayerDataLabel() {
