@@ -298,5 +298,9 @@
   "importWorld.difficulty": "Difficulty: %s",
   "importWorld.seed": "Seed: %s",
   "importWorld.days": "Days: %s",
-  "importWorld.size": "Size: %s"
+  "importWorld.size": "Size: %s",
+  "importWorld.error_file": "The selected file does not contain a valid Minecraft world or is corrupted.",
+  "fileChooser.choose_another.file": "Choose another file",
+  "fileChooser.invalid_file": "Invalid file selected",
+  "gui.back_to_menu": "Back to menu"
 }

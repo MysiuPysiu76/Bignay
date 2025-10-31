@@ -1,5 +1,6 @@
 package com.mysiupysiu.bignay.events;
 
+import com.mysiupysiu.bignay.screen.file.InvalidFileScreen;
 import com.mysiupysiu.bignay.screen.file.chooser.FileChooserScreen;
 import com.mysiupysiu.bignay.screen.WorldImportScreen;
 import com.mysiupysiu.bignay.utils.FileType;
@@ -42,7 +43,9 @@ public class WorldSelectScreenEvent {
                 WorldImportScreen importWorld = new WorldImportScreen(file);
                 if (WorldImporter.isValidWorld(file)) {
                     Minecraft.getInstance().setScreen(importWorld);
+                    return;
                 }
+                Minecraft.getInstance().setScreen(new InvalidFileScreen(fileChooser));
             });
             fileChooser.setPreviousScreen(screen);
             Minecraft.getInstance().setScreen(fileChooser);
