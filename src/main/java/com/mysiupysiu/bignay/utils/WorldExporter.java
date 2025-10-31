@@ -11,6 +11,8 @@ import java.util.zip.ZipOutputStream;
 public class WorldExporter {
 
     private final File source;
+    private ProgressListener progressListener;
+    private volatile boolean cancelled = false;
     private File destination;
     private String worldName;
     private boolean exportPlayerData;
@@ -21,15 +23,30 @@ public class WorldExporter {
 
     public void execute() {
         File outputZip = new File(this.destination, worldName + ".zip");
+        long totalSize = calculateTotalSize(source);
+        long[] processed = {0};
 
         try (FileOutputStream fos = new FileOutputStream(outputZip); ZipOutputStream zos = new ZipOutputStream(fos)) {
-            zipFolderRecursive(this.source, this.source.getName(), zos);
+            zipFolderRecursive(this.source, this.source.getName(), zos, processed, totalSize);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        if (cancelled && outputZip.exists()) outputZip.delete();
     }
 
-    private void zipFolderRecursive(File folder, String parentPath, ZipOutputStream zos) throws IOException {
+    private long calculateTotalSize(File folder) {
+        long size = 0;
+        File[] files = folder.listFiles();
+        if (files == null) return 0;
+        for (File f : files) {
+            if (f.isDirectory()) size += calculateTotalSize(f);
+            else size += f.length();
+        }
+        return size;
+    }
+
+    private void zipFolderRecursive(File folder, String parentPath, ZipOutputStream zos, long[] processed, long totalSize) throws IOException {
         File[] files = folder.listFiles();
         if (files == null) return;
 
@@ -45,16 +62,20 @@ public class WorldExporter {
             if (file.isDirectory()) {
                 zos.putNextEntry(new ZipEntry(entryName + "/"));
                 zos.closeEntry();
-
-                zipFolderRecursive(file, entryName, zos);
+                zipFolderRecursive(file, entryName, zos, processed, totalSize);
             } else {
                 try (FileInputStream fis = new FileInputStream(file)) {
                     zos.putNextEntry(new ZipEntry(entryName));
 
                     byte[] buffer = new byte[4096];
                     int len;
-                    while ((len = fis.read(buffer)) != -1) {
+                    while ((len = fis.read(buffer)) != -1 && !cancelled) {
                         zos.write(buffer, 0, len);
+                        processed[0] += len;
+                        if (progressListener != null && totalSize > 0) {
+                            double progress = (double) processed[0] / totalSize;
+                            progressListener.onProgress(progress);
+                        }
                     }
 
                     zos.closeEntry();
@@ -89,5 +110,17 @@ public class WorldExporter {
 
     public void setExportPlayerData(boolean exportPlayerData) {
         this.exportPlayerData = exportPlayerData;
+    }
+
+    public void setProgressListener(ProgressListener listener) {
+        this.progressListener = listener;
+    }
+
+    public ProgressListener getProgressListener() {
+        return progressListener;
+    }
+
+    public void cancel() {
+        this.cancelled = true;
     }
 }

@@ -93,7 +93,6 @@ abstract class AbstractFileChooserScreen extends Screen {
                             if (!requireDirectory) {
                                 currentDir = target.toPath();
                                 reloadEntries();
-                                return;
                             } else {
                                 onConfirm.accept(target);
                             }
@@ -101,11 +100,11 @@ abstract class AbstractFileChooserScreen extends Screen {
                             onConfirm.accept(target);
                         }
                     }
-                }).bounds(hiddenX, confirmY, btnWidth, btnHeight).build());
+                }).bounds(upX, confirmY, btnWidth, btnHeight).build());
 
         this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.cancel"), b -> {
             Minecraft.getInstance().setScreen(previousScreen);
-        }).bounds(upX, confirmY, btnWidth, btnHeight).build());
+        }).bounds(hiddenX, confirmY, btnWidth, btnHeight).build());
     }
 
     @Override

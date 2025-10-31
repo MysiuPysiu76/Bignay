@@ -24,6 +24,8 @@ public class WorldExportScreen extends Screen {
     private final File sourceWorld;
     private final long worldSizeBytes;
     private boolean exportPlayerData = true;
+    private boolean finished = false;
+    private boolean cancelled = false;
 
     private EditBox nameField;
     private Button selectDestButton;
@@ -82,14 +84,8 @@ public class WorldExportScreen extends Screen {
             exporter.setDestination(this.destinationFile);
             exporter.setExportPlayerData(this.exportPlayerData);
             exporter.setWorldName(this.worldName);
-            exporter.execute();
 
-            try {
-                levelAccess.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            Minecraft.getInstance().setScreen(null);
+            Minecraft.getInstance().setScreen(new WorldExportProgressScreen(this, exporter));
         }).bounds(centerX - 130, btnY, 120, 20).build();
 
         exportButton.active = (destinationFile != null);
@@ -106,6 +102,7 @@ public class WorldExportScreen extends Screen {
         int rowGap = 28;
         int inputWidth = 260;
         int inputX = centerX - inputWidth / 2;
+        int centerY = this.height / 2;
 
         String sizeText = (worldSizeBytes >= 0) ? humanReadableByteCount(worldSizeBytes) : "-";
         graphics.drawString(this.font, Component.translatable("exportWorld.size", sizeText), inputX, y, 0xFFFFFF, false);
@@ -129,6 +126,15 @@ public class WorldExportScreen extends Screen {
         }
 
         graphics.drawString(this.font, shortDest, pathX, nameFieldY + rowGap + 6, 0xFFFFFF, false);
+
+        if (finished) {
+            if (cancelled) {
+                graphics.drawCenteredString(this.font, Component.translatable("exportWorld.cancelled"), centerX, centerY + 70, 0xFF5555);
+            } else {
+                graphics.drawCenteredString(this.font, Component.translatable("exportWorld.done"), centerX, centerY + 70, 0x00FF00);
+            }
+            Minecraft.getInstance().setScreen(previousScreen);
+        }
 
         super.render(graphics, mouseX, mouseY, partialTicks);
     }
@@ -160,6 +166,14 @@ public class WorldExportScreen extends Screen {
         this.destinationFile = destinationFile;
         Minecraft.getInstance().setScreen(this);
         if (this.exportButton != null) this.exportButton.active = (destinationFile != null);
+    }
+
+    public void closeWorld() {
+        try {
+            levelAccess.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private Component getExportPlayerDataLabel() {

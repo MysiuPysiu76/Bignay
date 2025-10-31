@@ -302,5 +302,8 @@
   "importWorld.error_file": "The selected file does not contain a valid Minecraft world or is corrupted.",
   "fileChooser.choose_another.file": "Choose another file",
   "fileChooser.invalid_file": "Invalid file selected",
-  "gui.back_to_menu": "Back to menu"
+  "gui.back_to_menu": "Back to Menu",
+  "exportWorld.progress.title": "Exporting World",
+  "exportWorld.cancelled": "Exporting Canceled",
+  "exportWorld.done": "Exporting Done"
 }
