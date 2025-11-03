@@ -304,6 +304,6 @@
   "fileChooser.invalid_file": "Invalid file selected",
   "gui.back_to_menu": "Back to Menu",
   "exportWorld.progress.title": "Exporting World",
-  "exportWorld.cancelled": "Exporting Canceled",
-  "exportWorld.done": "Exporting Done"
+  "importWorld.progress.title": "Importing World",
+  "progressScreen.complete": "Complete: %s"
 }

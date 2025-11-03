@@ -1,7 +1,5 @@
 package com.mysiupysiu.bignay.utils;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
 
@@ -17,9 +15,11 @@ import java.util.zip.ZipFile;
 
 public class WorldImporter {
 
+    private ProgressListener progressListener;
     private final File source;
     private Path target;
     private String worldName;
+    private volatile boolean canceled = false;
 
     public WorldImporter(File source) {
         this.source = source;
@@ -78,8 +78,11 @@ public class WorldImporter {
                 }
             }
 
+            long totalSize = calculateTotalSize(zip);
+            long processed = 0;
+
             entries = zip.entries();
-            while (entries.hasMoreElements()) {
+            while (entries.hasMoreElements() && !canceled) {
                 ZipEntry entry = entries.nextElement();
                 String name = entry.getName();
 
@@ -96,15 +99,51 @@ public class WorldImporter {
                 } else {
                     Files.createDirectories(outPath.getParent());
                     try (InputStream is = zip.getInputStream(entry)) {
-                        Files.copy(is, outPath, StandardCopyOption.REPLACE_EXISTING);
+                        byte[] buffer = new byte[4096];
+                        int len;
+                        try (var os = Files.newOutputStream(outPath, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
+                            while ((len = is.read(buffer)) != -1 && !canceled) {
+                                os.write(buffer, 0, len);
+                                processed += len;
+                                if (progressListener != null && totalSize > 0) {
+                                    double progress = (double) processed / totalSize;
+                                    progressListener.onProgress(progress);
+                                }
+                            }
+                        }
                     }
                 }
             }
-            updateWorldName();
+
+            if (!canceled) {
+                updateWorldName();
+            } else {
+                deleteDirectory(this.target.toFile());
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Minecraft.getInstance().setScreen(new SelectWorldScreen(null));
+    }
+
+    private long calculateTotalSize(ZipFile zip) {
+        return zip.stream()
+                .filter(entry -> !entry.isDirectory())
+                .mapToLong(ZipEntry::getSize)
+                .filter(size -> size > 0)
+                .sum();
+    }
+
+    private void deleteDirectory(File dir) {
+        if (!dir.exists()) return;
+        File[] files = dir.listFiles();
+        if (files != null) {
+            for (File f : files) {
+                if (f.isDirectory()) deleteDirectory(f);
+                else f.delete();
+            }
+        }
+        dir.delete();
     }
 
     public void updateWorldName() throws IOException {
@@ -128,5 +167,17 @@ public class WorldImporter {
 
     public File getSource() {
         return source;
+    }
+
+    public void setProgressListener(ProgressListener listener) {
+        this.progressListener = listener;
+    }
+
+    public ProgressListener getProgressListener() {
+        return progressListener;
+    }
+
+    public void cancel() {
+        this.canceled = true;
     }
 }

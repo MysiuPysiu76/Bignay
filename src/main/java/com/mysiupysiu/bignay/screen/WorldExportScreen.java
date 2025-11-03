@@ -80,12 +80,12 @@ public class WorldExportScreen extends Screen {
         this.addRenderableWidget(cancelButton);
 
         exportButton = Button.builder(Component.translatable("exportWorld.export"), b -> {
-            WorldExporter exporter = new WorldExporter(this.sourceWorld);
+            WorldExporter exporter = new WorldExporter(levelAccess, this.sourceWorld);
             exporter.setDestination(this.destinationFile);
             exporter.setExportPlayerData(this.exportPlayerData);
             exporter.setWorldName(this.worldName);
 
-            Minecraft.getInstance().setScreen(new WorldExportProgressScreen(this, exporter));
+            Minecraft.getInstance().setScreen(new WorldExportProgressScreen(exporter));
         }).bounds(centerX - 130, btnY, 120, 20).build();
 
         exportButton.active = (destinationFile != null);
@@ -127,15 +127,6 @@ public class WorldExportScreen extends Screen {
 
         graphics.drawString(this.font, shortDest, pathX, nameFieldY + rowGap + 6, 0xFFFFFF, false);
 
-        if (finished) {
-            if (cancelled) {
-                graphics.drawCenteredString(this.font, Component.translatable("exportWorld.cancelled"), centerX, centerY + 70, 0xFF5555);
-            } else {
-                graphics.drawCenteredString(this.font, Component.translatable("exportWorld.done"), centerX, centerY + 70, 0x00FF00);
-            }
-            Minecraft.getInstance().setScreen(previousScreen);
-        }
-
         super.render(graphics, mouseX, mouseY, partialTicks);
     }
 
@@ -166,14 +157,6 @@ public class WorldExportScreen extends Screen {
         this.destinationFile = destinationFile;
         Minecraft.getInstance().setScreen(this);
         if (this.exportButton != null) this.exportButton.active = (destinationFile != null);
-    }
-
-    public void closeWorld() {
-        try {
-            levelAccess.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private Component getExportPlayerDataLabel() {

@@ -1,5 +1,7 @@
 package com.mysiupysiu.bignay.utils;
 
+import net.minecraft.world.level.storage.LevelStorageSource;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -10,14 +12,16 @@ import java.util.zip.ZipOutputStream;
 
 public class WorldExporter {
 
+    private final LevelStorageSource.LevelStorageAccess levelAccess;
     private final File source;
     private ProgressListener progressListener;
-    private volatile boolean cancelled = false;
+    private volatile boolean canceled = false;
     private File destination;
     private String worldName;
     private boolean exportPlayerData;
 
-    public WorldExporter(File source) {
+    public WorldExporter(LevelStorageSource.LevelStorageAccess levelAccess, File source) {
+        this.levelAccess = levelAccess;
         this.source = source;
     }
 
@@ -32,7 +36,8 @@ public class WorldExporter {
             throw new RuntimeException(e);
         }
 
-        if (cancelled && outputZip.exists()) outputZip.delete();
+        if (canceled && outputZip.exists()) outputZip.delete();
+        this.close();
     }
 
     private long calculateTotalSize(File folder) {
@@ -69,7 +74,7 @@ public class WorldExporter {
 
                     byte[] buffer = new byte[4096];
                     int len;
-                    while ((len = fis.read(buffer)) != -1 && !cancelled) {
+                    while ((len = fis.read(buffer)) != -1 && !canceled) {
                         zos.write(buffer, 0, len);
                         processed[0] += len;
                         if (progressListener != null && totalSize > 0) {
@@ -121,6 +126,15 @@ public class WorldExporter {
     }
 
     public void cancel() {
-        this.cancelled = true;
+        this.canceled = true;
+        this.close();
+    }
+
+    public void close() {
+        try {
+            levelAccess.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
