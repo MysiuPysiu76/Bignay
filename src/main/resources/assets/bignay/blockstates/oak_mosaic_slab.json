@@ -4,7 +4,7 @@
       "model": "bignay:block/oak_mosaic_slab"
     },
     "type=double": {
-      "model": "bignay:block/oak_mosaics"
+      "model": "bignay:block/oak_mosaic"
     },
     "type=top": {
       "model": "bignay:block/oak_mosaic_slab_top"

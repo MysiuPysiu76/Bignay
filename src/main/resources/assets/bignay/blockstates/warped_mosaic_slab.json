@@ -4,7 +4,7 @@
       "model": "bignay:block/warped_mosaic_slab"
     },
     "type=double": {
-      "model": "bignay:block/warped_mosaics"
+      "model": "bignay:block/warped_mosaic"
     },
     "type=top": {
       "model": "bignay:block/warped_mosaic_slab_top"

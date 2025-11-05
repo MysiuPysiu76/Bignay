@@ -4,7 +4,7 @@
       "model": "bignay:block/mangrove_mosaic_slab"
     },
     "type=double": {
-      "model": "bignay:block/mangrove_mosaics"
+      "model": "bignay:block/mangrove_mosaic"
     },
     "type=top": {
       "model": "bignay:block/mangrove_mosaic_slab_top"

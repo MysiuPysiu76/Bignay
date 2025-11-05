@@ -4,7 +4,7 @@
       "model": "bignay:block/crimson_mosaic_slab"
     },
     "type=double": {
-      "model": "bignay:block/crimson_mosaics"
+      "model": "bignay:block/crimson_mosaic"
     },
     "type=top": {
       "model": "bignay:block/crimson_mosaic_slab_top"

@@ -4,7 +4,7 @@
       "model": "bignay:block/acacia_mosaic_slab"
     },
     "type=double": {
-      "model": "bignay:block/acacia_mosaics"
+      "model": "bignay:block/acacia_mosaic"
     },
     "type=top": {
       "model": "bignay:block/acacia_mosaic_slab_top"
