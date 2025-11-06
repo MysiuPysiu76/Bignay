@@ -33,7 +33,7 @@ public class CustomCampfireRenderer implements BlockEntityRenderer<CustomCampfir
 
                 poseStack.mulPose(Axis.XP.rotationDegrees(90f));
 
-                float[] yRotations = {0f, 90f, 180f, 270f};
+                float[] yRotations = {0f, 90f, 270f, 180f};
                 poseStack.mulPose(Axis.ZP.rotationDegrees(yRotations[i]));
 
                 poseStack.scale(0.38f, 0.38f, 0.38f);
