@@ -1,16 +1,6 @@
 {
+  "replace": false,
   "values": [
-    "minecraft:oak_fence",
-    "minecraft:acacia_fence",
-    "minecraft:dark_oak_fence",
-    "minecraft:spruce_fence",
-    "minecraft:birch_fence",
-    "minecraft:jungle_fence",
-    "minecraft:crimson_fence",
-    "minecraft:warped_fence",
-    "minecraft:mangrove_fence",
-    "minecraft:bamboo_fence",
-    "minecraft:cherry_fence",
     "bignay:verdant_fence",
     "bignay:acacia_wood_fence",
     "bignay:birch_wood_fence",

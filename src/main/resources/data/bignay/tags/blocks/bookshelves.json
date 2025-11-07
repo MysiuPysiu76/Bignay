@@ -1,17 +1,17 @@
 {
-  "replace": false,
   "values": [
+    "minecraft:bookshelf",
     "bignay:acacia_bookshelf",
     "bignay:bamboo_bookshelf",
     "bignay:birch_bookshelf",
+    "bignay:cherry_bookshelf",
     "bignay:crimson_bookshelf",
     "bignay:dark_oak_bookshelf",
     "bignay:jungle_bookshelf",
-    "bignay:spruce_bookshelf",
-    "bignay:oak_bookshelf",
-    "bignay:warped_bookshelf",
-    "bignay:cherry_bookshelf",
     "bignay:mangrove_bookshelf",
-    "bignay:verdant_bookshelf"
+    "bignay:oak_bookshelf",
+    "bignay:spruce_bookshelf",
+    "bignay:verdant_bookshelf",
+    "bignay:warped_bookshelf"
   ]
 }
