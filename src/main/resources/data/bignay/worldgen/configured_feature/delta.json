@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:delta_feature",
+  "config": {
+    "contents": {
+      "Name": "minecraft:lava",
+      "Properties": {
+        "level": "0"
+      }
+    },
+    "rim": {
+      "Name": "bignay:basaltic_lava"
+    },
+    "rim_size": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 2,
+        "min_inclusive": 0
+      }
+    },
+    "size": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 11,
+        "min_inclusive": 1
+      }
+    }
+  }
+}
