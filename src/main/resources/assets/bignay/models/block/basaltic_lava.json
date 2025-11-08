@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "bignay:block/basaltic_lava_top",
+    "side": "bignay:block/basaltic_lava_side",
+    "top": "bignay:block/basaltic_lava_top"
+  }
+}
