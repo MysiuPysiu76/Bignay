@@ -1,12 +1,16 @@
 package com.mysiupysiu.bignay.items;
 
+import com.mysiupysiu.bignay.utils.CreativeTabProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -15,7 +19,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class WaxItem extends Item {
+import java.util.List;
+
+public class WaxItem extends Item implements CreativeTabProvider {
 
     public WaxItem() {
         super(new Properties());
@@ -65,5 +71,10 @@ public class WaxItem extends Item {
     @SuppressWarnings("unchecked")
     private static <T extends Comparable<T>> BlockState copyProperty(BlockState to, BlockState from, Property<?> property) {
         return to.setValue((Property<T>) property, (T) from.getValue(property));
+    }
+
+    @Override
+    public List<ResourceKey<CreativeModeTab>> getCreativeTabs() {
+        return List.of(CreativeModeTabs.INGREDIENTS);
     }
 }

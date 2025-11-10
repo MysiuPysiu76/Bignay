@@ -1,14 +1,18 @@
 package com.mysiupysiu.bignay.blocks;
 
 import com.mysiupysiu.bignay.menu.ArchaeologyTableMenu;
+import com.mysiupysiu.bignay.utils.CreativeTabProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.*;
 import net.minecraftforge.network.NetworkHooks;
@@ -21,7 +25,9 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
-public class ArchaeologyTableBlock extends Block {
+import java.util.List;
+
+public class ArchaeologyTableBlock extends Block implements CreativeTabProvider {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public ArchaeologyTableBlock() {
@@ -60,5 +66,10 @@ public class ArchaeologyTableBlock extends Block {
             NetworkHooks.openScreen(serverPlayer, provider, pos);
         }
         return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public List<ResourceKey<CreativeModeTab>> getCreativeTabs() {
+        return List.of(CreativeModeTabs.FUNCTIONAL_BLOCKS);
     }
 }

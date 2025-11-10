@@ -1,8 +1,12 @@
 package com.mysiupysiu.bignay.blocks;
 
+import com.mysiupysiu.bignay.utils.CreativeTabProvider;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -13,7 +17,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 
-public class BasalticLavaBlock extends Block {
+import java.util.List;
+import java.util.Set;
+
+public class BasalticLavaBlock extends Block implements CreativeTabProvider {
 
     public BasalticLavaBlock() {
         super(BlockBehaviour.Properties
@@ -39,5 +46,10 @@ public class BasalticLavaBlock extends Block {
             entity.hurt(level.damageSources().hotFloor(), 1.0F);
         }
         super.stepOn(level, pos, state, entity);
+    }
+
+    @Override
+    public List<ResourceKey<CreativeModeTab>> getCreativeTabs() {
+        return List.of(CreativeModeTabs.NATURAL_BLOCKS, CreativeModeTabs.FUNCTIONAL_BLOCKS);
     }
 }

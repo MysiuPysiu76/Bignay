@@ -1,9 +1,11 @@
 package com.mysiupysiu.bignay.blocks;
 
+import com.mysiupysiu.bignay.utils.CreativeTabProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -11,9 +13,7 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -29,7 +29,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 
-public class CustomCampfireBlock extends CampfireBlock {
+import java.util.List;
+
+public class CustomCampfireBlock extends CampfireBlock implements CreativeTabProvider {
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
@@ -182,5 +184,10 @@ public class CustomCampfireBlock extends CampfireBlock {
 
             super.onRemove(state, level, pos, newState, isMoving);
         }
+    }
+
+    @Override
+    public List<ResourceKey<CreativeModeTab>> getCreativeTabs() {
+        return List.of(CreativeModeTabs.FUNCTIONAL_BLOCKS);
     }
 }

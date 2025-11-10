@@ -2,12 +2,12 @@ package com.mysiupysiu.bignay.blocks;
 
 import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.items.ItemInit;
+import com.mysiupysiu.bignay.utils.CreativeTabProvider;
 import com.mysiupysiu.bignay.worldgen.ModConfiguredFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlag;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
@@ -23,16 +23,12 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Supplier;
 
 public class BlockInit {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, BignayMod.MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, BignayMod.MODID);
-
-    private static final List<RegistryObject<Item>> NATURAL_TAB_ITEMS = new ArrayList<>();
 
     public static final RegistryObject<Block> WAX_BLOCK = registerBlock("wax_block", WaxBlock::new);
     public static final RegistryObject<Block> WITHER_BONE_BLOCK = registerBlock("wither_bone_block", WitherBoneBlock::new);
@@ -104,17 +100,17 @@ public class BlockInit {
     public static final RegistryObject<Block> CRACKED_NETHER_BRICK_WALL = registerBlock("cracked_nether_brick_wall", WallsBlock::new);
     public static final RegistryObject<Block> STONE_WALL = registerBlock("stone_wall", WallsBlock::new);
 
-    public static final RegistryObject<Block> VERTICAL_ACACIA_PLANKS = registerBlock("vertical_acacia_planks", VerticalPlanksBlock::new);
-    public static final RegistryObject<Block> VERTICAL_BAMBOO_PLANKS = registerBlock("vertical_bamboo_planks", () -> new VerticalPlanksBlock(Blocks.BAMBOO_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_BIRCH_PLANKS = registerBlock("vertical_birch_planks", VerticalPlanksBlock::new);
-    public static final RegistryObject<Block> VERTICAL_CHERRY_PLANKS = registerBlock("vertical_cherry_planks", VerticalPlanksBlock::new);
-    public static final RegistryObject<Block> VERTICAL_CRIMSON_PLANKS = registerBlock("vertical_crimson_planks", () -> new VerticalPlanksBlock(Blocks.CRIMSON_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_DARK_OAK_PLANKS = registerBlock("vertical_dark_oak_planks", VerticalPlanksBlock::new);
-    public static final RegistryObject<Block> VERTICAL_JUNGLE_PLANKS = registerBlock("vertical_jungle_planks", VerticalPlanksBlock::new);
-    public static final RegistryObject<Block> VERTICAL_MANGROVE_PLANKS = registerBlock("vertical_mangrove_planks", VerticalPlanksBlock::new);
-    public static final RegistryObject<Block> VERTICAL_OAK_PLANKS = registerBlock("vertical_oak_planks", VerticalPlanksBlock::new);
-    public static final RegistryObject<Block> VERTICAL_SPRUCE_PLANKS = registerBlock("vertical_spruce_planks", VerticalPlanksBlock::new);
-    public static final RegistryObject<Block> VERTICAL_WARPED_PLANKS = registerBlock("vertical_warped_planks", () -> new VerticalPlanksBlock(Blocks.WARPED_PLANKS));
+    public static final RegistryObject<Block> VERTICAL_ACACIA_PLANKS = registerBlock("vertical_acacia_planks", () -> new DecorativeWoodBlock(Blocks.ACACIA_PLANKS));
+    public static final RegistryObject<Block> VERTICAL_BAMBOO_PLANKS = registerBlock("vertical_bamboo_planks", () -> new DecorativeWoodBlock(Blocks.BAMBOO_PLANKS));
+    public static final RegistryObject<Block> VERTICAL_BIRCH_PLANKS = registerBlock("vertical_birch_planks", () -> new DecorativeWoodBlock(Blocks.BIRCH_PLANKS));
+    public static final RegistryObject<Block> VERTICAL_CHERRY_PLANKS = registerBlock("vertical_cherry_planks", () -> new DecorativeWoodBlock(Blocks.CHERRY_PLANKS));
+    public static final RegistryObject<Block> VERTICAL_CRIMSON_PLANKS = registerBlock("vertical_crimson_planks", () -> new DecorativeWoodBlock(Blocks.CRIMSON_PLANKS));
+    public static final RegistryObject<Block> VERTICAL_DARK_OAK_PLANKS = registerBlock("vertical_dark_oak_planks", () -> new DecorativeWoodBlock(Blocks.DARK_OAK_PLANKS));
+    public static final RegistryObject<Block> VERTICAL_JUNGLE_PLANKS = registerBlock("vertical_jungle_planks", () -> new DecorativeWoodBlock(Blocks.JUNGLE_PLANKS));
+    public static final RegistryObject<Block> VERTICAL_MANGROVE_PLANKS = registerBlock("vertical_mangrove_planks", () -> new DecorativeWoodBlock(Blocks.MANGROVE_PLANKS));
+    public static final RegistryObject<Block> VERTICAL_OAK_PLANKS = registerBlock("vertical_oak_planks", () -> new DecorativeWoodBlock(Blocks.OAK_PLANKS));
+    public static final RegistryObject<Block> VERTICAL_SPRUCE_PLANKS = registerBlock("vertical_spruce_planks", () -> new DecorativeWoodBlock(Blocks.SPRUCE_PLANKS));
+    public static final RegistryObject<Block> VERTICAL_WARPED_PLANKS = registerBlock("vertical_warped_planks", () -> new DecorativeWoodBlock(Blocks.WARPED_PLANKS));
 
     public static final RegistryObject<Block> VERDANT_STEM = registerBlock("verdant_stem", () -> new NetherStemBlock(MapColor.COLOR_GREEN));
     public static final RegistryObject<Block> STRIPPED_VERDANT_STEM = registerBlock("stripped_verdant_stem", () -> new NetherStemBlock(MapColor.COLOR_GREEN));
@@ -122,8 +118,8 @@ public class BlockInit {
     public static final RegistryObject<Block> STRIPPED_VERDANT_HYPHAE = registerBlock("stripped_verdant_hyphae", () -> new NetherStemBlock(MapColor.COLOR_GREEN));
     public static final RegistryObject<Block> HOLLOW_VERDANT_STEM = registerBlock("hollow_verdant_stem", HollowLogBlock::new);
     public static final RegistryObject<Block> HOLLOW_STRIPPED_VERDANT_STEM = registerBlock("hollow_stripped_verdant_stem", HollowLogBlock::new);
-    public static final RegistryObject<Block> VERDANT_PLANKS = registerBlock("verdant_planks", VerticalPlanksBlock::new);
-    public static final RegistryObject<Block> VERTICAL_VERDANT_PLANKS = registerBlock("vertical_verdant_planks", VerticalPlanksBlock::new);
+    public static final RegistryObject<Block> VERDANT_PLANKS = registerBlock("verdant_planks", VerdantPlanksBlock::new);
+    public static final RegistryObject<Block> VERTICAL_VERDANT_PLANKS = registerBlock("vertical_verdant_planks", () -> new DecorativeWoodBlock(VERDANT_PLANKS.get()));
     public static final RegistryObject<Block> VERDANT_STAIRS = registerBlock("verdant_stairs", StairsBlock::new);
     public static final RegistryObject<Block> VERDANT_SLAB = registerBlock("verdant_slab", SlabsBlock::new);
     public static final RegistryObject<Block> VERDANT_FENCE = registerBlock("verdant_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE_GATE)));
@@ -228,18 +224,18 @@ public class BlockInit {
 
     public static final RegistryObject<Block> HEAVY_CHAIN = registerBlock("heavy_chain", HeavyChainBlock::new);
 
-    public static final RegistryObject<Block> ACACIA_BOOKSHELF = registerBlock("acacia_bookshelf", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final RegistryObject<Block> BAMBOO_BOOKSHELF = registerBlock("bamboo_bookshelf", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final RegistryObject<Block> BIRCH_BOOKSHELF = registerBlock("birch_bookshelf", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final RegistryObject<Block> CHERRY_BOOKSHELF = registerBlock("cherry_bookshelf", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final RegistryObject<Block> CRIMSON_BOOKSHELF = registerBlock("crimson_bookshelf", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final RegistryObject<Block> DARK_OAK_BOOKSHELF = registerBlock("dark_oak_bookshelf", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final RegistryObject<Block> JUNGLE_BOOKSHELF = registerBlock("jungle_bookshelf", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final RegistryObject<Block> MANGROVE_BOOKSHELF = registerBlock("mangrove_bookshelf", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final RegistryObject<Block> OAK_BOOKSHELF = registerBlock("oak_bookshelf", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final RegistryObject<Block> SPRUCE_BOOKSHELF = registerBlock("spruce_bookshelf", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final RegistryObject<Block> VERDANT_BOOKSHELF = registerBlock("verdant_bookshelf", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final RegistryObject<Block> WARPED_BOOKSHELF = registerBlock("warped_bookshelf", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final RegistryObject<Block> ACACIA_BOOKSHELF = registerBlock("acacia_bookshelf", BookshelfBlock::new);
+    public static final RegistryObject<Block> BAMBOO_BOOKSHELF = registerBlock("bamboo_bookshelf", BookshelfBlock::new);
+    public static final RegistryObject<Block> BIRCH_BOOKSHELF = registerBlock("birch_bookshelf", BookshelfBlock::new);
+    public static final RegistryObject<Block> CHERRY_BOOKSHELF = registerBlock("cherry_bookshelf", BookshelfBlock::new);
+    public static final RegistryObject<Block> CRIMSON_BOOKSHELF = registerBlock("crimson_bookshelf", BookshelfBlock::new);
+    public static final RegistryObject<Block> DARK_OAK_BOOKSHELF = registerBlock("dark_oak_bookshelf", BookshelfBlock::new);
+    public static final RegistryObject<Block> JUNGLE_BOOKSHELF = registerBlock("jungle_bookshelf", BookshelfBlock::new);
+    public static final RegistryObject<Block> MANGROVE_BOOKSHELF = registerBlock("mangrove_bookshelf", BookshelfBlock::new);
+    public static final RegistryObject<Block> OAK_BOOKSHELF = registerBlock("oak_bookshelf", BookshelfBlock::new);
+    public static final RegistryObject<Block> SPRUCE_BOOKSHELF = registerBlock("spruce_bookshelf", BookshelfBlock::new);
+    public static final RegistryObject<Block> VERDANT_BOOKSHELF = registerBlock("verdant_bookshelf", BookshelfBlock::new);
+    public static final RegistryObject<Block> WARPED_BOOKSHELF = registerBlock("warped_bookshelf", BookshelfBlock::new);
 
     public static final RegistryObject<Block> BLUE_NETHER_BRICKS = registerBlock("blue_nether_bricks", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.NETHER).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F).sound(SoundType.NETHER_BRICKS)));
     public static final RegistryObject<Block> BLUE_NETHER_BRICK_SLAB = registerBlock("blue_nether_brick_slab", SlabsBlock::new);
@@ -297,17 +293,17 @@ public class BlockInit {
     public static final RegistryObject<Block> DROWNED_HEAD = registerBlockOnly("drowned_head", () -> new HeadBlock(BlockBehaviour.Properties.copy(Blocks.CREEPER_HEAD)));
     public static final RegistryObject<Block> DROWNED_WALL_HEAD = registerBlockOnly("drowned_wall_head", () -> new WallHeadBlock(BlockBehaviour.Properties.copy(Blocks.CREEPER_WALL_HEAD)));
 
-    public static final RegistryObject<Block> ACACIA_MOSAIC = registerBlock("acacia_mosaic", () -> new Block(BlockBehaviour.Properties.copy(Blocks.ACACIA_PLANKS)));
-    public static final RegistryObject<Block> BIRCH_MOSAIC = registerBlock("birch_mosaic", () -> new Block(BlockBehaviour.Properties.copy(Blocks.BIRCH_PLANKS)));
-    public static final RegistryObject<Block> CHERRY_MOSAIC = registerBlock("cherry_mosaic", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS)));
-    public static final RegistryObject<Block> CRIMSON_MOSAIC = registerBlock("crimson_mosaic", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CRIMSON_PLANKS)));
-    public static final RegistryObject<Block> DARK_OAK_MOSAIC = registerBlock("dark_oak_mosaic", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DARK_OAK_PLANKS)));
-    public static final RegistryObject<Block> JUNGLE_MOSAIC = registerBlock("jungle_mosaic", () -> new Block(BlockBehaviour.Properties.copy(Blocks.JUNGLE_PLANKS)));
-    public static final RegistryObject<Block> MANGROVE_MOSAIC = registerBlock("mangrove_mosaic", () -> new Block(BlockBehaviour.Properties.copy(Blocks.MANGROVE_PLANKS)));
-    public static final RegistryObject<Block> OAK_MOSAIC = registerBlock("oak_mosaic", () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
-    public static final RegistryObject<Block> SPRUCE_MOSAIC = registerBlock("spruce_mosaic", () -> new Block(BlockBehaviour.Properties.copy(Blocks.SPRUCE_PLANKS)));
-    public static final RegistryObject<Block> VERDANT_MOSAIC = registerBlock("verdant_mosaic", () -> new Block(BlockBehaviour.Properties.copy(BlockInit.VERDANT_PLANKS.get())));
-    public static final RegistryObject<Block> WARPED_MOSAIC = registerBlock("warped_mosaic", () -> new Block(BlockBehaviour.Properties.copy(Blocks.WARPED_PLANKS)));
+    public static final RegistryObject<Block> ACACIA_MOSAIC = registerBlock("acacia_mosaic", () -> new DecorativeWoodBlock(Blocks.ACACIA_PLANKS));
+    public static final RegistryObject<Block> BIRCH_MOSAIC = registerBlock("birch_mosaic", () -> new DecorativeWoodBlock(Blocks.BIRCH_PLANKS));
+    public static final RegistryObject<Block> CHERRY_MOSAIC = registerBlock("cherry_mosaic", () -> new DecorativeWoodBlock(Blocks.CHERRY_PLANKS));
+    public static final RegistryObject<Block> CRIMSON_MOSAIC = registerBlock("crimson_mosaic", () -> new DecorativeWoodBlock(Blocks.CRIMSON_PLANKS));
+    public static final RegistryObject<Block> DARK_OAK_MOSAIC = registerBlock("dark_oak_mosaic", () -> new DecorativeWoodBlock(Blocks.DARK_OAK_PLANKS));
+    public static final RegistryObject<Block> JUNGLE_MOSAIC = registerBlock("jungle_mosaic", () -> new DecorativeWoodBlock(Blocks.JUNGLE_PLANKS));
+    public static final RegistryObject<Block> MANGROVE_MOSAIC = registerBlock("mangrove_mosaic", () -> new DecorativeWoodBlock(Blocks.MANGROVE_PLANKS));
+    public static final RegistryObject<Block> OAK_MOSAIC = registerBlock("oak_mosaic", () -> new DecorativeWoodBlock(Blocks.OAK_PLANKS));
+    public static final RegistryObject<Block> SPRUCE_MOSAIC = registerBlock("spruce_mosaic", () -> new DecorativeWoodBlock(Blocks.SPRUCE_PLANKS));
+    public static final RegistryObject<Block> VERDANT_MOSAIC = registerBlock("verdant_mosaic", () -> new DecorativeWoodBlock(BlockInit.VERDANT_PLANKS.get()));
+    public static final RegistryObject<Block> WARPED_MOSAIC = registerBlock("warped_mosaic", () -> new DecorativeWoodBlock(Blocks.WARPED_PLANKS));
 
     public static final RegistryObject<Block> ACACIA_MOSAIC_STAIRS = registerBlock("acacia_mosaic_stairs", StairsBlock::new);
     public static final RegistryObject<Block> BIRCH_MOSAIC_STAIRS = registerBlock("birch_mosaic_stairs", StairsBlock::new);
@@ -335,8 +331,7 @@ public class BlockInit {
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
-        RegistryObject<Item> blockItem = ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
-        NATURAL_TAB_ITEMS.add(blockItem);
+        ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
         return block;
     }
 
@@ -360,9 +355,13 @@ public class BlockInit {
     }
 
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey().equals(CreativeModeTabs.NATURAL_BLOCKS)) {
-            NATURAL_TAB_ITEMS.forEach(event::accept);
-        }
+        BLOCKS.getEntries().forEach((entry) -> {
+            if (entry.get() instanceof CreativeTabProvider tab) {
+                if (tab.getCreativeTabs().contains(event.getTabKey())) {
+                    event.accept(entry.get());
+                }
+            }
+        });
     }
 
     private static Boolean always(BlockState p_50810_, BlockGetter p_50811_, BlockPos p_50812_, EntityType<?> p_50813_) {

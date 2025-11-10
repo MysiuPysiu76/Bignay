@@ -4,16 +4,15 @@ import com.mysiupysiu.bignay.utils.CreativeTabProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.List;
 
-public class StairsBlock extends StairBlock implements CreativeTabProvider {
+public class DecorativeWoodBlock extends Block implements CreativeTabProvider {
 
-    public StairsBlock() {
-        super(Blocks.STONE.defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE).strength(2.0f).requiresCorrectToolForDrops());
+    public DecorativeWoodBlock(Block block) {
+        super(BlockBehaviour.Properties.copy(block));
     }
 
     @Override

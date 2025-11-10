@@ -1,17 +1,16 @@
 package com.mysiupysiu.bignay.blocks;
 
+import com.mysiupysiu.bignay.utils.CreativeTabProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -32,7 +31,9 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterloggedBlock {
+import java.util.List;
+
+public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterloggedBlock, CreativeTabProvider {
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -137,5 +138,10 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
         }
 
         return super.use(state, level, pos, player, hand, hit);
+    }
+
+    @Override
+    public List<ResourceKey<CreativeModeTab>> getCreativeTabs() {
+        return List.of(CreativeModeTabs.BUILDING_BLOCKS);
     }
 }

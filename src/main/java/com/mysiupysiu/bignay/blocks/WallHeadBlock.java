@@ -43,7 +43,6 @@ public class WallHeadBlock extends Block {
         return null;
     }
 
-
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return switch (state.getValue(FACING)) {

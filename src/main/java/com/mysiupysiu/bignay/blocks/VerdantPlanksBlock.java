@@ -7,24 +7,19 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.material.PushReaction;
 
 import java.util.List;
 
-public class WaxBlock extends Block implements CreativeTabProvider {
+public class VerdantPlanksBlock extends Block implements CreativeTabProvider {
 
-    public WaxBlock() {
-        super(BlockBehaviour.Properties.of()
-                .mapColor(MapColor.COLOR_ORANGE)
-                .pushReaction(PushReaction.NORMAL)
-                .strength(0.6F)
-                .sound(SoundType.HONEY_BLOCK)
-        );
+    public VerdantPlanksBlock() {
+        super(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.NETHER_WOOD));
     }
 
     @Override
     public List<ResourceKey<CreativeModeTab>> getCreativeTabs() {
-        return List.of(CreativeModeTabs.NATURAL_BLOCKS);
+        return List.of(CreativeModeTabs.BUILDING_BLOCKS);
     }
 }

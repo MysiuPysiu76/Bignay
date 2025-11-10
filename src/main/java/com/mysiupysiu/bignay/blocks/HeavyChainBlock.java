@@ -1,6 +1,10 @@
 package com.mysiupysiu.bignay.blocks;
 
+import com.mysiupysiu.bignay.utils.CreativeTabProvider;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ChainBlock;
@@ -10,7 +14,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class HeavyChainBlock extends ChainBlock {
+import java.util.List;
+
+public class HeavyChainBlock extends ChainBlock implements CreativeTabProvider {
 
     protected static final VoxelShape Y_AXIS_AABB = Block.box(5D, 0.0D, 5D, 11D, 16.0D, 11D);
     protected static final VoxelShape Z_AXIS_AABB = Block.box(5D, 5D, 0.0D, 11D, 11D, 16.0D);
@@ -27,5 +33,10 @@ public class HeavyChainBlock extends ChainBlock {
             case Y -> Y_AXIS_AABB;
             default -> X_AXIS_AABB;
         };
+    }
+
+    @Override
+    public List<ResourceKey<CreativeModeTab>> getCreativeTabs() {
+        return List.of(CreativeModeTabs.BUILDING_BLOCKS, CreativeModeTabs.FUNCTIONAL_BLOCKS);
     }
 }

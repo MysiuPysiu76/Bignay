@@ -1,5 +1,9 @@
-package com.mysiupysiu.bignay.entities;
+package com.mysiupysiu.bignay.items;
 
+import com.mysiupysiu.bignay.entities.AbstractQuadItemFrameItem;
+import com.mysiupysiu.bignay.entities.EntityInit;
+import com.mysiupysiu.bignay.entities.GlowQuadItemFrameEntity;
+import com.mysiupysiu.bignay.entities.QuadItemFrameEntity;
 import net.minecraft.world.level.Level;
 
 public class GlowQuadItemFrameItem extends AbstractQuadItemFrameItem {

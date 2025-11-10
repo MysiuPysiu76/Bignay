@@ -1,9 +1,13 @@
 package com.mysiupysiu.bignay.items;
 
+import com.mysiupysiu.bignay.utils.CreativeTabProvider;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -11,7 +15,9 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.NetherWartBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class WitherBoneMealItem extends Item {
+import java.util.List;
+
+public class WitherBoneMealItem extends Item implements CreativeTabProvider {
 
     public WitherBoneMealItem() {
         super(new Properties());
@@ -39,5 +45,10 @@ public class WitherBoneMealItem extends Item {
         }
 
         return InteractionResult.PASS;
+    }
+
+    @Override
+    public List<ResourceKey<CreativeModeTab>> getCreativeTabs() {
+        return List.of(CreativeModeTabs.INGREDIENTS, CreativeModeTabs.TOOLS_AND_UTILITIES);
     }
 }
