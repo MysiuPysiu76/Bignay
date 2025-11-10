@@ -35,13 +35,23 @@ public class CustomCampfireBlock extends CampfireBlock implements CreativeTabPro
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
-    public CustomCampfireBlock(BlockBehaviour.Properties properties) {
-        super(false, 1, properties);
+    public CustomCampfireBlock() {
+        super(false, 1, BlockBehaviour.Properties.copy(Blocks.CAMPFIRE));
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(LIT, true)
                 .setValue(SIGNAL_FIRE, false)
                 .setValue(WATERLOGGED, false)
                 .setValue(FACING, Direction.NORTH));
+    }
+
+    public CustomCampfireBlock(Block block) {
+        super(false, 1, BlockBehaviour.Properties.copy(block));
+    }
+
+    public static class SoulCampfire extends CustomCampfireBlock {
+        public SoulCampfire() {
+            super(Blocks.SOUL_CAMPFIRE);
+        }
     }
 
     @Override

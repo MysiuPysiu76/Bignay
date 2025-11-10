@@ -30,6 +30,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
 
@@ -38,10 +39,21 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public HollowLogBlock() {
-        super(Properties.copy(Blocks.OAK_LOG).noOcclusion());
+        super(Properties.copy(Blocks.STONE).noOcclusion());
         this.registerDefaultState(this.defaultBlockState()
                 .setValue(AXIS, Direction.Axis.Y)
                 .setValue(WATERLOGGED, false));
+    }
+
+    public HollowLogBlock(Block block) {
+        super(Properties.copy(block).noOcclusion());
+        this.registerDefaultState(this.defaultBlockState()
+                .setValue(AXIS, Direction.Axis.Y)
+                .setValue(WATERLOGGED, false));
+    }
+
+    public HollowLogBlock(RegistryObject<Block> block) {
+        this(block.get());
     }
 
     @Override
