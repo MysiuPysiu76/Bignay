@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#bignay:wooden_mosaic_slabs",
+    "#bignay:vertical_plank_slabs",
+    "bignay:verdant_slab"
+  ]
+}

@@ -237,16 +237,16 @@ public class BlockInit {
     public static final RegistryObject<Block> VERDANT_BOOKSHELF = registerBlock("verdant_bookshelf", BookshelfBlock::new);
     public static final RegistryObject<Block> WARPED_BOOKSHELF = registerBlock("warped_bookshelf", BookshelfBlock::new);
 
-    public static final RegistryObject<Block> BLUE_NETHER_BRICKS = registerBlock("blue_nether_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHER_BRICKS)));
+    public static final RegistryObject<Block> BLUE_NETHER_BRICKS = registerBlock("blue_nether_bricks", () -> new BuildingBlock(Blocks.RED_NETHER_BRICKS));
     public static final RegistryObject<Block> BLUE_NETHER_BRICK_SLAB = registerBlock("blue_nether_brick_slab", () -> new SlabsBlock(BLUE_NETHER_BRICKS));
     public static final RegistryObject<Block> BLUE_NETHER_BRICK_STAIRS = registerBlock("blue_nether_brick_stairs", () -> new StairsBlock(BLUE_NETHER_BRICKS));
     public static final RegistryObject<Block> BLUE_NETHER_BRICK_WALL = registerBlock("blue_nether_brick_wall", ()  -> new WallsBlock(BLUE_NETHER_BRICKS));
-    public static final RegistryObject<Block> GREEN_NETHER_BRICKS = registerBlock("green_nether_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHER_BRICKS)));
+    public static final RegistryObject<Block> GREEN_NETHER_BRICKS = registerBlock("green_nether_bricks", () -> new BuildingBlock(Blocks.RED_NETHER_BRICKS));
     public static final RegistryObject<Block> GREEN_NETHER_BRICK_SLAB = registerBlock("green_nether_brick_slab", () -> new SlabsBlock(GREEN_NETHER_BRICKS));
     public static final RegistryObject<Block> GREEN_NETHER_BRICK_STAIRS = registerBlock("green_nether_brick_stairs", () -> new StairsBlock(GREEN_NETHER_BRICKS));
     public static final RegistryObject<Block> GREEN_NETHER_BRICK_WALL = registerBlock("green_nether_brick_wall", () -> new WallsBlock(GREEN_NETHER_BRICKS));
 
-    public static final RegistryObject<Block> MOSSY_STONE = registerBlock("mossy_stone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+    public static final RegistryObject<Block> MOSSY_STONE = registerBlock("mossy_stone", () -> new BuildingBlock(Blocks.STONE));
     public static final RegistryObject<Block> MOSSY_STONE_STAIRS = registerBlock("mossy_stone_stairs", () -> new StairsBlock(MOSSY_STONE));
     public static final RegistryObject<Block> MOSSY_STONE_SLAB = registerBlock("mossy_stone_slab", () -> new SlabsBlock(MOSSY_STONE));
     public static final RegistryObject<Block> MOSSY_STONE_WALL = registerBlock("mossy_stone_wall", () -> new WallsBlock(MOSSY_STONE));
@@ -362,9 +362,5 @@ public class BlockInit {
                 }
             }
         });
-    }
-
-    private static Boolean always(BlockState p_50810_, BlockGetter p_50811_, BlockPos p_50812_, EntityType<?> p_50813_) {
-        return true;
     }
 }
