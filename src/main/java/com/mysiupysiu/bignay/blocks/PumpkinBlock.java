@@ -20,15 +20,18 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 
 import java.util.List;
 
 public class PumpkinBlock extends StemGrownBlock implements CreativeTabProvider {
 
-    public PumpkinBlock(BlockBehaviour.Properties p_55284_) {
-        super(p_55284_);
+    public PumpkinBlock(MapColor color) {
+        super(BlockBehaviour.Properties.of().mapColor(color).instrument(NoteBlockInstrument.DIDGERIDOO).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY));
     }
 
     public InteractionResult use(BlockState p_55289_, Level p_55290_, BlockPos p_55291_, Player p_55292_, InteractionHand p_55293_, BlockHitResult p_55294_) {

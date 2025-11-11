@@ -1,6 +1,5 @@
 package com.mysiupysiu.bignay.items;
 
-import com.mysiupysiu.bignay.entities.AbstractQuadItemFrameItem;
 import com.mysiupysiu.bignay.entities.EntityInit;
 import com.mysiupysiu.bignay.entities.GlowQuadItemFrameEntity;
 import com.mysiupysiu.bignay.entities.QuadItemFrameEntity;

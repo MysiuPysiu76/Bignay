@@ -59,9 +59,7 @@ public class BignayMod {
                 ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(BlockInit.VERDANT_ROOTS.getId(), BlockInit.POTTED_VERDANT_ROOTS);
 
                 BlockColors blockColors = Minecraft.getInstance().getBlockColors();
-                blockColors.register((state, world, pos, tintIndex) -> {
-                    return BiomeColors.getAverageFoliageColor(world, pos);
-                }, BlockInit.PALE_PUMPKIN_STEM.get(), BlockInit.ATTACHED_PALE_PUMPKIN_STEM.get());
+                blockColors.register((state, world, pos, tintIndex) -> BiomeColors.getAverageFoliageColor(world, pos), BlockInit.PALE_PUMPKIN_STEM.get(), BlockInit.ATTACHED_PALE_PUMPKIN_STEM.get());
             });
         }
 
