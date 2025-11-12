@@ -1,10 +1,8 @@
 {
   "replace": false,
   "values": [
-    "minecraft:warped_roots",
-    "minecraft:nether_sprouts",
-    "minecraft:crimson_roots",
     "bignay:verdant_roots",
-    "bignay:verdant_sprouts"
+    "bignay:verdant_sprouts",
+    "bignay:crimson_sprouts"
   ]
 }

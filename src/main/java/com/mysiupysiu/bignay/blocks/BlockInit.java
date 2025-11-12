@@ -4,15 +4,11 @@ import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.items.ItemInit;
 import com.mysiupysiu.bignay.utils.CreativeTabProvider;
 import com.mysiupysiu.bignay.worldgen.ModConfiguredFeatures;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlag;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -167,6 +163,7 @@ public class BlockInit {
     public static final RegistryObject<Block> POTTED_VERDANT_FUNGUS = registerBlockOnly("potted_verdant_fungus", () -> flowerPot(VERDANT_FUNGUS.get()));
     public static final RegistryObject<Block> POTTED_VERDANT_ROOTS = registerBlockOnly("potted_verdant_roots", () -> flowerPot(VERDANT_ROOTS.get()));
     public static final RegistryObject<Block> VERDANT_SPROUTS = registerBlock("verdant_sprouts", () -> new SproutsBlock(MapColor.COLOR_GREEN));
+    public static final RegistryObject<Block> CRIMSON_SPROUTS = registerBlock("crimson_sprouts", () -> new SproutsBlock(MapColor.CRIMSON_NYLIUM));
 
     public static final RegistryObject<Block> PALE_PUMPKIN = registerBlock("pale_pumpkin", () -> new PumpkinBlock(MapColor.COLOR_LIGHT_GRAY));
     public static final RegistryObject<Block> CARVED_PALE_PUMPKIN = registerBlock("carved_pale_pumpkin", EquipablePumpkinBlock.PalePumpkin::new);

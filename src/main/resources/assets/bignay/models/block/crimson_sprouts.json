@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "bignay:block/crimson_sprouts"
+  },
+  "render_type": "cutout"
+}
