@@ -3,7 +3,7 @@ loaderVersion = "${loader_version_range}"
 license = "${mod_license}"
 [[mods]]
 modId = "bignay"
-version = "0.19.0"
+version = "0.19.1"
 displayName = "Bignay"
 authors = "Mysiu Pysiu"
 description = '''Small things, improving Minecraft bit by bit'''
