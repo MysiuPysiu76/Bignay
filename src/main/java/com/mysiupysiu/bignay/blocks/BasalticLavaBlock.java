@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 
 import java.util.List;
-import java.util.Set;
 
 public class BasalticLavaBlock extends Block implements CreativeTabProvider {
 
