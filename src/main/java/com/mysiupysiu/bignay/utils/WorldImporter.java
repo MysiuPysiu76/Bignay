@@ -57,7 +57,7 @@ public class WorldImporter {
     public void execute() {
         if (this.worldName == null || this.worldName.isEmpty()) return;
 
-        this.target = Paths.get(System.getProperty("user.dir"), "saves", this.worldName);
+        chooseTarget();
 
         try (ZipFile zip = new ZipFile(this.source)) {
             String topFolder = null;
@@ -132,6 +132,15 @@ public class WorldImporter {
                 .mapToLong(ZipEntry::getSize)
                 .filter(size -> size > 0)
                 .sum();
+    }
+
+    public void chooseTarget() {
+        this.target = Paths.get(System.getProperty("user.dir"), "saves", this.worldName);
+
+        int i = 0;
+        while (this.target.toFile().exists()) {
+            this.target = Paths.get(System.getProperty("user.dir"), "saves", this.worldName + "_" + ++i);
+        }
     }
 
     private void deleteDirectory(File dir) {
