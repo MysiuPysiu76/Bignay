@@ -161,12 +161,6 @@ public class QuadItemFrameEntity extends HangingEntity {
     }
 
     @Override
-    public void kill() {
-        this.removeAllFramedMaps();
-        super.kill();
-    }
-
-    @Override
     public boolean hurt(DamageSource p_31776_, float p_31777_) {
         if (this.fixed) {
             return !p_31776_.is(DamageTypeTags.BYPASSES_INVULNERABILITY) && !p_31776_.isCreativePlayer() ? false : super.hurt(p_31776_, p_31777_);
@@ -238,7 +232,6 @@ public class QuadItemFrameEntity extends HangingEntity {
             if (p_31803_ instanceof Player) {
                 Player player = (Player) p_31803_;
                 if (player.getAbilities().instabuild) {
-                    this.removeAllFramedMaps();
                     return;
                 }
             }
@@ -251,7 +244,6 @@ public class QuadItemFrameEntity extends HangingEntity {
                 ItemStack itemstack = this.getItem(i);
                 if (!itemstack.isEmpty()) {
                     itemstack = itemstack.copy();
-                    this.removeFramedMap(itemstack);
                     if (this.random.nextFloat() < this.dropChance) {
                         this.spawnAtLocation(itemstack);
                     }
@@ -259,33 +251,6 @@ public class QuadItemFrameEntity extends HangingEntity {
                 }
             }
         }
-    }
-
-    private void removeAllFramedMaps() {
-        for (int i = 0; i < 4; i++) {
-            this.removeFramedMap(this.getItem(i));
-        }
-    }
-
-    private void removeFramedMap(ItemStack p_31811_) {
-        this.getFramedMapId(p_31811_).ifPresent((p_289456_) -> {
-            MapItemSavedData mapitemsaveddata = MapItem.getSavedData(p_289456_, this.level());
-            if (mapitemsaveddata != null) {
-                mapitemsaveddata.removedFromFrame(this.pos, this.getId());
-                mapitemsaveddata.setDirty(true);
-            }
-        });
-        p_31811_.setEntityRepresentation((Entity) null);
-    }
-
-    private OptionalInt getFramedMapId(ItemStack stack) {
-        if (stack.is(Items.FILLED_MAP)) {
-            Integer integer = MapItem.getMapId(stack);
-            if (integer != null) {
-                return OptionalInt.of(integer);
-            }
-        }
-        return OptionalInt.empty();
     }
 
     public ItemStack getItem() {
@@ -309,11 +274,6 @@ public class QuadItemFrameEntity extends HangingEntity {
     public void setItem(int slot, ItemStack stack, boolean notify) {
         if (!stack.isEmpty()) {
             stack = stack.copyWithCount(1);
-        }
-
-        ItemStack old = this.getItem(slot);
-        if (!old.isEmpty() && !ItemStack.matches(old, stack)) {
-            this.removeFramedMap(old);
         }
 
         this.onItemChanged(slot, stack);
@@ -421,7 +381,7 @@ public class QuadItemFrameEntity extends HangingEntity {
                 if (compoundtag != null && !compoundtag.isEmpty()) {
                     ItemStack itemstack = ItemStack.of(compoundtag);
                     if (itemstack.isEmpty()) {
-                        LOGGER.warn("Unable to load item from: {}", (Object) compoundtag);
+                        LOGGER.warn("Unable to load item from: {}", compoundtag);
                     } else {
                         this.setItem(i, itemstack, false);
                         String rKey = "ItemRotation" + i;

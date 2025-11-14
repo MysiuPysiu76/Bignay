@@ -1,15 +1,21 @@
 package com.mysiupysiu.bignay.items;
 
 import com.mysiupysiu.bignay.entities.QuadItemFrameEntity;
+import com.mysiupysiu.bignay.utils.CreativeTabProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 
-public abstract class AbstractQuadItemFrameItem extends Item {
+import java.util.List;
+
+public abstract class AbstractQuadItemFrameItem extends Item implements CreativeTabProvider {
 
     public AbstractQuadItemFrameItem(Properties properties) {
         super(properties);
@@ -42,5 +48,10 @@ public abstract class AbstractQuadItemFrameItem extends Item {
         }
 
         return InteractionResult.FAIL;
+    }
+
+    @Override
+    public List<ResourceKey<CreativeModeTab>> getCreativeTabs() {
+        return List.of(CreativeModeTabs.FUNCTIONAL_BLOCKS);
     }
 }
