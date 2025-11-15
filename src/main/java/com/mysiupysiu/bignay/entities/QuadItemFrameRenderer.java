@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.mysiupysiu.bignay.BignayMod;
+import com.mysiupysiu.bignay.utils.BignayTags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -76,12 +77,12 @@ public class QuadItemFrameRenderer extends EntityRenderer<QuadItemFrameEntity> {
         this.model.renderToBuffer(poseStack, vc, packedLight, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 1f);
 
         final float quadOffset = 0.18f;
-        final float scale = 0.5f;
         final float depthOffset = 1 / 20f;
 
         for (int i = 0; i < 4; i++) {
             ItemStack stack = entity.getItem(i);
             if (stack == null || stack.isEmpty()) continue;
+            float scale = 0.5f;
 
             poseStack.pushPose();
 
@@ -94,6 +95,10 @@ public class QuadItemFrameRenderer extends EntityRenderer<QuadItemFrameEntity> {
             } else {
                 tx = (i % 2 == 0) ? -quadOffset : quadOffset;
                 ty = (i < 2) ? quadOffset : -quadOffset;
+            }
+
+            if (stack.is(BignayTags.Items.BIG_ITEMS)) {
+                scale = 0.35f;
             }
 
             poseStack.translate(tx, ty, depthOffset);

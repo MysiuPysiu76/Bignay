@@ -1,0 +1,8 @@
+{
+  "values": [
+    "minecraft:item_frame",
+    "minecraft:glow_item_frame",
+    "bignay:quad_item_frame",
+    "bignay:glow_quad_item_frame"
+  ]
+}
