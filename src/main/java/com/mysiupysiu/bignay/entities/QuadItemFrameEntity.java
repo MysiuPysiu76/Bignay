@@ -2,7 +2,6 @@ package com.mysiupysiu.bignay.entities;
 
 import com.mojang.logging.LogUtils;
 
-import java.util.OptionalInt;
 import javax.annotation.Nullable;
 
 import com.mysiupysiu.bignay.items.ItemInit;
@@ -16,7 +15,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -32,6 +30,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.MapItem;
+import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DiodeBlock;
@@ -167,6 +166,20 @@ public class QuadItemFrameEntity extends HangingEntity {
         Entity attacker = source.getEntity();
         if (!(attacker instanceof Player player)) {
             return super.hurt(source, amount);
+        }
+
+        if (player.getMainHandItem().getItem() instanceof SwordItem) {
+            if (!this.level().isClientSide) {
+                for (int i = 0; i < 4; i++) {
+                    ItemStack s = this.getItem(i);
+                    if (!s.isEmpty()) {
+                        this.spawnAtLocation(s.copy());
+                        this.setItem(i, ItemStack.EMPTY, false);
+                    }
+                }
+                this.playSound(this.getRemoveItemSound(), 1.0F, 1.0F);
+            }
+            return true;
         }
 
         int slot = this.getQuadrantFromHit(player);
