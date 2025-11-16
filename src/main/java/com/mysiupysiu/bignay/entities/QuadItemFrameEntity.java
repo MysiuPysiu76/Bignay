@@ -161,22 +161,28 @@ public class QuadItemFrameEntity extends HangingEntity {
     }
 
     @Override
-    public boolean hurt(DamageSource p_31776_, float p_31777_) {
-        if (this.fixed) {
-            return !p_31776_.is(DamageTypeTags.BYPASSES_INVULNERABILITY) && !p_31776_.isCreativePlayer() ? false : super.hurt(p_31776_, p_31777_);
-        } else if (this.isInvulnerableTo(p_31776_)) {
-            return false;
-        } else if (!p_31776_.is(DamageTypeTags.IS_EXPLOSION) && (!this.isAllEmpty())) {
-            if (!this.level().isClientSide) {
-                this.dropItem(p_31776_.getEntity(), false);
-                this.gameEvent(GameEvent.BLOCK_CHANGE, p_31776_.getEntity());
-                this.playSound(this.getRemoveItemSound(), 1.0F, 1.0F);
-            }
+    public boolean hurt(DamageSource source, float amount) {
+        if (this.fixed) return false;
 
-            return true;
-        } else {
-            return super.hurt(p_31776_, p_31777_);
+        Entity attacker = source.getEntity();
+        if (!(attacker instanceof Player player)) {
+            return super.hurt(source, amount);
         }
+
+        int slot = this.getQuadrantFromHit(player);
+        ItemStack stack = this.getItem(slot);
+
+        if (stack.isEmpty()) {
+            return super.hurt(source, amount);
+        }
+
+        if (!this.level().isClientSide) {
+            this.spawnAtLocation(stack.copy());
+            this.setItem(slot, ItemStack.EMPTY, false);
+            this.playSound(this.getRemoveItemSound(), 1.0F, 1.0F);
+        }
+
+        return true;
     }
 
     private boolean isAllEmpty() {
