@@ -1,6 +1,7 @@
 package com.mysiupysiu.bignay.blocks;
 
 import com.mysiupysiu.bignay.BignayMod;
+import com.mysiupysiu.bignay.items.BurnableBlockItem;
 import com.mysiupysiu.bignay.items.ItemInit;
 import com.mysiupysiu.bignay.utils.CreativeTabProvider;
 import com.mysiupysiu.bignay.worldgen.ModConfiguredFeatures;
@@ -71,29 +72,29 @@ public class BlockInit {
     public static final RegistryObject<Block> SOUL_VERDANT_CAMPFIRE = registerBlock("soul_verdant_campfire", CustomCampfireBlock.SoulCampfire::new);
     public static final RegistryObject<Block> SOUL_WARPED_CAMPFIRE = registerBlock("soul_warped_campfire", CustomCampfireBlock.SoulCampfire::new);
 
-    public static final RegistryObject<Block> HOLLOW_ACACIA_LOG = registerBlock("hollow_acacia_log", () -> new HollowLogBlock(Blocks.ACACIA_LOG));
-    public static final RegistryObject<Block> HOLLOW_BAMBOO_BLOCK = registerBlock("hollow_bamboo_block", () -> new HollowLogBlock(Blocks.BAMBOO_BLOCK));
-    public static final RegistryObject<Block> HOLLOW_BIRCH_LOG = registerBlock("hollow_birch_log", () -> new HollowLogBlock(Blocks.BIRCH_LOG));
-    public static final RegistryObject<Block> HOLLOW_CHERRY_LOG = registerBlock("hollow_cherry_log", () -> new HollowLogBlock(Blocks.CHERRY_LOG));
+    public static final RegistryObject<Block> HOLLOW_ACACIA_LOG = registerBlock("hollow_acacia_log", () -> new HollowLogBlock(Blocks.ACACIA_LOG), 150);
+    public static final RegistryObject<Block> HOLLOW_BAMBOO_BLOCK = registerBlock("hollow_bamboo_block", () -> new HollowLogBlock(Blocks.BAMBOO_BLOCK), 150);
+    public static final RegistryObject<Block> HOLLOW_BIRCH_LOG = registerBlock("hollow_birch_log", () -> new HollowLogBlock(Blocks.BIRCH_LOG), 150);
+    public static final RegistryObject<Block> HOLLOW_CHERRY_LOG = registerBlock("hollow_cherry_log", () -> new HollowLogBlock(Blocks.CHERRY_LOG), 150);
     public static final RegistryObject<Block> HOLLOW_CRIMSON_STEM = registerBlock("hollow_crimson_stem", () -> new HollowLogBlock(Blocks.CRIMSON_STEM));
-    public static final RegistryObject<Block> HOLLOW_DARK_OAK_LOG = registerBlock("hollow_dark_oak_log", () -> new HollowLogBlock(Blocks.DARK_OAK_LOG));
-    public static final RegistryObject<Block> HOLLOW_JUNGLE_LOG = registerBlock("hollow_jungle_log", () -> new HollowLogBlock(Blocks.JUNGLE_LOG));
-    public static final RegistryObject<Block> HOLLOW_MANGROVE_LOG = registerBlock("hollow_mangrove_log", () -> new HollowLogBlock(Blocks.MANGROVE_LOG));
-    public static final RegistryObject<Block> HOLLOW_OAK_LOG = registerBlock("hollow_oak_log", () -> new HollowLogBlock(Blocks.OAK_LOG));
-    public static final RegistryObject<Block> HOLLOW_SPRUCE_LOG = registerBlock("hollow_spruce_log", () -> new HollowLogBlock(Blocks.SPRUCE_LOG));
+    public static final RegistryObject<Block> HOLLOW_DARK_OAK_LOG = registerBlock("hollow_dark_oak_log", () -> new HollowLogBlock(Blocks.DARK_OAK_LOG), 150);
+    public static final RegistryObject<Block> HOLLOW_JUNGLE_LOG = registerBlock("hollow_jungle_log", () -> new HollowLogBlock(Blocks.JUNGLE_LOG), 150);
+    public static final RegistryObject<Block> HOLLOW_MANGROVE_LOG = registerBlock("hollow_mangrove_log", () -> new HollowLogBlock(Blocks.MANGROVE_LOG), 150);
+    public static final RegistryObject<Block> HOLLOW_OAK_LOG = registerBlock("hollow_oak_log", () -> new HollowLogBlock(Blocks.OAK_LOG), 150);
+    public static final RegistryObject<Block> HOLLOW_SPRUCE_LOG = registerBlock("hollow_spruce_log", () -> new HollowLogBlock(Blocks.SPRUCE_LOG), 150);
     public static final RegistryObject<Block> HOLLOW_VERDANT_STEM = registerBlock("hollow_verdant_stem", () -> new HollowLogBlock(VERDANT_STEM));
     public static final RegistryObject<Block> HOLLOW_WARPED_STEM = registerBlock("hollow_warped_stem", () -> new HollowLogBlock(Blocks.WARPED_STEM));
 
-    public static final RegistryObject<Block> HOLLOW_STRIPPED_ACACIA_LOG = registerBlock("hollow_stripped_acacia_log", () -> new HollowLogBlock(Blocks.STRIPPED_ACACIA_LOG));
-    public static final RegistryObject<Block> HOLLOW_STRIPPED_BAMBOO_BLOCK = registerBlock("hollow_stripped_bamboo_block", () -> new HollowLogBlock(Blocks.STRIPPED_BAMBOO_BLOCK));
-    public static final RegistryObject<Block> HOLLOW_STRIPPED_BIRCH_LOG = registerBlock("hollow_stripped_birch_log", () -> new HollowLogBlock(Blocks.STRIPPED_BIRCH_LOG));
-    public static final RegistryObject<Block> HOLLOW_STRIPPED_CHERRY_LOG = registerBlock("hollow_stripped_cherry_log", () -> new HollowLogBlock(Blocks.STRIPPED_CHERRY_LOG));
+    public static final RegistryObject<Block> HOLLOW_STRIPPED_ACACIA_LOG = registerBlock("hollow_stripped_acacia_log", () -> new HollowLogBlock(Blocks.STRIPPED_ACACIA_LOG), 150);
+    public static final RegistryObject<Block> HOLLOW_STRIPPED_BAMBOO_BLOCK = registerBlock("hollow_stripped_bamboo_block", () -> new HollowLogBlock(Blocks.STRIPPED_BAMBOO_BLOCK), 150);
+    public static final RegistryObject<Block> HOLLOW_STRIPPED_BIRCH_LOG = registerBlock("hollow_stripped_birch_log", () -> new HollowLogBlock(Blocks.STRIPPED_BIRCH_LOG), 150);
+    public static final RegistryObject<Block> HOLLOW_STRIPPED_CHERRY_LOG = registerBlock("hollow_stripped_cherry_log", () -> new HollowLogBlock(Blocks.STRIPPED_CHERRY_LOG), 150);
     public static final RegistryObject<Block> HOLLOW_STRIPPED_CRIMSON_STEM = registerBlock("hollow_stripped_crimson_stem", () -> new HollowLogBlock(Blocks.STRIPPED_CRIMSON_STEM));
-    public static final RegistryObject<Block> HOLLOW_STRIPPED_DARK_OAK_LOG = registerBlock("hollow_stripped_dark_oak_log", () -> new HollowLogBlock(Blocks.STRIPPED_DARK_OAK_LOG));
-    public static final RegistryObject<Block> HOLLOW_STRIPPED_JUNGLE_LOG = registerBlock("hollow_stripped_jungle_log", () -> new HollowLogBlock(Blocks.STRIPPED_JUNGLE_LOG));
-    public static final RegistryObject<Block> HOLLOW_STRIPPED_MANGROVE_LOG = registerBlock("hollow_stripped_mangrove_log", () -> new HollowLogBlock(Blocks.STRIPPED_MANGROVE_LOG));
-    public static final RegistryObject<Block> HOLLOW_STRIPPED_OAK_LOG = registerBlock("hollow_stripped_oak_log", () -> new HollowLogBlock(Blocks.STRIPPED_OAK_LOG));
-    public static final RegistryObject<Block> HOLLOW_STRIPPED_SPRUCE_LOG = registerBlock("hollow_stripped_spruce_log", () -> new HollowLogBlock(Blocks.STRIPPED_SPRUCE_LOG));
+    public static final RegistryObject<Block> HOLLOW_STRIPPED_DARK_OAK_LOG = registerBlock("hollow_stripped_dark_oak_log", () -> new HollowLogBlock(Blocks.STRIPPED_DARK_OAK_LOG), 150);
+    public static final RegistryObject<Block> HOLLOW_STRIPPED_JUNGLE_LOG = registerBlock("hollow_stripped_jungle_log", () -> new HollowLogBlock(Blocks.STRIPPED_JUNGLE_LOG), 150);
+    public static final RegistryObject<Block> HOLLOW_STRIPPED_MANGROVE_LOG = registerBlock("hollow_stripped_mangrove_log", () -> new HollowLogBlock(Blocks.STRIPPED_MANGROVE_LOG), 150);
+    public static final RegistryObject<Block> HOLLOW_STRIPPED_OAK_LOG = registerBlock("hollow_stripped_oak_log", () -> new HollowLogBlock(Blocks.STRIPPED_OAK_LOG), 150);
+    public static final RegistryObject<Block> HOLLOW_STRIPPED_SPRUCE_LOG = registerBlock("hollow_stripped_spruce_log", () -> new HollowLogBlock(Blocks.STRIPPED_SPRUCE_LOG), 150);
     public static final RegistryObject<Block> HOLLOW_STRIPPED_VERDANT_STEM = registerBlock("hollow_stripped_verdant_stem", () -> new HollowLogBlock(VERDANT_STEM));
     public static final RegistryObject<Block> HOLLOW_STRIPPED_WARPED_STEM = registerBlock("hollow_stripped_warped_stem", () -> new HollowLogBlock(Blocks.STRIPPED_WARPED_STEM));
 
@@ -117,42 +118,42 @@ public class BlockInit {
     public static final RegistryObject<Block> CRACKED_NETHER_BRICK_WALL = registerBlock("cracked_nether_brick_wall", () -> new WallsBlock(Blocks.CRACKED_NETHER_BRICKS));
     public static final RegistryObject<Block> STONE_WALL = registerBlock("stone_wall", () -> new WallsBlock(Blocks.STONE));
 
-    public static final RegistryObject<Block> VERTICAL_ACACIA_PLANKS = registerBlock("vertical_acacia_planks", () -> new DecorativeWoodBlock(Blocks.ACACIA_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_BAMBOO_PLANKS = registerBlock("vertical_bamboo_planks", () -> new DecorativeWoodBlock(Blocks.BAMBOO_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_BIRCH_PLANKS = registerBlock("vertical_birch_planks", () -> new DecorativeWoodBlock(Blocks.BIRCH_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_CHERRY_PLANKS = registerBlock("vertical_cherry_planks", () -> new DecorativeWoodBlock(Blocks.CHERRY_PLANKS));
+    public static final RegistryObject<Block> VERTICAL_ACACIA_PLANKS = registerBlock("vertical_acacia_planks", () -> new DecorativeWoodBlock(Blocks.ACACIA_PLANKS), 300);
+    public static final RegistryObject<Block> VERTICAL_BAMBOO_PLANKS = registerBlock("vertical_bamboo_planks", () -> new DecorativeWoodBlock(Blocks.BAMBOO_PLANKS), 300);
+    public static final RegistryObject<Block> VERTICAL_BIRCH_PLANKS = registerBlock("vertical_birch_planks", () -> new DecorativeWoodBlock(Blocks.BIRCH_PLANKS), 300);
+    public static final RegistryObject<Block> VERTICAL_CHERRY_PLANKS = registerBlock("vertical_cherry_planks", () -> new DecorativeWoodBlock(Blocks.CHERRY_PLANKS), 300);
     public static final RegistryObject<Block> VERTICAL_CRIMSON_PLANKS = registerBlock("vertical_crimson_planks", () -> new DecorativeWoodBlock(Blocks.CRIMSON_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_DARK_OAK_PLANKS = registerBlock("vertical_dark_oak_planks", () -> new DecorativeWoodBlock(Blocks.DARK_OAK_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_JUNGLE_PLANKS = registerBlock("vertical_jungle_planks", () -> new DecorativeWoodBlock(Blocks.JUNGLE_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_MANGROVE_PLANKS = registerBlock("vertical_mangrove_planks", () -> new DecorativeWoodBlock(Blocks.MANGROVE_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_OAK_PLANKS = registerBlock("vertical_oak_planks", () -> new DecorativeWoodBlock(Blocks.OAK_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_SPRUCE_PLANKS = registerBlock("vertical_spruce_planks", () -> new DecorativeWoodBlock(Blocks.SPRUCE_PLANKS));
+    public static final RegistryObject<Block> VERTICAL_DARK_OAK_PLANKS = registerBlock("vertical_dark_oak_planks", () -> new DecorativeWoodBlock(Blocks.DARK_OAK_PLANKS), 300);
+    public static final RegistryObject<Block> VERTICAL_JUNGLE_PLANKS = registerBlock("vertical_jungle_planks", () -> new DecorativeWoodBlock(Blocks.JUNGLE_PLANKS), 300);
+    public static final RegistryObject<Block> VERTICAL_MANGROVE_PLANKS = registerBlock("vertical_mangrove_planks", () -> new DecorativeWoodBlock(Blocks.MANGROVE_PLANKS), 300);
+    public static final RegistryObject<Block> VERTICAL_OAK_PLANKS = registerBlock("vertical_oak_planks", () -> new DecorativeWoodBlock(Blocks.OAK_PLANKS), 300);
+    public static final RegistryObject<Block> VERTICAL_SPRUCE_PLANKS = registerBlock("vertical_spruce_planks", () -> new DecorativeWoodBlock(Blocks.SPRUCE_PLANKS), 300);
     public static final RegistryObject<Block> VERTICAL_VERDANT_PLANKS = registerBlock("vertical_verdant_planks", () -> new DecorativeWoodBlock(VERDANT_PLANKS.get()));
     public static final RegistryObject<Block> VERTICAL_WARPED_PLANKS = registerBlock("vertical_warped_planks", () -> new DecorativeWoodBlock(Blocks.WARPED_PLANKS));
 
-    public static final RegistryObject<Block> VERTICAL_ACACIA_PLANK_STAIRS = registerBlock("vertical_acacia_plank_stairs", () -> new StairsBlock(Blocks.ACACIA_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_BAMBOO_PLANK_STAIRS = registerBlock("vertical_bamboo_plank_stairs", () -> new StairsBlock(Blocks.BAMBOO_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_BIRCH_PLANK_STAIRS = registerBlock("vertical_birch_plank_stairs", () -> new StairsBlock(Blocks.BIRCH_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_CHERRY_PLANK_STAIRS = registerBlock("vertical_cherry_plank_stairs", () -> new StairsBlock(Blocks.CHERRY_PLANKS));
+    public static final RegistryObject<Block> VERTICAL_ACACIA_PLANK_STAIRS = registerBlock("vertical_acacia_plank_stairs", () -> new StairsBlock(Blocks.ACACIA_PLANKS), 300);
+    public static final RegistryObject<Block> VERTICAL_BAMBOO_PLANK_STAIRS = registerBlock("vertical_bamboo_plank_stairs", () -> new StairsBlock(Blocks.BAMBOO_PLANKS), 300);
+    public static final RegistryObject<Block> VERTICAL_BIRCH_PLANK_STAIRS = registerBlock("vertical_birch_plank_stairs", () -> new StairsBlock(Blocks.BIRCH_PLANKS), 300);
+    public static final RegistryObject<Block> VERTICAL_CHERRY_PLANK_STAIRS = registerBlock("vertical_cherry_plank_stairs", () -> new StairsBlock(Blocks.CHERRY_PLANKS), 300);
     public static final RegistryObject<Block> VERTICAL_CRIMSON_PLANK_STAIRS = registerBlock("vertical_crimson_plank_stairs", () -> new StairsBlock(Blocks.CRIMSON_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_DARK_OAK_PLANK_STAIRS = registerBlock("vertical_dark_oak_plank_stairs", () -> new StairsBlock(Blocks.DARK_OAK_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_JUNGLE_PLANK_STAIRS = registerBlock("vertical_jungle_plank_stairs", () -> new StairsBlock(Blocks.JUNGLE_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_MANGROVE_PLANK_STAIRS = registerBlock("vertical_mangrove_plank_stairs", () -> new StairsBlock(Blocks.MANGROVE_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_OAK_PLANK_STAIRS = registerBlock("vertical_oak_plank_stairs", () -> new StairsBlock(Blocks.OAK_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_SPRUCE_PLANK_STAIRS = registerBlock("vertical_spruce_plank_stairs", () -> new StairsBlock(Blocks.SPRUCE_PLANKS));
+    public static final RegistryObject<Block> VERTICAL_DARK_OAK_PLANK_STAIRS = registerBlock("vertical_dark_oak_plank_stairs", () -> new StairsBlock(Blocks.DARK_OAK_PLANKS), 300);
+    public static final RegistryObject<Block> VERTICAL_JUNGLE_PLANK_STAIRS = registerBlock("vertical_jungle_plank_stairs", () -> new StairsBlock(Blocks.JUNGLE_PLANKS), 300);
+    public static final RegistryObject<Block> VERTICAL_MANGROVE_PLANK_STAIRS = registerBlock("vertical_mangrove_plank_stairs", () -> new StairsBlock(Blocks.MANGROVE_PLANKS), 300);
+    public static final RegistryObject<Block> VERTICAL_OAK_PLANK_STAIRS = registerBlock("vertical_oak_plank_stairs", () -> new StairsBlock(Blocks.OAK_PLANKS), 300);
+    public static final RegistryObject<Block> VERTICAL_SPRUCE_PLANK_STAIRS = registerBlock("vertical_spruce_plank_stairs", () -> new StairsBlock(Blocks.SPRUCE_PLANKS), 300);
     public static final RegistryObject<Block> VERTICAL_VERDANT_PLANK_STAIRS = registerBlock("vertical_verdant_plank_stairs", () -> new StairsBlock(VERDANT_PLANKS));
     public static final RegistryObject<Block> VERTICAL_WARPED_PLANK_STAIRS = registerBlock("vertical_warped_plank_stairs", () -> new StairsBlock(Blocks.WARPED_PLANKS));
 
-    public static final RegistryObject<Block> VERTICAL_ACACIA_PLANK_SLAB = registerBlock("vertical_acacia_plank_slab", () -> new SlabsBlock(Blocks.ACACIA_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_BAMBOO_PLANK_SLAB = registerBlock("vertical_bamboo_plank_slab", () -> new SlabsBlock(Blocks.BAMBOO_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_BIRCH_PLANK_SLAB = registerBlock("vertical_birch_plank_slab", () -> new SlabsBlock(Blocks.BIRCH_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_CHERRY_PLANK_SLAB = registerBlock("vertical_cherry_plank_slab", () -> new SlabsBlock(Blocks.CHERRY_PLANKS));
+    public static final RegistryObject<Block> VERTICAL_ACACIA_PLANK_SLAB = registerBlock("vertical_acacia_plank_slab", () -> new SlabsBlock(Blocks.ACACIA_PLANKS), 150);
+    public static final RegistryObject<Block> VERTICAL_BAMBOO_PLANK_SLAB = registerBlock("vertical_bamboo_plank_slab", () -> new SlabsBlock(Blocks.BAMBOO_PLANKS), 150);
+    public static final RegistryObject<Block> VERTICAL_BIRCH_PLANK_SLAB = registerBlock("vertical_birch_plank_slab", () -> new SlabsBlock(Blocks.BIRCH_PLANKS), 150);
+    public static final RegistryObject<Block> VERTICAL_CHERRY_PLANK_SLAB = registerBlock("vertical_cherry_plank_slab", () -> new SlabsBlock(Blocks.CHERRY_PLANKS), 150);
     public static final RegistryObject<Block> VERTICAL_CRIMSON_PLANK_SLAB = registerBlock("vertical_crimson_plank_slab", () -> new SlabsBlock(Blocks.CRIMSON_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_DARK_OAK_PLANK_SLAB = registerBlock("vertical_dark_oak_plank_slab", () -> new SlabsBlock(Blocks.DARK_OAK_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_JUNGLE_PLANK_SLAB = registerBlock("vertical_jungle_plank_slab", () -> new SlabsBlock(Blocks.JUNGLE_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_MANGROVE_PLANK_SLAB = registerBlock("vertical_mangrove_plank_slab", () -> new SlabsBlock(Blocks.MANGROVE_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_OAK_PLANK_SLAB = registerBlock("vertical_oak_plank_slab", () -> new SlabsBlock(Blocks.OAK_PLANKS));
-    public static final RegistryObject<Block> VERTICAL_SPRUCE_PLANK_SLAB = registerBlock("vertical_spruce_plank_slab", () -> new SlabsBlock(Blocks.SPRUCE_PLANKS));
+    public static final RegistryObject<Block> VERTICAL_DARK_OAK_PLANK_SLAB = registerBlock("vertical_dark_oak_plank_slab", () -> new SlabsBlock(Blocks.DARK_OAK_PLANKS), 150);
+    public static final RegistryObject<Block> VERTICAL_JUNGLE_PLANK_SLAB = registerBlock("vertical_jungle_plank_slab", () -> new SlabsBlock(Blocks.JUNGLE_PLANKS), 150);
+    public static final RegistryObject<Block> VERTICAL_MANGROVE_PLANK_SLAB = registerBlock("vertical_mangrove_plank_slab", () -> new SlabsBlock(Blocks.MANGROVE_PLANKS), 150);
+    public static final RegistryObject<Block> VERTICAL_OAK_PLANK_SLAB = registerBlock("vertical_oak_plank_slab", () -> new SlabsBlock(Blocks.OAK_PLANKS), 150);
+    public static final RegistryObject<Block> VERTICAL_SPRUCE_PLANK_SLAB = registerBlock("vertical_spruce_plank_slab", () -> new SlabsBlock(Blocks.SPRUCE_PLANKS), 150);
     public static final RegistryObject<Block> VERTICAL_VERDANT_PLANK_SLAB = registerBlock("vertical_verdant_plank_slab", () -> new SlabsBlock(VERDANT_PLANKS));
     public static final RegistryObject<Block> VERTICAL_WARPED_PLANK_SLAB = registerBlock("vertical_warped_plank_slab", () -> new SlabsBlock(Blocks.WARPED_PLANKS));
 
@@ -221,16 +222,16 @@ public class BlockInit {
 
     public static final RegistryObject<Block> HEAVY_CHAIN = registerBlock("heavy_chain", HeavyChainBlock::new);
 
-    public static final RegistryObject<Block> ACACIA_BOOKSHELF = registerBlock("acacia_bookshelf", BookshelfBlock::new);
-    public static final RegistryObject<Block> BAMBOO_BOOKSHELF = registerBlock("bamboo_bookshelf", BookshelfBlock::new);
-    public static final RegistryObject<Block> BIRCH_BOOKSHELF = registerBlock("birch_bookshelf", BookshelfBlock::new);
-    public static final RegistryObject<Block> CHERRY_BOOKSHELF = registerBlock("cherry_bookshelf", BookshelfBlock::new);
+    public static final RegistryObject<Block> ACACIA_BOOKSHELF = registerBlock("acacia_bookshelf", BookshelfBlock::new, 300);
+    public static final RegistryObject<Block> BAMBOO_BOOKSHELF = registerBlock("bamboo_bookshelf", BookshelfBlock::new, 300);
+    public static final RegistryObject<Block> BIRCH_BOOKSHELF = registerBlock("birch_bookshelf", BookshelfBlock::new, 300);
+    public static final RegistryObject<Block> CHERRY_BOOKSHELF = registerBlock("cherry_bookshelf", BookshelfBlock::new, 300);
     public static final RegistryObject<Block> CRIMSON_BOOKSHELF = registerBlock("crimson_bookshelf", BookshelfBlock::new);
-    public static final RegistryObject<Block> DARK_OAK_BOOKSHELF = registerBlock("dark_oak_bookshelf", BookshelfBlock::new);
-    public static final RegistryObject<Block> JUNGLE_BOOKSHELF = registerBlock("jungle_bookshelf", BookshelfBlock::new);
-    public static final RegistryObject<Block> MANGROVE_BOOKSHELF = registerBlock("mangrove_bookshelf", BookshelfBlock::new);
-    public static final RegistryObject<Block> OAK_BOOKSHELF = registerBlock("oak_bookshelf", BookshelfBlock::new);
-    public static final RegistryObject<Block> SPRUCE_BOOKSHELF = registerBlock("spruce_bookshelf", BookshelfBlock::new);
+    public static final RegistryObject<Block> DARK_OAK_BOOKSHELF = registerBlock("dark_oak_bookshelf", BookshelfBlock::new, 300);
+    public static final RegistryObject<Block> JUNGLE_BOOKSHELF = registerBlock("jungle_bookshelf", BookshelfBlock::new, 300);
+    public static final RegistryObject<Block> MANGROVE_BOOKSHELF = registerBlock("mangrove_bookshelf", BookshelfBlock::new, 300);
+    public static final RegistryObject<Block> OAK_BOOKSHELF = registerBlock("oak_bookshelf", BookshelfBlock::new, 300);
+    public static final RegistryObject<Block> SPRUCE_BOOKSHELF = registerBlock("spruce_bookshelf", BookshelfBlock::new, 300);
     public static final RegistryObject<Block> VERDANT_BOOKSHELF = registerBlock("verdant_bookshelf", BookshelfBlock::new);
     public static final RegistryObject<Block> WARPED_BOOKSHELF = registerBlock("warped_bookshelf", BookshelfBlock::new);
 
@@ -248,28 +249,28 @@ public class BlockInit {
     public static final RegistryObject<Block> MOSSY_STONE_SLAB = registerBlock("mossy_stone_slab", () -> new SlabsBlock(MOSSY_STONE));
     public static final RegistryObject<Block> MOSSY_STONE_WALL = registerBlock("mossy_stone_wall", () -> new WallsBlock(MOSSY_STONE));
 
-    public static final RegistryObject<Block> ACACIA_WOOD_FENCE = registerBlock("acacia_wood_fence", () -> new WoodFenceBlock(Blocks.ACACIA_FENCE));
-    public static final RegistryObject<Block> BAMBOO_BLOCK_FENCE = registerBlock("bamboo_block_fence", () -> new WoodFenceBlock(Blocks.BAMBOO_FENCE));
-    public static final RegistryObject<Block> BIRCH_WOOD_FENCE = registerBlock("birch_wood_fence", () -> new WoodFenceBlock(Blocks.BIRCH_FENCE));
-    public static final RegistryObject<Block> CHERRY_WOOD_FENCE = registerBlock("cherry_wood_fence", () -> new WoodFenceBlock(Blocks.CHERRY_FENCE));
+    public static final RegistryObject<Block> ACACIA_WOOD_FENCE = registerBlock("acacia_wood_fence", () -> new WoodFenceBlock(Blocks.ACACIA_FENCE), 300);
+    public static final RegistryObject<Block> BAMBOO_BLOCK_FENCE = registerBlock("bamboo_block_fence", () -> new WoodFenceBlock(Blocks.BAMBOO_FENCE), 300);
+    public static final RegistryObject<Block> BIRCH_WOOD_FENCE = registerBlock("birch_wood_fence", () -> new WoodFenceBlock(Blocks.BIRCH_FENCE), 300);
+    public static final RegistryObject<Block> CHERRY_WOOD_FENCE = registerBlock("cherry_wood_fence", () -> new WoodFenceBlock(Blocks.CHERRY_FENCE), 300);
     public static final RegistryObject<Block> CRIMSON_HYPHAE_FENCE = registerBlock("crimson_hyphae_fence", () -> new WoodFenceBlock(Blocks.CRIMSON_FENCE));
-    public static final RegistryObject<Block> DARK_OAK_WOOD_FENCE = registerBlock("dark_oak_wood_fence", () -> new WoodFenceBlock(Blocks.DARK_OAK_FENCE));
-    public static final RegistryObject<Block> JUNGLE_WOOD_FENCE = registerBlock("jungle_wood_fence", () -> new WoodFenceBlock(Blocks.JUNGLE_FENCE));
-    public static final RegistryObject<Block> MANGROVE_WOOD_FENCE = registerBlock("mangrove_wood_fence", () -> new WoodFenceBlock(Blocks.MANGROVE_FENCE));
-    public static final RegistryObject<Block> OAK_WOOD_FENCE = registerBlock("oak_wood_fence", () -> new WoodFenceBlock(Blocks.OAK_FENCE));
-    public static final RegistryObject<Block> SPRUCE_WOOD_FENCE = registerBlock("spruce_wood_fence", () -> new WoodFenceBlock(Blocks.SPRUCE_FENCE));
+    public static final RegistryObject<Block> DARK_OAK_WOOD_FENCE = registerBlock("dark_oak_wood_fence", () -> new WoodFenceBlock(Blocks.DARK_OAK_FENCE), 300);
+    public static final RegistryObject<Block> JUNGLE_WOOD_FENCE = registerBlock("jungle_wood_fence", () -> new WoodFenceBlock(Blocks.JUNGLE_FENCE), 300);
+    public static final RegistryObject<Block> MANGROVE_WOOD_FENCE = registerBlock("mangrove_wood_fence", () -> new WoodFenceBlock(Blocks.MANGROVE_FENCE), 300);
+    public static final RegistryObject<Block> OAK_WOOD_FENCE = registerBlock("oak_wood_fence", () -> new WoodFenceBlock(Blocks.OAK_FENCE), 300);
+    public static final RegistryObject<Block> SPRUCE_WOOD_FENCE = registerBlock("spruce_wood_fence", () -> new WoodFenceBlock(Blocks.SPRUCE_FENCE), 300);
     public static final RegistryObject<Block> VERDANT_HYPHAE_FENCE = registerBlock("verdant_hyphae_fence", () -> new WoodFenceBlock(VERDANT_FENCE.get()));
     public static final RegistryObject<Block> WARPED_HYPHAE_FENCE = registerBlock("warped_hyphae_fence", () -> new WoodFenceBlock(Blocks.WARPED_FENCE));
 
-    public static final RegistryObject<Block> STRIPPED_ACACIA_WOOD_FENCE = registerBlock("stripped_acacia_wood_fence", () -> new WoodFenceBlock(Blocks.ACACIA_FENCE));
-    public static final RegistryObject<Block> STRIPPED_BIRCH_WOOD_FENCE = registerBlock("stripped_birch_wood_fence", () -> new WoodFenceBlock(Blocks.BIRCH_FENCE));
-    public static final RegistryObject<Block> STRIPPED_CHERRY_WOOD_FENCE = registerBlock("stripped_cherry_wood_fence", () -> new WoodFenceBlock(Blocks.CHERRY_FENCE));
+    public static final RegistryObject<Block> STRIPPED_ACACIA_WOOD_FENCE = registerBlock("stripped_acacia_wood_fence", () -> new WoodFenceBlock(Blocks.ACACIA_FENCE), 300);
+    public static final RegistryObject<Block> STRIPPED_BIRCH_WOOD_FENCE = registerBlock("stripped_birch_wood_fence", () -> new WoodFenceBlock(Blocks.BIRCH_FENCE), 300);
+    public static final RegistryObject<Block> STRIPPED_CHERRY_WOOD_FENCE = registerBlock("stripped_cherry_wood_fence", () -> new WoodFenceBlock(Blocks.CHERRY_FENCE), 300);
     public static final RegistryObject<Block> STRIPPED_CRIMSON_HYPHAE_FENCE = registerBlock("stripped_crimson_hyphae_fence", () -> new WoodFenceBlock(Blocks.CRIMSON_FENCE));
-    public static final RegistryObject<Block> STRIPPED_DARK_OAK_WOOD_FENCE = registerBlock("stripped_dark_oak_wood_fence", () -> new WoodFenceBlock(Blocks.DARK_OAK_FENCE));
-    public static final RegistryObject<Block> STRIPPED_JUNGLE_WOOD_FENCE = registerBlock("stripped_jungle_wood_fence", () -> new WoodFenceBlock(Blocks.JUNGLE_FENCE));
-    public static final RegistryObject<Block> STRIPPED_MANGROVE_WOOD_FENCE = registerBlock("stripped_mangrove_wood_fence", () -> new WoodFenceBlock(Blocks.MANGROVE_FENCE));
-    public static final RegistryObject<Block> STRIPPED_OAK_WOOD_FENCE = registerBlock("stripped_oak_wood_fence", () -> new WoodFenceBlock(Blocks.OAK_FENCE));
-    public static final RegistryObject<Block> STRIPPED_SPRUCE_WOOD_FENCE = registerBlock("stripped_spruce_wood_fence", () -> new WoodFenceBlock(Blocks.SPRUCE_FENCE));
+    public static final RegistryObject<Block> STRIPPED_DARK_OAK_WOOD_FENCE = registerBlock("stripped_dark_oak_wood_fence", () -> new WoodFenceBlock(Blocks.DARK_OAK_FENCE), 300);
+    public static final RegistryObject<Block> STRIPPED_JUNGLE_WOOD_FENCE = registerBlock("stripped_jungle_wood_fence", () -> new WoodFenceBlock(Blocks.JUNGLE_FENCE), 300);
+    public static final RegistryObject<Block> STRIPPED_MANGROVE_WOOD_FENCE = registerBlock("stripped_mangrove_wood_fence", () -> new WoodFenceBlock(Blocks.MANGROVE_FENCE), 300);
+    public static final RegistryObject<Block> STRIPPED_OAK_WOOD_FENCE = registerBlock("stripped_oak_wood_fence", () -> new WoodFenceBlock(Blocks.OAK_FENCE), 300);
+    public static final RegistryObject<Block> STRIPPED_SPRUCE_WOOD_FENCE = registerBlock("stripped_spruce_wood_fence", () -> new WoodFenceBlock(Blocks.SPRUCE_FENCE), 300);
     public static final RegistryObject<Block> STRIPPED_VERDANT_HYPHAE_FENCE = registerBlock("stripped_verdant_hyphae_fence", () -> new WoodFenceBlock(VERDANT_FENCE.get()));
     public static final RegistryObject<Block> STRIPPED_WARPED_HYPHAE_FENCE = registerBlock("stripped_warped_hyphae_fence", () -> new WoodFenceBlock(Blocks.WARPED_FENCE));
 
@@ -290,39 +291,39 @@ public class BlockInit {
     public static final RegistryObject<Block> DROWNED_HEAD = registerBlockOnly("drowned_head", () -> new HeadBlock(BlockBehaviour.Properties.copy(Blocks.CREEPER_HEAD)));
     public static final RegistryObject<Block> DROWNED_WALL_HEAD = registerBlockOnly("drowned_wall_head", () -> new WallHeadBlock(BlockBehaviour.Properties.copy(Blocks.CREEPER_WALL_HEAD)));
 
-    public static final RegistryObject<Block> ACACIA_MOSAIC = registerBlock("acacia_mosaic", () -> new DecorativeWoodBlock(Blocks.ACACIA_PLANKS));
-    public static final RegistryObject<Block> BIRCH_MOSAIC = registerBlock("birch_mosaic", () -> new DecorativeWoodBlock(Blocks.BIRCH_PLANKS));
-    public static final RegistryObject<Block> CHERRY_MOSAIC = registerBlock("cherry_mosaic", () -> new DecorativeWoodBlock(Blocks.CHERRY_PLANKS));
+    public static final RegistryObject<Block> ACACIA_MOSAIC = registerBlock("acacia_mosaic", () -> new DecorativeWoodBlock(Blocks.ACACIA_PLANKS), 300);
+    public static final RegistryObject<Block> BIRCH_MOSAIC = registerBlock("birch_mosaic", () -> new DecorativeWoodBlock(Blocks.BIRCH_PLANKS), 300);
+    public static final RegistryObject<Block> CHERRY_MOSAIC = registerBlock("cherry_mosaic", () -> new DecorativeWoodBlock(Blocks.CHERRY_PLANKS), 300);
     public static final RegistryObject<Block> CRIMSON_MOSAIC = registerBlock("crimson_mosaic", () -> new DecorativeWoodBlock(Blocks.CRIMSON_PLANKS));
-    public static final RegistryObject<Block> DARK_OAK_MOSAIC = registerBlock("dark_oak_mosaic", () -> new DecorativeWoodBlock(Blocks.DARK_OAK_PLANKS));
-    public static final RegistryObject<Block> JUNGLE_MOSAIC = registerBlock("jungle_mosaic", () -> new DecorativeWoodBlock(Blocks.JUNGLE_PLANKS));
-    public static final RegistryObject<Block> MANGROVE_MOSAIC = registerBlock("mangrove_mosaic", () -> new DecorativeWoodBlock(Blocks.MANGROVE_PLANKS));
-    public static final RegistryObject<Block> OAK_MOSAIC = registerBlock("oak_mosaic", () -> new DecorativeWoodBlock(Blocks.OAK_PLANKS));
-    public static final RegistryObject<Block> SPRUCE_MOSAIC = registerBlock("spruce_mosaic", () -> new DecorativeWoodBlock(Blocks.SPRUCE_PLANKS));
+    public static final RegistryObject<Block> DARK_OAK_MOSAIC = registerBlock("dark_oak_mosaic", () -> new DecorativeWoodBlock(Blocks.DARK_OAK_PLANKS), 300);
+    public static final RegistryObject<Block> JUNGLE_MOSAIC = registerBlock("jungle_mosaic", () -> new DecorativeWoodBlock(Blocks.JUNGLE_PLANKS), 300);
+    public static final RegistryObject<Block> MANGROVE_MOSAIC = registerBlock("mangrove_mosaic", () -> new DecorativeWoodBlock(Blocks.MANGROVE_PLANKS), 300);
+    public static final RegistryObject<Block> OAK_MOSAIC = registerBlock("oak_mosaic", () -> new DecorativeWoodBlock(Blocks.OAK_PLANKS), 300);
+    public static final RegistryObject<Block> SPRUCE_MOSAIC = registerBlock("spruce_mosaic", () -> new DecorativeWoodBlock(Blocks.SPRUCE_PLANKS), 300);
     public static final RegistryObject<Block> VERDANT_MOSAIC = registerBlock("verdant_mosaic", () -> new DecorativeWoodBlock(BlockInit.VERDANT_PLANKS.get()));
     public static final RegistryObject<Block> WARPED_MOSAIC = registerBlock("warped_mosaic", () -> new DecorativeWoodBlock(Blocks.WARPED_PLANKS));
 
-    public static final RegistryObject<Block> ACACIA_MOSAIC_STAIRS = registerBlock("acacia_mosaic_stairs", () -> new StairsBlock(ACACIA_MOSAIC));
-    public static final RegistryObject<Block> BIRCH_MOSAIC_STAIRS = registerBlock("birch_mosaic_stairs", () -> new StairsBlock(BIRCH_MOSAIC));
-    public static final RegistryObject<Block> CHERRY_MOSAIC_STAIRS = registerBlock("cherry_mosaic_stairs", () -> new StairsBlock(CHERRY_MOSAIC));
+    public static final RegistryObject<Block> ACACIA_MOSAIC_STAIRS = registerBlock("acacia_mosaic_stairs", () -> new StairsBlock(ACACIA_MOSAIC), 300);
+    public static final RegistryObject<Block> BIRCH_MOSAIC_STAIRS = registerBlock("birch_mosaic_stairs", () -> new StairsBlock(BIRCH_MOSAIC), 300);
+    public static final RegistryObject<Block> CHERRY_MOSAIC_STAIRS = registerBlock("cherry_mosaic_stairs", () -> new StairsBlock(CHERRY_MOSAIC), 300);
     public static final RegistryObject<Block> CRIMSON_MOSAIC_STAIRS = registerBlock("crimson_mosaic_stairs", () -> new StairsBlock(CRIMSON_MOSAIC));
-    public static final RegistryObject<Block> DARK_OAK_MOSAIC_STAIRS = registerBlock("dark_oak_mosaic_stairs", () -> new StairsBlock(DARK_OAK_MOSAIC));
-    public static final RegistryObject<Block> JUNGLE_MOSAIC_STAIRS = registerBlock("jungle_mosaic_stairs", () -> new StairsBlock(JUNGLE_MOSAIC));
-    public static final RegistryObject<Block> MANGROVE_MOSAIC_STAIRS = registerBlock("mangrove_mosaic_stairs", () -> new StairsBlock(MANGROVE_MOSAIC));
-    public static final RegistryObject<Block> OAK_MOSAIC_STAIRS = registerBlock("oak_mosaic_stairs", () -> new StairsBlock(OAK_MOSAIC));
-    public static final RegistryObject<Block> SPRUCE_MOSAIC_STAIRS = registerBlock("spruce_mosaic_stairs", () -> new StairsBlock(SPRUCE_MOSAIC));
+    public static final RegistryObject<Block> DARK_OAK_MOSAIC_STAIRS = registerBlock("dark_oak_mosaic_stairs", () -> new StairsBlock(DARK_OAK_MOSAIC), 300);
+    public static final RegistryObject<Block> JUNGLE_MOSAIC_STAIRS = registerBlock("jungle_mosaic_stairs", () -> new StairsBlock(JUNGLE_MOSAIC), 300);
+    public static final RegistryObject<Block> MANGROVE_MOSAIC_STAIRS = registerBlock("mangrove_mosaic_stairs", () -> new StairsBlock(MANGROVE_MOSAIC), 300);
+    public static final RegistryObject<Block> OAK_MOSAIC_STAIRS = registerBlock("oak_mosaic_stairs", () -> new StairsBlock(OAK_MOSAIC), 300);
+    public static final RegistryObject<Block> SPRUCE_MOSAIC_STAIRS = registerBlock("spruce_mosaic_stairs", () -> new StairsBlock(SPRUCE_MOSAIC), 300);
     public static final RegistryObject<Block> VERDANT_MOSAIC_STAIRS = registerBlock("verdant_mosaic_stairs", () -> new StairsBlock(VERDANT_MOSAIC));
     public static final RegistryObject<Block> WARPED_MOSAIC_STAIRS = registerBlock("warped_mosaic_stairs", () -> new StairsBlock(WARPED_MOSAIC));
 
-    public static final RegistryObject<Block> ACACIA_MOSAIC_SLAB = registerBlock("acacia_mosaic_slab", () -> new SlabsBlock(ACACIA_MOSAIC));
-    public static final RegistryObject<Block> BIRCH_MOSAIC_SLAB = registerBlock("birch_mosaic_slab", () -> new SlabsBlock(BIRCH_MOSAIC));
-    public static final RegistryObject<Block> CHERRY_MOSAIC_SLAB = registerBlock("cherry_mosaic_slab", () -> new SlabsBlock(CHERRY_MOSAIC));
+    public static final RegistryObject<Block> ACACIA_MOSAIC_SLAB = registerBlock("acacia_mosaic_slab", () -> new SlabsBlock(ACACIA_MOSAIC), 300);
+    public static final RegistryObject<Block> BIRCH_MOSAIC_SLAB = registerBlock("birch_mosaic_slab", () -> new SlabsBlock(BIRCH_MOSAIC), 300);
+    public static final RegistryObject<Block> CHERRY_MOSAIC_SLAB = registerBlock("cherry_mosaic_slab", () -> new SlabsBlock(CHERRY_MOSAIC), 300);
     public static final RegistryObject<Block> CRIMSON_MOSAIC_SLAB = registerBlock("crimson_mosaic_slab", () -> new SlabsBlock(CRIMSON_MOSAIC));
-    public static final RegistryObject<Block> DARK_OAK_MOSAIC_SLAB = registerBlock("dark_oak_mosaic_slab", () -> new SlabsBlock(DARK_OAK_MOSAIC));
-    public static final RegistryObject<Block> JUNGLE_MOSAIC_SLAB = registerBlock("jungle_mosaic_slab", () -> new SlabsBlock(JUNGLE_MOSAIC));
-    public static final RegistryObject<Block> MANGROVE_MOSAIC_SLAB = registerBlock("mangrove_mosaic_slab", () -> new SlabsBlock(MANGROVE_MOSAIC));
-    public static final RegistryObject<Block> OAK_MOSAIC_SLAB = registerBlock("oak_mosaic_slab", () -> new SlabsBlock(OAK_MOSAIC));
-    public static final RegistryObject<Block> SPRUCE_MOSAIC_SLAB = registerBlock("spruce_mosaic_slab", () -> new SlabsBlock(SPRUCE_MOSAIC));
+    public static final RegistryObject<Block> DARK_OAK_MOSAIC_SLAB = registerBlock("dark_oak_mosaic_slab", () -> new SlabsBlock(DARK_OAK_MOSAIC), 300);
+    public static final RegistryObject<Block> JUNGLE_MOSAIC_SLAB = registerBlock("jungle_mosaic_slab", () -> new SlabsBlock(JUNGLE_MOSAIC), 300);
+    public static final RegistryObject<Block> MANGROVE_MOSAIC_SLAB = registerBlock("mangrove_mosaic_slab", () -> new SlabsBlock(MANGROVE_MOSAIC), 300);
+    public static final RegistryObject<Block> OAK_MOSAIC_SLAB = registerBlock("oak_mosaic_slab", () -> new SlabsBlock(OAK_MOSAIC), 300);
+    public static final RegistryObject<Block> SPRUCE_MOSAIC_SLAB = registerBlock("spruce_mosaic_slab", () -> new SlabsBlock(SPRUCE_MOSAIC), 300);
     public static final RegistryObject<Block> VERDANT_MOSAIC_SLAB = registerBlock("verdant_mosaic_slab", () -> new SlabsBlock(VERDANT_MOSAIC));
     public static final RegistryObject<Block> WARPED_MOSAIC_SLAB = registerBlock("warped_mosaic_slab", () -> new SlabsBlock(WARPED_MOSAIC));
 
@@ -334,6 +335,12 @@ public class BlockInit {
 
     private static RegistryObject<Block> registerBlockOnly(String name, Supplier<Block> blockSupplier) {
         return BLOCKS.register(name, blockSupplier);
+    }
+
+    private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier, int burnTime) {
+        RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
+        ITEMS.register(name, () -> new BurnableBlockItem(block.get(), new Item.Properties(), burnTime));
+        return block;
     }
 
     public static void register(IEventBus eventBus) {
