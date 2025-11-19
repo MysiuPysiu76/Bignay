@@ -30,10 +30,10 @@ public class BlockInit {
     public static final RegistryObject<Block> WITHER_BONE_BLOCK = registerBlock("wither_bone_block", WitherBoneBlock::new);
     public static final RegistryObject<Block> ARCHAEOLOGY_TABLE_BLOCK = registerBlock("archaeology_table", ArchaeologyTableBlock::new);
 
-    public static final RegistryObject<Block> VERDANT_STEM = registerBlock("verdant_stem", () -> new NetherStemBlock(MapColor.COLOR_GREEN));
+    public static final RegistryObject<Block> VERDANT_STEM = registerBlock("verdant_stem", () -> new NaturalNetherStemBlock(MapColor.COLOR_GREEN));
     public static final RegistryObject<Block> STRIPPED_VERDANT_STEM = registerBlock("stripped_verdant_stem", () -> new NetherStemBlock(MapColor.COLOR_GREEN));
-    public static final RegistryObject<Block> VERDANT_HYPHAE = registerBlock("verdant_hyphae", () -> new NetherStemBlock(MapColor.COLOR_GREEN));
     public static final RegistryObject<Block> STRIPPED_VERDANT_HYPHAE = registerBlock("stripped_verdant_hyphae", () -> new NetherStemBlock(MapColor.COLOR_GREEN));
+    public static final RegistryObject<Block> VERDANT_HYPHAE = registerBlock("verdant_hyphae", () -> new NetherStemBlock(MapColor.COLOR_GREEN));
     public static final RegistryObject<Block> VERDANT_PLANKS = registerBlock("verdant_planks", VerdantPlanksBlock::new);
     public static final RegistryObject<Block> VERDANT_STAIRS = registerBlock("verdant_stairs", StairsBlock::new);
     public static final RegistryObject<Block> VERDANT_SLAB = registerBlock("verdant_slab", SlabsBlock::new);
