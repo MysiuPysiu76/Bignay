@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "bignay:mossy_cracked_stone_bricks"
+    "bignay:mossy_cracked_stone_bricks",
+    "bignay:mossy_chiseled_stone_bricks"
   ]
 }

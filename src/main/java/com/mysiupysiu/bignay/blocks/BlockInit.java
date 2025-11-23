@@ -252,6 +252,7 @@ public class BlockInit {
     public static final RegistryObject<Block> MOSSY_CRACKED_STONE_BRICK_STAIRS = registerBlock("mossy_cracked_stone_brick_stairs", () -> new StairsBlock(MOSSY_CRACKED_STONE_BRICKS));
     public static final RegistryObject<Block> MOSSY_CRACKED_STONE_BRICK_SLAB = registerBlock("mossy_cracked_stone_brick_slab", () -> new SlabsBlock(MOSSY_CRACKED_STONE_BRICKS));
     public static final RegistryObject<Block> MOSSY_CRACKED_STONE_BRICK_WALL = registerBlock("mossy_cracked_stone_brick_wall", () -> new WallsBlock(MOSSY_CRACKED_STONE_BRICKS));
+    public static final RegistryObject<Block> MOSSY_CHISELED_STONE_BRICKS = registerBlock("mossy_chiseled_stone_bricks", () -> new BuildingBlock(Blocks.MOSSY_STONE_BRICKS));
 
     public static final RegistryObject<Block> ACACIA_WOOD_FENCE = registerBlock("acacia_wood_fence", () -> new WoodFenceBlock(Blocks.ACACIA_FENCE), 300);
     public static final RegistryObject<Block> BAMBOO_BLOCK_FENCE = registerBlock("bamboo_block_fence", () -> new WoodFenceBlock(Blocks.BAMBOO_FENCE), 300);
