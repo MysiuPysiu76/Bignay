@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "bignay:cracked_stone_brick_slab",
+    "bignay:cracked_deepslate_brick_slab",
+    "bignay:cracked_deepslate_tile_slab",
+    "bignay:cracked_polished_blackstone_brick_slab",
+    "bignay:cracked_nether_brick_slab",
+    "bignay:basalt_brick_slab",
+    "bignay:cracked_basalt_brick_slab",
+    "bignay:blue_nether_brick_slab",
+    "bignay:green_nether_brick_slab",
+    "bignay:mossy_stone_slab",
+    "bignay:mossy_cracked_stone_brick_slab"
+  ]
+}
