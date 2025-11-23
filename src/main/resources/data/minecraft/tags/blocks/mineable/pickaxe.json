@@ -41,6 +41,10 @@
     "bignay:mossy_cracked_stone_brick_stairs",
     "bignay:mossy_chiseled_stone_bricks",
     "bignay:polished_andesite_wall",
-    "bignay:smooth_andesite"
+    "bignay:smooth_andesite",
+    "bignay:smooth_andesite_slab",
+    "bignay:smooth_andesite_stairs",
+    "bignay:smooth_andesite_wall",
+    "bignay:andesite_bricks"
   ]
 }
