@@ -12,3 +12,5 @@ The **Cobbled Basalt, Basalt Bricks, Chiseled Basalt and Basalt Pillar, Acacia, 
 Used in the Bignay mod with permission from the original creator - many thanks for allowing me to use them!
 
 The mosaic blocks were inspired by the work of people on Reddit and other mods, viewed on Google Images
+
+The Andesite, Diorite, Granite, Dripstone, Calcite variants of Polished, Smooth, Bricks, Pillar and Chiseled block textures come from [ImXR24](https://www.deviantart.com/imxr24) 
