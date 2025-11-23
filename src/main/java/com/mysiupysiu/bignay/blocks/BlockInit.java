@@ -332,6 +332,7 @@ public class BlockInit {
     public static final RegistryObject<Block> VERDANT_MOSAIC_SLAB = registerBlock("verdant_mosaic_slab", () -> new SlabsBlock(VERDANT_MOSAIC));
     public static final RegistryObject<Block> WARPED_MOSAIC_SLAB = registerBlock("warped_mosaic_slab", () -> new SlabsBlock(WARPED_MOSAIC));
 
+    public static final RegistryObject<Block> POLISHED_ANDESITE_WALL = registerBlock("polished_andesite_wall", () -> new WallsBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> SMOOTH_ANDESITE = registerBlock("smooth_andesite", () -> new BuildingBlock(Blocks.POLISHED_ANDESITE));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "wall",
+  "key": {
+    "#": {
+      "item": "minecraft:polished_andesite"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "bignay:polished_andesite_wall"
+  },
+  "show_notification": true
+}
