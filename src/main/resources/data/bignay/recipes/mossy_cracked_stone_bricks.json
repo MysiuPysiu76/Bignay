@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "mossy_cracked_stone_bricks",
+  "key": {
+    "Y": {
+      "item": "minecraft:cracked_stone_bricks"
+    },
+    "X": {
+      "item": "minecraft:mossy_stone_bricks"
+    }
+  },
+  "pattern": [
+    "XY",
+    "YX"
+  ],
+  "result": {
+    "item": "bignay:mossy_cracked_stone_bricks"
+  },
+  "show_notification": true
+}
