@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bignay:block/smooth_diorite_slab"
+    },
+    "type=double": {
+      "model": "bignay:block/smooth_diorite"
+    },
+    "type=top": {
+      "model": "bignay:block/smooth_diorite_slab_top"
+    }
+  }
+}

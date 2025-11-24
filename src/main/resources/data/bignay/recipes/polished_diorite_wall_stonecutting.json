@@ -2,7 +2,7 @@
   "type": "minecraft:stonecutting",
   "count": 1,
   "ingredient": {
-    "item": "bignay:polished_diorite"
+    "item": "minecraft:polished_diorite"
   },
   "result": "bignay:polished_diorite_wall"
 }

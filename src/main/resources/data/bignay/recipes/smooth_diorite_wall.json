@@ -3,7 +3,7 @@
   "category": "wall",
   "key": {
     "#": {
-      "item": "minecraft:polished_diorite"
+      "item": "bignay:smooth_diorite"
     }
   },
   "pattern": [
@@ -12,7 +12,7 @@
   ],
   "result": {
     "count": 6,
-    "item": "bignay:polished_diorite_wall"
+    "item": "bignay:smooth_diorite_wall"
   },
   "show_notification": true
 }
