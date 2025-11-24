@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bignay:block/mossy_andesite_brick_slab"
+    },
+    "type=double": {
+      "model": "bignay:block/mossy_andesite_bricks"
+    },
+    "type=top": {
+      "model": "bignay:block/mossy_andesite_brick_slab_top"
+    }
+  }
+}
