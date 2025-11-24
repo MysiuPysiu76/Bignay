@@ -338,6 +338,9 @@ public class BlockInit {
     public static final RegistryObject<Block> SMOOTH_ANDESITE_STAIRS = registerBlock("smooth_andesite_stairs", () -> new StairsBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> SMOOTH_ANDESITE_WALL = registerBlock("smooth_andesite_wall", () -> new WallsBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> ANDESITE_BRICKS = registerBlock("andesite_bricks", () -> new BuildingBlock(Blocks.POLISHED_ANDESITE));
+    public static final RegistryObject<Block> ANDESITE_BRICK_SLAB = registerBlock("andesite_brick_slab", () -> new SlabsBlock(Blocks.POLISHED_ANDESITE));
+    public static final RegistryObject<Block> ANDESITE_BRICK_STAIRS = registerBlock("andesite_brick_stairs", () -> new StairsBlock(Blocks.POLISHED_ANDESITE));
+    public static final RegistryObject<Block> ANDESITE_BRICK_WALL = registerBlock("andesite_brick_wall", () -> new WallsBlock(Blocks.POLISHED_ANDESITE));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);

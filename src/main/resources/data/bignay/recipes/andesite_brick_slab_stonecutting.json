@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "bignay:andesite_bricks"
+  },
+  "result": "bignay:andesite_brick_slab"
+}
