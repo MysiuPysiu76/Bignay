@@ -6,11 +6,11 @@
   ],
   "key": {
     "#": {
-      "item": "minecraft:polished_andesite"
+      "item": "minecraft:polished_diorite"
     }
   },
   "result": {
-    "item": "bignay:andesite_bricks",
+    "item": "bignay:diorite_bricks",
     "count": 4
   }
 }

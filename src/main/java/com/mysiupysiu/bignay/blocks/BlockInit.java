@@ -355,6 +355,10 @@ public class BlockInit {
     public static final RegistryObject<Block> SMOOTH_DIORITE_SLAB = registerBlock("smooth_diorite_slab", () -> new SlabsBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> SMOOTH_DIORITE_STAIRS = registerBlock("smooth_diorite_stairs", () -> new StairsBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> SMOOTH_DIORITE_WALL = registerBlock("smooth_diorite_wall", () -> new WallsBlock(Blocks.POLISHED_DIORITE));
+    public static final RegistryObject<Block> DIORITE_BRICKS = registerBlock("diorite_bricks", () -> new BuildingBlock(Blocks.POLISHED_DIORITE));
+    public static final RegistryObject<Block> DIORITE_BRICK_SLAB = registerBlock("diorite_brick_slab", () -> new SlabsBlock(Blocks.POLISHED_DIORITE));
+    public static final RegistryObject<Block> DIORITE_BRICK_STAIRS = registerBlock("diorite_brick_stairs", () -> new StairsBlock(Blocks.POLISHED_DIORITE));
+    public static final RegistryObject<Block> DIORITE_BRICK_WALL = registerBlock("diorite_brick_wall", () -> new WallsBlock(Blocks.POLISHED_DIORITE));
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
         ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
