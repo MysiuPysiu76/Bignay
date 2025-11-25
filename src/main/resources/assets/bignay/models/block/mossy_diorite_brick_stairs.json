@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "bignay:block/mossy_diorite_bricks",
+    "side": "bignay:block/mossy_diorite_bricks",
+    "top": "bignay:block/mossy_diorite_bricks"
+  }
+}

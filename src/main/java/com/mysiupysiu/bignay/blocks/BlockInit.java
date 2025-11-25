@@ -363,6 +363,11 @@ public class BlockInit {
     public static final RegistryObject<Block> CRACKED_DIORITE_BRICK_SLAB = registerBlock("cracked_diorite_brick_slab", () -> new SlabsBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> CRACKED_DIORITE_BRICK_STAIRS = registerBlock("cracked_diorite_brick_stairs", () -> new StairsBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> CRACKED_DIORITE_BRICK_WALL = registerBlock("cracked_diorite_brick_wall", () -> new WallsBlock(Blocks.POLISHED_DIORITE));
+    public static final RegistryObject<Block> MOSSY_DIORITE_BRICKS = registerBlock("mossy_diorite_bricks", () -> new BuildingBlock(Blocks.POLISHED_DIORITE));
+    public static final RegistryObject<Block> MOSSY_DIORITE_BRICK_SLAB = registerBlock("mossy_diorite_brick_slab", () -> new SlabsBlock(Blocks.POLISHED_DIORITE));
+    public static final RegistryObject<Block> MOSSY_DIORITE_BRICK_STAIRS = registerBlock("mossy_diorite_brick_stairs", () -> new StairsBlock(Blocks.POLISHED_DIORITE));
+    public static final RegistryObject<Block> MOSSY_DIORITE_BRICK_WALL = registerBlock("mossy_diorite_brick_wall", () -> new WallsBlock(Blocks.POLISHED_DIORITE));
+
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
         ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
