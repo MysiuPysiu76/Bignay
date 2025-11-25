@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "bignay:diorite_bricks"
+  },
+  "result": "bignay:diorite_pillar"
+}
