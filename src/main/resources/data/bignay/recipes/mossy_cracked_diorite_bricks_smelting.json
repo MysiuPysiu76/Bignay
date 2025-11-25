@@ -4,7 +4,7 @@
   "cookingtime": 200,
   "experience": 0.1,
   "ingredient": {
-    "item": "minecraft:diorite_bricks"
+    "item": "bignay:diorite_bricks"
   },
   "result": "bignay:cracked_diorite_bricks"
 }
