@@ -349,6 +349,7 @@ public class BlockInit {
     public static final RegistryObject<Block> MOSSY_ANDESITE_BRICK_SLAB = registerBlock("mossy_andesite_brick_slab", () -> new SlabsBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> MOSSY_ANDESITE_BRICK_STAIRS = registerBlock("mossy_andesite_brick_stairs", () -> new StairsBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> MOSSY_ANDESITE_BRICK_WALL = registerBlock("mossy_andesite_brick_wall", () -> new WallsBlock(Blocks.POLISHED_ANDESITE));
+    public static final RegistryObject<Block> CHISELED_ANDESITE = registerBlock("chiseled_andesite", () -> new BuildingBlock(Blocks.POLISHED_ANDESITE));
 
     public static final RegistryObject<Block> POLISHED_DIORITE_WALL = registerBlock("polished_diorite_wall", () -> new WallsBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> SMOOTH_DIORITE = registerBlock("smooth_diorite", () -> new BuildingBlock(Blocks.POLISHED_DIORITE));

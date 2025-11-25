@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "building",
-  "group": "mossy_stone",
+  "group": "mossy_andesite",
   "ingredients": [
     {
       "item": "bignay:andesite_bricks"
