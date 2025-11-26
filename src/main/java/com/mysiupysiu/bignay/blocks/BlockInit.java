@@ -372,6 +372,8 @@ public class BlockInit {
     public static final RegistryObject<Block> CHISELED_DIORITE = registerBlock("chiseled_diorite", () -> new BuildingBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> DIORITE_PILLAR = registerBlock("diorite_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DIORITE)));
 
+    public static final RegistryObject<Block> POLISHED_GRANITE_WALL = registerBlock("polished_granite_wall", () -> new WallsBlock(Blocks.POLISHED_GRANITE));
+
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
         ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
