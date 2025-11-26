@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bignay:block/smooth_granite_slab"
+    },
+    "type=double": {
+      "model": "bignay:block/smooth_granite"
+    },
+    "type=top": {
+      "model": "bignay:block/smooth_granite_slab_top"
+    }
+  }
+}

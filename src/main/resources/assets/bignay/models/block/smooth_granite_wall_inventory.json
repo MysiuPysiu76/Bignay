@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/wall_inventory",
   "textures": {
-    "wall": "minecraft:block/polished_granite"
+    "wall": "bignay:block/smooth_granite"
   }
 }

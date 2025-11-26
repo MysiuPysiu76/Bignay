@@ -373,6 +373,10 @@ public class BlockInit {
     public static final RegistryObject<Block> DIORITE_PILLAR = registerBlock("diorite_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DIORITE)));
 
     public static final RegistryObject<Block> POLISHED_GRANITE_WALL = registerBlock("polished_granite_wall", () -> new WallsBlock(Blocks.POLISHED_GRANITE));
+    public static final RegistryObject<Block> SMOOTH_GRANITE = registerBlock("smooth_granite", () -> new BuildingBlock(Blocks.POLISHED_GRANITE));
+    public static final RegistryObject<Block> SMOOTH_GRANITE_SLAB = registerBlock("smooth_granite_slab", () -> new SlabsBlock(Blocks.POLISHED_GRANITE));
+    public static final RegistryObject<Block> SMOOTH_GRANITE_STAIRS = registerBlock("smooth_granite_stairs", () -> new StairsBlock(Blocks.POLISHED_GRANITE));
+    public static final RegistryObject<Block> SMOOTH_GRANITE_WALL = registerBlock("smooth_granite_wall", () -> new WallsBlock(Blocks.POLISHED_GRANITE));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);

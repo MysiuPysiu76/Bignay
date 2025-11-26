@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "bignay:block/smooth_granite",
+    "side": "bignay:block/smooth_granite",
+    "top": "bignay:block/smooth_granite"
+  }
+}

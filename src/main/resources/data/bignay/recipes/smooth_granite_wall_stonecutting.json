@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "bignay:smooth_granite"
+  },
+  "result": "bignay:smooth_granite_wall"
+}
