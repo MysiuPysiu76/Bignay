@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "bignay:cracked_granite_bricks"
+  },
+  "result": "bignay:cracked_granite_brick_stairs"
+}
