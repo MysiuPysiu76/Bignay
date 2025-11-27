@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "bignay:granite_bricks"
+  },
+  "result": "bignay:granite_pillar"
+}
