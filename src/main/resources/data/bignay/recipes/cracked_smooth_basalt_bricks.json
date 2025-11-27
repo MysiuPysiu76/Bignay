@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "bignay:smooth_basalt_bricks"
+  },
+  "result": "bignay:cracked_smooth_basalt_bricks",
+  "experience": 0.1,
+  "cookingtime": 200
+}
