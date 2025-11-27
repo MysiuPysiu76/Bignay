@@ -404,6 +404,7 @@ public class BlockInit {
     public static final RegistryObject<Block> CRACKED_SMOOTH_BASALT_BRICK_SLAB = registerBlock("cracked_smooth_basalt_brick_slab", () -> new SlabsBlock(Blocks.SMOOTH_BASALT));
     public static final RegistryObject<Block> CRACKED_SMOOTH_BASALT_BRICK_STAIRS = registerBlock("cracked_smooth_basalt_brick_stairs", () -> new StairsBlock(Blocks.SMOOTH_BASALT));
     public static final RegistryObject<Block> CRACKED_SMOOTH_BASALT_BRICK_WALL = registerBlock("cracked_smooth_basalt_brick_wall", () -> new WallsBlock(Blocks.SMOOTH_BASALT));
+    public static final RegistryObject<Block> CHISELED_SMOOTH_BASALT = registerBlock("chiseled_smooth_basalt", () -> new BuildingBlock(Blocks.SMOOTH_BASALT));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "bignay:polished_smooth_basalt"
+  },
+  "result": "bignay:smooth_basalt_brick_wall"
+}
