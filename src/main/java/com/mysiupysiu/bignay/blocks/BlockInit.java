@@ -205,16 +205,16 @@ public class BlockInit {
     public static final RegistryObject<Block> ANGRY_SOUL_JACK_O_LANTERN = registerBlock("angry_soul_jack_o_lantern", JackOLantern.Soul::new);
     public static final RegistryObject<Block> ANGRY_SOUL_PALE_JACK_O_LANTERN = registerBlock("angry_soul_pale_jack_o_lantern", JackOLantern.SoulPale::new);
 
-    public static final RegistryObject<Block> BASALT_BRICKS = registerBlock("basalt_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.BASALT)));
+    public static final RegistryObject<Block> BASALT_BRICKS = registerBlock("basalt_bricks", () -> new BuildingBlock(Blocks.BASALT));
     public static final RegistryObject<Block> BASALT_BRICK_SLAB = registerBlock("basalt_brick_slab", () -> new SlabsBlock(BASALT_BRICKS));
     public static final RegistryObject<Block> BASALT_BRICK_STAIRS = registerBlock("basalt_brick_stairs", () -> new StairsBlock(BASALT_BRICKS));
     public static final RegistryObject<Block> BASALT_BRICK_WALL = registerBlock("basalt_brick_wall", () -> new WallsBlock(BASALT_BRICKS));
-    public static final RegistryObject<Block> CHISELED_BASALT = registerBlock("chiseled_basalt", () -> new Block(BlockBehaviour.Properties.copy(BASALT_BRICKS.get())));
+    public static final RegistryObject<Block> CHISELED_BASALT = registerBlock("chiseled_basalt", () -> new BuildingBlock(Blocks.BASALT));
     public static final RegistryObject<Block> BASALT_PILLAR = registerBlock("basalt_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(BASALT_BRICKS.get())));
     public static final RegistryObject<Block> SMOOTH_BASALT_STAIRS = registerBlock("smooth_basalt_stairs", () -> new StairsBlock(BASALT_BRICKS.get()));
     public static final RegistryObject<Block> SMOOTH_BASALT_SLAB = registerBlock("smooth_basalt_slab", () -> new SlabsBlock(BASALT_BRICKS.get()));
     public static final RegistryObject<Block> COBBLED_BASALT = registerBlock("cobbled_basalt", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.BASALT)));
-    public static final RegistryObject<Block> CRACKED_BASALT_BRICKS = registerBlock("cracked_basalt_bricks", () -> new Block(BlockBehaviour.Properties.copy(BASALT_BRICKS.get())));
+    public static final RegistryObject<Block> CRACKED_BASALT_BRICKS = registerBlock("cracked_basalt_bricks", () -> new BuildingBlock(Blocks.BASALT));
     public static final RegistryObject<Block> CRACKED_BASALT_BRICK_SLAB = registerBlock("cracked_basalt_brick_slab", () -> new SlabsBlock(CRACKED_BASALT_BRICKS));
     public static final RegistryObject<Block> CRACKED_BASALT_BRICK_STAIRS = registerBlock("cracked_basalt_brick_stairs", () -> new StairsBlock(CRACKED_BASALT_BRICKS));
     public static final RegistryObject<Block> CRACKED_BASALT_BRICK_WALL = registerBlock("cracked_basalt_brick_wall", () -> new WallsBlock(CRACKED_BASALT_BRICKS));
@@ -391,6 +391,11 @@ public class BlockInit {
     public static final RegistryObject<Block> MOSSY_GRANITE_BRICK_WALL = registerBlock("mossy_granite_brick_wall", () -> new WallsBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> CHISELED_GRANITE = registerBlock("chiseled_granite", () -> new BuildingBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> GRANITE_PILLAR = registerBlock("granite_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_GRANITE)));
+
+    public static final RegistryObject<Block> POLISHED_SMOOTH_BASALT = registerBlock("polished_smooth_basalt", () -> new BuildingBlock(Blocks.SMOOTH_BASALT));
+    public static final RegistryObject<Block> POLISHED_SMOOTH_BASALT_SLAB = registerBlock("polished_smooth_basalt_slab", () -> new SlabsBlock(Blocks.SMOOTH_BASALT));
+    public static final RegistryObject<Block> POLISHED_SMOOTH_BASALT_STAIRS = registerBlock("polished_smooth_basalt_stairs", () -> new StairsBlock(Blocks.SMOOTH_BASALT));
+    public static final RegistryObject<Block> POLISHED_SMOOTH_BASALT_WALL = registerBlock("polished_smooth_basalt_wall", () -> new WallsBlock(Blocks.SMOOTH_BASALT));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);

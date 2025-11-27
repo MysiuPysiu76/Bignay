@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "wall",
+  "key": {
+    "#": {
+      "item": "bignay:polished_smooth_basalt"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "bignay:polished_smooth_basalt_wall"
+  },
+  "show_notification": true
+}
