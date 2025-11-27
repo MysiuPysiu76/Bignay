@@ -389,6 +389,7 @@ public class BlockInit {
     public static final RegistryObject<Block> MOSSY_GRANITE_BRICK_SLAB = registerBlock("mossy_granite_brick_slab", () -> new SlabsBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> MOSSY_GRANITE_BRICK_STAIRS = registerBlock("mossy_granite_brick_stairs", () -> new StairsBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> MOSSY_GRANITE_BRICK_WALL = registerBlock("mossy_granite_brick_wall", () -> new WallsBlock(Blocks.POLISHED_GRANITE));
+    public static final RegistryObject<Block> CHISELED_GRANITE = registerBlock("chiseled_granite", () -> new BuildingBlock(Blocks.POLISHED_GRANITE));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
