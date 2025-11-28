@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "bignay:block/polished_dripstone",
+    "side": "bignay:block/polished_dripstone",
+    "top": "bignay:block/polished_dripstone"
+  }
+}

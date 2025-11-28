@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "bignay:polished_dripstone"
+  },
+  "result": "bignay:polished_dripstone_wall"
+}
