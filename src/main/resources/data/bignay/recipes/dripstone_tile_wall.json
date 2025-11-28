@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "wall",
+  "key": {
+    "#": {
+      "item": "bignay:dripstone_tiles"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "bignay:dripstone_tile_wall"
+  },
+  "show_notification": true
+}

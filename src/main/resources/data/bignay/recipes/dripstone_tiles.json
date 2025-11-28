@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "bignay:dripstone_bricks"
+    }
+  },
+  "result": {
+    "item": "bignay:dripstone_tiles",
+    "count": 4
+  }
+}
