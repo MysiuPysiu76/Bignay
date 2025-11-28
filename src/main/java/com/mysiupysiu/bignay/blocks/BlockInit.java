@@ -408,13 +408,17 @@ public class BlockInit {
     public static final RegistryObject<Block> SMOOTH_BASALT_PILLAR = registerBlock("smooth_basalt_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.SMOOTH_BASALT)));
 
     public static final RegistryObject<Block> POLISHED_DRIPSTONE = registerBlock("polished_dripstone", () -> new BuildingBlock(Blocks.DRIPSTONE_BLOCK));
-    public static final RegistryObject<Block> POLISHED_DRIPSTONE_SLAB = registerBlock("polished_dripstone_slab", () -> new BuildingBlock(Blocks.DRIPSTONE_BLOCK));
-    public static final RegistryObject<Block> POLISHED_DRIPSTONE_STAIRS = registerBlock("polished_dripstone_stairs", () -> new BuildingBlock(Blocks.DRIPSTONE_BLOCK));
-    public static final RegistryObject<Block> POLISHED_DRIPSTONE_WALL = registerBlock("polished_dripstone_wall", () -> new BuildingBlock(Blocks.DRIPSTONE_BLOCK));
+    public static final RegistryObject<Block> POLISHED_DRIPSTONE_SLAB = registerBlock("polished_dripstone_slab", () -> new SlabsBlock(Blocks.DRIPSTONE_BLOCK));
+    public static final RegistryObject<Block> POLISHED_DRIPSTONE_STAIRS = registerBlock("polished_dripstone_stairs", () -> new StairsBlock(Blocks.DRIPSTONE_BLOCK));
+    public static final RegistryObject<Block> POLISHED_DRIPSTONE_WALL = registerBlock("polished_dripstone_wall", () -> new WallsBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> DRIPSTONE_BRICKS = registerBlock("dripstone_bricks", () -> new BuildingBlock(Blocks.DRIPSTONE_BLOCK));
-    public static final RegistryObject<Block> DRIPSTONE_BRICK_SLAB = registerBlock("dripstone_brick_slab", () -> new BuildingBlock(Blocks.DRIPSTONE_BLOCK));
-    public static final RegistryObject<Block> DRIPSTONE_BRICK_STAIRS = registerBlock("dripstone_brick_stairs", () -> new BuildingBlock(Blocks.DRIPSTONE_BLOCK));
-    public static final RegistryObject<Block> DRIPSTONE_BRICK_WALL = registerBlock("dripstone_brick_wall", () -> new BuildingBlock(Blocks.DRIPSTONE_BLOCK));
+    public static final RegistryObject<Block> DRIPSTONE_BRICK_SLAB = registerBlock("dripstone_brick_slab", () -> new SlabsBlock(Blocks.DRIPSTONE_BLOCK));
+    public static final RegistryObject<Block> DRIPSTONE_BRICK_STAIRS = registerBlock("dripstone_brick_stairs", () -> new StairsBlock(Blocks.DRIPSTONE_BLOCK));
+    public static final RegistryObject<Block> DRIPSTONE_BRICK_WALL = registerBlock("dripstone_brick_wall", () -> new WallsBlock(Blocks.DRIPSTONE_BLOCK));
+    public static final RegistryObject<Block> CRACKED_DRIPSTONE_BRICKS = registerBlock("cracked_dripstone_bricks", () -> new BuildingBlock(Blocks.DRIPSTONE_BLOCK));
+    public static final RegistryObject<Block> CRACKED_DRIPSTONE_BRICK_SLAB = registerBlock("cracked_dripstone_brick_slab", () -> new SlabsBlock(Blocks.DRIPSTONE_BLOCK));
+    public static final RegistryObject<Block> CRACKED_DRIPSTONE_BRICK_STAIRS = registerBlock("cracked_dripstone_brick_stairs", () -> new StairsBlock(Blocks.DRIPSTONE_BLOCK));
+    public static final RegistryObject<Block> CRACKED_DRIPSTONE_BRICK_WALL = registerBlock("cracked_dripstone_brick_wall", () -> new WallsBlock(Blocks.DRIPSTONE_BLOCK));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
