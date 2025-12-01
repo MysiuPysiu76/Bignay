@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "bignay:smooth_calcite"
+  },
+  "result": "bignay:smooth_calcite_pillar"
+}
