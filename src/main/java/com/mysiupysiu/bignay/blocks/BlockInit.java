@@ -440,6 +440,10 @@ public class BlockInit {
     public static final RegistryObject<Block> CRACKED_CALCITE_BRICK_WALL = registerBlock("cracked_calcite_brick_wall", () -> new WallsBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> CHISELED_CALCITE = registerBlock("chiseled_calcite", () -> new BuildingBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> CALCITE_PILLAR = registerBlock("calcite_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CALCITE)));
+    public static final RegistryObject<Block> SMOOTH_CALCITE = registerBlock("smooth_calcite", () -> new BuildingBlock(Blocks.CALCITE));
+    public static final RegistryObject<Block> SMOOTH_CALCITE_SLAB = registerBlock("smooth_calcite_slab", () -> new SlabsBlock(Blocks.CALCITE));
+    public static final RegistryObject<Block> SMOOTH_CALCITE_STAIRS = registerBlock("smooth_calcite_stairs", () -> new StairsBlock(Blocks.CALCITE));
+    public static final RegistryObject<Block> SMOOTH_CALCITE_WALL = registerBlock("smooth_calcite_wall", () -> new WallsBlock(Blocks.CALCITE));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);

@@ -4,16 +4,17 @@
   "group": "stairs",
   "key": {
     "#": {
-      "item": "bignay:calcite_bricks"
+      "item": "bignay:smooth_calcite"
     }
   },
   "pattern": [
-    "#",
-    "#"
+    "#  ",
+    "## ",
+    "###"
   ],
   "result": {
-    "count": 2,
-    "item": "bignay:calcite_pillar"
+    "count": 4,
+    "item": "bignay:smooth_calcite_stairs"
   },
   "show_notification": true
 }

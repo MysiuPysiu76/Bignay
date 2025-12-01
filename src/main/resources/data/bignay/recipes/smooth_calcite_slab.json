@@ -1,19 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "stairs",
+  "group": "slab",
   "key": {
     "#": {
-      "item": "bignay:calcite_bricks"
+      "item": "bignay:smooth_calcite"
     }
   },
   "pattern": [
-    "#",
-    "#"
+    "###"
   ],
   "result": {
-    "count": 2,
-    "item": "bignay:calcite_pillar"
+    "count": 6,
+    "item": "bignay:smooth_calcite_slab"
   },
   "show_notification": true
 }

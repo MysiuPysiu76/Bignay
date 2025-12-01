@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "wall",
+  "key": {
+    "#": {
+      "item": "bignay:smooth_calcite"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "bignay:smooth_calcite_wall"
+  },
+  "show_notification": true
+}
