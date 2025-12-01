@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "bignay:block/calcite_pillar",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "bignay:block/calcite_pillar"
+    },
+    "axis=z": {
+      "model": "bignay:block/calcite_pillar",
+      "x": 90
+    }
+  }
+}
