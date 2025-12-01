@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bignay:block/smooth_calcite_brick_slab"
+    },
+    "type=double": {
+      "model": "bignay:block/smooth_calcite_bricks"
+    },
+    "type=top": {
+      "model": "bignay:block/smooth_calcite_brick_slab_top"
+    }
+  }
+}
