@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "bignay:cracked_smooth_calcite_bricks"
+  },
+  "result": "bignay:cracked_smooth_calcite_brick_stairs"
+}
