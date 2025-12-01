@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "bignay:calcite_bricks"
+  },
+  "result": "bignay:calcite_brick_slab"
+}

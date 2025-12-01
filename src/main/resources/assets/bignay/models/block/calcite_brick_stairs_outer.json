@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "bignay:block/calcite_bricks",
+    "side": "bignay:block/calcite_bricks",
+    "top": "bignay:block/calcite_bricks"
+  }
+}

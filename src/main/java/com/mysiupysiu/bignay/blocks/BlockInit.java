@@ -430,6 +430,10 @@ public class BlockInit {
     public static final RegistryObject<Block> POLISHED_CALCITE_SLAB = registerBlock("polished_calcite_slab", () -> new SlabsBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> POLISHED_CALCITE_STAIRS = registerBlock("polished_calcite_stairs", () -> new StairsBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> POLISHED_CALCITE_WALL = registerBlock("polished_calcite_wall", () -> new WallsBlock(Blocks.CALCITE));
+    public static final RegistryObject<Block> CALCITE_BRICKS = registerBlock("calcite_bricks", () -> new BuildingBlock(Blocks.CALCITE));
+    public static final RegistryObject<Block> CALCITE_BRICK_SLAB = registerBlock("calcite_brick_slab", () -> new SlabsBlock(Blocks.CALCITE));
+    public static final RegistryObject<Block> CALCITE_BRICK_STAIRS = registerBlock("calcite_brick_stairs", () -> new StairsBlock(Blocks.CALCITE));
+    public static final RegistryObject<Block> CALCITE_BRICK_WALL = registerBlock("calcite_brick_wall", () -> new WallsBlock(Blocks.CALCITE));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
