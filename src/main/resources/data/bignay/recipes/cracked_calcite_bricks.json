@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smelting",
+    "ingredient": {
+        "item": "bignay:calcite_bricks"
+    },
+    "result": "bignay:cracked_calcite_bricks",
+    "experience": 0.1,
+    "cookingtime": 200
+}
