@@ -32,11 +32,15 @@ public class WorldExportScreen extends Screen {
     private Button exportButton;
     private String worldName;
 
-    public WorldExportScreen(Screen previousScreen, LevelStorageSource.LevelStorageAccess levelAccess) throws IOException, NoSuchFieldException, IllegalAccessException {
+    public WorldExportScreen(Screen previousScreen, LevelStorageSource.LevelStorageAccess levelAccess) {
         super(Component.translatable("selectWorld.edit.export"));
         this.levelAccess = levelAccess;
         this.previousScreen = previousScreen;
-        this.sourceWorld = new File(levelAccess.getWorldDir().toFile().getCanonicalPath(), levelAccess.getLevelId());
+        try {
+            this.sourceWorld = new File(levelAccess.getWorldDir().toFile().getCanonicalPath(), levelAccess.getLevelId());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         this.worldSizeBytes = computeFolderSize(sourceWorld.toPath());
         this.worldName = levelAccess.getSummary().getLevelName();
     }
@@ -102,7 +106,6 @@ public class WorldExportScreen extends Screen {
         int rowGap = 28;
         int inputWidth = 260;
         int inputX = centerX - inputWidth / 2;
-        int centerY = this.height / 2;
 
         String sizeText = (worldSizeBytes >= 0) ? humanReadableByteCount(worldSizeBytes) : "-";
         graphics.drawString(this.font, Component.translatable("exportWorld.size", sizeText), inputX, y, 0xFFFFFF, false);
