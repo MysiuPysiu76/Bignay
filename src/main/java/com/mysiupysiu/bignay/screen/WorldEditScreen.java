@@ -23,15 +23,13 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.nio.file.Path;
 
-import static net.minecraft.network.chat.Component.translatable;
-
 public class WorldEditScreen extends Screen {
 
     private final LevelStorageSource.LevelStorageAccess levelAccess;
     private EditBox worldNameEdit;
 
     public WorldEditScreen(EditWorldScreen screen) throws Exception {
-        super(translatable("selectWorld.edit.title"));
+        super(Component.translatable("selectWorld.edit.title"));
         this.levelAccess = getLevelAccess(screen);
     }
 
@@ -64,7 +62,7 @@ public class WorldEditScreen extends Screen {
         this.addRenderableWidget(getRecreateButton().bounds(startX_Left, startY + 96, 150, 20).build());
         this.addRenderableWidget(Button.builder(Component.literal(""), b -> {}).bounds(startX_Right, startY + 96, 150, 20).build());
 
-        this.addRenderableWidget(Button.builder(Component.literal(""), b -> {}).bounds(startX_Left, startY + 120, 150, 20).build());
+        this.addRenderableWidget(getDeleteButton().bounds(startX_Left, startY + 120, 150, 20).build());
         this.addRenderableWidget(getExportButton().bounds(startX_Right, startY + 120, 150, 20).build());
 
         int bottomY = this.height / 4 + 149;
@@ -104,7 +102,7 @@ public class WorldEditScreen extends Screen {
         this.renderBackground(graphics);
 
         graphics.drawCenteredString(this.font, this.title, this.width / 2, 15, 16777215);
-        graphics.drawString(this.font, translatable("selectWorld.enterName"), this.width / 2 - 100, 23, 10526880);
+        graphics.drawString(this.font, Component.translatable("selectWorld.enterName"), this.width / 2 - 100, 23, 10526880);
 
         this.worldNameEdit.render(graphics, mouseX, mouseY, delta);
 
@@ -186,6 +184,25 @@ public class WorldEditScreen extends Screen {
                         Component.translatable("selectWorld.recreate.error.title"),
                         Component.translatable("selectWorld.recreate.error.text")));
             }
+        });
+    }
+
+    private Button.Builder getDeleteButton() {
+        return Button.builder(Component.translatable("selectWorld.delete"), btn -> {
+            this.minecraft.setScreen(new ConfirmScreen(is -> {
+                try {
+                    if (is) {
+                        this.minecraft.setScreen(new ProgressScreen(true));
+                        this.levelAccess.deleteLevel();
+                    } else {
+                        this.levelAccess.close();
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                this.minecraft.setScreen(new SelectWorldScreen(null));
+            }, Component.translatable("selectWorld.deleteQuestion"), Component.translatable("selectWorld.deleteWarning", this.levelAccess.getSummary().getLevelName()), Component.translatable("selectWorld.deleteButton"), CommonComponents.GUI_CANCEL));
         });
     }
 
