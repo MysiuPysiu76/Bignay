@@ -33,6 +33,11 @@ public class WorldEditScreen extends Screen {
         this.levelAccess = getLevelAccess(screen);
     }
 
+    public WorldEditScreen(LevelStorageSource.LevelStorageAccess levelAccess) {
+        super(Component.translatable("selectWorld.edit.title"));
+        this.levelAccess = levelAccess;
+    }
+
     @Override
     protected void init() {
         int centerX = this.width / 2;
@@ -47,7 +52,7 @@ public class WorldEditScreen extends Screen {
         int startX_Right = centerX + 5;
         int startY = this.height / 4 + 5;
 
-        this.addRenderableWidget(Button.builder(Component.literal(""), b -> {}).bounds(startX_Left, startY, 150, 20).build());
+        this.addRenderableWidget(getInformationButton().bounds(startX_Left, startY, 150, 20).build());
         this.addRenderableWidget(getOpenWorldFolderButton().bounds(startX_Right, startY, 150, 20).build());
 
         this.addRenderableWidget(getResetIconButton().bounds(startX_Left,startY + 24, 150, 20).build());
@@ -69,9 +74,7 @@ public class WorldEditScreen extends Screen {
         Button saveButton = this.addRenderableWidget(Button.builder(Component.translatable("selectWorld.edit.save"), b -> onSave()).bounds(centerX - 135, bottomY, 130, 20).build());
         this.addRenderableWidget(Button.builder(CommonComponents.GUI_CANCEL, b -> onClose()).bounds(centerX + 5, bottomY, 130, 20).build());
 
-        this.worldNameEdit.setResponder(s -> {
-            saveButton.active = !s.isBlank();
-        });
+        this.worldNameEdit.setResponder(s -> saveButton.active = !s.isBlank());
     }
 
     private void onSave() {
@@ -90,11 +93,11 @@ public class WorldEditScreen extends Screen {
     @Override
     public void onClose() {
         try {
-            this.levelAccess.close();
+            levelAccess.close();
+            Minecraft.getInstance().setScreen(new SelectWorldScreen(null));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Minecraft.getInstance().setScreen(new SelectWorldScreen(null));
     }
 
     @Override
@@ -105,7 +108,6 @@ public class WorldEditScreen extends Screen {
         graphics.drawString(this.font, Component.translatable("selectWorld.enterName"), this.width / 2 - 100, 23, 10526880);
 
         this.worldNameEdit.render(graphics, mouseX, mouseY, delta);
-
         super.render(graphics, mouseX, mouseY, delta);
     }
 
@@ -113,6 +115,11 @@ public class WorldEditScreen extends Screen {
         Field field = EditWorldScreen.class.getDeclaredField("levelAccess");
         field.setAccessible(true);
         return (LevelStorageSource.LevelStorageAccess) field.get(screen);
+    }
+
+    private Button.Builder getInformationButton() {
+        return Button.builder(Component.translatable("selectWorld.info"), btn ->
+                Minecraft.getInstance().setScreen(new WorldInfoScreen(this.levelAccess)));
     }
 
     private Button.Builder getOpenWorldFolderButton() {

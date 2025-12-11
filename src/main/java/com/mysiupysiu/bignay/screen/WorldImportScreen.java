@@ -1,5 +1,6 @@
 package com.mysiupysiu.bignay.screen;
 
+import com.mysiupysiu.bignay.utils.FileUtils;
 import com.mysiupysiu.bignay.utils.WorldImporter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -80,7 +81,7 @@ public class WorldImportScreen extends Screen {
         gui.drawString(this.font, Component.translatable("importWorld.difficulty", difficulty), leftX, lineY + dy * 3, 0xFFFFFF);
         gui.drawString(this.font, Component.translatable("importWorld.seed", seed), rightX, lineY + dy, 0xFFFFFF);
         gui.drawString(this.font, Component.translatable("importWorld.days", daysPlayed), rightX, lineY + dy * 2, 0xFFFFFF);
-        gui.drawString(this.font, Component.translatable("importWorld.size", WorldExportScreen.humanReadableByteCount(source.length())), rightX, lineY + dy * 3, 0xFFFFFF);
+        gui.drawString(this.font, Component.translatable("importWorld.size", FileUtils.humanReadableByteCount(source.length())), rightX, lineY + dy * 3, 0xFFFFFF);
 
         super.render(gui, mouseX, mouseY, delta);
     }

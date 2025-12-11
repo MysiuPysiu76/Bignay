@@ -1,6 +1,7 @@
 package com.mysiupysiu.bignay.screen;
 
 import com.mysiupysiu.bignay.screen.file.chooser.FolderChooserScreen;
+import com.mysiupysiu.bignay.utils.FileUtils;
 import com.mysiupysiu.bignay.utils.WorldExporter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -41,7 +42,7 @@ public class WorldExportScreen extends Screen {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        this.worldSizeBytes = computeFolderSize(sourceWorld.toPath());
+        this.worldSizeBytes = FileUtils.computeFolderSize(sourceWorld.toPath());
         this.worldName = levelAccess.getSummary().getLevelName();
     }
 
@@ -107,7 +108,7 @@ public class WorldExportScreen extends Screen {
         int inputWidth = 260;
         int inputX = centerX - inputWidth / 2;
 
-        String sizeText = (worldSizeBytes >= 0) ? humanReadableByteCount(worldSizeBytes) : "-";
+        String sizeText = (worldSizeBytes >= 0) ? FileUtils.humanReadableByteCount(worldSizeBytes) : "-";
         graphics.drawString(this.font, Component.translatable("exportWorld.size", sizeText), inputX, y, 0xFFFFFF, false);
 
         int nameFieldY = y + rowGap + 12;
@@ -131,29 +132,6 @@ public class WorldExportScreen extends Screen {
         graphics.drawString(this.font, shortDest, pathX, nameFieldY + rowGap + 6, 0xFFFFFF, false);
 
         super.render(graphics, mouseX, mouseY, partialTicks);
-    }
-
-    private long computeFolderSize(Path p) {
-        if (p == null) return -1;
-        try (Stream<Path> walk = Files.walk(p)) {
-            return walk.filter(Files::isRegularFile).mapToLong(path -> {
-                try {
-                    return Files.size(path);
-                } catch (IOException e) {
-                    return 0L;
-                }
-            }).sum();
-        } catch (IOException e) {
-            return -1;
-        }
-    }
-
-    public static String humanReadableByteCount(long bytes) {
-        if (bytes < 0) return "-";
-        if (bytes < 1024) return bytes + " B";
-        int exp = (int) (Math.log(bytes) / Math.log(1024));
-        String pre = "KMGT".charAt(exp - 1) + "";
-        return String.format("%.1f %sB", bytes / Math.pow(1024, exp), pre);
     }
 
     public void setDestinationFile(File destinationFile) {
