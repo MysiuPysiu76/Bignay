@@ -2,7 +2,7 @@
   "type": "minecraft:stonecutting",
   "count": 1,
   "ingredient": {
-    "item": "bignay:smooth_basalt"
+    "item": "minecraft:smooth_basalt"
   },
   "result": "bignay:smooth_basalt_pillar"
 }
