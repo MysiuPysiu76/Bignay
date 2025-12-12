@@ -412,6 +412,7 @@
   "selectWorld.info.deaths": "  Deaths Count: %s",
   "selectWorld.info.mobsKilled": "  Killed Mobs %s",
   "selectWorld.info.day": "  World Day: %s",
+  "selectWorld.setIcon": "Set Icon",
   "selectWorld.info.mined": "  Mined Blocks: %s",
   "selectWorld.duplicate": "Duplicate",
   "gui.copy": "Copy ",

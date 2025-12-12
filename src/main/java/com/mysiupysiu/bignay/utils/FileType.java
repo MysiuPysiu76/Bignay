@@ -1,7 +1,8 @@
 package com.mysiupysiu.bignay.utils;
 
 public enum FileType {
-    ZIP("zip");
+    ZIP("zip"),
+    PNG("png");
 
     private final String extension;
 

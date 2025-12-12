@@ -1,6 +1,8 @@
 package com.mysiupysiu.bignay.screen;
 
 import com.mojang.datafixers.util.Pair;
+import com.mysiupysiu.bignay.screen.file.chooser.FileChooserScreen;
+import com.mysiupysiu.bignay.utils.FileType;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -19,8 +21,12 @@ import net.minecraft.world.level.validation.ContentValidationException;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.LoggerFactory;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class WorldEditScreen extends Screen {
@@ -56,7 +62,7 @@ public class WorldEditScreen extends Screen {
         this.addRenderableWidget(getOpenWorldFolderButton().bounds(startX_Right, startY, 150, 20).build());
 
         this.addRenderableWidget(getResetIconButton().bounds(startX_Left,startY + 24, 150, 20).build());
-        this.addRenderableWidget(Button.builder(Component.literal(""), b -> {}).bounds(startX_Right, startY + 24, 150, 20).build());
+        this.addRenderableWidget(getSetIconButton().bounds(startX_Right, startY + 24, 150, 20).build());
 
         this.addRenderableWidget(getMakeBackupButton().bounds(startX_Left, startY + 48, 150, 20).build());
         this.addRenderableWidget(Button.builder(Component.literal(""), b -> {}).bounds(startX_Right, startY + 48, 150, 20).build());
@@ -131,6 +137,36 @@ public class WorldEditScreen extends Screen {
         return Button.builder(Component.translatable("selectWorld.edit.resetIcon"), btn ->
                 this.levelAccess.getIconFile().ifPresent((path) ->
                     FileUtils.deleteQuietly(path.toFile())));
+    }
+
+    private Button.Builder getSetIconButton() {
+        return Button.builder(Component.translatable("selectWorld.setIcon"), btn -> {
+            FileChooserScreen fileChooser = new FileChooserScreen();
+            fileChooser.setPreviousScreen(this);
+            fileChooser.addFilter(FileType.PNG);
+            fileChooser.setOnConfirm(f -> {
+                try {
+                    File worldDir = this.levelAccess.getLevelPath(LevelResource.ROOT).toFile().getCanonicalFile();
+                    Path oldIcon = new File(worldDir, "icon.png").toPath();
+                    Files.delete(oldIcon);
+                    Files.copy(f.toPath(), oldIcon);
+                    Minecraft.getInstance().setScreen(this);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            fileChooser.setAdditionalFilter(f -> {
+                try {
+                    BufferedImage img = ImageIO.read(f);
+                    if (img.getHeight() == 64 && img.getWidth() == 64) return true;
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                return false;
+            });
+            Minecraft.getInstance().setScreen(fileChooser);
+        });
     }
 
     private Button.Builder getMakeBackupButton() {
