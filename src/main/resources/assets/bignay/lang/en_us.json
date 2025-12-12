@@ -413,6 +413,8 @@
   "selectWorld.info.mobsKilled": "  Killed Mobs %s",
   "selectWorld.info.day": "  World Day: %s",
   "selectWorld.info.mined": "  Mined Blocks: %s",
+  "selectWorld.duplicate": "Duplicate",
+  "gui.copy": "Copy ",
   "selectWorld.info.crafted": "  Items Crafted: %s",
   "selectWorld.info.distance": "  Distance Traveled: %s§e blocks",
   "selectWorld.info.time": "  Time Played: %s",

@@ -65,7 +65,7 @@ public class WorldEditScreen extends Screen {
         this.addRenderableWidget(Button.builder(Component.literal(""), b -> {}).bounds(startX_Right, startY + 72, 150, 20).build());
 
         this.addRenderableWidget(getRecreateButton().bounds(startX_Left, startY + 96, 150, 20).build());
-        this.addRenderableWidget(Button.builder(Component.literal(""), b -> {}).bounds(startX_Right, startY + 96, 150, 20).build());
+        this.addRenderableWidget(getDuplicateButton().bounds(startX_Right, startY + 96, 150, 20).build());
 
         this.addRenderableWidget(getDeleteButton().bounds(startX_Left, startY + 120, 150, 20).build());
         this.addRenderableWidget(getExportButton().bounds(startX_Right, startY + 120, 150, 20).build());
@@ -192,6 +192,11 @@ public class WorldEditScreen extends Screen {
                         Component.translatable("selectWorld.recreate.error.text")));
             }
         });
+    }
+
+    private Button.Builder getDuplicateButton() {
+        return Button.builder(Component.translatable("selectWorld.duplicate"), btn ->
+                Minecraft.getInstance().setScreen(new DuplicateWorldScreen(levelAccess)));
     }
 
     private Button.Builder getDeleteButton() {
