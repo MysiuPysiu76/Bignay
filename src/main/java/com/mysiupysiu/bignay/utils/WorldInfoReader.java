@@ -31,32 +31,56 @@ public class WorldInfoReader {
     }
 
     public String getPlayerTimePlayed() {
-        return humanReadablePlayTime(this.stats.getAsJsonObject("minecraft:custom").getAsJsonPrimitive("minecraft:play_time").getAsInt() / 20);
+        try {
+            return humanReadablePlayTime(this.stats.getAsJsonObject("minecraft:custom").getAsJsonPrimitive("minecraft:play_time").getAsInt() / 20);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    public long getPlayerMobsKilledCount() {
-        return getElementsCount(this.stats.getAsJsonObject("minecraft:killed"));
+    public Long getPlayerMobsKilledCount() {
+        try {
+            return getElementsCount(this.stats.getAsJsonObject("minecraft:killed"));
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    public long getPlayerBlocksDestroyedCount() {
-        return getElementsCount(this.stats.getAsJsonObject("minecraft:mined"));
+    public Long getPlayerBlocksDestroyedCount() {
+        try {
+            return getElementsCount(this.stats.getAsJsonObject("minecraft:mined"));
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    public long getPlayerItemsCraftedCount() {
-        return getElementsCount(this.stats.getAsJsonObject("minecraft:crafted"));
+    public Long getPlayerItemsCraftedCount() {
+        try {
+            return getElementsCount(this.stats.getAsJsonObject("minecraft:crafted"));
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    public int getPlayerDeathsCount() {
-        return this.stats.getAsJsonObject("minecraft:custom").getAsJsonPrimitive("minecraft:deaths").getAsInt();
+    public Integer getPlayerDeathsCount() {
+        try {
+            return this.stats.getAsJsonObject("minecraft:custom").getAsJsonPrimitive("minecraft:deaths").getAsInt();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    public long getPlayerDistanceTraveled() {
-        return Stream.of("walk", "horse", "boat", "minecart", "aviate", "swim", "sprint")
-                .map(this::getDistanceByKey)
-                .mapToLong(Long::longValue).sum();
+    public Long getPlayerDistanceTraveled() {
+        try {
+            return Stream.of("walk", "horse", "boat", "minecart", "aviate", "swim", "sprint")
+                    .map(this::getDistanceByKey)
+                    .mapToLong(Long::longValue).sum();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    public int getPlayerFinishedAdvancementsCount() {
+    public Integer getPlayerFinishedAdvancementsCount() {
         try {
             File root = this.levelAccess.getLevelPath(LevelResource.ROOT).toFile().getCanonicalFile();
             File file = new File(new File(root, "advancements"), Minecraft.getInstance().getUser().getUuid() + ".json");
@@ -70,36 +94,64 @@ public class WorldInfoReader {
 
             return sum;
         } catch (Exception e) {
-            return 0;
+            return null;
         }
     }
 
-    public long getPlayerLastPlayed() {
-        return levelAccess.getSummary().getLastPlayed();
+    public Long getPlayerLastPlayed() {
+        try {
+            return levelAccess.getSummary().getLastPlayed();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public String getWorldName() {
-        return this.levelData.getString("LevelName");
+        try {
+            return this.levelData.getString("LevelName");
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public String getWorldVersion() {
-        return this.levelData.getCompound("Version").getString("Name");
+        try {
+            return this.levelData.getCompound("Version").getString("Name");
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    public long getWorldSeed() {
-        return this.levelData.getCompound("WorldGenSettings").getLong("seed");
+    public Long getWorldSeed() {
+        try {
+            return this.levelData.getCompound("WorldGenSettings").getLong("seed");
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public String getWorldDifficulty() {
-        return this.levelAccess.getSummary().getSettings().difficulty().getDisplayName().getString();
+        try {
+            return this.levelAccess.getSummary().getSettings().difficulty().getDisplayName().getString();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public String getWorldGameMode() {
-        return levelAccess.getSummary().getGameMode().getLongDisplayName().getString();
+        try {
+            return levelAccess.getSummary().getGameMode().getLongDisplayName().getString();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    public boolean getWorldHardcore() {
-        return this.levelData.getBoolean("hardcore");
+    public Boolean getWorldHardcore() {
+        try {
+            return this.levelData.getBoolean("hardcore");
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public String getWorldSize() {
@@ -110,12 +162,21 @@ public class WorldInfoReader {
         }
     }
 
-    public int getWorldDay() {
-        return this.levelData.getInt("DayTime") / 24000;
+    public Integer getWorldDay() {
+        try {
+            return this.levelData.getInt("DayTime") / 24000;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    public boolean getWorldCheatsEnabled() {
-        return this.levelData.getBoolean("allowCommands");
+    public Boolean getWorldCheatsEnabled() {
+        try {
+            return this.levelData.getBoolean("allowCommands");
+
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     private void loadLevelDat() {
@@ -142,8 +203,8 @@ public class WorldInfoReader {
         } catch (Exception ignored) {}
     }
 
-    private int getElementsCount(JsonObject object) {
-        int sum = 0;
+    private Long getElementsCount(JsonObject object) {
+        long sum = 0;
 
         for (Map.Entry<String, JsonElement> entry : object.entrySet()) {
             JsonElement elem = entry.getValue();

@@ -69,26 +69,32 @@ public class WorldInfoScreen extends Screen {
         WorldInfoReader reader = new WorldInfoReader(this.levelAccess);
         lines.clear();
 
-        lines.add(Component.translatable("selectWorld.info.player"));
-        lines.add(Component.translatable("selectWorld.info.time", "§e" + reader.getPlayerTimePlayed()));
-        lines.add(Component.translatable("selectWorld.info.mined", "§e" + reader.getPlayerBlocksDestroyedCount()));
-        lines.add(Component.translatable("selectWorld.info.mobsKilled", "§e" + reader.getPlayerMobsKilledCount()));
-        lines.add(Component.translatable("selectWorld.info.crafted", "§e" + reader.getPlayerItemsCraftedCount()));
-        lines.add(Component.translatable("selectWorld.info.deaths", "§e" + reader.getPlayerDeathsCount()));
-        lines.add(Component.translatable("selectWorld.info.distance", "§e" + reader.getPlayerDistanceTraveled()));
-        lines.add(Component.translatable("selectWorld.info.achievements", "§e" + reader.getPlayerFinishedAdvancementsCount()));
-        lines.add(Component.translatable("selectWorld.info.lastPlayed", "§e" + Instant.ofEpochMilli(reader.getPlayerLastPlayed()).atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"))));
+        addLine("player", "-");
+        addLine("time", reader.getPlayerTimePlayed());
+        addLine("mined", reader.getPlayerBlocksDestroyedCount());
+        addLine("mobsKilled", reader.getPlayerMobsKilledCount());
+        addLine("crafted", reader.getPlayerItemsCraftedCount());
+        addLine("deaths", reader.getPlayerDeathsCount());
+        addLine("distance", reader.getPlayerDistanceTraveled());
+        addLine("achievements", reader.getPlayerFinishedAdvancementsCount());
+        addLine("lastPlayed", Instant.ofEpochMilli(reader.getPlayerLastPlayed()).atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
 
-        lines.add(Component.translatable("selectWorld.info.world"));
-        lines.add(Component.translatable("selectWorld.info.worldName", "§e" + reader.getWorldName()));
-        lines.add(Component.translatable("selectWorld.info.seed", "§e" + reader.getWorldSeed()));
-        lines.add(Component.translatable("selectWorld.info.version", "§e" + reader.getWorldVersion()));
-        lines.add(Component.translatable("selectWorld.info.size", "§e" + reader.getWorldSize()));
-        lines.add(Component.translatable("selectWorld.info.difficulty", "§e" + reader.getWorldDifficulty()));
-        lines.add(Component.translatable("selectWorld.info.gamemode", "§e" + reader.getWorldGameMode()));
-        lines.add(Component.translatable("selectWorld.info.day", "§e" + reader.getWorldDay()));
-        lines.add(Component.translatable("selectWorld.info.cheats", "§e" + reader.getWorldCheatsEnabled()));
-        lines.add(Component.translatable("selectWorld.info.hardcore", "§e" + reader.getWorldHardcore()));
+        addLine("world", "-");
+        addLine("worldName", reader.getWorldName());
+        addLine("seed", reader.getWorldSeed());
+        addLine("version", reader.getWorldVersion());
+        addLine("size", reader.getWorldSize());
+        addLine("difficulty", reader.getWorldDifficulty());
+        addLine("gamemode", reader.getWorldGameMode());
+        addLine("day", reader.getWorldDay());
+        addLine("cheats", reader.getWorldCheatsEnabled());
+        addLine("hardcore", reader.getWorldHardcore());
+    }
+
+    private void addLine(String name, Object first, Object... other) {
+        if (first != null) {
+            this.lines.add(Component.translatable("selectWorld.info." + name, "§e" + first, other));
+        }
     }
 
     public static class InfoScrollPanel {
