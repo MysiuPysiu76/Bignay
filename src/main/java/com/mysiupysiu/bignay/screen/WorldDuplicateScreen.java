@@ -11,12 +11,12 @@ import java.nio.file.*;
 import java.util.Comparator;
 import java.util.stream.Stream;
 
-public class DuplicateWorldScreen extends AbstractProgressScreen {
+public class WorldDuplicateScreen extends AbstractProgressScreen {
 
     private final LevelStorageSource.LevelStorageAccess sourceAccess;
     private Path destination;
 
-    public DuplicateWorldScreen(LevelStorageSource.LevelStorageAccess access) {
+    public WorldDuplicateScreen(LevelStorageSource.LevelStorageAccess access) {
         super(Component.translatable("selectWorld.duplicate"));
         this.sourceAccess = access;
     }

@@ -68,7 +68,7 @@ public class WorldEditScreen extends Screen {
         this.addRenderableWidget(Button.builder(Component.literal(""), b -> {}).bounds(startX_Right, startY + 48, 150, 20).build());
 
         this.addRenderableWidget(getOptimizeWorldButton().bounds(startX_Left, startY + 72, 150, 20).build());
-        this.addRenderableWidget(Button.builder(Component.literal(""), b -> {}).bounds(startX_Right, startY + 72, 150, 20).build());
+        this.addRenderableWidget(getPruneWorldButton().bounds(startX_Right, startY + 72, 150, 20).build());
 
         this.addRenderableWidget(getRecreateButton().bounds(startX_Left, startY + 96, 150, 20).build());
         this.addRenderableWidget(getDuplicateButton().bounds(startX_Right, startY + 96, 150, 20).build());
@@ -193,6 +193,21 @@ public class WorldEditScreen extends Screen {
         });
     }
 
+    private Button.Builder getPruneWorldButton() {
+        return Button.builder(Component.translatable("selectWorld.edit.prune"), btn -> {
+            this.minecraft.setScreen(new ConfirmScreen(confirm -> {
+                if (confirm) {
+                    this.minecraft.setScreen(new WorldPruneScreen(this.levelAccess, this));
+                } else {
+                    this.minecraft.setScreen(this);
+                }
+            },
+                    Component.translatable("selectWorld.edit.prune.question"),
+                    Component.translatable("selectWorld.edit.prune.description"),
+                    CommonComponents.GUI_PROCEED, CommonComponents.GUI_CANCEL));
+        });
+    }
+
     private Button.Builder getRecreateButton() {
         return Button.builder(Component.translatable("selectWorld.recreate"), b -> {
             Minecraft mc = Minecraft.getInstance();
@@ -232,7 +247,7 @@ public class WorldEditScreen extends Screen {
 
     private Button.Builder getDuplicateButton() {
         return Button.builder(Component.translatable("selectWorld.duplicate"), btn ->
-                Minecraft.getInstance().setScreen(new DuplicateWorldScreen(levelAccess)));
+                Minecraft.getInstance().setScreen(new WorldDuplicateScreen(levelAccess)));
     }
 
     private Button.Builder getDeleteButton() {
