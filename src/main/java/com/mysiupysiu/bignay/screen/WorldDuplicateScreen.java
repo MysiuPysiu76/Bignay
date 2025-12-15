@@ -6,6 +6,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.storage.LevelResource;
 import net.minecraft.world.level.storage.LevelStorageSource;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.Comparator;
@@ -59,24 +60,29 @@ public class WorldDuplicateScreen extends AbstractProgressScreen {
                         .forEach(path -> {
                             try {
                                 Files.deleteIfExists(path);
-                            } catch (IOException ignored) {
-                            }
+                            } catch (IOException ignored) {}
                         });
             } catch (IOException ignored) {}
         }
     }
 
     private int generateCopyId(String base) {
-        LevelStorageSource lss = Minecraft.getInstance().getLevelSource();
-        int i = 1;
-        String candidate;
+        try {
+            File root = Minecraft.getInstance().getLevelSource().getBaseDir().toFile().getCanonicalFile();
 
-        do {
-            candidate = base + " (Copy " + i + ")";
-            i++;
-        } while (lss.levelExists(candidate));
+            int i = 1;
+            String candidate = base + " (Copy " + i + ")";
 
-        return i;
+            while (new File(root, candidate).exists()) {
+                i++;
+                candidate = base + " (Copy " + i + ")";
+            }
+
+            return i;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     private void copyFolderWithProgress(Path src, Path dst) throws IOException {
