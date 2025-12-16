@@ -1,5 +1,9 @@
-package com.mysiupysiu.bignay.utils;
+package com.mysiupysiu.bignay.utils.world;
 
+import com.mysiupysiu.bignay.utils.OperationWithProgress;
+import com.mysiupysiu.bignay.utils.ProgressListener;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
 
@@ -13,7 +17,7 @@ import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-public class WorldImporter {
+public class WorldImporter implements OperationWithProgress {
 
     private ProgressListener progressListener;
     private final File source;
@@ -54,6 +58,7 @@ public class WorldImporter {
         }
     }
 
+    @Override
     public void execute() {
         if (this.worldName == null || this.worldName.isEmpty()) return;
 
@@ -123,7 +128,9 @@ public class WorldImporter {
 
         } catch (Exception e) {
             e.printStackTrace();
+            finish();
         }
+        finish();
     }
 
     private long calculateTotalSize(ZipFile zip) {
@@ -178,15 +185,18 @@ public class WorldImporter {
         return source;
     }
 
-    public void setProgressListener(ProgressListener listener) {
+    @Override
+    public void setProgressScreen(ProgressListener listener) {
         this.progressListener = listener;
     }
 
-    public ProgressListener getProgressListener() {
-        return progressListener;
-    }
-
+    @Override
     public void cancel() {
         this.canceled = true;
+    }
+
+    @Override
+    public void finish() {
+        this.progressListener.onFinish();
     }
 }

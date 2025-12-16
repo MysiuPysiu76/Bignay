@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.screen;
 
-import com.mysiupysiu.bignay.utils.WorldInfoReader;
+import com.mysiupysiu.bignay.utils.world.WorldInfoReader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;

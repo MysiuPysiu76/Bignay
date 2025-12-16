@@ -1,5 +1,9 @@
-package com.mysiupysiu.bignay.utils;
+package com.mysiupysiu.bignay.utils.world;
 
+import com.mysiupysiu.bignay.screen.OperationWithProgressScreen;
+import com.mysiupysiu.bignay.utils.OperationWithProgress;
+import com.mysiupysiu.bignay.utils.ProgressListener;
+import net.minecraft.client.Minecraft;
 import net.minecraft.world.level.storage.LevelStorageSource;
 
 import java.io.File;
@@ -10,7 +14,7 @@ import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-public class WorldExporter {
+public class WorldExporter implements OperationWithProgress {
 
     private final LevelStorageSource.LevelStorageAccess levelAccess;
     private final File source;
@@ -25,6 +29,7 @@ public class WorldExporter {
         this.source = source;
     }
 
+    @Override
     public void execute() {
         File outputZip = new File(this.destination, worldName + ".zip");
         long totalSize = calculateTotalSize(source);
@@ -38,6 +43,7 @@ public class WorldExporter {
 
         if (canceled && outputZip.exists()) outputZip.delete();
         this.close();
+        this.finish();
     }
 
     private long calculateTotalSize(File folder) {
@@ -117,22 +123,25 @@ public class WorldExporter {
         this.exportPlayerData = exportPlayerData;
     }
 
-    public void setProgressListener(ProgressListener listener) {
+    @Override
+    public void setProgressScreen(ProgressListener listener) {
         this.progressListener = listener;
     }
 
-    public ProgressListener getProgressListener() {
-        return progressListener;
-    }
-
+    @Override
     public void cancel() {
         this.canceled = true;
         this.close();
     }
 
+    @Override
+    public void finish() {
+        this.progressListener.onFinish();
+    }
+
     public void close() {
         try {
-            levelAccess.close();
+            this.levelAccess.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

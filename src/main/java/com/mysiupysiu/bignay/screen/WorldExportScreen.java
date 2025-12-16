@@ -2,7 +2,7 @@ package com.mysiupysiu.bignay.screen;
 
 import com.mysiupysiu.bignay.screen.file.chooser.FolderChooserScreen;
 import com.mysiupysiu.bignay.utils.FileUtils;
-import com.mysiupysiu.bignay.utils.WorldExporter;
+import com.mysiupysiu.bignay.utils.world.WorldExporter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -87,7 +87,7 @@ public class WorldExportScreen extends Screen {
             exporter.setExportPlayerData(this.exportPlayerData);
             exporter.setWorldName(this.worldName);
 
-            Minecraft.getInstance().setScreen(new WorldExportProgressScreen(exporter));
+            Minecraft.getInstance().setScreen(new OperationWithProgressScreen(Component.translatable("exportWorld.progress.title"), exporter));
         }).bounds(centerX - 130, btnY, 120, 20).build();
 
         exportButton.active = (destinationFile != null);

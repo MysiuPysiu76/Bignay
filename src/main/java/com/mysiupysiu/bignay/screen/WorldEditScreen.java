@@ -3,6 +3,7 @@ package com.mysiupysiu.bignay.screen;
 import com.mojang.datafixers.util.Pair;
 import com.mysiupysiu.bignay.screen.file.chooser.FileChooserScreen;
 import com.mysiupysiu.bignay.utils.FileType;
+import com.mysiupysiu.bignay.utils.world.WorldDuplicator;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -247,7 +248,7 @@ public class WorldEditScreen extends Screen {
 
     private Button.Builder getDuplicateButton() {
         return Button.builder(Component.translatable("selectWorld.duplicate"), btn ->
-                Minecraft.getInstance().setScreen(new WorldDuplicateScreen(levelAccess)));
+                Minecraft.getInstance().setScreen(new OperationWithProgressScreen(Component.translatable("selectWorld.duplicate"), new WorldDuplicator(this.levelAccess))));
     }
 
     private Button.Builder getDeleteButton() {

@@ -1,57 +1,63 @@
-package com.mysiupysiu.bignay.screen;
+package com.mysiupysiu.bignay.utils.world;
 
+import com.mysiupysiu.bignay.screen.OperationWithProgressScreen;
 import com.mysiupysiu.bignay.utils.FileUtils;
+import com.mysiupysiu.bignay.utils.OperationWithProgress;
+import com.mysiupysiu.bignay.utils.ProgressListener;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.storage.LevelResource;
 import net.minecraft.world.level.storage.LevelStorageSource;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Comparator;
 import java.util.stream.Stream;
 
-public class WorldDuplicateScreen extends AbstractProgressScreen {
+public class WorldDuplicator implements OperationWithProgress {
 
-    private final LevelStorageSource.LevelStorageAccess sourceAccess;
+    private final LevelStorageSource.LevelStorageAccess storageAccess;
     private Path destination;
+    private ProgressListener progressListener;
 
-    public WorldDuplicateScreen(LevelStorageSource.LevelStorageAccess access) {
-        super(Component.translatable("selectWorld.duplicate"));
-        this.sourceAccess = access;
+    public WorldDuplicator(LevelStorageSource.LevelStorageAccess storageAccess) {
+        this.storageAccess = storageAccess;
     }
 
     @Override
-    protected void onAction() {
+    public void execute() {
         try {
-            Path src = this.sourceAccess.getLevelPath(LevelResource.ROOT);
+            Path src = this.storageAccess.getLevelPath(LevelResource.ROOT);
 
-            String worldName = sourceAccess.getLevelId();
+            String worldName = storageAccess.getLevelId();
             int copyId = generateCopyId(worldName);
 
             LevelStorageSource lss = Minecraft.getInstance().getLevelSource();
 
             LevelStorageSource.LevelStorageAccess newAccess = lss.createAccess(worldName + " (Copy " + copyId + ")");
-            destination = newAccess.getLevelPath(LevelResource.ROOT);
+            this.destination = newAccess.getLevelPath(LevelResource.ROOT);
 
             copyFolderWithProgress(src, destination);
             newAccess.renameLevel(worldName + " (" + Component.translatable("gui.copy").getString() + copyId + ")");
-            finish();
-            this.sourceAccess.close();
+            this.finish();
+            this.storageAccess.close();
         } catch (Exception e) {
             e.printStackTrace();
             try {
-                this.sourceAccess.close();
+                this.storageAccess.close();
             } catch (IOException es) {
                 es.printStackTrace();
             }
-            finish();
+            this.finish();
         }
     }
 
     @Override
-    public void onCancel() {
+    public void cancel() {
         Thread.currentThread().interrupt();
 
         if (destination != null && Files.exists(destination)) {
@@ -64,6 +70,11 @@ public class WorldDuplicateScreen extends AbstractProgressScreen {
                         });
             } catch (IOException ignored) {}
         }
+    }
+
+    @Override
+    public void finish() {
+        this.progressListener.onFinish();
     }
 
     private int generateCopyId(String base) {
@@ -82,7 +93,6 @@ public class WorldDuplicateScreen extends AbstractProgressScreen {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     private void copyFolderWithProgress(Path src, Path dst) throws IOException {
@@ -102,15 +112,19 @@ public class WorldDuplicateScreen extends AbstractProgressScreen {
                 Files.copy(path, target, StandardCopyOption.REPLACE_EXISTING);
 
                 copiedBytes[0] += Files.size(path);
-                onProgress(Math.min(1.0, (double) copiedBytes[0] / totalBytes));
+                progressListener.onProgress(Math.min(1.0, (double) copiedBytes[0] / totalBytes));
 
                 if (Thread.currentThread().isInterrupted()) {
                     throw new RuntimeException("Copy cancelled");
                 }
-
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
+    }
+
+    @Override
+    public void setProgressScreen(ProgressListener progressListener) {
+        this.progressListener = progressListener;
     }
 }

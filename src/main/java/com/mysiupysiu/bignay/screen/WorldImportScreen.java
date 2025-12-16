@@ -1,7 +1,7 @@
 package com.mysiupysiu.bignay.screen;
 
 import com.mysiupysiu.bignay.utils.FileUtils;
-import com.mysiupysiu.bignay.utils.WorldImporter;
+import com.mysiupysiu.bignay.utils.world.WorldImporter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -15,7 +15,6 @@ import net.minecraft.network.chat.Component;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.*;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -51,7 +50,7 @@ public class WorldImportScreen extends Screen {
         Button importButton = Button.builder(Component.translatable("importWorld.import"), b -> {
             WorldImporter importer = new WorldImporter(source);
             importer.setWorldName(nameInput.getValue().trim());
-            Minecraft.getInstance().setScreen(new WorldImportProgressScreen(importer));
+            Minecraft.getInstance().setScreen(new OperationWithProgressScreen(Component.translatable("importWorld.progress.title"), importer));
         }).bounds(centerX - 110, y, 100, 20).build();
         this.addRenderableWidget(importButton);
 

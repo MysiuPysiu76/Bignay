@@ -1,8 +1,9 @@
-package com.mysiupysiu.bignay.utils;
+package com.mysiupysiu.bignay.utils.world;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.mysiupysiu.bignay.utils.FileUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
@@ -240,9 +241,5 @@ public class WorldInfoReader {
         }
 
         return String.format("%.2f%s", (double) seconds / units[exp], symbols[exp]);
-    }
-
-    public LevelStorageSource.LevelStorageAccess getLevelAccess() {
-        return levelAccess;
     }
 }

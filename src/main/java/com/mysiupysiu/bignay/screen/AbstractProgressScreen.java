@@ -12,8 +12,8 @@ public abstract class AbstractProgressScreen extends Screen implements ProgressL
     private volatile double progress = 0.0;
     private boolean finished = false;
 
-    protected AbstractProgressScreen(Component p_96550_) {
-        super(p_96550_);
+    protected AbstractProgressScreen(Component component) {
+        super(component);
     }
 
     protected abstract void onAction();
@@ -21,7 +21,7 @@ public abstract class AbstractProgressScreen extends Screen implements ProgressL
     @Override
     protected void init() {
         super.init();
-        new Thread(() -> onAction(), "World Export Thread").start();
+        new Thread(this::onAction, "Operation Thread").start();
 
         int centerX = this.width / 2;
         int btnWidth = 100;
@@ -62,6 +62,11 @@ public abstract class AbstractProgressScreen extends Screen implements ProgressL
     @Override
     public void onProgress(double progress) {
         this.progress = progress;
+    }
+
+    @Override
+    public void onFinish() {
+        finish();
     }
 
     public final void finish() {

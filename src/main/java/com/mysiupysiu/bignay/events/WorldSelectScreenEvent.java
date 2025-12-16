@@ -4,7 +4,7 @@ import com.mysiupysiu.bignay.screen.file.InvalidFileScreen;
 import com.mysiupysiu.bignay.screen.file.chooser.FileChooserScreen;
 import com.mysiupysiu.bignay.screen.WorldImportScreen;
 import com.mysiupysiu.bignay.utils.FileType;
-import com.mysiupysiu.bignay.utils.WorldImporter;
+import com.mysiupysiu.bignay.utils.world.WorldImporter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
