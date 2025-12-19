@@ -23,9 +23,4 @@ public class OperationWithProgressScreen extends AbstractProgressScreen {
         operation.cancel();
         finish();
     }
-
-    @Override
-    public void onFinish() {
-        finish();
-    }
 }

@@ -14,8 +14,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Stream;
 import java.util.zip.ZipFile;
 
@@ -109,7 +111,7 @@ public class WorldInfoReader {
 
     public String getWorldName() {
         try {
-            return this.levelData.getString("LevelName");
+            return this.levelData.getCompound("Data").getString("LevelName");
         } catch (Exception e) {
             return null;
         }
@@ -117,7 +119,7 @@ public class WorldInfoReader {
 
     public String getWorldVersion() {
         try {
-            return this.levelData.getCompound("Version").getString("Name");
+            return this.levelData.getCompound("Data").getCompound("Version").getString("Name");
         } catch (Exception e) {
             return null;
         }
@@ -125,7 +127,7 @@ public class WorldInfoReader {
 
     public Long getWorldSeed() {
         try {
-            return this.levelData.getCompound("WorldGenSettings").getLong("seed");
+            return this.levelData.getCompound("Data").getCompound("WorldGenSettings").getLong("seed");
         } catch (Exception e) {
             return null;
         }
@@ -149,7 +151,7 @@ public class WorldInfoReader {
 
     public Boolean getWorldHardcore() {
         try {
-            return this.levelData.getBoolean("hardcore");
+            return this.levelData.getCompound("Data").getBoolean("hardcore");
         } catch (Exception e) {
             return null;
         }
@@ -165,7 +167,7 @@ public class WorldInfoReader {
 
     public Integer getWorldDay() {
         try {
-            return this.levelData.getInt("DayTime") / 24000;
+            return this.levelData.getCompound("Data").getInt("DayTime") / 24000;
         } catch (Exception e) {
             return null;
         }
@@ -173,10 +175,42 @@ public class WorldInfoReader {
 
     public Boolean getWorldCheatsEnabled() {
         try {
-            return this.levelData.getBoolean("allowCommands");
+            return this.levelData.getCompound("Data").getBoolean("allowCommands");
 
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    public UUID getWorldUUID() {
+        try {
+            Path dataDir = this.levelAccess.getLevelPath(LevelResource.ROOT).resolve("data");
+            Files.createDirectories(dataDir);
+
+            Path file = dataDir.resolve("uuid.dat");
+
+            if (Files.exists(file)) {
+                CompoundTag tag = NbtIo.readCompressed(file.toFile());
+                if (tag.hasUUID("UUID")) {
+                    return tag.getUUID("UUID");
+                }
+            }
+
+            createWorldUUID(file.toFile());
+            return getWorldUUID();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to read/create world UUID", e);
+        }
+    }
+
+    private void createWorldUUID(File file) {
+        try {
+            UUID uuid = UUID.randomUUID();
+            CompoundTag tag = new CompoundTag();
+            tag.putUUID("UUID", uuid);
+            NbtIo.writeCompressed(tag, file);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -185,12 +219,12 @@ public class WorldInfoReader {
 
         if (levelDatPath.toString().endsWith(".zip")) {
             try (ZipFile zip = new ZipFile(levelDatPath.toFile()); InputStream is = zip.getInputStream(zip.getEntry("level.dat"))) {
-                this.levelData = NbtIo.readCompressed(is).getCompound("Data");
+                this.levelData = NbtIo.readCompressed(is);
             } catch (Exception ignored) {}
         } else {
             try {
                 File levelDatFile = levelDatPath.toFile();
-                this.levelData = NbtIo.readCompressed(levelDatFile).getCompound("Data");
+                this.levelData = NbtIo.readCompressed(levelDatFile);
             } catch (IOException ignored) {}
         }
     }

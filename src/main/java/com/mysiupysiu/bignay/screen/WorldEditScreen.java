@@ -2,8 +2,12 @@ package com.mysiupysiu.bignay.screen;
 
 import com.mojang.datafixers.util.Pair;
 import com.mysiupysiu.bignay.screen.file.chooser.FileChooserScreen;
+import com.mysiupysiu.bignay.utils.BackupEntry;
+import com.mysiupysiu.bignay.utils.Backups;
 import com.mysiupysiu.bignay.utils.FileType;
+import com.mysiupysiu.bignay.utils.world.WorldRestorer;
 import com.mysiupysiu.bignay.utils.world.WorldDuplicator;
+import com.mysiupysiu.bignay.utils.world.WorldInfoReader;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -29,6 +33,13 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
+import java.util.Optional;
+import java.util.UUID;
 
 public class WorldEditScreen extends Screen {
 
@@ -66,7 +77,7 @@ public class WorldEditScreen extends Screen {
         this.addRenderableWidget(getSetIconButton().bounds(startX_Right, startY + 24, 150, 20).build());
 
         this.addRenderableWidget(getMakeBackupButton().bounds(startX_Left, startY + 48, 150, 20).build());
-        this.addRenderableWidget(Button.builder(Component.literal(""), b -> {}).bounds(startX_Right, startY + 48, 150, 20).build());
+        this.addRenderableWidget(getMenageBackupsButton().bounds(startX_Right, startY + 48, 150, 20).build());
 
         this.addRenderableWidget(getOptimizeWorldButton().bounds(startX_Left, startY + 72, 150, 20).build());
         this.addRenderableWidget(getPruneWorldButton().bounds(startX_Right, startY + 72, 150, 20).build());
@@ -149,7 +160,7 @@ public class WorldEditScreen extends Screen {
                 try {
                     File worldDir = this.levelAccess.getLevelPath(LevelResource.ROOT).toFile().getCanonicalFile();
                     Path oldIcon = new File(worldDir, "icon.png").toPath();
-                    Files.delete(oldIcon);
+                    Files.deleteIfExists(oldIcon);
                     Files.copy(f.toPath(), oldIcon);
                     Minecraft.getInstance().setScreen(this);
                 } catch (IOException e) {
@@ -173,6 +184,21 @@ public class WorldEditScreen extends Screen {
     private Button.Builder getMakeBackupButton() {
         return Button.builder(Component.translatable("selectWorld.edit.backup"), btn ->
                 makeBackupAndShowToast(this.levelAccess));
+    }
+
+    private Button.Builder getMenageBackupsButton() {
+        return Button.builder(Component.translatable("selectWorld.backup.manage"), btn -> {
+            File backups = new File(this.minecraft.gameDirectory, "backups");
+            BackupEntry be = Backups.getLatestBackupForWorld(new WorldInfoReader(this.levelAccess).getWorldUUID()).get();
+            WorldRestorer restorer = new WorldRestorer(this.levelAccess, new File(backups, be.file()));
+            this.minecraft.setScreen(new ConfirmScreen(is -> {
+               if (is) {
+                   Minecraft.getInstance().setScreen(new OperationWithProgressScreen(Component.translatable("selectWorld.backup.restoring"), restorer));
+               } else {
+                   this.minecraft.setScreen(this);
+               }
+           }, Component.translatable("selectWorld.backup.restore"), Component.translatable("selectWorld.backup.restoreWorld", new WorldInfoReader(this.levelAccess).getWorldName(),  Instant.ofEpochMilli(be.created()).atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")), be.version())));
+        });
     }
 
     private Button.Builder getOptimizeWorldButton() {
@@ -281,6 +307,7 @@ public class WorldEditScreen extends Screen {
             Component title = Component.translatable("selectWorld.edit.backupCreated", access.getLevelId());
             Component size = Component.translatable("selectWorld.edit.backupSize", Mth.ceil(backupSize / 1048576.0D));
 
+            registerBackup();
             showToast(title, size);
             return true;
         } catch (IOException e) {
@@ -294,5 +321,42 @@ public class WorldEditScreen extends Screen {
 
     private void showToast(Component title, Component message) {
         Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.WORLD_BACKUP, title, message));
+    }
+
+    private void registerBackup() {
+        File backupFile = getBackupFile();
+
+        try {
+            Backups.addBackup(new BackupEntry(
+                    UUID.randomUUID(), new WorldInfoReader(this.levelAccess).getWorldUUID(),
+                    backupFile.getName(), Files.getLastModifiedTime(backupFile.toPath()).toMillis(),
+                    new WorldInfoReader(this.levelAccess).getWorldVersion(), backupFile.length()
+            ));
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    private long getCreationTime(Path path) {
+        try {
+            BasicFileAttributes attr = Files.readAttributes(path, BasicFileAttributes.class);
+            return attr.creationTime().toMillis();
+        } catch (IOException e) {
+            return 0;
+        }
+    }
+    
+    private File getBackupFile() {
+        try {
+            File folder = new File(System.getProperty("user.dir"), "backups");
+
+            Optional<Path> latest = Files.list(folder.toPath())
+                    .filter(Files::isRegularFile)
+                    .max(Comparator.comparingLong(this::getCreationTime));
+
+            return latest.get().toFile();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

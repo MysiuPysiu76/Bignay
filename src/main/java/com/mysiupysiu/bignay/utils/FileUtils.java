@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.stream.Stream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 public class FileUtils {
 
@@ -21,6 +24,36 @@ public class FileUtils {
         } catch (IOException e) {
             return -1;
         }
+    }
+
+    public static long calculateFilesSize(ZipFile zip) {
+        return zip.stream()
+                .filter(entry -> !entry.isDirectory())
+                .mapToLong(ZipEntry::getSize)
+                .filter(size -> size > 0)
+                .sum();
+    }
+
+    public static boolean delete(File file) {
+        if (!file.exists()) return false;
+        if (file.isDirectory()) {
+            try {
+                org.apache.commons.io.FileUtils.deleteDirectory(file);
+                return true;
+            } catch (IOException e) {
+                return false;
+            }
+        }
+
+        return file.delete();
+    }
+
+    public static boolean deleteWorld(File file) {
+        if (!file.isDirectory()) throw new IllegalArgumentException("File is File (Not a folder)");
+
+        Arrays.asList(file.listFiles()).stream().filter(f -> f.getName().contains("level.dat")).forEach(File::delete);
+
+        return delete(file);
     }
 
     public static String humanReadableByteCount(long bytes) {

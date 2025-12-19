@@ -1,5 +1,6 @@
 package com.mysiupysiu.bignay.utils.world;
 
+import com.mysiupysiu.bignay.utils.FileUtils;
 import com.mysiupysiu.bignay.utils.OperationWithProgress;
 import com.mysiupysiu.bignay.utils.ProgressListener;
 import net.minecraft.client.Minecraft;
@@ -83,7 +84,7 @@ public class WorldImporter implements OperationWithProgress {
                 }
             }
 
-            long totalSize = calculateTotalSize(zip);
+            long totalSize = FileUtils.calculateFilesSize(zip);
             long processed = 0;
 
             entries = zip.entries();
@@ -131,14 +132,6 @@ public class WorldImporter implements OperationWithProgress {
             finish();
         }
         finish();
-    }
-
-    private long calculateTotalSize(ZipFile zip) {
-        return zip.stream()
-                .filter(entry -> !entry.isDirectory())
-                .mapToLong(ZipEntry::getSize)
-                .filter(size -> size > 0)
-                .sum();
     }
 
     public void chooseTarget() {
