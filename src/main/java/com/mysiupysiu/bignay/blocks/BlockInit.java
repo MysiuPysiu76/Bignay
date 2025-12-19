@@ -210,10 +210,10 @@ public class BlockInit {
     public static final RegistryObject<Block> BASALT_BRICK_STAIRS = registerBlock("basalt_brick_stairs", () -> new StairsBlock(BASALT_BRICKS));
     public static final RegistryObject<Block> BASALT_BRICK_WALL = registerBlock("basalt_brick_wall", () -> new WallsBlock(BASALT_BRICKS));
     public static final RegistryObject<Block> CHISELED_BASALT = registerBlock("chiseled_basalt", () -> new BuildingBlock(Blocks.BASALT));
-    public static final RegistryObject<Block> BASALT_PILLAR = registerBlock("basalt_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(BASALT_BRICKS.get())));
+    public static final RegistryObject<Block> BASALT_PILLAR = registerBlock("basalt_pillar", () -> new PillarBlock(BASALT_BRICKS));
     public static final RegistryObject<Block> SMOOTH_BASALT_STAIRS = registerBlock("smooth_basalt_stairs", () -> new StairsBlock(BASALT_BRICKS.get()));
     public static final RegistryObject<Block> SMOOTH_BASALT_SLAB = registerBlock("smooth_basalt_slab", () -> new SlabsBlock(BASALT_BRICKS.get()));
-    public static final RegistryObject<Block> COBBLED_BASALT = registerBlock("cobbled_basalt", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.BASALT)));
+    public static final RegistryObject<Block> COBBLED_BASALT = registerBlock("cobbled_basalt", () -> new PillarBlock(Blocks.BASALT));
     public static final RegistryObject<Block> CRACKED_BASALT_BRICKS = registerBlock("cracked_basalt_bricks", () -> new BuildingBlock(Blocks.BASALT));
     public static final RegistryObject<Block> CRACKED_BASALT_BRICK_SLAB = registerBlock("cracked_basalt_brick_slab", () -> new SlabsBlock(CRACKED_BASALT_BRICKS));
     public static final RegistryObject<Block> CRACKED_BASALT_BRICK_STAIRS = registerBlock("cracked_basalt_brick_stairs", () -> new StairsBlock(CRACKED_BASALT_BRICKS));
@@ -350,7 +350,7 @@ public class BlockInit {
     public static final RegistryObject<Block> MOSSY_ANDESITE_BRICK_STAIRS = registerBlock("mossy_andesite_brick_stairs", () -> new StairsBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> MOSSY_ANDESITE_BRICK_WALL = registerBlock("mossy_andesite_brick_wall", () -> new WallsBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> CHISELED_ANDESITE = registerBlock("chiseled_andesite", () -> new BuildingBlock(Blocks.POLISHED_ANDESITE));
-    public static final RegistryObject<Block> ANDESITE_PILLAR = registerBlock("andesite_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_ANDESITE)));
+    public static final RegistryObject<Block> ANDESITE_PILLAR = registerBlock("andesite_pillar", () -> new PillarBlock(Blocks.POLISHED_ANDESITE));
 
     public static final RegistryObject<Block> POLISHED_DIORITE_WALL = registerBlock("polished_diorite_wall", () -> new WallsBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> SMOOTH_DIORITE = registerBlock("smooth_diorite", () -> new BuildingBlock(Blocks.POLISHED_DIORITE));
@@ -370,7 +370,7 @@ public class BlockInit {
     public static final RegistryObject<Block> MOSSY_DIORITE_BRICK_STAIRS = registerBlock("mossy_diorite_brick_stairs", () -> new StairsBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> MOSSY_DIORITE_BRICK_WALL = registerBlock("mossy_diorite_brick_wall", () -> new WallsBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> CHISELED_DIORITE = registerBlock("chiseled_diorite", () -> new BuildingBlock(Blocks.POLISHED_DIORITE));
-    public static final RegistryObject<Block> DIORITE_PILLAR = registerBlock("diorite_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_DIORITE)));
+    public static final RegistryObject<Block> DIORITE_PILLAR = registerBlock("diorite_pillar", () -> new PillarBlock(Blocks.POLISHED_DIORITE));
 
     public static final RegistryObject<Block> POLISHED_GRANITE_WALL = registerBlock("polished_granite_wall", () -> new WallsBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> SMOOTH_GRANITE = registerBlock("smooth_granite", () -> new BuildingBlock(Blocks.POLISHED_GRANITE));
@@ -390,7 +390,7 @@ public class BlockInit {
     public static final RegistryObject<Block> MOSSY_GRANITE_BRICK_STAIRS = registerBlock("mossy_granite_brick_stairs", () -> new StairsBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> MOSSY_GRANITE_BRICK_WALL = registerBlock("mossy_granite_brick_wall", () -> new WallsBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> CHISELED_GRANITE = registerBlock("chiseled_granite", () -> new BuildingBlock(Blocks.POLISHED_GRANITE));
-    public static final RegistryObject<Block> GRANITE_PILLAR = registerBlock("granite_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.POLISHED_GRANITE)));
+    public static final RegistryObject<Block> GRANITE_PILLAR = registerBlock("granite_pillar", () -> new PillarBlock(Blocks.POLISHED_GRANITE));
 
     public static final RegistryObject<Block> POLISHED_SMOOTH_BASALT = registerBlock("polished_smooth_basalt", () -> new BuildingBlock(Blocks.SMOOTH_BASALT));
     public static final RegistryObject<Block> POLISHED_SMOOTH_BASALT_SLAB = registerBlock("polished_smooth_basalt_slab", () -> new SlabsBlock(Blocks.SMOOTH_BASALT));
@@ -405,7 +405,7 @@ public class BlockInit {
     public static final RegistryObject<Block> CRACKED_SMOOTH_BASALT_BRICK_STAIRS = registerBlock("cracked_smooth_basalt_brick_stairs", () -> new StairsBlock(Blocks.SMOOTH_BASALT));
     public static final RegistryObject<Block> CRACKED_SMOOTH_BASALT_BRICK_WALL = registerBlock("cracked_smooth_basalt_brick_wall", () -> new WallsBlock(Blocks.SMOOTH_BASALT));
     public static final RegistryObject<Block> CHISELED_SMOOTH_BASALT = registerBlock("chiseled_smooth_basalt", () -> new BuildingBlock(Blocks.SMOOTH_BASALT));
-    public static final RegistryObject<Block> SMOOTH_BASALT_PILLAR = registerBlock("smooth_basalt_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.SMOOTH_BASALT)));
+    public static final RegistryObject<Block> SMOOTH_BASALT_PILLAR = registerBlock("smooth_basalt_pillar", () -> new PillarBlock(Blocks.SMOOTH_BASALT));
 
     public static final RegistryObject<Block> POLISHED_DRIPSTONE = registerBlock("polished_dripstone", () -> new BuildingBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> POLISHED_DRIPSTONE_SLAB = registerBlock("polished_dripstone_slab", () -> new SlabsBlock(Blocks.DRIPSTONE_BLOCK));
@@ -424,7 +424,7 @@ public class BlockInit {
     public static final RegistryObject<Block> DRIPSTONE_TILE_STAIRS = registerBlock("dripstone_tile_stairs", () -> new StairsBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> DRIPSTONE_TILE_WALL = registerBlock("dripstone_tile_wall", () -> new WallsBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> CHISELED_DRIPSTONE = registerBlock("chiseled_dripstone", () -> new BuildingBlock(Blocks.DRIPSTONE_BLOCK));
-    public static final RegistryObject<Block> DRIPSTONE_PILLAR = registerBlock("dripstone_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.DRIPSTONE_BLOCK)));
+    public static final RegistryObject<Block> DRIPSTONE_PILLAR = registerBlock("dripstone_pillar", () -> new PillarBlock(Blocks.DRIPSTONE_BLOCK));
 
     public static final RegistryObject<Block> POLISHED_CALCITE = registerBlock("polished_calcite", () -> new BuildingBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> POLISHED_CALCITE_SLAB = registerBlock("polished_calcite_slab", () -> new SlabsBlock(Blocks.CALCITE));
@@ -439,7 +439,7 @@ public class BlockInit {
     public static final RegistryObject<Block> CRACKED_CALCITE_BRICK_STAIRS = registerBlock("cracked_calcite_brick_stairs", () -> new StairsBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> CRACKED_CALCITE_BRICK_WALL = registerBlock("cracked_calcite_brick_wall", () -> new WallsBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> CHISELED_CALCITE = registerBlock("chiseled_calcite", () -> new BuildingBlock(Blocks.CALCITE));
-    public static final RegistryObject<Block> CALCITE_PILLAR = registerBlock("calcite_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CALCITE)));
+    public static final RegistryObject<Block> CALCITE_PILLAR = registerBlock("calcite_pillar", () -> new PillarBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> SMOOTH_CALCITE = registerBlock("smooth_calcite", () -> new BuildingBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> SMOOTH_CALCITE_SLAB = registerBlock("smooth_calcite_slab", () -> new SlabsBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> SMOOTH_CALCITE_STAIRS = registerBlock("smooth_calcite_stairs", () -> new StairsBlock(Blocks.CALCITE));
@@ -453,7 +453,7 @@ public class BlockInit {
     public static final RegistryObject<Block> CRACKED_SMOOTH_CALCITE_BRICK_STAIRS = registerBlock("cracked_smooth_calcite_brick_stairs", () -> new StairsBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> CRACKED_SMOOTH_CALCITE_BRICK_WALL = registerBlock("cracked_smooth_calcite_brick_wall", () -> new WallsBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> CHISELED_SMOOTH_CALCITE = registerBlock("chiseled_smooth_calcite", () -> new BuildingBlock(Blocks.CALCITE));
-    public static final RegistryObject<Block> SMOOTH_CALCITE_PILLAR = registerBlock("smooth_calcite_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CALCITE)));
+    public static final RegistryObject<Block> SMOOTH_CALCITE_PILLAR = registerBlock("smooth_calcite_pillar", () -> new PillarBlock(Blocks.CALCITE));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
