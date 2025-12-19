@@ -29,6 +29,7 @@ abstract class AbstractFileChooserScreen extends Screen {
     private List<File> entries;
     private Consumer<File> onConfirm;
     protected Set<FileType> fileTypes;
+    protected Component filterComponent;
 
     private int scroll = 0;
     private int selectedIndex = -1;
@@ -134,15 +135,18 @@ abstract class AbstractFileChooserScreen extends Screen {
             int y = listY + i * LINE_HEIGHT;
             if (idx >= entries.size()) break;
             File f = entries.get(idx);
-            String prefix = f.isDirectory() ? "[DIR] " : "      ";
+            String prefix = f.isDirectory() ? "[DIR] " : "        ";
             int color = f.isDirectory() ? 0xAADDAA : 0xFFFFFF;
 
             if (idx == selectedIndex) {
                 graphics.fill(listX, y - 2, listX + listW, y + LINE_HEIGHT, 0x40FFFFFF);
             }
 
+
             graphics.drawString(this.font, prefix + f.getName(), listX + 4, y, color, false);
         }
+
+        if (filterComponent != null) graphics.drawCenteredString(this.font, filterComponent, this.width / 2, (listY + VISIBLE_LINES * LINE_HEIGHT) + 15, 0xFFFFFF);
 
         super.render(graphics, mouseX, mouseY, delta);
     }

@@ -39,6 +39,7 @@ public class WorldSelectScreenEvent {
         Button importButton = Button.builder(Component.translatable("importWorld.import"), b -> {
             FileChooserScreen fileChooser = new FileChooserScreen();
             fileChooser.addFilter(FileType.ZIP);
+            fileChooser.setFilterText(Component.translatable("fileChooser.filter.zip"));
             fileChooser.setOnConfirm(file -> {
                 WorldImportScreen importWorld = new WorldImportScreen(file);
                 if (WorldImporter.isValidWorld(file)) {

@@ -448,6 +448,8 @@
   "fileChooser.hidden_files_off": "Hidden Files: OFF",
   "fileChooser.cancel": "Cancel",
   "fileChooser.home": "Home",
+  "fileChooser.filter.image64": "Only 64x64 px images are allowed",
+  "fileChooser.filter.zip": "Only ZIP Files are allowed",
   "fileChooser.home.description": "Open home folder",
   "fileChooser.up.description": "Open parent folder",
   "fileChooser.refresh": "Refresh",

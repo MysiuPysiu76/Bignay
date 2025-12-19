@@ -174,9 +174,9 @@ public class WorldEditScreen extends Screen {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-
                 return false;
             });
+            fileChooser.setFilterText(Component.translatable("fileChooser.filter.image64"));
             Minecraft.getInstance().setScreen(fileChooser);
         });
     }

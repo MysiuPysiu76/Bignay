@@ -58,11 +58,20 @@ public class FileChooserScreen extends AbstractFileChooserScreen {
 
     public void removeFilter(FileType... fileType) {
         fileTypes.removeAll(Set.of(fileType));
+        this.filterComponent = null;
         reloadEntries();
     }
 
     public void setAdditionalFilter(Predicate<File> p) {
         this.additionalFilter = p;
         reloadEntries();
+    }
+
+    public void setFilterText(Component c) {
+        this.filterComponent = c;
+    }
+
+    public Component getFilterText() {
+        return this.filterComponent;
     }
 }
