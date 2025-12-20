@@ -23,6 +23,7 @@ import net.minecraft.world.level.LevelSettings;
 import net.minecraft.world.level.storage.LevelResource;
 import net.minecraft.world.level.storage.LevelStorageSource;
 import net.minecraft.world.level.validation.ContentValidationException;
+import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.LoggerFactory;
 
@@ -130,7 +131,12 @@ public class WorldEditScreen extends Screen {
     }
 
     private LevelStorageSource.LevelStorageAccess getLevelAccess(EditWorldScreen screen) throws Exception {
-        Field field = EditWorldScreen.class.getDeclaredField("levelAccess");
+        Field field;
+        try {
+            field = EditWorldScreen.class.getDeclaredField("f_101249_");
+        } catch (Exception e) {
+            field = EditWorldScreen.class.getDeclaredField("levelAccess");
+        }
         field.setAccessible(true);
         return (LevelStorageSource.LevelStorageAccess) field.get(screen);
     }

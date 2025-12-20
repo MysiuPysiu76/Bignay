@@ -52,7 +52,14 @@ public class WorldSelectScreenEvent {
             Minecraft.getInstance().setScreen(fileChooser);
         }).bounds(pos[0], pos[1], pos[2], pos[3]).build();
 
-        Method addRenderableWidget = Screen.class.getDeclaredMethod("addRenderableWidget", GuiEventListener.class);
+        Method addRenderableWidget;
+
+        try {
+            addRenderableWidget = Screen.class.getDeclaredMethod("m_142416_", GuiEventListener.class);
+        } catch (Exception e) {
+            addRenderableWidget = Screen.class.getDeclaredMethod("addRenderableWidget", GuiEventListener.class);
+        }
+
         addRenderableWidget.setAccessible(true);
         addRenderableWidget.invoke(screen, importButton);
     }
