@@ -459,6 +459,8 @@ public class BlockInit {
     public static final RegistryObject<Block> QUARTZ_BRICK_STAIRS = registerBlock("quartz_brick_stairs", () -> new StairsBlock(Blocks.QUARTZ_BRICKS));
     public static final RegistryObject<Block> QUARTZ_BRICK_WALL = registerBlock("quartz_brick_wall", () -> new WallsBlock(Blocks.QUARTZ_BRICKS));
 
+    public static final RegistryObject<Block> COMPRESSED_STONE = registerBlock("compressed_stone", CompressedStone::new);
+
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
         ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
