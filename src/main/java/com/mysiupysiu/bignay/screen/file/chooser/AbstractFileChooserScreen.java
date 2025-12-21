@@ -59,25 +59,25 @@ abstract class AbstractFileChooserScreen extends Screen {
     protected void init() {
         super.init();
 
-        int btnWidth = 98;
+        int btnWidth = 90;
         int btnHeight = 20;
         int btnY = MARGIN + 4;
         int spacing = 10;
+        int centerX = this.width / 2;
 
         int hiddenX = this.width - MARGIN - btnWidth - 20;
         int upX = hiddenX - btnWidth - spacing;
-        int homeX = upX - btnWidth - spacing;
 
-        refreshButton = Button.builder(Component.translatable("fileChooser.refresh"), b -> reloadEntries()).bounds(MARGIN, btnY, btnWidth, btnHeight).build();
+        refreshButton = Button.builder(Component.translatable("fileChooser.refresh"), b -> reloadEntries()).bounds(centerX - 195, btnY, btnWidth, btnHeight).build();
         this.addRenderableWidget(refreshButton);
 
-        homeButton = Button.builder(Component.translatable("fileChooser.home"), b -> goHome()).bounds(homeX, btnY, btnWidth, btnHeight).build();
+        homeButton = Button.builder(Component.translatable("fileChooser.home"), b -> goHome()).bounds(centerX - 95, btnY, btnWidth, btnHeight).build();
         this.addRenderableWidget(homeButton);
 
-        upButton = Button.builder(Component.translatable("fileChooser.up"), b -> goUp()).bounds(upX, btnY, btnWidth, btnHeight).build();
+        upButton = Button.builder(Component.translatable("fileChooser.up"), b -> goUp()).bounds(centerX + 5, btnY, btnWidth, btnHeight).build();
         this.addRenderableWidget(upButton);
 
-        hiddenToggleButton = Button.builder(getHiddenFilesButtonLabel(), b -> toggleHiddenFiles()).bounds(hiddenX, btnY, btnWidth, btnHeight).build();
+        hiddenToggleButton = Button.builder(getHiddenFilesButtonLabel(), b -> toggleHiddenFiles()).bounds(centerX + 105, btnY, btnWidth, btnHeight).build();
         this.addRenderableWidget(hiddenToggleButton);
 
         int listY = MARGIN + 48;
