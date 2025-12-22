@@ -167,7 +167,7 @@ public class ScreenshotViewerScreen extends Screen {
 
         recalcLayout();
 
-        if (rowY.size() > 0) {
+        if (!rowY.isEmpty()) {
             int rowIndex = Math.min(anchorRow, rowY.size() - 1);
             scrollY = rowY.get(rowIndex) + Math.min(offsetInRow, rowHeights.get(rowIndex));
             scrollY = Mth.clamp(scrollY, 0, maxScrollY);
@@ -478,14 +478,7 @@ public class ScreenshotViewerScreen extends Screen {
         super.render(pose, mouseX, mouseY, partialTick);
     }
 
-    private void renderThumbnailSafe(
-            GuiGraphics pose,
-            Entry e,
-            int x,
-            int y,
-            int rowHeight,
-            int index
-    ) {
+    private void renderThumbnailSafe(GuiGraphics pose, Entry e, int x, int y, int rowHeight, int index) {
         int imageH = rowHeight - captionHeight - 2;
         boolean selected = (index == selectedIndex);
 
@@ -505,16 +498,21 @@ public class ScreenshotViewerScreen extends Screen {
         }
 
         if (selected) {
+            int drawW = thumbWidth;
+            int drawH = e.resource != null && e.loaded ? (int) (e.origHeight * ((double) thumbWidth / e.origWidth)) : Math.min((int) (thumbWidth * avgAspectRatio), imageH);
+            int offsetY = y + Math.max(0, (imageH - drawH) / 2);
+
             int bx1 = x - SELECT_BORDER_THICKNESS;
-            int by1 = y - SELECT_BORDER_THICKNESS;
-            int bx2 = x + thumbWidth + SELECT_BORDER_THICKNESS;
-            int by2 = y + imageH + SELECT_BORDER_THICKNESS;
+            int by1 = offsetY - SELECT_BORDER_THICKNESS;
+            int bx2 = x + drawW + SELECT_BORDER_THICKNESS;
+            int by2 = offsetY + drawH + SELECT_BORDER_THICKNESS;
 
             pose.fill(bx1, by1, bx2, by1 + SELECT_BORDER_THICKNESS, SELECT_BORDER_COLOR);
             pose.fill(bx1, by2 - SELECT_BORDER_THICKNESS, bx2, by2, SELECT_BORDER_COLOR);
             pose.fill(bx1, by1, bx1 + SELECT_BORDER_THICKNESS, by2, SELECT_BORDER_COLOR);
             pose.fill(bx2 - SELECT_BORDER_THICKNESS, by1, bx2, by2, SELECT_BORDER_COLOR);
         }
+
         pose.drawString(this.font, e.path.getFileName().toString(), x, y + rowHeight - captionHeight, 0xCCCCCC);
     }
 
