@@ -28,6 +28,11 @@ public class ScreenshotViewerScreen extends Screen {
     private final int gap = 8;
     private int fixedRowImageHeight;
 
+    private int selectedIndex = -1;
+    private long lastClickTime = 0L;
+    private int lastClickIndex = -1;
+    private static final long DOUBLE_CLICK_MS = 350L;
+
     private int prefetchRows = 6;
 
     private double avgAspectRatio = 9.0 / 16.0;
@@ -353,6 +358,7 @@ public class ScreenshotViewerScreen extends Screen {
         }
 
         int idx = 0;
+        boolean clickedOnAny = false;
         for (int row = 0; row < rowHeights.size(); row++) {
             for (int col = 0; col < columns; col++) {
                 if (idx >= entries.size()) break;
@@ -361,27 +367,49 @@ public class ScreenshotViewerScreen extends Screen {
                 int rowH = rowHeights.get(row);
                 int imageH = rowH - captionHeight - 2;
                 if (mouseX >= x && mouseX <= x + thumbWidth && mouseY >= y && mouseY <= y + imageH) {
-                    Entry e = entries.get(idx);
-                    fullscreen = true;
-                    fullscreenEntry = e;
-                    if ((!e.loaded && !e.loading) || e.failed) {
-                        synchronized (queuedIndices) {
-                            if (!queuedIndices.get(idx) && !e.loading && !e.loaded) {
-                                queuedIndices.set(idx);
-                                e.loading = true;
-                                int finalIdx = idx;
-                                loader.submit(() -> loadEntry(finalIdx));
+                    clickedOnAny = true;
+                    long now = System.currentTimeMillis();
+
+                    if (lastClickIndex == idx && now - lastClickTime <= DOUBLE_CLICK_MS) {
+                        Entry e = entries.get(idx);
+                        fullscreen = true;
+                        fullscreenEntry = e;
+
+                        if ((!e.loaded && !e.loading) || e.failed) {
+                            synchronized (queuedIndices) {
+                                if (!queuedIndices.get(idx) && !e.loading && !e.loaded) {
+                                    queuedIndices.set(idx);
+                                    e.loading = true;
+                                    final int finalIdx = idx;
+                                    loader.submit(() -> loadEntry(finalIdx));
+                                }
                             }
                         }
+
+                        lastClickIndex = -1;
+                        lastClickTime = 0;
+                        selectedIndex = idx;
+                    } else {
+                        selectedIndex = idx;
+                        lastClickIndex = idx;
+                        lastClickTime = now;
                     }
+
                     return true;
                 }
                 idx++;
             }
         }
 
+        if (!clickedOnAny) {
+            selectedIndex = -1;
+            lastClickIndex = -1;
+            lastClickTime = 0;
+        }
+
         return super.mouseClicked(mouseX, mouseY, button);
     }
+
 
     @Override
     public void render(GuiGraphics pose, int mouseX, int mouseY, float partialTick) {
@@ -440,7 +468,7 @@ public class ScreenshotViewerScreen extends Screen {
                 if (idx >= entries.size()) break;
                 int x = gap + col * (thumbWidth + gap);
                 Entry e = entries.get(idx);
-                renderThumbnailSafe(pose, e, x, y, rowH);
+                renderThumbnailSafe(pose, e, x, y, rowH, idx);
                 idx++;
             }
         }
@@ -450,30 +478,49 @@ public class ScreenshotViewerScreen extends Screen {
         super.render(pose, mouseX, mouseY, partialTick);
     }
 
-    private void renderThumbnailSafe(GuiGraphics pose, Entry e, int x, int y, int rowHeight) {
-        int availableH = rowHeight - captionHeight - 2;
-        if (e.resource != null && e.origWidth > 0 && e.origHeight > 0 && e.loaded) {
-            int imgW = e.origWidth;
-            int imgH = e.origHeight;
+    private void renderThumbnailSafe(
+            GuiGraphics pose,
+            Entry e,
+            int x,
+            int y,
+            int rowHeight,
+            int index
+    ) {
+        int imageH = rowHeight - captionHeight - 2;
+        boolean selected = (index == selectedIndex);
 
-            double scale = (double) thumbWidth / imgW;
+        if (e.resource != null && e.loaded && e.origWidth > 0 && e.origHeight > 0) {
+            double scale = (double) thumbWidth / e.origWidth;
             int drawW = thumbWidth;
-            int drawH = (int) (imgH * scale);
+            int drawH = (int) (e.origHeight * scale);
 
-            int offsetX = x + (thumbWidth - drawW) / 2;
-            int offsetY = y + Math.max(0, (availableH - drawH) / 2);
+            int offsetY = y + Math.max(0, (imageH - drawH) / 2);
 
             RenderSystem.setShaderTexture(0, e.resource);
-            pose.blit(e.resource, offsetX, offsetY, 0, 0, drawW, drawH, drawW, drawH);
+            pose.blit(e.resource, x, offsetY, 0, 0, drawW, drawH, drawW, drawH);
         } else {
-            int estimatedH = (int) Math.max(thumbWidth * avgAspectRatio, thumbWidth * 0.6);
-            estimatedH = Math.min(estimatedH, availableH);
-            int offsetY = y + Math.max(0, (availableH - estimatedH) / 2);
-            drawPlaceholder(pose, x, offsetY, thumbWidth, estimatedH, e.loading);
+            int estH = Math.min((int) (thumbWidth * avgAspectRatio), imageH);
+            int offsetY = y + (imageH - estH) / 2;
+            drawPlaceholder(pose, x, offsetY, thumbWidth, estH, e.loading);
         }
 
+        if (selected) {
+            int bx1 = x - SELECT_BORDER_THICKNESS;
+            int by1 = y - SELECT_BORDER_THICKNESS;
+            int bx2 = x + thumbWidth + SELECT_BORDER_THICKNESS;
+            int by2 = y + imageH + SELECT_BORDER_THICKNESS;
+
+            pose.fill(bx1, by1, bx2, by1 + SELECT_BORDER_THICKNESS, SELECT_BORDER_COLOR);
+            pose.fill(bx1, by2 - SELECT_BORDER_THICKNESS, bx2, by2, SELECT_BORDER_COLOR);
+            pose.fill(bx1, by1, bx1 + SELECT_BORDER_THICKNESS, by2, SELECT_BORDER_COLOR);
+            pose.fill(bx2 - SELECT_BORDER_THICKNESS, by1, bx2, by2, SELECT_BORDER_COLOR);
+        }
         pose.drawString(this.font, e.path.getFileName().toString(), x, y + rowHeight - captionHeight, 0xCCCCCC);
     }
+
+    private static final int SELECT_BORDER_COLOR = 0xFFFFFFFF;
+    private static final int SELECT_BORDER_THICKNESS = 1;
+
 
     private void drawPlaceholder(GuiGraphics pose, int x, int y, int w, int h, boolean loading) {
         pose.fill(x, y, x + w, y + h, 0xFF333333);
