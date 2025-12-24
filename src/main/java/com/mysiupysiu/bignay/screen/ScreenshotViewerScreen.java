@@ -5,6 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -13,19 +14,18 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 public class ScreenshotViewerScreen extends Screen {
     private static final Path SCREENSHOTS_DIR = Minecraft.getInstance().gameDirectory.toPath().resolve("screenshots");
 
-    private static final int MIN_COLUMNS = 3;
-    private static final int MAX_COLUMNS = 8;
     private int columns = 4;
     private final int gap = 8;
 
@@ -47,7 +47,6 @@ public class ScreenshotViewerScreen extends Screen {
     private static final int DARK_BAR_COLOR = 0xA0000000;
 
     private int prefetchRows = 8;
-
     private double avgAspectRatio = 9.0 / 16.0;
 
     private int thumbWidth;
@@ -74,10 +73,6 @@ public class ScreenshotViewerScreen extends Screen {
     });
 
     private final BitSet queuedIndices = new BitSet();
-
-    private boolean fullscreen = false;
-    @Nullable
-    private Entry fullscreenEntry = null;
 
     private volatile boolean layoutDirty = false;
     private long lastScrollTime = 0;
@@ -138,33 +133,15 @@ public class ScreenshotViewerScreen extends Screen {
 
         int y = this.height - 24;
 
-        this.openButton = Button.builder(
-                Component.translatable("screenshotsViewer.open"),
-                btn -> {
-                    if (selectedIndex < 0 || selectedIndex >= entries.size()) return;
-
-                    Entry e = entries.get(selectedIndex);
-                    fullscreen = true;
-                    fullscreenEntry = e;
-
-                    if ((!e.loaded && !e.loading) || e.failed) {
-                        synchronized (queuedIndices) {
-                            if (!queuedIndices.get(selectedIndex) && !e.loading && !e.loaded) {
-                                queuedIndices.set(selectedIndex);
-                                e.loading = true;
-                                final int idx = selectedIndex;
-                                loader.submit(() -> loadEntry(idx));
-                            }
-                        }
-                    }
-                }
+        this.openButton = Button.builder(Component.translatable("screenshotsViewer.open"), btn ->
+                Minecraft.getInstance().setScreen(new ScreenshotView(list.get(selectedIndex).getFileName().toString(), this))
         ).bounds(this.width / 2 - 154, y, 72, 20).build();
 
-
         this.addRenderableWidget(openButton);
-        this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, btn ->
-            Minecraft.getInstance().setScreen(null)
-        ).bounds(this.width / 2 + 82, y, 72, 20).build());
+        this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, btn -> {
+            close();
+            Minecraft.getInstance().setScreen(null);
+        }).bounds(this.width / 2 + 82, y, 72, 20).build());
         updateButtons();
     }
 
@@ -176,8 +153,7 @@ public class ScreenshotViewerScreen extends Screen {
         panelH = Math.max(100, this.height - panelTopBottomPadding * 2);
     }
 
-    @Override
-    public void removed() {
+    public void close() {
         super.removed();
         loader.shutdownNow();
         TextureManager tm = Minecraft.getInstance().getTextureManager();
@@ -233,7 +209,7 @@ public class ScreenshotViewerScreen extends Screen {
     }
 
     private void recalcLayout() {
-        columns = Mth.clamp(columns, MIN_COLUMNS, MAX_COLUMNS);
+        columns = Mth.clamp(columns, 3, 6);
 
         int totalGap = (columns + 1) * gap;
         thumbWidth = Math.max(48, (panelW - totalGap) / columns);
@@ -381,7 +357,6 @@ public class ScreenshotViewerScreen extends Screen {
         for (int i = 0; i < entries.size(); i++) {
             if (i < keepStart || i >= keepEnd) {
                 Entry e = entries.get(i);
-                if (e == fullscreenEntry) continue;
                 if (e.resource != null || e.dynamicTexture != null || e.loaded || e.loading) {
                     e.unload(tm);
                     synchronized (queuedIndices) {
@@ -405,12 +380,6 @@ public class ScreenshotViewerScreen extends Screen {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (fullscreen) {
-            fullscreen = false;
-            fullscreenEntry = null;
-            return true;
-        }
-
         if (mouseX < panelX || mouseX > panelX + panelW || mouseY < panelY || mouseY > panelY + panelH) {
 
             if (!isMouseOverButton(mouseX, mouseY)) {
@@ -436,25 +405,7 @@ public class ScreenshotViewerScreen extends Screen {
                     long now = System.currentTimeMillis();
 
                     if (lastClickIndex == idx && now - lastClickTime <= DOUBLE_CLICK_MS) {
-                        Entry e = entries.get(idx);
-                        fullscreen = true;
-                        fullscreenEntry = e;
-
-                        if ((!e.loaded && !e.loading) || e.failed) {
-                            synchronized (queuedIndices) {
-                                if (!queuedIndices.get(idx) && !e.loading && !e.loaded) {
-                                    queuedIndices.set(idx);
-                                    e.loading = true;
-                                    final int finalIdx = idx;
-                                    loader.submit(() -> loadEntry(finalIdx));
-                                }
-                            }
-                        }
-
-                        lastClickIndex = -1;
-                        lastClickTime = 0;
-                        selectedIndex = idx;
-                        updateButtons();
+                        Minecraft.getInstance().setScreen(new ScreenshotView(list.get(idx).getFileName().toString(), this));
                     } else {
                         selectedIndex = idx;
                         lastClickIndex = idx;
@@ -486,43 +437,6 @@ public class ScreenshotViewerScreen extends Screen {
         if (layoutDirty && (System.currentTimeMillis() - lastScrollTime) > SCROLL_GRACE_MS) {
             recalcLayoutPreserveAnchor();
             layoutDirty = false;
-        }
-
-        if (fullscreen && fullscreenEntry != null && fullscreenEntry.resource != null && fullscreenEntry.origWidth > 0 && fullscreenEntry.origHeight > 0 && fullscreenEntry.loaded) {
-            int imgWidth = fullscreenEntry.origWidth;
-            int imgHeight = fullscreenEntry.origHeight;
-
-            int padding = gap * 3;
-            int maxW = this.width - padding * 2;
-            int maxH = this.height - padding * 2;
-
-            double scale = Math.min((double) maxW / imgWidth, (double) maxH / imgHeight);
-
-            int drawW = (int) (imgWidth * scale);
-            int drawH = (int) (imgHeight * scale);
-
-            int offsetX = (this.width - drawW) / 2;
-            int offsetY = (this.height - drawH) / 2;
-
-            RenderSystem.setShaderTexture(0, fullscreenEntry.resource);
-            gui.blit(fullscreenEntry.resource, offsetX, offsetY, 0, 0, drawW, drawH, drawW, drawH);
-
-            gui.drawCenteredString(this.font, fullscreenEntry.path.getFileName().toString(), this.width / 2, offsetY + drawH + 4, 0xFFFFFF);
-            super.render(gui, mouseX, mouseY, partialTick);
-            return;
-        } else if (fullscreen && fullscreenEntry != null) {
-            int padding = gap * 3;
-            int areaW = this.width - padding * 2;
-            int areaH = this.height - padding * 2;
-            int boxW = Math.min(areaW, areaH);
-            int boxH = boxW;
-            int offsetX = (this.width - boxW) / 2;
-            int offsetY = (this.height - boxH) / 2;
-            gui.fill(offsetX, offsetY, offsetX + boxW, offsetY + boxH, 0xFF333333);
-            gui.drawCenteredString(this.font, fullscreenEntry.loading ? "loading..." : "no image", this.width / 2, offsetY + boxH / 2 - 6, 0xFFFFFF);
-            gui.drawCenteredString(this.font, fullscreenEntry.path.getFileName().toString(), this.width / 2, offsetY + boxH + 4, 0xFFFFFF);
-            super.render(gui, mouseX, mouseY, partialTick);
-            return;
         }
 
         gui.fill(0, panelY - 3, this.width, panelY, DARK_BAR_COLOR);
@@ -622,21 +536,17 @@ public class ScreenshotViewerScreen extends Screen {
 
     @Override
     public boolean keyPressed(int key, int scancode, int modifiers) {
-        if (key == 256) {
-            if (fullscreen) {
-                fullscreen = false;
-                fullscreenEntry = null;
-            } else {
-                Minecraft.getInstance().setScreen(null);
-            }
+        if (key == 256) { // ESC
+            Minecraft.getInstance().setScreen(null);
+            close();
             return true;
         }
         return super.keyPressed(key, scancode, modifiers);
     }
 
     private boolean isMouseOverButton(double mouseX, double mouseY) {
-        for (var w : this.renderables) {
-            if (w instanceof Button b) {
+        for (Renderable r : this.renderables) {
+            if (r instanceof Button b) {
                 if (mouseX >= b.getX() && mouseX <= b.getX() + b.getWidth()
                         && mouseY >= b.getY() && mouseY <= b.getY() + b.getHeight()) {
                     return true;
@@ -645,7 +555,6 @@ public class ScreenshotViewerScreen extends Screen {
         }
         return false;
     }
-
 
     private void updateButtons() {
         openButton.active = selectedIndex != -1;
