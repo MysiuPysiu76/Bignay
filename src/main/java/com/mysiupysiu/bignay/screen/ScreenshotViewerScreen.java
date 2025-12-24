@@ -4,9 +4,12 @@ import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -26,14 +29,25 @@ public class ScreenshotViewerScreen extends Screen {
     private static final int MAX_COLUMNS = 8;
     private int columns = 4;
     private final int gap = 8;
+
+    private int panelX;
+    private int panelY;
+    private int panelW;
+    private int panelH;
+    private final int panelTopBottomPadding = 30;
+
     private int fixedRowImageHeight;
 
     private int selectedIndex = -1;
     private long lastClickTime = 0L;
     private int lastClickIndex = -1;
     private static final long DOUBLE_CLICK_MS = 350L;
+    private static final int SELECT_BORDER_COLOR = 0xFFFFFFFF;
+    private static final int SELECT_BORDER_THICKNESS = 1;
 
-    private int prefetchRows = 6;
+    private static final int DARK_BAR_COLOR = 0xA0000000;
+
+    private int prefetchRows = 8;
 
     private double avgAspectRatio = 9.0 / 16.0;
 
@@ -51,7 +65,7 @@ public class ScreenshotViewerScreen extends Screen {
 
     private final List<Entry> entries = new ArrayList<>();
 
-    private final int maxConcurrentLoads = 3;
+    private final int maxConcurrentLoads = Math.min(8, Math.max(3, Runtime.getRuntime().availableProcessors()));
     private final ExecutorService loader = Executors.newFixedThreadPool(maxConcurrentLoads, r -> {
         Thread t = new Thread(r, "screenshot-loader");
         t.setDaemon(true);
@@ -110,15 +124,30 @@ public class ScreenshotViewerScreen extends Screen {
     }
 
     public ScreenshotViewerScreen() {
-        super(Component.literal("Screenshots"));
+        super(Component.translatable("screenshotsViewer.title"));
     }
 
     @Override
     protected void init() {
         super.init();
+        computePanelBounds();
         loadEntries();
         recalcLayout();
         schedulePrefetch(scrollY);
+
+        int y = this.height - 24;
+
+        this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, btn ->
+            Minecraft.getInstance().setScreen(null)
+        ).bounds(this.width / 2 + 82, y, 72, 20).build());
+    }
+
+    private void computePanelBounds() {
+        int sideMargin = 20;
+        panelX = sideMargin;
+        panelW = Math.max(100, this.width - sideMargin * 2);
+        panelY = panelTopBottomPadding;
+        panelH = Math.max(100, this.height - panelTopBottomPadding * 2);
     }
 
     @Override
@@ -165,6 +194,7 @@ public class ScreenshotViewerScreen extends Screen {
             if (offsetInRow < 0) offsetInRow = 0;
         }
 
+        computePanelBounds();
         recalcLayout();
 
         if (!rowY.isEmpty()) {
@@ -180,14 +210,10 @@ public class ScreenshotViewerScreen extends Screen {
         columns = Mth.clamp(columns, MIN_COLUMNS, MAX_COLUMNS);
 
         int totalGap = (columns + 1) * gap;
-        thumbWidth = Math.max(48, (this.width - totalGap) / columns);
+        thumbWidth = Math.max(48, (panelW - totalGap) / columns);
 
         fixedRowImageHeight = (int) (thumbWidth * avgAspectRatio);
-        fixedRowImageHeight = Mth.clamp(
-                fixedRowImageHeight,
-                thumbWidth * 9 / 16,
-                thumbWidth * 3 / 2
-        );
+        fixedRowImageHeight = Mth.clamp(fixedRowImageHeight, thumbWidth * 9 / 16, thumbWidth * 3 / 2);
 
         int rowHeight = fixedRowImageHeight + captionHeight + 2;
 
@@ -200,17 +226,16 @@ public class ScreenshotViewerScreen extends Screen {
             rowHeights.add(rowHeight);
         }
 
-        int curY = gap;
+        int curY = 2;
         for (int h : rowHeights) {
             rowY.add(curY);
             curY += h + gap;
         }
 
         contentHeight = curY;
-        maxScrollY = Math.max(0, contentHeight - (this.height - 60));
+        maxScrollY = Math.max(0, contentHeight - panelH + 10);
         scrollY = Mth.clamp(scrollY, 0, maxScrollY);
     }
-
 
     private int findRowAt(int scroll) {
         for (int i = 0; i < rowY.size(); i++) {
@@ -228,7 +253,7 @@ public class ScreenshotViewerScreen extends Screen {
         while (firstRow < rowY.size() && rowY.get(firstRow) + rowHeights.get(firstRow) < scrollPixel - gap) firstRow++;
 
         int visibleRows = 0;
-        int h = this.height;
+        int h = panelH;
         for (int r = firstRow; r < rowY.size(); r++) {
             int y = rowY.get(r) - scrollPixel;
             if (y > h) break;
@@ -238,13 +263,16 @@ public class ScreenshotViewerScreen extends Screen {
         int visibleStart = Math.max(0, firstRow * columns);
         int visibleEnd = Math.min(entries.size(), (firstRow + visibleRows) * columns);
 
+        startLoadingRange(visibleStart, visibleEnd);
+
         int lastRow = Math.min(rowHeights.size(), firstRow + visibleRows + prefetchRows + 3);
         int prefetchEnd = Math.min(entries.size(), lastRow * columns);
 
-        startLoadingRange(visibleStart, visibleEnd);
         if (visibleEnd < prefetchEnd) startLoadingRange(visibleEnd, prefetchEnd);
 
-        unloadFar(Math.max(0, visibleStart - (prefetchRows + 2) * columns), Math.min(entries.size(), prefetchEnd + (prefetchRows + 2) * columns));
+        int keepStart = Math.max(0, visibleStart - (prefetchRows + 2) * columns);
+        int keepEnd = Math.min(entries.size(), prefetchEnd + (prefetchRows + 2) * columns);
+        unloadFar(keepStart, keepEnd);
     }
 
     private void startLoadingRange(int startInclusive, int endExclusive) {
@@ -325,7 +353,7 @@ public class ScreenshotViewerScreen extends Screen {
     private void unloadFar(int keepStart, int keepEnd) {
         TextureManager tm = Minecraft.getInstance().getTextureManager();
         for (int i = 0; i < entries.size(); i++) {
-            if (i < keepStart || i > keepEnd) {
+            if (i < keepStart || i >= keepEnd) {
                 Entry e = entries.get(i);
                 if (e == fullscreenEntry) continue;
                 if (e.resource != null || e.dynamicTexture != null || e.loaded || e.loading) {
@@ -340,7 +368,7 @@ public class ScreenshotViewerScreen extends Screen {
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
-        int step = rowHeights.isEmpty() ? thumbWidth + gap : rowHeights.get(Math.min(0, rowHeights.size() - 1));
+        int step = rowHeights.isEmpty() ? thumbWidth + gap : rowHeights.get(0);
         scrollY -= (int) (delta * step);
         scrollY = Mth.clamp(scrollY, 0, maxScrollY);
         lastScrollTime = System.currentTimeMillis();
@@ -357,13 +385,20 @@ public class ScreenshotViewerScreen extends Screen {
             return true;
         }
 
+        if (mouseX < panelX || mouseX > panelX + panelW || mouseY < panelY || mouseY > panelY + panelH) {
+            selectedIndex = -1;
+            lastClickIndex = -1;
+            lastClickTime = 0;
+            return super.mouseClicked(mouseX, mouseY, button);
+        }
+
         int idx = 0;
         boolean clickedOnAny = false;
         for (int row = 0; row < rowHeights.size(); row++) {
             for (int col = 0; col < columns; col++) {
                 if (idx >= entries.size()) break;
-                int x = gap + col * (thumbWidth + gap);
-                int y = rowY.get(row) - scrollY;
+                int x = panelX + gap + col * (thumbWidth + gap);
+                int y = panelY + rowY.get(row) - scrollY;
                 int rowH = rowHeights.get(row);
                 int imageH = rowH - captionHeight - 2;
                 if (mouseX >= x && mouseX <= x + thumbWidth && mouseY >= y && mouseY <= y + imageH) {
@@ -410,10 +445,11 @@ public class ScreenshotViewerScreen extends Screen {
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
-
     @Override
-    public void render(GuiGraphics pose, int mouseX, int mouseY, float partialTick) {
-        renderBackground(pose);
+    public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTick) {
+        renderBackground(gui);
+
+        gui.drawCenteredString(this.font, Component.translatable("screenshotsViewer.title"), this.width / 2, 10, 0xFFFFFF);
 
         if (layoutDirty && (System.currentTimeMillis() - lastScrollTime) > SCROLL_GRACE_MS) {
             recalcLayoutPreserveAnchor();
@@ -437,10 +473,10 @@ public class ScreenshotViewerScreen extends Screen {
             int offsetY = (this.height - drawH) / 2;
 
             RenderSystem.setShaderTexture(0, fullscreenEntry.resource);
-            pose.blit(fullscreenEntry.resource, offsetX, offsetY, 0, 0, drawW, drawH, drawW, drawH);
+            gui.blit(fullscreenEntry.resource, offsetX, offsetY, 0, 0, drawW, drawH, drawW, drawH);
 
-            pose.drawCenteredString(this.font, fullscreenEntry.path.getFileName().toString(), this.width / 2, offsetY + drawH + 4, 0xFFFFFF);
-            super.render(pose, mouseX, mouseY, partialTick);
+            gui.drawCenteredString(this.font, fullscreenEntry.path.getFileName().toString(), this.width / 2, offsetY + drawH + 4, 0xFFFFFF);
+            super.render(gui, mouseX, mouseY, partialTick);
             return;
         } else if (fullscreen && fullscreenEntry != null) {
             int padding = gap * 3;
@@ -450,33 +486,63 @@ public class ScreenshotViewerScreen extends Screen {
             int boxH = boxW;
             int offsetX = (this.width - boxW) / 2;
             int offsetY = (this.height - boxH) / 2;
-            pose.fill(offsetX, offsetY, offsetX + boxW, offsetY + boxH, 0xFF333333);
-            pose.drawCenteredString(this.font, fullscreenEntry.loading ? "loading..." : "no image", this.width / 2, offsetY + boxH / 2 - 6, 0xFFFFFF);
-            pose.drawCenteredString(this.font, fullscreenEntry.path.getFileName().toString(), this.width / 2, offsetY + boxH + 4, 0xFFFFFF);
-            super.render(pose, mouseX, mouseY, partialTick);
+            gui.fill(offsetX, offsetY, offsetX + boxW, offsetY + boxH, 0xFF333333);
+            gui.drawCenteredString(this.font, fullscreenEntry.loading ? "loading..." : "no image", this.width / 2, offsetY + boxH / 2 - 6, 0xFFFFFF);
+            gui.drawCenteredString(this.font, fullscreenEntry.path.getFileName().toString(), this.width / 2, offsetY + boxH + 4, 0xFFFFFF);
+            super.render(gui, mouseX, mouseY, partialTick);
             return;
         }
 
+        gui.fill(0, panelY - 3, this.width, panelY, DARK_BAR_COLOR);
+        gui.fill(0, panelY + panelH, this.width, panelY + panelH + 3, DARK_BAR_COLOR);
+
+        gui.fill(0, panelY, this.width, panelY + panelH, 0x88000000);
+
         if (rowHeights.isEmpty()) recalcLayout();
+
+        gui.enableScissor(panelX, panelY, panelX + panelW, panelY + panelH);
 
         int totalRows = rowHeights.size();
         int idx = 0;
         for (int row = 0; row < totalRows; row++) {
-            int y = rowY.get(row) - scrollY;
+            int y = panelY + rowY.get(row) - scrollY;
             int rowH = rowHeights.get(row);
             for (int col = 0; col < columns; col++) {
                 if (idx >= entries.size()) break;
-                int x = gap + col * (thumbWidth + gap);
+                int x = panelX + gap + col * (thumbWidth + gap);
                 Entry e = entries.get(idx);
-                renderThumbnailSafe(pose, e, x, y, rowH, idx);
+                renderThumbnailSafe(gui, e, x, y, rowH, idx);
                 idx++;
             }
         }
 
+        gui.disableScissor();
+
         int total = list == null ? entries.size() : list.size();
-        pose.drawString(this.font, "Screenshots: " + total, gap, this.height - gap, 0xFFFFFF);
-        super.render(pose, mouseX, mouseY, partialTick);
+        int totalTextY = panelY + contentHeight - gap - this.font.lineHeight - scrollY + 12;
+
+        if (totalTextY + this.font.lineHeight >= panelY && totalTextY <= panelY + panelH) {
+            gui.drawCenteredString(this.font, "Screenshots: " + total, this.width / 2, totalTextY, 0xFFFFFF);
+        }
+
+
+        super.render(gui, mouseX, mouseY, partialTick);
     }
+
+    private String ellipsize(String text, int maxWidth) {
+        var font = this.font;
+
+        if (font.width(text) <= maxWidth) {
+            return text;
+        }
+
+        String dots = "...";
+        int dotsWidth = font.width(dots);
+
+        String cut = font.plainSubstrByWidth(text, maxWidth - dotsWidth);
+        return cut + dots;
+    }
+
 
     private void renderThumbnailSafe(GuiGraphics pose, Entry e, int x, int y, int rowHeight, int index) {
         int imageH = rowHeight - captionHeight - 2;
@@ -493,7 +559,7 @@ public class ScreenshotViewerScreen extends Screen {
             pose.blit(e.resource, x, offsetY, 0, 0, drawW, drawH, drawW, drawH);
         } else {
             int estH = Math.min((int) (thumbWidth * avgAspectRatio), imageH);
-            int offsetY = y + (imageH - estH) / 2;
+            int offsetY = y + Math.max(0, (imageH - estH) / 2);
             drawPlaceholder(pose, x, offsetY, thumbWidth, estH, e.loading);
         }
 
@@ -513,16 +579,13 @@ public class ScreenshotViewerScreen extends Screen {
             pose.fill(bx2 - SELECT_BORDER_THICKNESS, by1, bx2, by2, SELECT_BORDER_COLOR);
         }
 
-        pose.drawString(this.font, e.path.getFileName().toString(), x, y + rowHeight - captionHeight, 0xCCCCCC);
+        String name = e.path.getFileName().toString();
+        pose.drawString(this.font, ellipsize(name, thumbWidth), x, y + rowHeight - captionHeight, 0xCCCCCC);
     }
-
-    private static final int SELECT_BORDER_COLOR = 0xFFFFFFFF;
-    private static final int SELECT_BORDER_THICKNESS = 1;
-
 
     private void drawPlaceholder(GuiGraphics pose, int x, int y, int w, int h, boolean loading) {
         pose.fill(x, y, x + w, y + h, 0xFF333333);
-        pose.drawCenteredString(this.font, Component.translatable("screenshots.loading" + (loading ? "Image" : "Error")), x + w / 2, y + h / 2 - 4, 0xFFFFFF);
+        pose.drawCenteredString(this.font, Component.translatable("screenshotsViewer.loading" + (loading ? "Image" : "Error")), x + w / 2, y + h / 2 - 4, 0xFFFFFF);
     }
 
     @Override
