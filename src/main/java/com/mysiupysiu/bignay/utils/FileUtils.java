@@ -48,6 +48,10 @@ public class FileUtils {
         return file.delete();
     }
 
+    public static boolean delete(Path path) {
+        return deleteWorld(path.toFile());
+    }
+
     public static boolean deleteWorld(File file) {
         if (!file.isDirectory()) throw new IllegalArgumentException("File is File (Not a folder)");
 

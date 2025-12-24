@@ -6,7 +6,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.network.chat.CommonComponents;
@@ -64,6 +63,8 @@ public class ScreenshotViewerScreen extends Screen {
     private List<Path> list;
 
     private final List<Entry> entries = new ArrayList<>();
+
+    private Button openButton;
 
     private final int maxConcurrentLoads = Math.min(8, Math.max(3, Runtime.getRuntime().availableProcessors()));
     private final ExecutorService loader = Executors.newFixedThreadPool(maxConcurrentLoads, r -> {
@@ -137,9 +138,34 @@ public class ScreenshotViewerScreen extends Screen {
 
         int y = this.height - 24;
 
+        this.openButton = Button.builder(
+                Component.translatable("screenshotsViewer.open"),
+                btn -> {
+                    if (selectedIndex < 0 || selectedIndex >= entries.size()) return;
+
+                    Entry e = entries.get(selectedIndex);
+                    fullscreen = true;
+                    fullscreenEntry = e;
+
+                    if ((!e.loaded && !e.loading) || e.failed) {
+                        synchronized (queuedIndices) {
+                            if (!queuedIndices.get(selectedIndex) && !e.loading && !e.loaded) {
+                                queuedIndices.set(selectedIndex);
+                                e.loading = true;
+                                final int idx = selectedIndex;
+                                loader.submit(() -> loadEntry(idx));
+                            }
+                        }
+                    }
+                }
+        ).bounds(this.width / 2 - 154, y, 72, 20).build();
+
+
+        this.addRenderableWidget(openButton);
         this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, btn ->
             Minecraft.getInstance().setScreen(null)
         ).bounds(this.width / 2 + 82, y, 72, 20).build());
+        updateButtons();
     }
 
     private void computePanelBounds() {
@@ -386,9 +412,13 @@ public class ScreenshotViewerScreen extends Screen {
         }
 
         if (mouseX < panelX || mouseX > panelX + panelW || mouseY < panelY || mouseY > panelY + panelH) {
-            selectedIndex = -1;
-            lastClickIndex = -1;
-            lastClickTime = 0;
+
+            if (!isMouseOverButton(mouseX, mouseY)) {
+                selectedIndex = -1;
+                lastClickIndex = -1;
+                lastClickTime = 0;
+            }
+
             return super.mouseClicked(mouseX, mouseY, button);
         }
 
@@ -424,10 +454,12 @@ public class ScreenshotViewerScreen extends Screen {
                         lastClickIndex = -1;
                         lastClickTime = 0;
                         selectedIndex = idx;
+                        updateButtons();
                     } else {
                         selectedIndex = idx;
                         lastClickIndex = idx;
                         lastClickTime = now;
+                        updateButtons();
                     }
 
                     return true;
@@ -600,5 +632,22 @@ public class ScreenshotViewerScreen extends Screen {
             return true;
         }
         return super.keyPressed(key, scancode, modifiers);
+    }
+
+    private boolean isMouseOverButton(double mouseX, double mouseY) {
+        for (var w : this.renderables) {
+            if (w instanceof Button b) {
+                if (mouseX >= b.getX() && mouseX <= b.getX() + b.getWidth()
+                        && mouseY >= b.getY() && mouseY <= b.getY() + b.getHeight()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    private void updateButtons() {
+        openButton.active = selectedIndex != -1;
     }
 }
