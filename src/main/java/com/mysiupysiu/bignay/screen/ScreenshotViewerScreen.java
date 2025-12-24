@@ -554,7 +554,7 @@ public class ScreenshotViewerScreen extends Screen {
         int totalTextY = panelY + contentHeight - gap - this.font.lineHeight - scrollY + 12;
 
         if (totalTextY + this.font.lineHeight >= panelY && totalTextY <= panelY + panelH) {
-            gui.drawCenteredString(this.font, "Screenshots: " + total, this.width / 2, totalTextY, 0xFFFFFF);
+            gui.drawCenteredString(this.font, Component.translatable("screenshotsViewer.count", total), this.width / 2, totalTextY, 0xFFFFFF);
         }
 
 

@@ -113,7 +113,7 @@ abstract class AbstractFileChooserScreen extends Screen {
         this.renderBackground(graphics);
         graphics.drawCenteredString(this.font, this.title, this.width / 2, MARGIN - 10, 0xFFFFFF);
 
-        graphics.drawString(this.font, "Current path: " + currentDir.toString(), MARGIN, MARGIN + 28, 0xAAAAAA, false);
+        graphics.drawString(this.font, Component.translatable("fileChooser.currentPath", currentDir.toString()), MARGIN, MARGIN + 28, 0xAAAAAA, false);
 
         refreshButton.setTooltip(Tooltip.create(Component.translatable("fileChooser.refresh.description")));
         refreshButton.setTooltipDelay(200);
