@@ -21,7 +21,6 @@ public class ScreenshotView extends Screen {
     private final Screen parent;
 
     private ResourceLocation texture;
-    private DynamicTexture dynamicTexture;
     private int imgW, imgH;
     private boolean failed = false;
 
@@ -38,29 +37,29 @@ public class ScreenshotView extends Screen {
         int y = this.height - 24;
 
         this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, btn ->
-                Minecraft.getInstance().setScreen(parent)
+                Minecraft.getInstance().setScreen(this.parent)
         ).bounds(this.width / 2 + 82, y, 72, 20).build());
     }
 
     private void loadImage() {
-        try (InputStream is = Files.newInputStream(Minecraft.getInstance().gameDirectory.toPath().resolve("screenshots").resolve(name))) {
+        try (InputStream is = Files.newInputStream(Minecraft.getInstance().gameDirectory.toPath().resolve("screenshots").resolve(this.name))) {
             NativeImage img = NativeImage.read(is);
-            imgW = img.getWidth();
-            imgH = img.getHeight();
+            this.imgW = img.getWidth();
+            this.imgH = img.getHeight();
 
-            dynamicTexture = new DynamicTexture(img);
-            texture = new ResourceLocation("bignay", "screenshot_full_" + UUID.randomUUID());
+            DynamicTexture dynamicTexture = new DynamicTexture(img);
+            this.texture = new ResourceLocation("bignay", "screenshot_full_" + UUID.randomUUID());
 
             Minecraft.getInstance().getTextureManager().register(texture, dynamicTexture);
         } catch (Exception e) {
-            failed = true;
+            this.failed = true;
         }
     }
 
     @Override
     public void removed() {
-        if (texture != null) {
-            Minecraft.getInstance().getTextureManager().release(texture);
+        if (this.texture != null) {
+            Minecraft.getInstance().getTextureManager().release(this.texture);
         }
     }
 
@@ -68,7 +67,7 @@ public class ScreenshotView extends Screen {
     public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTick) {
         renderBackground(gui);
 
-        if (failed || texture == null) {
+        if (this.failed || this.texture == null) {
             gui.drawCenteredString(this.font, Component.translatable("screenshotsViewer.loadingError"), this.width / 2, this.height / 2, 0xFFFFFF);
             return;
         }
@@ -84,10 +83,10 @@ public class ScreenshotView extends Screen {
         int x = (this.width - drawW) / 2;
         int y = (this.height - drawH) / 2;
 
-        RenderSystem.setShaderTexture(0, texture);
-        gui.blit(texture, x, y, 0, 0, drawW, drawH, drawW, drawH);
+        RenderSystem.setShaderTexture(0, this.texture);
+        gui.blit(this.texture, x, y, 0, 0, drawW, drawH, drawW, drawH);
 
-        gui.drawCenteredString(this.font, name, this.width / 2, 7, 0xFFFFFF);
+        gui.drawCenteredString(this.font, this.name, this.width / 2, 7, 0xFFFFFF);
         super.render(gui, mouseX, mouseY, partialTick);
     }
 

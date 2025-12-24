@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.events;
 
-import com.mysiupysiu.bignay.screen.ScreenshotViewerScreen;
+import com.mysiupysiu.bignay.screen.ScreenshotsViewerScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -32,7 +32,7 @@ public class TitleScreenEvent {
 
         event.removeListener(realms);
 
-        Button screenshots = Button.builder(Component.translatable("menu.screenshots"), b -> Minecraft.getInstance().setScreen(new ScreenshotViewerScreen()))
+        Button screenshots = Button.builder(Component.translatable("menu.screenshots"), b -> Minecraft.getInstance().setScreen(new ScreenshotsViewerScreen()))
                 .bounds(pos[0], pos[1], pos[2], pos[3]).build();
 
         Method addRenderableWidget;

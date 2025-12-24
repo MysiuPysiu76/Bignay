@@ -23,7 +23,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
-public class ScreenshotViewerScreen extends Screen {
+public class ScreenshotsViewerScreen extends Screen {
     private static final Path SCREENSHOTS_DIR = Minecraft.getInstance().gameDirectory.toPath().resolve("screenshots");
 
     private int columns = 4;
@@ -37,7 +37,7 @@ public class ScreenshotViewerScreen extends Screen {
 
     private int fixedRowImageHeight;
 
-    private int selectedIndex = -1;
+    private final Set<Integer> selectedIndices = new HashSet<>();
     private long lastClickTime = 0L;
     private int lastClickIndex = -1;
     private static final long DOUBLE_CLICK_MS = 350L;
@@ -119,7 +119,7 @@ public class ScreenshotViewerScreen extends Screen {
         }
     }
 
-    public ScreenshotViewerScreen() {
+    public ScreenshotsViewerScreen() {
         super(Component.translatable("screenshotsViewer.title"));
     }
 
@@ -134,7 +134,14 @@ public class ScreenshotViewerScreen extends Screen {
         int y = this.height - 24;
 
         this.openButton = Button.builder(Component.translatable("screenshotsViewer.open"), btn ->
-                Minecraft.getInstance().setScreen(new ScreenshotView(list.get(selectedIndex).getFileName().toString(), this))
+                {
+                    int idx = lastClickIndex;
+                    if (idx >= 0) {
+                        Minecraft.getInstance().setScreen(new ScreenshotView(list.get(idx).getFileName().toString(), this)
+                        );
+                    }
+
+                }
         ).bounds(this.width / 2 - 154, y, 72, 20).build();
 
         this.addRenderableWidget(openButton);
@@ -380,50 +387,67 @@ public class ScreenshotViewerScreen extends Screen {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
+
         if (mouseX < panelX || mouseX > panelX + panelW || mouseY < panelY || mouseY > panelY + panelH) {
 
             if (!isMouseOverButton(mouseX, mouseY)) {
-                selectedIndex = -1;
+                selectedIndices.clear();
                 lastClickIndex = -1;
                 lastClickTime = 0;
+                updateButtons();
             }
 
             return super.mouseClicked(mouseX, mouseY, button);
         }
 
         int idx = 0;
-        boolean clickedOnAny = false;
+
         for (int row = 0; row < rowHeights.size(); row++) {
             for (int col = 0; col < columns; col++) {
                 if (idx >= entries.size()) break;
+
                 int x = panelX + gap + col * (thumbWidth + gap);
                 int y = panelY + rowY.get(row) - scrollY;
                 int rowH = rowHeights.get(row);
                 int imageH = rowH - captionHeight - 2;
+
                 if (mouseX >= x && mouseX <= x + thumbWidth && mouseY >= y && mouseY <= y + imageH) {
-                    clickedOnAny = true;
+
                     long now = System.currentTimeMillis();
 
-                    if (lastClickIndex == idx && now - lastClickTime <= DOUBLE_CLICK_MS) {
-                        Minecraft.getInstance().setScreen(new ScreenshotView(list.get(idx).getFileName().toString(), this));
-                    } else {
-                        selectedIndex = idx;
-                        lastClickIndex = idx;
-                        lastClickTime = now;
-                        updateButtons();
+                    if (idx == lastClickIndex && now - lastClickTime <= DOUBLE_CLICK_MS) {
+                        Minecraft.getInstance().setScreen(
+                                new ScreenshotView(list.get(idx).getFileName().toString(), this)
+                        );
+                        return true;
                     }
 
+                    boolean ctrl = Screen.hasControlDown();
+                    boolean shift = Screen.hasShiftDown();
+
+                    if (shift && lastClickIndex != -1) {
+                        selectRange(lastClickIndex, idx);
+                    } else if (ctrl) {
+                        toggleSelection(idx);
+                    } else {
+                        selectedIndices.clear();
+                        selectedIndices.add(idx);
+                        lastClickIndex = idx;
+                    }
+
+                    lastClickTime = now;
+                    updateButtons();
                     return true;
                 }
+
                 idx++;
             }
         }
 
-        if (!clickedOnAny) {
-            selectedIndex = -1;
-            lastClickIndex = -1;
-            lastClickTime = 0;
-        }
+        selectedIndices.clear();
+        lastClickIndex = -1;
+        lastClickTime = 0;
+        updateButtons();
 
         return super.mouseClicked(mouseX, mouseY, button);
     }
@@ -475,6 +499,26 @@ public class ScreenshotViewerScreen extends Screen {
         super.render(gui, mouseX, mouseY, partialTick);
     }
 
+    private void selectRange(int from, int to) {
+        selectedIndices.clear();
+
+        int start = Math.min(from, to);
+        int end = Math.max(from, to);
+
+        for (int i = start; i <= end; i++) {
+            selectedIndices.add(i);
+        }
+    }
+
+    private void toggleSelection(int idx) {
+        if (selectedIndices.contains(idx)) {
+            selectedIndices.remove(idx);
+        } else {
+            selectedIndices.add(idx);
+        }
+        lastClickIndex = idx;
+    }
+
     private String ellipsize(String text, int maxWidth) {
         var font = this.font;
 
@@ -489,10 +533,9 @@ public class ScreenshotViewerScreen extends Screen {
         return cut + dots;
     }
 
-
     private void renderThumbnailSafe(GuiGraphics pose, Entry e, int x, int y, int rowHeight, int index) {
         int imageH = rowHeight - captionHeight - 2;
-        boolean selected = (index == selectedIndex);
+        boolean selected = selectedIndices.contains(index);
 
         if (e.resource != null && e.loaded && e.origWidth > 0 && e.origHeight > 0) {
             double scale = (double) thumbWidth / e.origWidth;
@@ -536,9 +579,14 @@ public class ScreenshotViewerScreen extends Screen {
 
     @Override
     public boolean keyPressed(int key, int scancode, int modifiers) {
+        if (key == 65 && hasControlDown()) { // A + Ctrl
+            selectAll();
+            return true;
+        }
+
         if (key == 256) { // ESC
-            Minecraft.getInstance().setScreen(null);
             close();
+            Minecraft.getInstance().setScreen(null);
             return true;
         }
         return super.keyPressed(key, scancode, modifiers);
@@ -556,7 +604,15 @@ public class ScreenshotViewerScreen extends Screen {
         return false;
     }
 
+    private void selectAll() {
+        selectedIndices.clear();
+        for (int i = 0; i < entries.size(); i++) {
+            selectedIndices.add(i);
+        }
+        updateButtons();
+    }
+
     private void updateButtons() {
-        openButton.active = selectedIndex != -1;
+        this.openButton.active = selectedIndices.size() == 1;
     }
 }
