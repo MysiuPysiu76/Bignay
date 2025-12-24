@@ -2,6 +2,7 @@ package com.mysiupysiu.bignay.screen;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mysiupysiu.bignay.screen.file.chooser.FolderChooserScreen;
 import com.mysiupysiu.bignay.utils.FileUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -12,8 +13,10 @@ import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.UUID;
 
 public class ScreenshotView extends Screen {
@@ -36,6 +39,9 @@ public class ScreenshotView extends Screen {
         loadImage();
 
         int y = this.height - 24;
+
+        this.addRenderableWidget(Button.builder(Component.translatable("screenshotsViewer.export"), btn -> export())
+                .bounds(this.width / 2 - 76, y, 72, 20).build());
 
         this.addRenderableWidget(Button.builder(Component.translatable("screenshotsViewer.delete"), btn -> delete())
                 .bounds(this.width / 2 + 4, y, 72, 20).build());
@@ -107,7 +113,29 @@ public class ScreenshotView extends Screen {
     }
 
     private void delete() {
-        FileUtils.delete(Minecraft.getInstance().gameDirectory.toPath().resolve("screenshots").resolve(this.name));
+        FileUtils.delete(getFile());
         back();
+    }
+
+    private void export() {
+        FolderChooserScreen folderChooserScreen = new FolderChooserScreen();
+        folderChooserScreen.setPreviousScreen(this);
+        folderChooserScreen.setOnConfirm(f -> {
+            export(f.toPath());
+            back();
+        });
+        Minecraft.getInstance().setScreen(folderChooserScreen);
+    }
+
+    private void export(Path destination) {
+        try {
+            Files.copy(getFile(), destination.resolve(this.name));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private Path getFile() {
+        return Minecraft.getInstance().gameDirectory.toPath().resolve("screenshots").resolve(this.name);
     }
 }

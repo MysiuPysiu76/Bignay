@@ -1,13 +1,20 @@
 package com.mysiupysiu.bignay.utils;
 
+import net.minecraft.network.chat.Component;
+
+import javax.xml.stream.events.Comment;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+import java.util.zip.ZipOutputStream;
 
 public class FileUtils {
 
@@ -82,5 +89,29 @@ public class FileUtils {
 
     public static FileType getFileType(File file) {
         return FileType.fromExtension(getExtension(file.getName()));
+    }
+
+    public static void zipFiles(List<Path> files, Path outputZip) {
+        try (ZipOutputStream zos = new ZipOutputStream(new BufferedOutputStream(Files.newOutputStream(outputZip)))) {
+            byte[] buffer = new byte[8192];
+
+            for (Path file : files) {
+                if (!Files.isRegularFile(file)) continue;
+
+                ZipEntry entry = new ZipEntry(file.getFileName().toString());
+                zos.putNextEntry(entry);
+
+                try (InputStream in = Files.newInputStream(file)) {
+                    int len;
+                    while ((len = in.read(buffer)) > 0) {
+                        zos.write(buffer, 0, len);
+                    }
+                }
+
+                zos.closeEntry();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

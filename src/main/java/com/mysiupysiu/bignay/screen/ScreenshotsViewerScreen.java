@@ -2,6 +2,7 @@ package com.mysiupysiu.bignay.screen;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mysiupysiu.bignay.screen.file.chooser.FolderChooserScreen;
 import com.mysiupysiu.bignay.utils.FileUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -19,10 +20,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ScreenshotsViewerScreen extends Screen {
     private static final Path SCREENSHOTS_DIR = Minecraft.getInstance().gameDirectory.toPath().resolve("screenshots");
@@ -65,6 +69,7 @@ public class ScreenshotsViewerScreen extends Screen {
     private final List<Entry> entries = new ArrayList<>();
 
     private Button openButton;
+    private Button exportButton;
     private Button deleteButton;
 
     private final int maxConcurrentLoads = Math.min(8, Math.max(3, Runtime.getRuntime().availableProcessors()));
@@ -146,12 +151,15 @@ public class ScreenshotsViewerScreen extends Screen {
                 }
         ).bounds(this.width / 2 - 154, y, 72, 20).build();
 
+        this.exportButton = Button.builder(Component.translatable("screenshotsViewer.export"), btn -> exportSelected())
+                .bounds(this.width / 2 - 76, y, 72, 20).build();
 
         this.deleteButton = Button.builder(Component.translatable("screenshotsViewer.delete"), btn ->
                 deleteSelected()
         ).bounds(this.width / 2 + 4, y, 72, 20).build();
 
         this.addRenderableWidget(openButton);
+        this.addRenderableWidget(exportButton);
         this.addRenderableWidget(deleteButton);
         this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, btn -> {
             close();
@@ -622,14 +630,28 @@ public class ScreenshotsViewerScreen extends Screen {
 
     private void updateButtons() {
         this.openButton.active = selectedIndices.size() == 1;
+        this.exportButton.active = !selectedIndices.isEmpty();
         this.deleteButton.active = !selectedIndices.isEmpty();
     }
 
-    private void deleteSelected() {
-        selectedIndices.stream()
+    private Stream<Path> getSelected() {
+        return this.selectedIndices.stream()
                 .sorted(Comparator.reverseOrder())
-                .map(i -> entries.get(i).path)
-                .forEach(FileUtils::delete);
+                .map(i -> entries.get(i).path);
+    }
+
+    private void exportSelected() {
+        FolderChooserScreen folderChooserScreen = new FolderChooserScreen();
+        folderChooserScreen.setPreviousScreen(this);
+        folderChooserScreen.setOnConfirm(f -> {
+            FileUtils.zipFiles(getSelected().toList(), f.toPath().resolve(Component.translatable("screenshotsViewer.export.fileName", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy-HH-mm"))).getString()));
+            Minecraft.getInstance().setScreen(this);
+        });
+        Minecraft.getInstance().setScreen(folderChooserScreen);
+    }
+
+    private void deleteSelected() {
+        getSelected().forEach(FileUtils::delete);
         selectedIndices.clear();
         loadEntries();
         recalcLayout();
