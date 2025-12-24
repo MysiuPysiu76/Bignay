@@ -2,6 +2,7 @@ package com.mysiupysiu.bignay.screen;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mysiupysiu.bignay.utils.FileUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -64,6 +65,7 @@ public class ScreenshotsViewerScreen extends Screen {
     private final List<Entry> entries = new ArrayList<>();
 
     private Button openButton;
+    private Button deleteButton;
 
     private final int maxConcurrentLoads = Math.min(8, Math.max(3, Runtime.getRuntime().availableProcessors()));
     private final ExecutorService loader = Executors.newFixedThreadPool(maxConcurrentLoads, r -> {
@@ -144,7 +146,13 @@ public class ScreenshotsViewerScreen extends Screen {
                 }
         ).bounds(this.width / 2 - 154, y, 72, 20).build();
 
+
+        this.deleteButton = Button.builder(Component.translatable("screenshotsViewer.delete"), btn ->
+                deleteSelected()
+        ).bounds(this.width / 2 + 4, y, 72, 20).build();
+
         this.addRenderableWidget(openButton);
+        this.addRenderableWidget(deleteButton);
         this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, btn -> {
             close();
             Minecraft.getInstance().setScreen(null);
@@ -614,5 +622,18 @@ public class ScreenshotsViewerScreen extends Screen {
 
     private void updateButtons() {
         this.openButton.active = selectedIndices.size() == 1;
+        this.deleteButton.active = !selectedIndices.isEmpty();
+    }
+
+    private void deleteSelected() {
+        selectedIndices.stream()
+                .sorted(Comparator.reverseOrder())
+                .map(i -> entries.get(i).path)
+                .forEach(FileUtils::delete);
+        selectedIndices.clear();
+        loadEntries();
+        recalcLayout();
+        schedulePrefetch(scrollY);
+        updateButtons();
     }
 }

@@ -118,6 +118,7 @@
   "block.bignay.verdant_roots": "Verdant Roots",
   "menu.screenshots": "Screenshots",
   "screenshotsViewer.loadingImage": "Loading image...",
+  "screenshotsViewer.delete": "Delete",
   "screenshotsViewer.loadingError": "Error while loading",
   "screenshotsViewer.count": "Screenshots: %s",
   "screenshotsViewer.title": "Screenshots Viewer",

@@ -2,6 +2,7 @@ package com.mysiupysiu.bignay.screen;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mysiupysiu.bignay.utils.FileUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -36,24 +37,11 @@ public class ScreenshotView extends Screen {
 
         int y = this.height - 24;
 
-        this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, btn ->
-                Minecraft.getInstance().setScreen(this.parent)
-        ).bounds(this.width / 2 + 82, y, 72, 20).build());
-    }
+        this.addRenderableWidget(Button.builder(Component.translatable("screenshotsViewer.delete"), btn -> delete())
+                .bounds(this.width / 2 + 4, y, 72, 20).build());
 
-    private void loadImage() {
-        try (InputStream is = Files.newInputStream(Minecraft.getInstance().gameDirectory.toPath().resolve("screenshots").resolve(this.name))) {
-            NativeImage img = NativeImage.read(is);
-            this.imgW = img.getWidth();
-            this.imgH = img.getHeight();
-
-            DynamicTexture dynamicTexture = new DynamicTexture(img);
-            this.texture = new ResourceLocation("bignay", "screenshot_full_" + UUID.randomUUID());
-
-            Minecraft.getInstance().getTextureManager().register(texture, dynamicTexture);
-        } catch (Exception e) {
-            this.failed = true;
-        }
+        this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, btn -> back())
+                .bounds(this.width / 2 + 82, y, 72, 20).build());
     }
 
     @Override
@@ -97,5 +85,29 @@ public class ScreenshotView extends Screen {
             return true;
         }
         return super.keyPressed(key, scancode, modifiers);
+    }
+
+    private void loadImage() {
+        try (InputStream is = Files.newInputStream(Minecraft.getInstance().gameDirectory.toPath().resolve("screenshots").resolve(this.name))) {
+            NativeImage img = NativeImage.read(is);
+            this.imgW = img.getWidth();
+            this.imgH = img.getHeight();
+
+            DynamicTexture dynamicTexture = new DynamicTexture(img);
+            this.texture = new ResourceLocation("bignay", "screenshot_full_" + UUID.randomUUID());
+
+            Minecraft.getInstance().getTextureManager().register(texture, dynamicTexture);
+        } catch (Exception e) {
+            this.failed = true;
+        }
+    }
+
+    private void back() {
+        Minecraft.getInstance().setScreen(this.parent);
+    }
+
+    private void delete() {
+        FileUtils.delete(Minecraft.getInstance().gameDirectory.toPath().resolve("screenshots").resolve(this.name));
+        back();
     }
 }

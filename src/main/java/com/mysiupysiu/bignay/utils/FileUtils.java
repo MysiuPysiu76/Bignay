@@ -49,7 +49,7 @@ public class FileUtils {
     }
 
     public static boolean delete(Path path) {
-        return deleteWorld(path.toFile());
+        return delete(path.toFile());
     }
 
     public static boolean deleteWorld(File file) {
