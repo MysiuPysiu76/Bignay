@@ -140,16 +140,12 @@ public class ScreenshotsViewerScreen extends Screen {
 
         int y = this.height - 24;
 
-        this.openButton = Button.builder(Component.translatable("screenshotsViewer.open"), btn ->
-                {
+        this.openButton = Button.builder(Component.translatable("screenshotsViewer.open"), btn -> {
                     int idx = lastClickIndex;
                     if (idx >= 0) {
-                        Minecraft.getInstance().setScreen(new ScreenshotView(list.get(idx).getFileName().toString(), this)
-                        );
+                        Minecraft.getInstance().setScreen(new ScreenshotView(list.get(idx).getFileName().toString(), this));
                     }
-
-                }
-        ).bounds(this.width / 2 - 154, y, 72, 20).build();
+        }).bounds(this.width / 2 - 154, y, 72, 20).build();
 
         this.exportButton = Button.builder(Component.translatable("screenshotsViewer.export"), btn -> exportSelected())
                 .bounds(this.width / 2 - 76, y, 72, 20).build();
@@ -598,6 +594,23 @@ public class ScreenshotsViewerScreen extends Screen {
         if (key == 65 && hasControlDown()) { // A + Ctrl
             selectAll();
             return true;
+        }
+
+        if (key == 261) { // DELETE
+            deleteSelected();
+            return true;
+        }
+
+        if (key == 69) { // E
+            exportSelected();
+            return true;
+        }
+
+        if (key == 257 && selectedIndices.size() == 1) { // Enter
+            int idx = lastClickIndex;
+            if (idx >= 0) {
+                Minecraft.getInstance().setScreen(new ScreenshotView(list.get(idx).getFileName().toString(), this));
+            }
         }
 
         if (key == 256) { // ESC
