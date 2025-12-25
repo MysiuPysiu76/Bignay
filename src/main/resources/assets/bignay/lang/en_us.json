@@ -471,6 +471,7 @@
   "fileChooser.refresh.description": "Refresh current directory",
   "fileChooser.choose_folder": "Choose folder",
   "exportWorld.exportPlayerData.on": "Export Player Data: ON",
+  "item.bignay.golden_berries": "Golden Berries",
   "exportWorld.exportPlayerData.off": "Export Player Data: OFF",
   "importWorld.title": "Import World",
   "importWorld.import": "Import",
