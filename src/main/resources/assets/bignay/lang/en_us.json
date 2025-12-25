@@ -422,6 +422,7 @@
   "selectWorld.info.difficulty": "  Difficulty: %s",
   "selectWorld.info.hardcore": "  Hardcore: %s",
   "selectWorld.info.cheats": "  Cheats Enabled: %s",
+  "selectWorld.info.createdDate": "  Created Date: %s",
   "selectWorld.info.version": "  Version: %s",
   "selectWorld.info.deaths": "  Deaths Count: %s",
   "selectWorld.info.mobsKilled": "  Killed Mobs %s",

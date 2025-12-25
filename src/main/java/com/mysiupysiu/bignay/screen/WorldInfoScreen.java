@@ -77,10 +77,11 @@ public class WorldInfoScreen extends Screen {
         addLine("deaths", reader.getPlayerDeathsCount());
         addLine("distance", reader.getPlayerDistanceTraveled());
         addLine("achievements", reader.getPlayerFinishedAdvancementsCount());
-        addLine("lastPlayed", Instant.ofEpochMilli(reader.getPlayerLastPlayed()).atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
+        addLine("lastPlayed", formatDate(reader.getPlayerLastPlayed()));
 
         addLine("world", "-");
         addLine("worldName", reader.getWorldName());
+        addLine("createdDate", formatDate(reader.getWorldCreatedDate()));
         addLine("seed", reader.getWorldSeed());
         addLine("version", reader.getWorldVersion());
         addLine("size", reader.getWorldSize());
@@ -95,6 +96,10 @@ public class WorldInfoScreen extends Screen {
         if (first != null) {
             this.lines.add(Component.translatable("selectWorld.info." + name, "§e" + first, other));
         }
+    }
+
+    private String formatDate(Long l) {
+        return Instant.ofEpochMilli(l).atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
     }
 
     public static class InfoScrollPanel {
