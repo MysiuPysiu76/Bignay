@@ -54,6 +54,8 @@ public class MobHeadDropEvent {
             dropStack = new ItemStack(ItemInit.BLAZE_HEAD.get());
         } else if (mob instanceof Slime) {
             dropStack = new ItemStack(ItemInit.SLIME_HEAD.get());
+        } else if (mob instanceof Stray) {
+            dropStack = new ItemStack(ItemInit.STRAY_SKULL.get());
         }
 
         if (dropStack == null) return;

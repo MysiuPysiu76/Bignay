@@ -295,6 +295,8 @@ public class BlockInit {
     public static final RegistryObject<Block> MAGMA_CUBE_WALL_HEAD = registerBlockOnly("magma_cube_wall_head", () -> new WallHeadBlock(BlockBehaviour.Properties.copy(Blocks.CREEPER_WALL_HEAD)));
     public static final RegistryObject<Block> DROWNED_HEAD = registerBlockOnly("drowned_head", () -> new HeadBlock(BlockBehaviour.Properties.copy(Blocks.CREEPER_HEAD)));
     public static final RegistryObject<Block> DROWNED_WALL_HEAD = registerBlockOnly("drowned_wall_head", () -> new WallHeadBlock(BlockBehaviour.Properties.copy(Blocks.CREEPER_WALL_HEAD)));
+    public static final RegistryObject<Block> STRAY_SKULL = registerBlockOnly("stray_skull", () -> new HeadBlock(BlockBehaviour.Properties.copy(Blocks.SKELETON_SKULL)));
+    public static final RegistryObject<Block> STRAY_WALL_SKULL = registerBlockOnly("stray_wall_skull", () -> new WallHeadBlock(BlockBehaviour.Properties.copy(Blocks.SKELETON_WALL_SKULL)));
 
     public static final RegistryObject<Block> ACACIA_MOSAIC = registerBlock("acacia_mosaic", () -> new DecorativeWoodBlock(Blocks.ACACIA_PLANKS), 300);
     public static final RegistryObject<Block> BIRCH_MOSAIC = registerBlock("birch_mosaic", () -> new DecorativeWoodBlock(Blocks.BIRCH_PLANKS), 300);

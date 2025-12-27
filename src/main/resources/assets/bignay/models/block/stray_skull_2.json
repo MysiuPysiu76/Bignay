@@ -1,6 +1,6 @@
 {
   "parent": "bignay:block/layer_head_2",
   "textures": {
-    "texture": "bignay:block/drowned_head"
+    "texture": "bignay:block/stray_skull"
   }
 }

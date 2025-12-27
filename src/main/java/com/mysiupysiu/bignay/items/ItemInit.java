@@ -38,6 +38,7 @@ public class ItemInit {
     public static final RegistryObject<Item> CAVE_SPIDER_HEAD = registerItem("cave_spider_head", () -> new HeadItem(BlockInit.CAVE_SPIDER_HEAD.get(), BlockInit.CAVE_SPIDER_WALL_HEAD.get()));
     public static final RegistryObject<Item> MAGMA_CUBE_HEAD = registerItem("magma_cube_head", () -> new HeadItem(BlockInit.MAGMA_CUBE_HEAD.get(), BlockInit.MAGMA_CUBE_WALL_HEAD.get()));
     public static final RegistryObject<Item> DROWNED_HEAD = registerItem("drowned_head", () -> new HeadItem(BlockInit.DROWNED_HEAD.get(), BlockInit.DROWNED_WALL_HEAD.get()));
+    public static final RegistryObject<Item> STRAY_SKULL = registerItem("stray_skull", () -> new HeadItem(BlockInit.STRAY_SKULL.get(), BlockInit.STRAY_WALL_SKULL.get()));
 
     public static final RegistryObject<Item> GOLDEN_BERRIES = registerItem("golden_berries", GoldenBerriesItem::new);
 

@@ -436,6 +436,7 @@
   "selectWorld.info.time": "  Time Played: %s",
   "selectWorld.info.size": "  Size: %s",
   "exportWorld.chosen-destination": "Chosen destination: ",
+  "block.bignay.stray_skull": "Stray Skull",
   "exportWorld.chosen-destination.none": "not selected",
   "exportWorld.size": "World Size: %s",
   "exportWorld.export": "Export",
