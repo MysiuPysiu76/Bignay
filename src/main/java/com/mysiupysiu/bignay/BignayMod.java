@@ -6,6 +6,7 @@ import com.mysiupysiu.bignay.entities.*;
 import com.mysiupysiu.bignay.items.ItemInit;
 import com.mysiupysiu.bignay.menu.MenuInit;
 import com.mysiupysiu.bignay.utils.ModelLayers;
+import com.mysiupysiu.bignay.worldgen.decoration.DecoratorInit;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -36,6 +37,7 @@ public class BignayMod {
         BlockEntityInit.register(modEventBus);
         MenuInit.register(modEventBus);
         EntityInit.register(modEventBus);
+        DecoratorInit.DECORATORS.register(modEventBus);
 
         modEventBus.addListener(BlockInit::addCreative);
         modEventBus.addListener(ItemInit::addCreative);
