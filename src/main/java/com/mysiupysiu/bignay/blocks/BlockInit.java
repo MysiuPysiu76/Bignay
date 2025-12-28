@@ -463,6 +463,11 @@ public class BlockInit {
 
     public static final RegistryObject<Block> COMPRESSED_STONE = registerBlock("compressed_stone", CompressedStone::new);
 
+    public static final RegistryObject<Block> PRISMARINE_TILES = registerBlock("prismarine_tiles", () -> new BuildingBlock(Blocks.PRISMARINE));
+    public static final RegistryObject<Block> PRISMARINE_TILE_SLAB = registerBlock("prismarine_tile_slab", () -> new SlabsBlock(Blocks.PRISMARINE));
+    public static final RegistryObject<Block> PRISMARINE_TILE_STAIRS = registerBlock("prismarine_tile_stairs", () -> new StairsBlock(Blocks.PRISMARINE));
+    public static final RegistryObject<Block> PRISMARINE_TILE_WALL = registerBlock("prismarine_tile_wall", () -> new WallsBlock(Blocks.PRISMARINE));
+
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
         ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
