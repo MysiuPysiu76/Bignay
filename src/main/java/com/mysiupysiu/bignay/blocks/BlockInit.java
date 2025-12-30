@@ -469,6 +469,8 @@ public class BlockInit {
     public static final RegistryObject<Block> PRISMARINE_TILE_WALL = registerBlock("prismarine_tile_wall", () -> new WallsBlock(Blocks.PRISMARINE));
     public static final RegistryObject<Block> PRISMARINE_BRICK_WALL = registerBlock("prismarine_brick_wall", () -> new WallsBlock(Blocks.PRISMARINE));
 
+    public static final RegistryObject<Block> RANDOMIZER = registerBlock("randomizer", RandomizerBlock::new);
+
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
         ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));

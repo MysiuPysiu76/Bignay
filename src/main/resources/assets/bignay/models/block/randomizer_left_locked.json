@@ -1,0 +1,128 @@
+{
+	"ambientocclusion": false,
+	"textures": {
+		"plate": "bignay:block/randomizer_left",
+		"slab": "minecraft:block/smooth_stone",
+		"lit": "minecraft:block/redstone_torch",
+		"unlit": "minecraft:block/redstone_torch_off",
+		"particle": "bignay:block/randomizer_left",
+		"lock": "minecraft:block/bedrock",
+		"module": "bignay:block/randomizer_module"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 2, 16],
+			"faces": {
+				"north": {"uv": [0, 14, 16, 16], "texture": "#slab", "cullface": "north"},
+				"east": {"uv": [0, 14, 16, 16], "texture": "#slab", "cullface": "east"},
+				"south": {"uv": [0, 14, 16, 16], "texture": "#slab", "cullface": "south"},
+				"west": {"uv": [0, 14, 16, 16], "texture": "#slab", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#plate"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#slab", "cullface": "down"}
+			}
+		},
+		{
+			"from": [2, 2, 12],
+			"to": [14, 4, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 4]},
+			"faces": {
+				"north": {"uv": [2, 7, 14, 9], "texture": "#lock"},
+				"east": {"uv": [6, 7, 8, 9], "texture": "#lock"},
+				"south": {"uv": [2, 7, 14, 9], "texture": "#lock"},
+				"west": {"uv": [6, 7, 8, 9], "texture": "#lock"},
+				"up": {"uv": [7, 2, 9, 14], "rotation": 90, "texture": "#lock"},
+				"down": {"uv": [7, 2, 9, 14], "rotation": 90, "texture": "#lock"}
+			}
+		},
+		{
+			"from": [12, 7, 8],
+			"to": [14, 7, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, -3]},
+			"faces": {
+				"up": {"uv": [7, 6, 9, 8], "texture": "#lit"}
+			}
+		},
+		{
+			"from": [12, 2, 7],
+			"to": [14, 8, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, -3]},
+			"faces": {
+				"east": {"uv": [6, 5, 10, 11], "texture": "#lit"},
+				"west": {"uv": [6, 5, 10, 11], "texture": "#lit"}
+			}
+		},
+		{
+			"from": [11, 2, 8],
+			"to": [15, 8, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, -3]},
+			"faces": {
+				"north": {"uv": [6, 5, 10, 11], "texture": "#lit"},
+				"south": {"uv": [6, 5, 10, 11], "texture": "#lit"}
+			}
+		},
+		{
+			"from": [7, 5, 2],
+			"to": [9, 5, 4],
+			"faces": {
+				"up": {"uv": [7, 6, 9, 8], "texture": "#lit"}
+			}
+		},
+		{
+			"from": [7, 2, 1],
+			"to": [9, 6, 5],
+			"faces": {
+				"east": {"uv": [6, 5, 10, 9], "texture": "#lit"},
+				"west": {"uv": [6, 5, 10, 9], "texture": "#lit"}
+			}
+		},
+		{
+			"from": [6, 2, 2],
+			"to": [10, 6, 4],
+			"faces": {
+				"north": {"uv": [6, 5, 10, 9], "texture": "#lit"},
+				"south": {"uv": [6, 5, 10, 9], "texture": "#lit"}
+			}
+		},
+		{
+			"from": [2, 2, 8],
+			"to": [4, 7, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-8, 0, -3]},
+			"faces": {
+				"north": {"uv": [7, 6, 9, 11], "texture": "#unlit"},
+				"east": {"uv": [7, 6, 9, 11], "texture": "#unlit"},
+				"south": {"uv": [7, 6, 9, 11], "texture": "#unlit"},
+				"west": {"uv": [7, 6, 9, 11], "texture": "#unlit"},
+				"up": {"uv": [7, 6, 9, 8], "texture": "#unlit"},
+				"down": {"uv": [7, 13, 9, 15], "texture": "#unlit"}
+			}
+		},
+		{
+			"from": [6, 3, 7],
+			"to": [10, 4, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 3, 7]},
+			"faces": {
+				"north": {"uv": [0, 5, 4, 6], "texture": "#module"},
+				"east": {"uv": [8, 5, 12, 6], "texture": "#module"},
+				"south": {"uv": [12, 5, 16, 6], "texture": "#module"},
+				"west": {"uv": [4, 5, 8, 6], "texture": "#module"},
+				"up": {"uv": [0, 0, 4, 4], "texture": "#module"},
+				"down": {"uv": [5, 0, 9, 4], "texture": "#module"}
+			}
+		},
+		{
+			"from": [7, 2, 8],
+			"to": [9, 3, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 2, 8]},
+			"faces": {
+				"north": {"uv": [13, 6, 15, 7], "texture": "#module"},
+				"east": {"uv": [9, 6, 11, 7], "texture": "#module"},
+				"south": {"uv": [5, 6, 7, 7], "texture": "#module"},
+				"west": {"uv": [1, 6, 3, 7], "texture": "#module"},
+				"up": {"uv": [8, 4, 10, 6], "texture": "#missing"},
+				"down": {"uv": [1, 6, 3, 8], "texture": "#missing"}
+			}
+		}
+	],
+	"render_type": "cutout"
+}
