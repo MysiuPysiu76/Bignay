@@ -19,7 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.UUID;
 
-public class ScreenshotView extends Screen {
+public class ScreenshotViewScreen extends Screen {
 
     private final String name;
     private final Screen parent;
@@ -28,7 +28,7 @@ public class ScreenshotView extends Screen {
     private int imgW, imgH;
     private boolean failed = false;
 
-    public ScreenshotView(String name, Screen parent) {
+    public ScreenshotViewScreen(String name, Screen parent) {
         super(Component.literal(name));
         this.name = name;
         this.parent = parent;

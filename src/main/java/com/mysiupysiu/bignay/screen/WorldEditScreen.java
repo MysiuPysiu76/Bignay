@@ -195,15 +195,31 @@ public class WorldEditScreen extends Screen {
     private Button.Builder getMenageBackupsButton() {
         return Button.builder(Component.translatable("selectWorld.backup.manage"), btn -> {
             File backups = new File(this.minecraft.gameDirectory, "backups");
-            BackupEntry be = Backups.getLatestBackupForWorld(new WorldInfoReader(this.levelAccess).getWorldUUID()).get();
-            WorldRestorer restorer = new WorldRestorer(this.levelAccess, new File(backups, be.file()));
-            this.minecraft.setScreen(new ConfirmScreen(is -> {
-               if (is) {
-                   Minecraft.getInstance().setScreen(new OperationWithProgressScreen(Component.translatable("selectWorld.backup.restoring"), restorer));
-               } else {
-                   this.minecraft.setScreen(this);
-               }
-           }, Component.translatable("selectWorld.backup.restore"), Component.translatable("selectWorld.backup.restoreWorld", new WorldInfoReader(this.levelAccess).getWorldName(),  Instant.ofEpochMilli(be.created()).atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")), be.version())));
+            BackupEntry be = Backups.getLatestBackupForWorld(new WorldInfoReader(this.levelAccess).getWorldUUID());
+
+            if (be == null) {
+                this.minecraft.setScreen(new ConfirmScreen(is -> {
+                    if (is) {
+                        makeBackupAndShowToast(this.levelAccess);
+                        Minecraft.getInstance().setScreen(new WorldEditScreen(this.levelAccess));
+                    } else {
+                        Minecraft.getInstance().setScreen(new WorldEditScreen(this.levelAccess));
+                    }
+                },
+                        Component.translatable("selectWorld.backup.notFound"),
+                        Component.translatable("selectWorld.backup.notFoundDesc")));
+            } else {
+                WorldRestorer restorer = new WorldRestorer(this.levelAccess, new File(backups, be.file()));
+                this.minecraft.setScreen(new ConfirmScreen(is -> {
+                    if (is) {
+                        Minecraft.getInstance().setScreen(new OperationWithProgressScreen(Component.translatable("selectWorld.backup.restoring"), restorer));
+                    } else {
+                        this.minecraft.setScreen(this);
+                    }
+                },
+                        Component.translatable("selectWorld.backup.restore"),
+                        Component.translatable("selectWorld.backup.restoreWorld", new WorldInfoReader(this.levelAccess).getWorldName(),  Instant.ofEpochMilli(be.created()).atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")), be.version())));
+            }
         });
     }
 

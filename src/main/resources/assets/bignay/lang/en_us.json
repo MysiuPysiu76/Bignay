@@ -402,6 +402,8 @@
   "block.bignay.mossy_chiseled_stone_bricks": "Mossy Chiseled Stone Bricks",
   "block.bignay.quartz_brick_slab": "Quartz Brick Slab",
   "block.bignay.quartz_brick_stairs": "Quartz Brick Stairs",
+  "selectWorld.backup.notFound": "You don't have a backup for this world yet",
+  "selectWorld.backup.notFoundDesc": "Would you like to create your first backup?",
   "block.bignay.quartz_brick_wall": "Quartz Brick Wall",
   "block.bignay.mossy_cracked_stone_brick_slab": "Mossy Cracked Stone Brick Slab",
   "block.bignay.mossy_diorite_brick_slab": "Mossy Diorite Brick Slab",

@@ -61,7 +61,11 @@ public class Backups {
         return BACKUPS.stream().filter(b -> b.worldUUID().equals(worldUUID)).toList();
     }
 
-    public static Optional<BackupEntry> getLatestBackupForWorld(UUID worldUUID) {
-        return getBackupsForWorld(worldUUID).stream().max(Comparator.comparingLong(BackupEntry::created));
+    public static BackupEntry getLatestBackupForWorld(UUID worldUUID) {
+        try {
+            return getBackupsForWorld(worldUUID).stream().max(Comparator.comparingLong(BackupEntry::created)).get();
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
