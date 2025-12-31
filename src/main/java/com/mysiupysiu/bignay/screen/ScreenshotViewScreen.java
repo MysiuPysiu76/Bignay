@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mysiupysiu.bignay.screen.file.chooser.FolderChooserScreen;
 import com.mysiupysiu.bignay.utils.FileUtils;
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -12,6 +13,7 @@ import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.storage.LevelResource;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,6 +41,9 @@ public class ScreenshotViewScreen extends Screen {
         loadImage();
 
         int y = this.height - 24;
+
+        this.addRenderableWidget(Button.builder(Component.translatable("screenshotsViewer.show"), btn -> open())
+                .bounds(this.width / 2 - 154, y, 72, 20).build());
 
         this.addRenderableWidget(Button.builder(Component.translatable("screenshotsViewer.export"), btn -> export())
                 .bounds(this.width / 2 - 76, y, 72, 20).build());
@@ -115,6 +120,10 @@ public class ScreenshotViewScreen extends Screen {
     private void delete() {
         FileUtils.delete(getFile());
         back();
+    }
+
+    private void open() {
+        Util.getPlatform().openFile(getFile().toFile());
     }
 
     private void export() {
