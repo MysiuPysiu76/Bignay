@@ -1,0 +1,140 @@
+{
+  "parent": "minecraft:adventure/kill_all_mobs",
+  "display": {
+    "icon": {
+      "item": "minecraft:creeper_head"
+    },
+    "title": {
+      "translate": "advancements.adventure.collect_all_heads.title"
+    },
+    "description": {
+      "translate": "advancements.adventure.collect_all_heads.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "zombie_head": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["minecraft:zombie_head"] }
+        ]
+      }
+    },
+    "creeper_head": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["minecraft:creeper_head"] }
+        ]
+      }
+    },
+    "piglin_head": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["minecraft:piglin_head"] }
+        ]
+      }
+    },
+    "dragon_head": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["minecraft:dragon_head"] }
+        ]
+      }
+    },
+    "skeleton_skull": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["minecraft:skeleton_skull"] }
+        ]
+      }
+    },
+    "wither_skeleton_skull": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["minecraft:wither_skeleton_skull"] }
+        ]
+      }
+    },
+    "enderman_head": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["bignay:enderman_head"] }
+        ]
+      }
+    },
+    "spider_head": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["bignay:spider_head"] }
+        ]
+      }
+    },
+    "blaze_head": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["bignay:blaze_head"] }
+        ]
+      }
+    },
+    "husk_head": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["bignay:husk_head"] }
+        ]
+      }
+    },
+    "slime_head": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["bignay:slime_head"] }
+        ]
+      }
+    },
+    "cave_spider_head": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["bignay:cave_spider_head"] }
+        ]
+      }
+    },
+    "magma_cube_head": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["bignay:magma_cube_head"] }
+        ]
+      }
+    },
+    "drowned_head": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["bignay:drowned_head"] }
+        ]
+      }
+    },
+    "stray_skull": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["bignay:stray_skull"] }
+        ]
+      }
+    }
+  }
+}
