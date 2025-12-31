@@ -99,6 +99,7 @@ public class WorldInfoScreen extends Screen {
     }
 
     private String formatDate(Long l) {
+        if (l == null) return null;
         return Instant.ofEpochMilli(l).atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
     }
 
