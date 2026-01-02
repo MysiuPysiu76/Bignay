@@ -471,6 +471,24 @@ public class BlockInit {
 
     public static final RegistryObject<Block> RANDOMIZER = registerBlock("randomizer", RandomizerBlock::new);
 
+    public static final RegistryObject<Block> SOUL_CANDLE = registerBlock("soul_candle", () -> new CandlesBlock(MapColor.SAND));
+    public static final RegistryObject<Block> SOUL_WHITE_CANDLE = registerBlock("soul_white_candle", () -> new CandlesBlock(MapColor.WOOL));
+    public static final RegistryObject<Block> SOUL_ORANGE_CANDLE = registerBlock("soul_orange_candle", () -> new CandlesBlock(MapColor.COLOR_ORANGE));
+    public static final RegistryObject<Block> SOUL_MAGENTA_CANDLE = registerBlock("soul_magenta_candle", () -> new CandlesBlock(MapColor.COLOR_MAGENTA));
+    public static final RegistryObject<Block> SOUL_LIGHT_BLUE_CANDLE = registerBlock("soul_light_blue_candle", () -> new CandlesBlock(MapColor.COLOR_LIGHT_BLUE));
+    public static final RegistryObject<Block> SOUL_YELLOW_CANDLE = registerBlock("soul_yellow_candle", () -> new CandlesBlock(MapColor.COLOR_YELLOW));
+    public static final RegistryObject<Block> SOUL_LIME_CANDLE = registerBlock("soul_lime_candle", () -> new CandlesBlock(MapColor.COLOR_LIGHT_GREEN));
+    public static final RegistryObject<Block> SOUL_PINK_CANDLE = registerBlock("soul_pink_candle", () -> new CandlesBlock(MapColor.COLOR_PINK));
+    public static final RegistryObject<Block> SOUL_GRAY_CANDLE = registerBlock("soul_gray_candle", () -> new CandlesBlock(MapColor.COLOR_GRAY));
+    public static final RegistryObject<Block> SOUL_LIGHT_GRAY_CANDLE = registerBlock("soul_light_gray_candle", () -> new CandlesBlock(MapColor.COLOR_LIGHT_GRAY));
+    public static final RegistryObject<Block> SOUL_CYAN_CANDLE = registerBlock("soul_cyan_candle", () -> new CandlesBlock(MapColor.COLOR_CYAN));
+    public static final RegistryObject<Block> SOUL_PURPLE_CANDLE = registerBlock("soul_purple_candle", () -> new CandlesBlock(MapColor.COLOR_PURPLE));
+    public static final RegistryObject<Block> SOUL_BLUE_CANDLE = registerBlock("soul_blue_candle", () -> new CandlesBlock(MapColor.COLOR_BLUE));
+    public static final RegistryObject<Block> SOUL_BROWN_CANDLE = registerBlock("soul_brown_candle", () -> new CandlesBlock(MapColor.COLOR_BROWN));
+    public static final RegistryObject<Block> SOUL_GREEN_CANDLE = registerBlock("soul_green_candle", () -> new CandlesBlock(MapColor.COLOR_GREEN));
+    public static final RegistryObject<Block> SOUL_RED_CANDLE = registerBlock("soul_red_candle", () -> new CandlesBlock(MapColor.COLOR_RED));
+    public static final RegistryObject<Block> SOUL_BLACK_CANDLE = registerBlock("soul_black_candle", () -> new CandlesBlock(MapColor.COLOR_BLACK));
+
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
         ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
