@@ -489,6 +489,9 @@ public class BlockInit {
     public static final RegistryObject<Block> SOUL_RED_CANDLE = registerBlock("soul_red_candle", () -> new CandlesBlock(MapColor.COLOR_RED));
     public static final RegistryObject<Block> SOUL_BLACK_CANDLE = registerBlock("soul_black_candle", () -> new CandlesBlock(MapColor.COLOR_BLACK));
 
+    public static final RegistryObject<Block> ACACIA_CAVITY = registerBlock("acacia_cavity", () -> new CavityLog(Blocks.ACACIA_LOG));
+    public static final RegistryObject<Block> BIRCH_CAVITY = registerBlock("birch_cavity", () -> new CavityLog(Blocks.BIRCH_LOG));
+
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
         ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "bignay:block/acacia_cavity",
+    "side": "minecraft:block/acacia_log",
+    "top": "minecraft:block/acacia_log_top"
+  }
+}
