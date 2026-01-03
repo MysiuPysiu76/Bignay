@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "bignay:block/cherry_cavity",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "bignay:block/cherry_cavity"
+    },
+    "facing=south": {
+      "model": "bignay:block/cherry_cavity",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "bignay:block/cherry_cavity",
+      "y": 270
+    }
+  }
+}

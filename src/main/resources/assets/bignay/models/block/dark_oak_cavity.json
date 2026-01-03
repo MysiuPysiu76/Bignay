@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "bignay:block/dark_oak_cavity",
+    "side": "minecraft:block/dark_oak_log",
+    "top": "minecraft:block/dark_oak_log_top"
+  }
+}
