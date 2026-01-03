@@ -4,12 +4,9 @@
     "#bignay:all_vertical_plank_blocks",
     "#bignay:all_wooden_mosaic_blocks",
     "#bignay:bookshelves",
+    "#bignay:cavity_logs",
     "#bignay:hollow_logs",
     "bignay:archaeology_table",
-    "bignay:verdant_fungus",
-    "bignay:acacia_cavity",
-    "bignay:birch_cavity",
-    "bignay:cherry_cavity",
-    "bignay:dark_oak_cavity"
+    "bignay:verdant_fungus"
   ]
 }

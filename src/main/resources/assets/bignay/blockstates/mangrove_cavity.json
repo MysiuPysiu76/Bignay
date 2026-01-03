@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "bignay:block/mangrove_cavity",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "bignay:block/mangrove_cavity"
+    },
+    "facing=south": {
+      "model": "bignay:block/mangrove_cavity",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "bignay:block/mangrove_cavity",
+      "y": 270
+    }
+  }
+}
