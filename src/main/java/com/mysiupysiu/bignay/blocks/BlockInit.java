@@ -495,6 +495,8 @@ public class BlockInit {
     public static final RegistryObject<Block> DARK_OAK_CAVITY = registerBlock("dark_oak_cavity", () -> new CavityLog(Blocks.DARK_OAK_LOG));
     public static final RegistryObject<Block> JUNGLE_CAVITY = registerBlock("jungle_cavity", () -> new CavityLog(Blocks.JUNGLE_LOG));
     public static final RegistryObject<Block> MANGROVE_CAVITY = registerBlock("mangrove_cavity", () -> new CavityLog(Blocks.MANGROVE_LOG));
+    public static final RegistryObject<Block> OAK_CAVITY = registerBlock("oak_cavity", () -> new CavityLog(Blocks.OAK_LOG));
+    public static final RegistryObject<Block> SPRUCE_CAVITY = registerBlock("spruce_cavity", () -> new CavityLog(Blocks.SPRUCE_LOG));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
