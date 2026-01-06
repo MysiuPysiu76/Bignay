@@ -8,6 +8,11 @@
       {
         "type": "minecraft:leave_vine",
         "probability": 0.25
+      },
+      {
+        "type": "bignay:cavity",
+        "block": "bignay:oak_cavity",
+        "probability": 0.05
       }
     ],
     "dirt_provider": {

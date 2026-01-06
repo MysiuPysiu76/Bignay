@@ -4,6 +4,11 @@
     "decorators": [
       {
         "type": "bignay:forest_trunk_vine"
+      },
+      {
+        "type": "bignay:cavity",
+        "block": "bignay:oak_cavity",
+        "probability": 0.05
       }
     ],
     "dirt_provider": {

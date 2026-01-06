@@ -8,6 +8,11 @@
       {
         "type": "minecraft:beehive",
         "probability": 0.02
+      },
+      {
+        "type": "bignay:cavity",
+        "block": "bignay:oak_cavity",
+        "probability": 0.05
       }
     ],
     "dirt_provider": {

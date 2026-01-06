@@ -3,15 +3,19 @@
   "config": {
     "decorators": [
       {
-        "type": "bignay:forest_trunk_vine"
+        "type": "minecraft:cocoa",
+        "probability": 0.2
       },
       {
-        "type": "minecraft:beehive",
-        "probability": 0.002
+        "type": "minecraft:trunk_vine"
+      },
+      {
+        "type": "minecraft:leave_vine",
+        "probability": 0.25
       },
       {
         "type": "bignay:cavity",
-        "block": "bignay:oak_cavity",
+        "block": "bignay:jungle_cavity",
         "probability": 0.05
       }
     ],
@@ -30,7 +34,7 @@
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "minecraft:oak_leaves",
+        "Name": "minecraft:jungle_leaves",
         "Properties": {
           "distance": "7",
           "persistent": "false",
@@ -49,13 +53,13 @@
     "trunk_placer": {
       "type": "minecraft:straight_trunk_placer",
       "base_height": 4,
-      "height_rand_a": 2,
+      "height_rand_a": 8,
       "height_rand_b": 0
     },
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "minecraft:oak_log",
+        "Name": "minecraft:jungle_log",
         "Properties": {
           "axis": "y"
         }

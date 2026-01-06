@@ -3,6 +3,7 @@ package com.mysiupysiu.bignay.blocks;
 import com.mysiupysiu.bignay.utils.CreativeTabProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -19,14 +20,11 @@ import java.util.List;
 public class CavityLog extends Block implements CreativeTabProvider {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final EnumProperty<Direction.Axis> AXIS =
-            BlockStateProperties.AXIS;
+    public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
 
     public CavityLog(Block b) {
         super(BlockBehaviour.Properties.copy(b));
-        this.registerDefaultState(
-                this.stateDefinition.any().setValue(FACING, net.minecraft.core.Direction.NORTH)
-        );
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, net.minecraft.core.Direction.NORTH));
     }
 
     @Override
@@ -42,5 +40,9 @@ public class CavityLog extends Block implements CreativeTabProvider {
     @Override
     public List<ResourceKey<CreativeModeTab>> getCreativeTabs() {
         return List.of(CreativeModeTabs.NATURAL_BLOCKS);
+    }
+
+    public BlockState randomBlockState(RandomSource random) {
+        return this.defaultBlockState().setValue(FACING, List.of(Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST).get(random.nextInt(4)));
     }
 }

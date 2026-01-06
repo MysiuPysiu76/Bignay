@@ -3,16 +3,9 @@
   "config": {
     "decorators": [
       {
-        "type": "bignay:forest_trunk_vine"
-      },
-      {
-        "type": "minecraft:beehive",
-        "probability": 0.002
-      },
-      {
         "type": "bignay:cavity",
-        "block": "bignay:oak_cavity",
-        "probability": 0.05
+        "block": "bignay:spruce_cavity",
+        "probability": 0.08
       }
     ],
     "dirt_provider": {
@@ -22,15 +15,33 @@
       }
     },
     "foliage_placer": {
-      "type": "minecraft:blob_foliage_placer",
-      "height": 3,
-      "offset": 0,
-      "radius": 2
+      "type": "minecraft:spruce_foliage_placer",
+      "offset": {
+        "type": "minecraft:uniform",
+        "value": {
+          "max_inclusive": 2,
+          "min_inclusive": 0
+        }
+      },
+      "radius": {
+        "type": "minecraft:uniform",
+        "value": {
+          "max_inclusive": 3,
+          "min_inclusive": 2
+        }
+      },
+      "trunk_height": {
+        "type": "minecraft:uniform",
+        "value": {
+          "max_inclusive": 2,
+          "min_inclusive": 1
+        }
+      }
     },
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "minecraft:oak_leaves",
+        "Name": "minecraft:spruce_leaves",
         "Properties": {
           "distance": "7",
           "persistent": "false",
@@ -42,20 +53,20 @@
     "ignore_vines": true,
     "minimum_size": {
       "type": "minecraft:two_layers_feature_size",
-      "limit": 1,
+      "limit": 2,
       "lower_size": 0,
-      "upper_size": 1
+      "upper_size": 2
     },
     "trunk_placer": {
       "type": "minecraft:straight_trunk_placer",
-      "base_height": 4,
+      "base_height": 5,
       "height_rand_a": 2,
-      "height_rand_b": 0
+      "height_rand_b": 1
     },
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "minecraft:oak_log",
+        "Name": "minecraft:spruce_log",
         "Properties": {
           "axis": "y"
         }
