@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.utils;
+package com.mysiupysiu.bignay.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandSourceStack;
@@ -23,8 +23,7 @@ public class LocateBlockCommand {
     private static final int SEARCH_RADIUS = 256;
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(
-                Commands.literal("locate")
+        dispatcher.register(Commands.literal("locate")
                         .then(Commands.literal("block")
                                 .then(Commands.argument("block", ResourceLocationArgument.id())
                                         .suggests((ctx, builder) -> {
@@ -34,7 +33,7 @@ public class LocateBlockCommand {
                                         .executes(ctx -> {
                                             ResourceLocation id = ResourceLocationArgument.getId(ctx, "block");
                                             if (!BuiltInRegistries.BLOCK.containsKey(id)) {
-                                                ctx.getSource().sendFailure(Component.translatable("commands.locate.block.invald", id));
+                                                ctx.getSource().sendFailure(Component.translatable("commands.locate.block.invalid", id));
                                                 return 0;
                                             }
                                             Block block = BuiltInRegistries.BLOCK.get(id);
@@ -102,9 +101,7 @@ public class LocateBlockCommand {
                     if (chunkDistSq > bestDistSq) continue;
 
                     var chunk = level.getChunk(chunkX, chunkZ);
-                    var heightmap = chunk.getOrCreateHeightmapUnprimed(
-                            net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING
-                    );
+                    var heightmap = chunk.getOrCreateHeightmapUnprimed(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING);
 
                     for (int x = 0; x < 16; x++) {
                         for (int z = 0; z < 16; z++) {
