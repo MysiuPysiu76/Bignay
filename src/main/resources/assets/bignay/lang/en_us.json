@@ -500,6 +500,7 @@
   "fileChooser.choose_file": "Choose File",
   "fileChooser.confirm": "Confirm",
   "selectWorld.backup.manage": "Manage Backups",
+  "block.bignay.tall_dead_bush": "Tall Dead Bush",
   "selectWorld.backup.restore": "Restore World Backup",
   "selectWorld.backup.restoreWorld": "You are about to restore the world %s from a backup created on %s (version: %s). This action is irreversible.",
   "selectWorld.backup.restoring": "Restoring Backup",
