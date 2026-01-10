@@ -5,6 +5,8 @@ import com.mysiupysiu.bignay.items.BurnableBlockItem;
 import com.mysiupysiu.bignay.items.ItemInit;
 import com.mysiupysiu.bignay.utils.CreativeTabProvider;
 import com.mysiupysiu.bignay.worldgen.ModConfiguredFeatures;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.flag.FeatureFlag;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -497,6 +499,8 @@ public class BlockInit {
     public static final RegistryObject<Block> MANGROVE_CAVITY = registerBlock("mangrove_cavity", () -> new CavityLog(Blocks.MANGROVE_LOG));
     public static final RegistryObject<Block> OAK_CAVITY = registerBlock("oak_cavity", () -> new CavityLog(Blocks.OAK_LOG));
     public static final RegistryObject<Block> SPRUCE_CAVITY = registerBlock("spruce_cavity", () -> new CavityLog(Blocks.SPRUCE_LOG));
+
+    public static final RegistryObject<Block> PEONY = registerBlock("peony", () -> new FlowersBlock(MobEffects.GLOWING, 3));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
