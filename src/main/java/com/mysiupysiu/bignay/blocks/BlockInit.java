@@ -501,6 +501,7 @@ public class BlockInit {
     public static final RegistryObject<Block> SPRUCE_CAVITY = registerBlock("spruce_cavity", () -> new CavityLog(Blocks.SPRUCE_LOG));
 
     public static final RegistryObject<Block> PEONY = registerBlock("peony", () -> new FlowersBlock(MobEffects.GLOWING, 3));
+    public static final RegistryObject<Block> BLUE_ROSE_BUSH = registerBlock("blue_rose_bush", TallFlowersBlock::new);
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);

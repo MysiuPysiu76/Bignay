@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "bignay:block/blue_rose_bush_bottom"
+    },
+    "half=upper": {
+      "model": "bignay:block/blue_rose_bush_top"
+    }
+  }
+}
