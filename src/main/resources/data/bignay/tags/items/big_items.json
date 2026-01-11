@@ -169,6 +169,7 @@
     "#bignay:buckets",
     "#bignay:campfires",
     "#bignay:chains",
+    "#bignay:soul_candles",
     "#bignay:colors",
     "#bignay:compasses",
     "#bignay:corals",
@@ -193,6 +194,10 @@
     "bignay:pale_pumpkin_seeds",
     "bignay:golden_berries",
     "bignay:wax",
-    "bignay:randomizer"
+    "bignay:randomizer",
+    "bignay:tall_dead_bush",
+    "bignay:mushroom_cluster",
+    "bignay:peony",
+    "bignay:blue_rose_bush"
   ]
 }

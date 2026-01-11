@@ -503,6 +503,7 @@ public class BlockInit {
     public static final RegistryObject<Block> PEONY = registerBlock("peony", () -> new FlowersBlock(MobEffects.GLOWING, 3));
     public static final RegistryObject<Block> BLUE_ROSE_BUSH = registerBlock("blue_rose_bush", TallFlowersBlock::new);
     public static final RegistryObject<Block> TALL_DEAD_BUSH = registerBlock("tall_dead_bush", TallDeadBushBlock::new, 200);
+    public static final RegistryObject<Block> MUSHROOM_CLUSTER = registerBlock("mushroom_cluster", () -> new FlowersBlock(MobEffects.GLOWING, 3));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
