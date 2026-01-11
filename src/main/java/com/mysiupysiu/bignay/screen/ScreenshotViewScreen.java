@@ -19,21 +19,26 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.UUID;
 
 public class ScreenshotViewScreen extends Screen {
 
     private final String name;
     private final Screen parent;
+    private final List<Path> list;
+    private final int index;
 
     private ResourceLocation texture;
     private int imgW, imgH;
     private boolean failed = false;
 
-    public ScreenshotViewScreen(String name, Screen parent) {
-        super(Component.literal(name));
-        this.name = name;
+    public ScreenshotViewScreen(List<Path> list, int index, Screen parent) {
+        super(Component.literal(list.get(index).toString()));
         this.parent = parent;
+        this.list = list;
+        this.name = list.get(index).getFileName().toString();
+        this.index = index;
     }
 
     @Override
@@ -95,6 +100,14 @@ public class ScreenshotViewScreen extends Screen {
             Minecraft.getInstance().setScreen(this.parent);
             return true;
         }
+        if (key == 263) {
+            Minecraft.getInstance().setScreen(new ScreenshotViewScreen(list, checkIndex(index - 1), parent));
+            return true;
+        }
+        if (key == 262 ) {
+            Minecraft.getInstance().setScreen(new ScreenshotViewScreen(list, checkIndex(index + 1), parent));
+            return true;
+        }
         return super.keyPressed(key, scancode, modifiers);
     }
 
@@ -146,5 +159,11 @@ public class ScreenshotViewScreen extends Screen {
 
     private Path getFile() {
         return Minecraft.getInstance().gameDirectory.toPath().resolve("screenshots").resolve(this.name);
+    }
+
+    private int checkIndex(int idx) {
+        if (idx == -1) return list.size() - 1;
+        if (idx == list.size()) return 0;
+        return idx;
     }
 }
