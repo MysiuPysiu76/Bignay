@@ -517,6 +517,8 @@
   "fileChooser.refresh": "Refresh",
   "fileChooser.refresh.description": "Refresh current directory",
   "fileChooser.choose_folder": "Choose folder",
+  "block.bignay.tall_brown_mushroom_cluster": "Tall Brown Mushroom Cluster",
+  "block.bignay.tall_red_mushroom_cluster": "Tall Red Mushroom Cluster",
   "exportWorld.exportPlayerData.on": "Export Player Data: ON",
   "item.bignay.golden_berries": "Golden Berries",
   "exportWorld.exportPlayerData.off": "Export Player Data: OFF",

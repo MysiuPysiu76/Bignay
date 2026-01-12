@@ -9,6 +9,8 @@
     "bignay:archaeology_table",
     "bignay:verdant_fungus",
     "bignay:tall_dead_bush",
-    "bignay:mushroom_cluster"
+    "bignay:mushroom_cluster",
+    "bignay:tall_brown_mushroom_cluster",
+    "bignay:tall_red_mushroom_cluster"
   ]
 }

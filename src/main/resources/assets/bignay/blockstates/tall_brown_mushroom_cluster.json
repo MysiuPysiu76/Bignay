@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "bignay:block/tall_brown_mushroom_cluster_bottom"
+    },
+    "half=upper": {
+      "model": "bignay:block/tall_brown_mushroom_cluster_top"
+    }
+  }
+}

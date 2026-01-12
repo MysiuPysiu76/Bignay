@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "bignay:block/tall_red_mushroom_cluster_top"
+  },
+  "render_type": "cutout"
+}
