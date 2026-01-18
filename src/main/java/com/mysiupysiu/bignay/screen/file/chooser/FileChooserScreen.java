@@ -31,9 +31,9 @@ public class FileChooserScreen extends AbstractFileChooserScreen {
         }
 
         Stream<File> folders = Arrays.stream(content).filter(File::isDirectory);
-        Stream<File> files = Arrays.stream(content).filter(File::isFile).filter(f -> fileTypes.contains(FileUtils.getFileType(f)));
+        Stream<File> files = Arrays.stream(content).filter(File::isFile).filter(f -> this.fileTypes.contains(FileUtils.getFileType(f)));
 
-        return Stream.concat(folders, files.filter(f -> additionalFilter.test(f)));
+        return Stream.concat(folders, files.filter(f -> this.additionalFilter.test(f)));
     }
 
     @Override
@@ -42,29 +42,24 @@ public class FileChooserScreen extends AbstractFileChooserScreen {
     }
 
     public void setFilter(FileType... fileType) {
-        fileTypes = new LinkedHashSet<>(Set.of(fileType));
-        reloadEntries();
+        this.fileTypes = new LinkedHashSet<>(Set.of(fileType));
     }
 
     public void addFilter(FileType... fileType) {
-        fileTypes.addAll(Set.of(fileType));
-        reloadEntries();
+        this.fileTypes.addAll(Set.of(fileType));
     }
 
     public void clearFilter() {
-        fileTypes.clear();
-        reloadEntries();
+        this.fileTypes.clear();
     }
 
     public void removeFilter(FileType... fileType) {
-        fileTypes.removeAll(Set.of(fileType));
-        this.filterComponent = null;
-        reloadEntries();
+        this.fileTypes.removeAll(Set.of(fileType));
+        this.filterComponent = Component.empty();
     }
 
     public void setAdditionalFilter(Predicate<File> p) {
         this.additionalFilter = p;
-        reloadEntries();
     }
 
     public void setFilterText(Component c) {

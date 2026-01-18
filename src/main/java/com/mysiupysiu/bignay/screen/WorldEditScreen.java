@@ -162,6 +162,7 @@ public class WorldEditScreen extends Screen {
             FileChooserScreen fileChooser = new FileChooserScreen();
             fileChooser.setPreviousScreen(this);
             fileChooser.addFilter(FileType.PNG);
+            fileChooser.setFilterText(Component.translatable("fileChooser.filter.image64"));
             fileChooser.setOnConfirm(f -> {
                 try {
                     File worldDir = this.levelAccess.getLevelPath(LevelResource.ROOT).toFile().getCanonicalFile();
@@ -182,7 +183,6 @@ public class WorldEditScreen extends Screen {
                 }
                 return false;
             });
-            fileChooser.setFilterText(Component.translatable("fileChooser.filter.image64"));
             Minecraft.getInstance().setScreen(fileChooser);
         });
     }

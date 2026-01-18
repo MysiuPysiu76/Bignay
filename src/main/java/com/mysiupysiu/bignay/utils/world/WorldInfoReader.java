@@ -170,9 +170,9 @@ public class WorldInfoReader {
         }
     }
 
-    public Integer getWorldDay() {
+    public Long getWorldDay() {
         try {
-            return this.levelData.getCompound("Data").getInt("DayTime") / 24000;
+            return this.levelData.getCompound("Data").getLong("DayTime") / 24000;
         } catch (Exception e) {
             return null;
         }

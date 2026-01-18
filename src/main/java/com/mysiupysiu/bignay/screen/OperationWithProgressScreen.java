@@ -15,7 +15,7 @@ public class OperationWithProgressScreen extends AbstractProgressScreen {
 
     @Override
     protected void onAction() {
-        operation.execute();
+        this.operation.execute();
     }
 
     @Override
