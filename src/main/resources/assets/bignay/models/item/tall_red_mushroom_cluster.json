@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "bignay:block/tall_red_mushroom_cluster_top"
+    "layer0": "bignay:item/tall_red_mushroom_cluster"
   }
 }
