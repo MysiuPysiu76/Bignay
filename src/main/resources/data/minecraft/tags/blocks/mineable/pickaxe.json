@@ -163,6 +163,10 @@
     "bignay:quartz_brick_wall",
     "bignay:mossy_andesite_brick_slab",
     "bignay:mossy_andesite_brick_stairs",
-    "bignay:mossy_andesite_brick_wall"
+    "bignay:mossy_andesite_brick_wall",
+    "bignay:cracked_dripstone_tiles",
+    "bignay:cracked_dripstone_tile_wall",
+    "bignay:cracked_dripstone_tile_stairs",
+    "bignay:cracked_dripstone_tile_slab"
   ]
 }
