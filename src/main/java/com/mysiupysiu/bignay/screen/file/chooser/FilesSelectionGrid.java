@@ -20,19 +20,19 @@ import java.util.function.Consumer;
 @OnlyIn(Dist.CLIENT)
 public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.RowEntry> {
 
+    private static final int CELL_SIZE = 50;
+    private static final int CELL_GAP = 6;
+    private static final float ICON_SCALE = 2.5F;
+    private static final long DOUBLE_CLICK_MS = 350;
+
     private final AbstractFileChooserScreen rootScreen;
     private List<File> content = List.of();
     private File selectedFile = null;
     private Path path;
     private Consumer<File> onPathUpdate;
 
-    private static final int CELL_SIZE = 50;
-    private static final int CELL_GAP = 6;
-    private static final float ICON_SCALE = 2.5F;
-
     private long lastClickTime = 0;
     private File lastClickedFile = null;
-    private static final long DOUBLE_CLICK_MS = 350;
     private boolean draggingScrollbar = false;
     private int columns = 6;
 
@@ -47,7 +47,6 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
         int startX = this.getLeft() + (this.width - gridWidth) / 2;
         return startX + gridWidth + 10;
     }
-
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
@@ -121,6 +120,14 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
     }
 
     @Override
+    public void setSelected(RowEntry entry) {}
+
+    @Override
+    public boolean isFocused() {
+        return false;
+    }
+
+    @Override
     public boolean mouseDragged(double mouseX, double mouseY, int button, double dx, double dy) {
         if (super.mouseDragged(mouseY, mouseY, button, dx, dy)) {
             return true;
@@ -144,8 +151,118 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
 
     @Override
     public boolean mouseReleased(double mouseX, double mouseY, int button) {
-        draggingScrollbar = false;
+        this.draggingScrollbar = false;
         return super.mouseReleased(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        if (this.content == null || this.content.isEmpty()) {
+            return super.keyPressed(keyCode, scanCode, modifiers);
+        }
+
+        if (keyCode == 258 && this.selectedFile == null) { // TAB
+            this.selectFirstIfNone();
+            this.setScrollAmount(0.0D);
+            return true;
+        }
+
+        int itemsPerRow = Math.max(1, this.columns);
+
+        int currentIndex = 0;
+        if (this.selectedFile != null) {
+            currentIndex = this.content.indexOf(this.selectedFile);
+            if (currentIndex < 0) currentIndex = 0;
+        }
+
+        int oldIndex = currentIndex;
+        boolean moved = false;
+        boolean shift = (modifiers & 1) != 0;
+
+        switch (keyCode) {
+            case 265 -> { // UP
+                currentIndex = Math.max(0, currentIndex - itemsPerRow);
+                moved = true;
+            }
+            case 264 -> { // DOWN
+                currentIndex = Math.min(this.content.size() - 1, currentIndex + itemsPerRow);
+                moved = true;
+            }
+            case 263 -> { // LEFT
+                currentIndex = Math.max(0, currentIndex - 1);
+                moved = true;
+            }
+            case 262 -> { // RIGHT
+                currentIndex = Math.min(this.content.size() - 1, currentIndex + 1);
+                moved = true;
+            }
+            case 258 -> { // TAB
+                if (shift) {
+                    currentIndex = (currentIndex - 1 + this.content.size()) % this.content.size();
+                } else {
+                    currentIndex = (currentIndex + 1) % this.content.size();
+                }
+                moved = true;
+            }
+            case 257, 335 -> { // ENTER
+                File sel = this.selectedFile;
+                if (sel == null && !this.content.isEmpty()) {
+                    sel = this.content.get(0);
+                    this.selectedFile = sel;
+                }
+
+                if (sel != null) {
+                    if (sel.isDirectory()) {
+                        this.path = sel.toPath();
+                        this.rootScreen.setPath(this.path);
+                        this.setContent(this.rootScreen.getEntries(sel));
+                    } else {
+                        this.rootScreen.fileConfirm();
+                    }
+                }
+                return true;
+            }
+            default -> {
+                return super.keyPressed(keyCode, scanCode, modifiers);
+            }
+        }
+
+        if (!moved || currentIndex == oldIndex) return true;
+
+        this.selectedFile = this.content.get(currentIndex);
+
+        int rowOfSelection = currentIndex / itemsPerRow;
+
+        double targetTop = rowOfSelection * this.itemHeight;
+        double targetBottom = targetTop + this.itemHeight;
+
+        double visibleTop = this.getScrollAmount();
+        double visibleBottom = visibleTop + (this.getBottom() - this.getTop() - this.itemHeight);
+
+        if (targetTop < visibleTop) {
+            this.setScrollAmount(targetTop);
+        } else if (targetBottom > visibleBottom) {
+            double newScroll = targetBottom - (this.getBottom() - this.getTop() - this.itemHeight);
+            newScroll = Mth.clamp(newScroll, 0.0D, this.getMaxScroll());
+            this.setScrollAmount(newScroll);
+        }
+
+        return true;
+    }
+
+    public void setContent(List<File> files) {
+        this.content = files == null ? List.of() : List.copyOf(files);
+        this.reload();
+        this.selectedFile = null;
+        this.setScrollAmount(0.0D);
+    }
+
+    @Override
+    protected void renderList(GuiGraphics g, int mouseX, int mouseY, float partialTicks) {
+        boolean wasFocused = this.isFocused();
+        this.setFocused(false);
+        super.renderList(g, mouseX, mouseY, partialTicks);
+        this.setFocused(wasFocused);
     }
 
     public class RowEntry extends ObjectSelectionList.Entry<RowEntry> {
@@ -161,7 +278,6 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
 
         @Override
         public void render(GuiGraphics g, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float partialTicks) {
-
             int gridWidth = columns * CELL_SIZE + (columns - 1) * CELL_GAP;
             int startX = FilesSelectionGrid.this.getRowLeft() + (FilesSelectionGrid.this.getRowWidth() - gridWidth) / 2;
 
@@ -203,6 +319,38 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
         }
     }
 
+    public void selectFirstIfNone() {
+        if (this.selectedFile == null && this.content != null && !this.content.isEmpty()) {
+            this.selectedFile = this.content.get(0);
+            try { this.setSelected(null); }
+            catch (Throwable ignored) {}
+            ensureSelectedVisible();
+        }
+    }
+
+    private void ensureSelectedVisible() {
+        if (this.selectedFile == null) return;
+        int index = this.content.indexOf(this.selectedFile);
+        if (index < 0) return;
+
+        int possiblePerRow = Math.max(1, this.getRowWidth() / (CELL_SIZE + CELL_GAP));
+        int itemsPerRow = Math.max(1, Math.min(this.columns, possiblePerRow));
+        int row = index / itemsPerRow;
+
+        double targetTop = row * (double) this.itemHeight;
+        double targetBottom = targetTop + this.itemHeight;
+        double visibleTop = this.getScrollAmount();
+        double visibleBottom = visibleTop + (this.getBottom() - this.getTop());
+
+        if (targetTop < visibleTop) {
+            this.setScrollAmount(Math.max(0.0D, Math.min(targetTop, this.getMaxScroll())));
+        } else if (targetBottom > visibleBottom) {
+            double newScroll = targetBottom - (this.getBottom() - this.getTop());
+            newScroll = Math.max(0.0D, Math.min(newScroll, this.getMaxScroll()));
+            this.setScrollAmount(newScroll);
+        }
+    }
+
     public File getSelectedFile() {
         return this.selectedFile;
     }
@@ -218,10 +366,10 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
         return s + ellipsis;
     }
 
-
     public void setPath(Path path) {
         this.path = path;
         if (this.onPathUpdate != null) this.onPathUpdate.accept(this.path.toFile());
+        if (rootScreen.isRequireDirectory()) this.selectedFile = path.toFile();
     }
 
     public Path getPath() {
@@ -230,11 +378,6 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
 
     public void setOnPathUpdate(Consumer<File> c) {
         this.onPathUpdate = c;
-    }
-
-    public void setContent(List<File> files) {
-        this.content = files == null ? List.of() : List.copyOf(files);
-        this.reload();
     }
 
     public void setColumns(int columns) {

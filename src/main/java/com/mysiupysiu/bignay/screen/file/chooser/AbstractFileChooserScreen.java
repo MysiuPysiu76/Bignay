@@ -54,11 +54,11 @@ abstract class AbstractFileChooserScreen extends Screen {
         int centerX = this.width / 2;
 
         this.list = new FilesSelectionGrid(this.width, this.height, 65, this.height - 40, this);
+        this.goHome();
         this.list.setColumns(6);
-        this.list.setPath(currentDir);
+        this.list.setPath(this.currentDir);
         this.list.setOnPathUpdate(file -> this.currentDir = file.toPath());
         this.addRenderableWidget(this.list);
-        this.goHome();
 
         Button refreshButton = Button.builder(Component.translatable("fileChooser.refresh"), b -> updateContent()).bounds(centerX - 195, btnY, btnWidth, btnHeight).build();
         refreshButton.setTooltip(Tooltip.create(Component.translatable("fileChooser.refresh.description")));
@@ -102,7 +102,6 @@ abstract class AbstractFileChooserScreen extends Screen {
     }
 
     @Override
-
     public boolean mouseReleased(double mouseX, double mouseY, int button) {
         if (this.draggingScrollbar) {
             this.draggingScrollbar = false;
