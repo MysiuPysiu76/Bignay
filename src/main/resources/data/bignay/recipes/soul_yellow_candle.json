@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "soul_dyed_candle",
+  "ingredients": [
+    {
+      "item": "bignay:soul_candle"
+    },
+    {
+      "item": "minecraft:yellow_dye"
+    }
+  ],
+  "result": {
+    "item": "bignay:soul_yellow_candle"
+  }
+}
