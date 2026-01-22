@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bignay:block/mossy_cobbled_deepslate_slab"
+    },
+    "type=double": {
+      "model": "bignay:block/mossy_cobbled_deepslate"
+    },
+    "type=top": {
+      "model": "bignay:block/mossy_cobbled_deepslate_slab_top"
+    }
+  }
+}
