@@ -27,18 +27,20 @@ public class WitherBoneMealItem extends Item implements CreativeTabProvider {
     public InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
-
         BlockState state = level.getBlockState(pos);
 
         if (!level.isClientSide && state.getBlock() == Blocks.NETHER_WART) {
             int age = state.getValue(NetherWartBlock.AGE);
 
             if (age < 3) {
-                level.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0f, 1.0f);
                 context.getItemInHand().shrink(1);
+                level.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0f, 1.0f);
+                context.getPlayer().swing(context.getHand(), true);
+                level.levelEvent(1505, pos, 0);
 
                 if (level.random.nextFloat() < 0.4f) {
                     level.setBlock(pos, state.setValue(NetherWartBlock.AGE, age + 1), 2);
+
                     return InteractionResult.SUCCESS;
                 }
             }
