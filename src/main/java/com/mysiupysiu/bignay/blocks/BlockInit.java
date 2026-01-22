@@ -507,6 +507,8 @@ public class BlockInit {
     public static final RegistryObject<Block> BLUE_ROSE_BUSH = registerBlock("blue_rose_bush", TallPlantBlock::new);
     public static final RegistryObject<Block> TALL_DEAD_BUSH = registerBlock("tall_dead_bush", TallDeadBushBlock::new, 200);
     public static final RegistryObject<Block> MUSHROOM_CLUSTER = registerBlock("mushroom_cluster", () -> new PlantBlock(MobEffects.GLOWING, 3));
+    public static final RegistryObject<Block> RED_MUSHROOM_CLUSTER = registerBlock("red_mushroom_cluster", () -> new PlantBlock(MobEffects.GLOWING, 3));
+    public static final RegistryObject<Block> BROWN_MUSHROOM_CLUSTER = registerBlock("brown_mushroom_cluster", () -> new PlantBlock(MobEffects.GLOWING, 3));
     public static final RegistryObject<Block> TALL_RED_MUSHROOM_CLUSTER = registerBlock("tall_red_mushroom_cluster", TallPlantBlock::new);
     public static final RegistryObject<Block> TALL_BROWN_MUSHROOM_CLUSTER = registerBlock("tall_brown_mushroom_cluster", TallPlantBlock::new);
 
