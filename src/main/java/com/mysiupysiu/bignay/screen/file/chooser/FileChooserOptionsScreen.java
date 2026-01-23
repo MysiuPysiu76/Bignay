@@ -10,8 +10,10 @@ class FileChooserOptionsScreen extends Screen {
 
     private final Screen parent;
     private boolean showHidden = AbstractFileChooserScreen.isShowHidden();
+    private int columns = AbstractFileChooserScreen.getColumns();
 
     private Button showHiddenButton;
+    private Button columnsButton;
 
     public FileChooserOptionsScreen(Screen parent) {
         super(Component.translatable("fileChooser.options.title"));
@@ -28,14 +30,19 @@ class FileChooserOptionsScreen extends Screen {
 
         this.showHiddenButton = Button.builder(getHiddenFilesButtonLabel(), btn -> updateHiddenButton())
                 .bounds(centerX - 80, this.height / 2 - 60, btnW, btnH).build();
-        this.addRenderableWidget(showHiddenButton);
+        this.addRenderableWidget(this.showHiddenButton);
+
+        this.columnsButton = Button.builder(Component.literal("Columns: " + columns), btn ->
+                incrementColumns()
+        ).bounds(centerX - 80, this.height / 2 - 30, btnW, btnH).build();
+        this.addRenderableWidget(this.columnsButton);
 
         this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.options.reset"), btn ->
-            resetSettings()
+                resetSettings()
         ).bounds(centerX - 110, this.height / 2 + 80, 100, 20).build());
 
         this.addRenderableWidget(Button.builder(Component.translatable("gui.back"), btn ->
-            Minecraft.getInstance().setScreen(parent)
+                onClose()
         ).bounds(centerX + 10, this.height / 2 + 80, 100, 20).build());
     }
 
@@ -51,6 +58,7 @@ class FileChooserOptionsScreen extends Screen {
     public void onClose() {
         super.onClose();
         AbstractFileChooserScreen.setShowHidden(this.showHidden);
+        AbstractFileChooserScreen.setColumns(this.columns);
         Minecraft.getInstance().setScreen(this.parent);
     }
 
@@ -59,11 +67,18 @@ class FileChooserOptionsScreen extends Screen {
         this.showHiddenButton.setMessage(getHiddenFilesButtonLabel());
     }
 
+    private void incrementColumns() {
+        this.columns++;
+        if (this.columns > 7) this.columns = 4;
+        this.columnsButton.setMessage(Component.translatable("fileChooser.options.columns", this.columns));
+    }
+
     private Component getHiddenFilesButtonLabel() {
         return Component.translatable("fileChooser.options.hidden_files_" + (this.showHidden ? "on" : "off"));
     }
 
     private void resetSettings() {
         this.showHidden = false;
+        this.columns = 6;
     }
 }

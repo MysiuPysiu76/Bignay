@@ -21,6 +21,8 @@ import java.util.stream.Stream;
 abstract class AbstractFileChooserScreen extends Screen {
 
     private final boolean requireDirectory = isRequireDirectory();
+    private static boolean showHidden = false;
+    private static int columns = 6;
     private static final int MARGIN = 20;
 
     private Screen previousScreen;
@@ -29,7 +31,6 @@ abstract class AbstractFileChooserScreen extends Screen {
     private List<File> entries;
     private Consumer<File> onConfirm;
 
-    private static boolean showHidden = false;
     protected Set<FileType> fileTypes;
     protected Component filterComponent = Component.empty();
     private boolean draggingScrollbar = false;
@@ -54,7 +55,7 @@ abstract class AbstractFileChooserScreen extends Screen {
 
         this.list = new FilesSelectionGrid(this.width, this.height, 65, this.height - 40, this);
         this.goHome();
-        this.list.setColumns(6);
+        this.list.setColumns(columns);
         this.list.setPath(this.currentDir);
         this.list.setOnPathUpdate(file -> this.currentDir = file.toPath());
         this.addRenderableWidget(this.list);
@@ -179,5 +180,13 @@ abstract class AbstractFileChooserScreen extends Screen {
 
     static boolean isShowHidden() {
         return showHidden;
+    }
+
+    static void setColumns(int c) {
+        columns = c;
+    }
+
+    static int getColumns() {
+        return columns;
     }
 }

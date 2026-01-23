@@ -1,5 +1,7 @@
 package com.mysiupysiu.bignay.screen.file.chooser;
 
+import com.mysiupysiu.bignay.utils.FileType;
+import com.mysiupysiu.bignay.utils.FileUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ObjectSelectionList;
@@ -91,16 +93,16 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
 
                     this.selectedFile = clicked;
 
-                    boolean isDoubleClick = clicked.equals(lastClickedFile) && (now - lastClickTime) <= DOUBLE_CLICK_MS;
+                    boolean isDoubleClick = clicked.equals(this.lastClickedFile) && (now - this.lastClickTime) <= DOUBLE_CLICK_MS;
 
                     this.lastClickTime = now;
                     this.lastClickedFile = clicked;
 
                     if (isDoubleClick) {
-                        this.path = selectedFile.toPath();
+                        this.path = this.selectedFile.toPath();
                         if (clicked.isDirectory()) {
-                            this.rootScreen.setPath(path);
-                            this.setContent(rootScreen.getEntries(clicked));
+                            this.rootScreen.setPath(this.path);
+                            this.setContent(this.rootScreen.getEntries(clicked));
                         } else {
                             this.rootScreen.fileConfirm();
                         }
@@ -291,7 +293,14 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
                     g.fill(drawX - 2, drawY - 2, drawX + CELL_SIZE + 2, drawY + CELL_SIZE + 4, 0x40FFFFFF);
                 }
 
-                ItemStack icon = file.isDirectory() ? new ItemStack(Items.CHEST) : new ItemStack(Items.PAPER);
+                ItemStack icon;
+                if (file.isDirectory()) {
+                    icon = new ItemStack(Items.CHEST);
+                } else if (file.isFile() && FileUtils.getFileType(file).equals(FileType.ZIP)) {
+                    icon = new ItemStack(Items.BOOK);
+                } else {
+                    icon = new ItemStack(Items.CHEST);
+                }
 
                 var pose = g.pose();
                 pose.pushPose();

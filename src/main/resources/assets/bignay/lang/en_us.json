@@ -534,6 +534,7 @@
   "block.bignay.tall_red_mushroom_cluster": "Tall Red Mushroom Cluster",
   "exportWorld.exportPlayerData.on": "Export Player Data: ON",
   "item.bignay.golden_berries": "Golden Berries",
+  "fileChooser.options.columns": "Columns: %s",
   "exportWorld.exportPlayerData.off": "Export Player Data: OFF",
   "importWorld.title": "Import World",
   "importWorld.import": "Import",
