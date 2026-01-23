@@ -29,10 +29,9 @@ abstract class AbstractFileChooserScreen extends Screen {
     private List<File> entries;
     private Consumer<File> onConfirm;
 
-    private boolean showHidden = false;
+    private static boolean showHidden = false;
     protected Set<FileType> fileTypes;
     protected Component filterComponent = Component.empty();
-    private Button hiddenToggleButton;
     private boolean draggingScrollbar = false;
 
     public AbstractFileChooserScreen(Component component) {
@@ -75,8 +74,10 @@ abstract class AbstractFileChooserScreen extends Screen {
         upButton.setTooltipDelay(200);
         this.addRenderableWidget(upButton);
 
-        this.hiddenToggleButton = Button.builder(getHiddenFilesButtonLabel(), b -> toggleHiddenFiles()).bounds(centerX + 105, btnY, btnWidth, btnHeight).build();
-        this.addRenderableWidget(this.hiddenToggleButton);
+        Button optionsButton = Button.builder(Component.translatable("fileChooser.options"), b -> openOptions()).bounds(centerX + 105, btnY, btnWidth, btnHeight).build();
+        upButton.setTooltip(Tooltip.create(Component.translatable("fileChooser.options.description")));
+        upButton.setTooltipDelay(200);
+        this.addRenderableWidget(optionsButton);
 
         int bottomY = this.height - 30;
 
@@ -126,10 +127,8 @@ abstract class AbstractFileChooserScreen extends Screen {
         updateContent();
     }
 
-    private void toggleHiddenFiles() {
-        this.showHidden = !this.showHidden;
-        this.hiddenToggleButton.setMessage(getHiddenFilesButtonLabel());
-        updateContent();
+    private void openOptions() {
+        Minecraft.getInstance().setScreen(new FileChooserOptionsScreen(this));
     }
 
     void fileConfirm() {
@@ -162,10 +161,6 @@ abstract class AbstractFileChooserScreen extends Screen {
                 .toList();
     }
 
-    private Component getHiddenFilesButtonLabel() {
-        return Component.translatable("fileChooser.hidden_files_" + (this.showHidden ? "on" : "off"));
-    }
-
     public void setPreviousScreen(Screen previousScreen) {
         this.previousScreen = previousScreen;
     }
@@ -176,5 +171,13 @@ abstract class AbstractFileChooserScreen extends Screen {
 
     void setPath(Path path) {
         this.currentDir = path;
+    }
+
+    static void setShowHidden(boolean s) {
+        showHidden = s;
+    }
+
+    static boolean isShowHidden() {
+        return showHidden;
     }
 }
