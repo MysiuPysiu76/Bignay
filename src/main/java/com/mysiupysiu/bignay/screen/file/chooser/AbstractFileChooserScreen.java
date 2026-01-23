@@ -75,8 +75,8 @@ abstract class AbstractFileChooserScreen extends Screen {
         this.addRenderableWidget(upButton);
 
         Button optionsButton = Button.builder(Component.translatable("fileChooser.options"), b -> openOptions()).bounds(centerX + 105, btnY, btnWidth, btnHeight).build();
-        upButton.setTooltip(Tooltip.create(Component.translatable("fileChooser.options.description")));
-        upButton.setTooltipDelay(200);
+        optionsButton.setTooltip(Tooltip.create(Component.translatable("fileChooser.options.description")));
+        optionsButton.setTooltipDelay(200);
         this.addRenderableWidget(optionsButton);
 
         int bottomY = this.height - 30;

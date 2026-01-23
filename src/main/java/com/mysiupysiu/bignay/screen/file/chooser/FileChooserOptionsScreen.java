@@ -29,6 +29,14 @@ class FileChooserOptionsScreen extends Screen {
         this.showHiddenButton = Button.builder(getHiddenFilesButtonLabel(), btn -> updateHiddenButton())
                 .bounds(centerX - 80, this.height / 2 - 60, btnW, btnH).build();
         this.addRenderableWidget(showHiddenButton);
+
+        this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.options.reset"), btn ->
+            resetSettings()
+        ).bounds(centerX - 110, this.height / 2 + 80, 100, 20).build());
+
+        this.addRenderableWidget(Button.builder(Component.translatable("gui.back"), btn ->
+            Minecraft.getInstance().setScreen(parent)
+        ).bounds(centerX + 10, this.height / 2 + 80, 100, 20).build());
     }
 
     @Override
@@ -53,5 +61,9 @@ class FileChooserOptionsScreen extends Screen {
 
     private Component getHiddenFilesButtonLabel() {
         return Component.translatable("fileChooser.options.hidden_files_" + (this.showHidden ? "on" : "off"));
+    }
+
+    private void resetSettings() {
+        this.showHidden = false;
     }
 }
