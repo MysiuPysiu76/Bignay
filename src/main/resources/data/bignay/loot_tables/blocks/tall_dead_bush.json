@@ -3,24 +3,43 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
       "entries": [
         {
-          "type": "minecraft:item",
-          "conditions": [
+          "type": "minecraft:alternatives",
+          "children": [
             {
-              "block": "bignay:tall_dead_bush",
-              "condition": "minecraft:block_state_property",
-              "properties": {
-                "half": "lower"
-              }
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "items": [
+                      "minecraft:shears"
+                    ]
+                  }
+                }
+              ],
+              "name": "bignay:tall_dead_bush"
+            },
+            {
+              "type": "minecraft:item",
+              "functions": [
+                {
+                  "add": false,
+                  "count": {
+                    "type": "minecraft:uniform",
+                    "max": 2.0,
+                    "min": 0.0
+                  },
+                  "function": "minecraft:set_count"
+                },
+                {
+                  "function": "minecraft:explosion_decay"
+                }
+              ],
+              "name": "minecraft:stick"
             }
-          ],
-          "name": "bignay:tall_dead_bush"
+          ]
         }
       ],
       "rolls": 1.0
