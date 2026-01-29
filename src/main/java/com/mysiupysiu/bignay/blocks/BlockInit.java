@@ -511,8 +511,10 @@ public class BlockInit {
     public static final RegistryObject<Block> BROWN_MUSHROOM_CLUSTER = registerBlock("brown_mushroom_cluster", () -> new PlantBlock(MobEffects.GLOWING, 3));
     public static final RegistryObject<Block> TALL_RED_MUSHROOM_CLUSTER = registerBlock("tall_red_mushroom_cluster", TallPlantBlock::new);
     public static final RegistryObject<Block> TALL_BROWN_MUSHROOM_CLUSTER = registerBlock("tall_brown_mushroom_cluster", TallPlantBlock::new);
+    public static final RegistryObject<Block> HYACINTH = registerBlock("hyacinth", () -> new PlantBlock(MobEffects.GLOWING, 3));
 
     public static final RegistryObject<Block> POTTED_PEONY = registerBlockOnly("potted_peony", () -> flowerPot(PEONY.get()));
+    public static final RegistryObject<Block> POTTED_HYACINTH = registerBlockOnly("potted_hyacinth", () -> flowerPot(PEONY.get()));
 
     public static final RegistryObject<Block> MOSSY_COBBLED_DEEPSLATE = registerBlock("mossy_cobbled_deepslate", () -> new BuildingBlock(Blocks.COBBLED_DEEPSLATE));
     public static final RegistryObject<Block> MOSSY_COBBLED_DEEPSLATE_SLAB = registerBlock("mossy_cobbled_deepslate_slab", () -> new SlabsBlock(Blocks.COBBLED_DEEPSLATE));

@@ -9,9 +9,9 @@ The **Happy, Angry, Derpy, Skull and Anxious Carved Pumpkin** texture variants, 
 
 The **Cobbled Basalt, Basalt Bricks, Chiseled Basalt and Basalt Pillar, Acacia, Birch, Crimson, Dark Oak, Jungle, Spruce, Warped Bookshelf and Prismarine Tiles** texture was created by [MCjossic](https://www.reddit.com/user/MCjossic/).  
 
-The Andesite, Diorite, Granite, Dripstone, Calcite variants of Polished, Smooth, Bricks, Pillar and Chiseled block textures come from [ImXR24](https://www.deviantart.com/imxr24)
+The **Andesite, Diorite, Granite, Dripstone, Calcite variants of Polished, Smooth, Bricks, Pillar and Chiseled block** textures come from [ImXR24](https://www.deviantart.com/imxr24)
 
-The **Tree cavity** textures come from [Turfnerf(BuildsZenith)](https://x.com/BuildsZenith)
+The **Tree cavity, Hyacinth, Peony, Mushroom Clusters, Tall Dead Bush and Blue Rose** textures come from [Turfnerf(BuildsZenith)](https://x.com/BuildsZenith)
 
 Used in the Bignay mod with permission from the original creator - many thanks for allowing me to use them!
 
