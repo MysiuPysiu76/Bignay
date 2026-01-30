@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "watered=true": {
+      "model": "bignay:block/pot_watered"
+    },
+    "watered=false": {
+      "model": "bignay:block/pot"
+    }
+  }
+}

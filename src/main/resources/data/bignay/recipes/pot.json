@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "minecraft:brick"
+    },
+    "D": {
+      "item": "minecraft:dirt"
+    }
+  },
+  "pattern": [
+    "#D#",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "item": "bignay:pot"
+  }
+}

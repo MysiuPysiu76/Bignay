@@ -1,0 +1,6 @@
+{
+  "parent": "bignay:block/template_pot",
+  "textures": {
+    "top": "bignay:block/pot_top_watered"
+  }
+}

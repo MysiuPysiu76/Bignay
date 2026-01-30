@@ -521,6 +521,8 @@ public class BlockInit {
     public static final RegistryObject<Block> MOSSY_COBBLED_DEEPSLATE_STAIRS = registerBlock("mossy_cobbled_deepslate_stairs", () -> new StairsBlock(Blocks.COBBLED_DEEPSLATE));
     public static final RegistryObject<Block> MOSSY_COBBLED_DEEPSLATE_WALL = registerBlock("mossy_cobbled_deepslate_wall", () -> new WallsBlock(Blocks.COBBLED_DEEPSLATE));
 
+    public static final RegistryObject<Block> POT = registerBlock("pot", PotBlock::new);
+
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
         ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
