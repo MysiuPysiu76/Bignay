@@ -512,6 +512,8 @@
   "exportWorld.choose": "Choose",
   "fileChooser.choose_file": "Choose File",
   "fileChooser.confirm": "Confirm",
+  "commands.name.set.single": "Set name of %s to %s",
+  "commands.name.set.multiple": "Set name of %s entities to %s",
   "selectWorld.backup.manage": "Manage Backups",
   "block.bignay.tall_dead_bush": "Tall Dead Bush",
   "selectWorld.backup.restore": "Restore World Backup",
