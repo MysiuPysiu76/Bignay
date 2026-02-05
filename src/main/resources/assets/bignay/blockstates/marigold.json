@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "bignay:block/marigold_bottom"
+    },
+    "half=upper": {
+      "model": "bignay:block/marigold_top"
+    }
+  }
+}

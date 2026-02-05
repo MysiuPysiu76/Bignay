@@ -470,6 +470,7 @@
   "selectWorld.info.achievements": "  Unlocked Achievements: %s",
   "selectWorld.info.lastPlayed": "  Last Played: %s",
   "selectWorld.info.gamemode": "  Gamemode: %s",
+  "block.bignay.marigold": "Marigold",
   "selectWorld.info.difficulty": "  Difficulty: %s",
   "block.bignay.cyan_rose_bush": "Cyan Rose Bush",
   "selectWorld.info.hardcore": "  Hardcore: %s",

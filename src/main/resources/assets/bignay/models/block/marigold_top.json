@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "bignay:block/marigold_top"
+  },
+  "render_type": "cutout"
+}
