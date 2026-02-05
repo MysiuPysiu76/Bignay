@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "bignay:block/lapis_lotus"
+  },
+  "render_type": "cutout"
+}
