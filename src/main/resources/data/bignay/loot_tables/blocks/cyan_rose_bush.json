@@ -13,18 +13,18 @@
           "type": "minecraft:item",
           "conditions": [
             {
-              "block": "bignay:blue_rose_bush",
+              "block": "bignay:cyan_rose_bush",
               "condition": "minecraft:block_state_property",
               "properties": {
                 "half": "lower"
               }
             }
           ],
-          "name": "bignay:blue_rose_bush"
+          "name": "bignay:cyan_rose_bush"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "bignay:blocks/blue_rose_bush"
+  "random_sequence": "bignay:blocks/cyan_rose_bush"
 }
