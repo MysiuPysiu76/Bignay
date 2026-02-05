@@ -513,6 +513,7 @@ public class BlockInit {
     public static final RegistryObject<Block> TALL_RED_MUSHROOM_CLUSTER = registerBlock("tall_red_mushroom_cluster", TallPlantBlock::new);
     public static final RegistryObject<Block> TALL_BROWN_MUSHROOM_CLUSTER = registerBlock("tall_brown_mushroom_cluster", TallPlantBlock::new);
     public static final RegistryObject<Block> HYACINTH = registerBlock("hyacinth", () -> new PlantBlock(MobEffects.POISON, 8));
+    public static final RegistryObject<Block> LILAC = registerBlock("lilac", () -> new PlantBlock(MobEffects.REGENERATION, 4));
 
     public static final RegistryObject<Block> POTTED_PEONY = registerBlockOnly("potted_peony", () -> flowerPot(PEONY.get()));
     public static final RegistryObject<Block> POTTED_HYACINTH = registerBlockOnly("potted_hyacinth", () -> flowerPot(HYACINTH.get()));
