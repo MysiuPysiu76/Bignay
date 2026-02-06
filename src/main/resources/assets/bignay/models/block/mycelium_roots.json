@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "bignay:block/mycelium_roots"
+  },
+  "render_type": "cutout"
+}

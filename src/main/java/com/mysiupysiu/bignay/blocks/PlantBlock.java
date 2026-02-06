@@ -3,6 +3,7 @@ package com.mysiupysiu.bignay.blocks;
 import com.mysiupysiu.bignay.utils.CreativeTabProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.FlowerBlock;
@@ -24,6 +25,10 @@ public class PlantBlock extends FlowerBlock implements CreativeTabProvider {
                         .sound(SoundType.GRASS)
                         .offsetType(BlockBehaviour.OffsetType.XZ)
                         .pushReaction(PushReaction.DESTROY));
+    }
+
+    public PlantBlock() {
+        this(MobEffects.POISON, 0);
     }
 
     @Override

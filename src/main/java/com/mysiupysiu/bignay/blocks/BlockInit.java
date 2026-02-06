@@ -504,17 +504,22 @@ public class BlockInit {
     public static final RegistryObject<Block> SPRUCE_CAVITY = registerBlock("spruce_cavity", () -> new CavityLog(Blocks.SPRUCE_LOG));
 
     public static final RegistryObject<Block> PEONY = registerBlock("peony", () -> new PlantBlock(MobEffects.WEAKNESS, 7));
+    public static final RegistryObject<Block> LILAC = registerBlock("lilac", () -> new PlantBlock(MobEffects.REGENERATION, 4));
+    public static final RegistryObject<Block> HYACINTH = registerBlock("hyacinth", () -> new PlantBlock(MobEffects.POISON, 8));
+    public static final RegistryObject<Block> LAPIS_LOTUS = registerBlock("lapis_lotus", () -> new PlantBlock(MobEffects.NIGHT_VISION, 10));
+
     public static final RegistryObject<Block> CYAN_ROSE_BUSH = registerBlock("cyan_rose_bush", TallPlantBlock::new);
     public static final RegistryObject<Block> MARIGOLD = registerBlock("marigold", TallPlantBlock::new);
     public static final RegistryObject<Block> TALL_DEAD_BUSH = registerBlock("tall_dead_bush", TallDeadBushBlock::new, 200);
-    public static final RegistryObject<Block> MUSHROOM_CLUSTER = registerBlock("mushroom_cluster", () -> new PlantBlock(MobEffects.GLOWING, 0));
-    public static final RegistryObject<Block> RED_MUSHROOM_CLUSTER = registerBlock("red_mushroom_cluster", () -> new PlantBlock(MobEffects.GLOWING, 0));
-    public static final RegistryObject<Block> BROWN_MUSHROOM_CLUSTER = registerBlock("brown_mushroom_cluster", () -> new PlantBlock(MobEffects.GLOWING, 0));
+
+    public static final RegistryObject<Block> PUFFBALLS = registerBlock("puffballs", PlantBlock::new);
+    public static final RegistryObject<Block> MYCELIUM_ROOTS = registerBlock("mycelium_roots", () -> new NetherRootsBlock(MapColor.COLOR_GRAY));
+    public static final RegistryObject<Block> MYCELIUM_SPROUTS = registerBlock("mycelium_sprouts", () -> new SproutsBlock(MapColor.COLOR_GRAY));
+    public static final RegistryObject<Block> MUSHROOM_CLUSTER = registerBlock("mushroom_cluster", PlantBlock::new);
+    public static final RegistryObject<Block> RED_MUSHROOM_CLUSTER = registerBlock("red_mushroom_cluster", PlantBlock::new);
+    public static final RegistryObject<Block> BROWN_MUSHROOM_CLUSTER = registerBlock("brown_mushroom_cluster", PlantBlock::new);
     public static final RegistryObject<Block> TALL_RED_MUSHROOM_CLUSTER = registerBlock("tall_red_mushroom_cluster", TallPlantBlock::new);
     public static final RegistryObject<Block> TALL_BROWN_MUSHROOM_CLUSTER = registerBlock("tall_brown_mushroom_cluster", TallPlantBlock::new);
-    public static final RegistryObject<Block> HYACINTH = registerBlock("hyacinth", () -> new PlantBlock(MobEffects.POISON, 8));
-    public static final RegistryObject<Block> LILAC = registerBlock("lilac", () -> new PlantBlock(MobEffects.REGENERATION, 4));
-    public static final RegistryObject<Block> LAPIS_LOTUS = registerBlock("lapis_lotus", () -> new PlantBlock(MobEffects.NIGHT_VISION, 10));
 
     public static final RegistryObject<Block> POTTED_PEONY = registerBlockOnly("potted_peony", () -> flowerPot(PEONY.get()));
     public static final RegistryObject<Block> POTTED_HYACINTH = registerBlockOnly("potted_hyacinth", () -> flowerPot(HYACINTH.get()));
