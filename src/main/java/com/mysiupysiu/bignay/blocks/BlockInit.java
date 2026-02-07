@@ -522,7 +522,10 @@ public class BlockInit {
     public static final RegistryObject<Block> TALL_BROWN_MUSHROOM_CLUSTER = registerBlock("tall_brown_mushroom_cluster", TallPlantBlock::new);
 
     public static final RegistryObject<Block> POTTED_PEONY = registerBlockOnly("potted_peony", () -> flowerPot(PEONY.get()));
+    public static final RegistryObject<Block> POTTED_LILAC = registerBlockOnly("potted_lilac", () -> flowerPot(LILAC.get()));
     public static final RegistryObject<Block> POTTED_HYACINTH = registerBlockOnly("potted_hyacinth", () -> flowerPot(HYACINTH.get()));
+    public static final RegistryObject<Block> POTTED_LAPIS_LOTUS = registerBlockOnly("potted_lapis_lotus", () -> flowerPot(LAPIS_LOTUS.get()));
+    public static final RegistryObject<Block> POTTED_PUFFBALLS = registerBlockOnly("potted_puffballs", () -> flowerPot(PUFFBALLS.get()));
 
     public static final RegistryObject<Block> MOSSY_COBBLED_DEEPSLATE = registerBlock("mossy_cobbled_deepslate", () -> new BuildingBlock(Blocks.COBBLED_DEEPSLATE));
     public static final RegistryObject<Block> MOSSY_COBBLED_DEEPSLATE_SLAB = registerBlock("mossy_cobbled_deepslate_slab", () -> new SlabsBlock(Blocks.COBBLED_DEEPSLATE));
