@@ -548,6 +548,7 @@
   "block.bignay.pot": "Pot",
   "fileChooser.options.reset": "Reset",
   "importWorld.version": "Version: %s",
+  "fileChooser.emptyFolder": "Folder is empty or no matching files",
   "importWorld.gamemode": "Gamemode: %s",
   "importWorld.difficulty": "Difficulty: %s",
   "block.bignay.puffballs": "Puffballs",

@@ -264,6 +264,16 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
         boolean wasFocused = this.isFocused();
         this.setFocused(false);
         super.renderList(g, mouseX, mouseY, partialTicks);
+
+        if (this.content == null || this.content.isEmpty()) {
+            var font = Minecraft.getInstance().font;
+
+            int centerX = this.getRowLeft() + this.getRowWidth() / 2;
+            int centerY = this.getTop() + (this.getBottom() - this.getTop()) / 2;
+
+            g.drawCenteredString(font, Component.translatable("fileChooser.emptyFolder"), centerX, centerY, 0xFFFFFF);
+        }
+
         this.setFocused(wasFocused);
     }
 
