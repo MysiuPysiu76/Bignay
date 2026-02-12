@@ -1,9 +1,7 @@
 package com.mysiupysiu.bignay.utils.world;
 
-import com.mysiupysiu.bignay.screen.OperationWithProgressScreen;
 import com.mysiupysiu.bignay.utils.OperationWithProgress;
 import com.mysiupysiu.bignay.utils.ProgressListener;
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.level.storage.LevelStorageSource;
 
 import java.io.File;

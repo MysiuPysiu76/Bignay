@@ -1,8 +1,5 @@
 package com.mysiupysiu.bignay.utils;
 
-import net.minecraft.network.chat.Component;
-
-import javax.xml.stream.events.Comment;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.IOException;

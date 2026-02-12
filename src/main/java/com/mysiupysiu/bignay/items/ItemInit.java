@@ -3,7 +3,7 @@ package com.mysiupysiu.bignay.items;
 import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.blocks.BlockInit;
 import com.mysiupysiu.bignay.utils.CreativeTabProvider;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;

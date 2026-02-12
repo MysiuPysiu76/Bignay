@@ -1,9 +1,6 @@
 package com.mysiupysiu.bignay.entities;
 
 import com.mojang.logging.LogUtils;
-
-import javax.annotation.Nullable;
-
 import com.mysiupysiu.bignay.items.ItemInit;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Direction;
@@ -20,12 +17,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityDimensions;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MoverType;
-import net.minecraft.world.entity.Pose;
-import net.minecraft.world.entity.SlotAccess;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.decoration.HangingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -42,6 +34,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
+
+import javax.annotation.Nullable;
 
 public class QuadItemFrameEntity extends HangingEntity {
     private static final Logger LOGGER = LogUtils.getLogger();

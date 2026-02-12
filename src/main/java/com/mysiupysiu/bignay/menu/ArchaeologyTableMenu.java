@@ -3,12 +3,12 @@ package com.mysiupysiu.bignay.menu;
 import com.mysiupysiu.bignay.items.ItemInit;
 import com.mysiupysiu.bignay.utils.BignayTags;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.SimpleContainer;
 
 public class ArchaeologyTableMenu extends AbstractContainerMenu {
     private final SimpleContainer container = new SimpleContainer(3) {

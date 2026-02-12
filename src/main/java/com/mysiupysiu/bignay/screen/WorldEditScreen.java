@@ -5,9 +5,9 @@ import com.mysiupysiu.bignay.screen.file.chooser.FileChooserScreen;
 import com.mysiupysiu.bignay.utils.BackupEntry;
 import com.mysiupysiu.bignay.utils.Backups;
 import com.mysiupysiu.bignay.utils.FileType;
-import com.mysiupysiu.bignay.utils.world.WorldRestorer;
 import com.mysiupysiu.bignay.utils.world.WorldDuplicator;
 import com.mysiupysiu.bignay.utils.world.WorldInfoReader;
+import com.mysiupysiu.bignay.utils.world.WorldRestorer;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -23,7 +23,6 @@ import net.minecraft.world.level.LevelSettings;
 import net.minecraft.world.level.storage.LevelResource;
 import net.minecraft.world.level.storage.LevelStorageSource;
 import net.minecraft.world.level.validation.ContentValidationException;
-import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.LoggerFactory;
 
