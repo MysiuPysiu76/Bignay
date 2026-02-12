@@ -13,7 +13,7 @@
           "type": "minecraft:item",
           "conditions": [
             {
-              "block": "bignay:tall_marigold",
+              "block": "bignay:marigold",
               "condition": "minecraft:block_state_property",
               "properties": {
                 "half": "lower"
