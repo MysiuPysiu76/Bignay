@@ -15,6 +15,7 @@ import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,6 +26,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -150,17 +152,14 @@ public class ScreenshotsViewerScreen extends Screen {
         this.exportButton = Button.builder(Component.translatable("screenshotsViewer.export"), btn -> exportSelected())
                 .bounds(this.width / 2 - 76, y, 72, 20).build();
 
-        this.deleteButton = Button.builder(Component.translatable("screenshotsViewer.delete"), btn ->
-                deleteSelected()
-        ).bounds(this.width / 2 + 4, y, 72, 20).build();
+        this.deleteButton = Button.builder(Component.translatable("screenshotsViewer.delete"), btn -> deleteSelected())
+                .bounds(this.width / 2 + 4, y, 72, 20).build();
 
         this.addRenderableWidget(openButton);
         this.addRenderableWidget(exportButton);
         this.addRenderableWidget(deleteButton);
-        this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, btn -> {
-            close();
-            Minecraft.getInstance().setScreen(null);
-        }).bounds(this.width / 2 + 82, y, 72, 20).build());
+        this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, btn -> close())
+            .bounds(this.width / 2 + 82, y, 72, 20).build());
         updateButtons();
     }
 
@@ -177,6 +176,7 @@ public class ScreenshotsViewerScreen extends Screen {
         loader.shutdownNow();
         TextureManager tm = Minecraft.getInstance().getTextureManager();
         for (Entry e : entries) e.unload(tm);
+        Minecraft.getInstance().setScreen(null);
     }
 
     private void loadEntries() {
@@ -654,9 +654,9 @@ public class ScreenshotsViewerScreen extends Screen {
     private void exportSelected() {
         FolderChooserScreen folderChooserScreen = new FolderChooserScreen();
         folderChooserScreen.setPreviousScreen(this);
+        folderChooserScreen.setBackToPreviousAfterConfirm(true);
         folderChooserScreen.setOnConfirm(f -> {
             FileUtils.zipFiles(getSelected().toList(), f.toPath().resolve(Component.translatable("screenshotsViewer.export.fileName", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy-HH-mm"))).getString()));
-            Minecraft.getInstance().setScreen(this);
         });
         Minecraft.getInstance().setScreen(folderChooserScreen);
     }

@@ -371,6 +371,7 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
     }
 
     public File getSelectedFile() {
+        if (this.selectedFile == null) return this.path.toFile();
         return this.selectedFile;
     }
 

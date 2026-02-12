@@ -7,6 +7,7 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -34,6 +35,8 @@ abstract class AbstractFileChooserScreen extends Screen {
     protected Set<FileType> fileTypes;
     protected Component filterComponent = Component.empty();
     private boolean draggingScrollbar = false;
+
+    private boolean backToPreviousAfterConfirm = false;
 
     public AbstractFileChooserScreen(Component component) {
         super(component);
@@ -149,6 +152,7 @@ abstract class AbstractFileChooserScreen extends Screen {
                 this.onConfirm.accept(target);
             }
         }
+        if (backToPreviousAfterConfirm) Minecraft.getInstance().setScreen(this.previousScreen);
     }
 
     List<File> getEntries(File dir) {
@@ -168,6 +172,14 @@ abstract class AbstractFileChooserScreen extends Screen {
 
     public void setOnConfirm(Consumer<File> onConfirm) {
         this.onConfirm = onConfirm;
+    }
+
+    public boolean isBackToPreviousAfterConfirm() {
+        return backToPreviousAfterConfirm;
+    }
+
+    public void setBackToPreviousAfterConfirm(boolean backToPreviousAfterConfirm) {
+        this.backToPreviousAfterConfirm = backToPreviousAfterConfirm;
     }
 
     void setPath(Path path) {
