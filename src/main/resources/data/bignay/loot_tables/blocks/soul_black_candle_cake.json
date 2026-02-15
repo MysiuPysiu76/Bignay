@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "bignay:soul_black_candle"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "bignay:blocks/soul_black_candle_cake"
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "bignay:block/soul_white_candle_cake"
+    },
+    "lit=true": {
+      "model": "bignay:block/soul_white_candle_cake_lit"
+    }
+  }
+}

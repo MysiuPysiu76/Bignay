@@ -494,6 +494,24 @@ public class BlockInit {
     public static final RegistryObject<Block> SOUL_RED_CANDLE = registerBlock("soul_red_candle", () -> new CandlesBlock(MapColor.COLOR_RED));
     public static final RegistryObject<Block> SOUL_BLACK_CANDLE = registerBlock("soul_black_candle", () -> new CandlesBlock(MapColor.COLOR_BLACK));
 
+    public static final RegistryObject<Block> SOUL_CANDLE_CAKE = registerBlockOnly("soul_candle_cake", () -> new CandlesCakeBlock(SOUL_CANDLE));
+    public static final RegistryObject<Block> SOUL_WHITE_CANDLE_CAKE = registerBlockOnly("soul_white_candle_cake", () -> new CandlesCakeBlock(SOUL_WHITE_CANDLE));
+    public static final RegistryObject<Block> SOUL_ORANGE_CANDLE_CAKE = registerBlockOnly("soul_orange_candle_cake", () -> new CandlesCakeBlock(SOUL_ORANGE_CANDLE));
+    public static final RegistryObject<Block> SOUL_MAGENTA_CANDLE_CAKE = registerBlockOnly("soul_magenta_candle_cake", () -> new CandlesCakeBlock(SOUL_MAGENTA_CANDLE));
+    public static final RegistryObject<Block> SOUL_LIGHT_BLUE_CANDLE_CAKE = registerBlockOnly("soul_light_blue_candle_cake", () -> new CandlesCakeBlock(SOUL_LIGHT_BLUE_CANDLE));
+    public static final RegistryObject<Block> SOUL_YELLOW_CANDLE_CAKE = registerBlockOnly("soul_yellow_candle_cake", () -> new CandlesCakeBlock(SOUL_YELLOW_CANDLE));
+    public static final RegistryObject<Block> SOUL_LIME_CANDLE_CAKE = registerBlockOnly("soul_lime_candle_cake", () -> new CandlesCakeBlock(SOUL_LIME_CANDLE));
+    public static final RegistryObject<Block> SOUL_PINK_CANDLE_CAKE = registerBlockOnly("soul_pink_candle_cake", () -> new CandlesCakeBlock(SOUL_PINK_CANDLE));
+    public static final RegistryObject<Block> SOUL_GRAY_CANDLE_CAKE = registerBlockOnly("soul_gray_candle_cake", () -> new CandlesCakeBlock(SOUL_GRAY_CANDLE));
+    public static final RegistryObject<Block> SOUL_LIGHT_GRAY_CANDLE_CAKE = registerBlockOnly("soul_light_gray_candle_cake", () -> new CandlesCakeBlock(SOUL_LIGHT_GRAY_CANDLE));
+    public static final RegistryObject<Block> SOUL_CYAN_CANDLE_CAKE = registerBlockOnly("soul_cyan_candle_cake", () -> new CandlesCakeBlock(SOUL_CYAN_CANDLE));
+    public static final RegistryObject<Block> SOUL_PURPLE_CANDLE_CAKE = registerBlockOnly("soul_purple_candle_cake", () -> new CandlesCakeBlock(SOUL_PURPLE_CANDLE));
+    public static final RegistryObject<Block> SOUL_BLUE_CANDLE_CAKE = registerBlockOnly("soul_blue_candle_cake", () -> new CandlesCakeBlock(SOUL_BLUE_CANDLE));
+    public static final RegistryObject<Block> SOUL_BROWN_CANDLE_CAKE = registerBlockOnly("soul_brown_candle_cake", () -> new CandlesCakeBlock(SOUL_BROWN_CANDLE));
+    public static final RegistryObject<Block> SOUL_GREEN_CANDLE_CAKE = registerBlockOnly("soul_green_candle_cake", () -> new CandlesCakeBlock(SOUL_GREEN_CANDLE));
+    public static final RegistryObject<Block> SOUL_RED_CANDLE_CAKE = registerBlockOnly("soul_red_candle_cake", () -> new CandlesCakeBlock(SOUL_RED_CANDLE));
+    public static final RegistryObject<Block> SOUL_BLACK_CANDLE_CAKE = registerBlockOnly("soul_black_candle_cake", () -> new CandlesCakeBlock(SOUL_BLACK_CANDLE));
+
     public static final RegistryObject<Block> ACACIA_CAVITY = registerBlock("acacia_cavity", () -> new CavityLog(Blocks.ACACIA_LOG));
     public static final RegistryObject<Block> BIRCH_CAVITY = registerBlock("birch_cavity", () -> new CavityLog(Blocks.BIRCH_LOG));
     public static final RegistryObject<Block> CHERRY_CAVITY = registerBlock("cherry_cavity", () -> new CavityLog(Blocks.CHERRY_LOG));
