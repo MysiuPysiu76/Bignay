@@ -3,7 +3,7 @@ package com.mysiupysiu.bignay.entities;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import com.mysiupysiu.bignay.BignayMod;
+import com.mysiupysiu.bignay.events.ClientModEvents;
 import com.mysiupysiu.bignay.utils.BignayTags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -23,7 +23,7 @@ public class QuadItemFrameRenderer extends EntityRenderer<QuadItemFrameEntity> {
 
     public QuadItemFrameRenderer(EntityRendererProvider.Context ctx) {
         super(ctx);
-        this.model = new QuadItemFrameModel(ctx.bakeLayer(BignayMod.ClientModEvents.QUAD_ITEM_FRAME_LAYER));
+        this.model = new QuadItemFrameModel(ctx.bakeLayer(ClientModEvents.QUAD_ITEM_FRAME_LAYER));
     }
 
     @Override
