@@ -87,7 +87,7 @@ public class WorldExportScreen extends Screen {
             exporter.setExportPlayerData(this.exportPlayerData);
             exporter.setWorldName(this.worldName);
 
-            Minecraft.getInstance().setScreen(new OperationWithProgressScreen(Component.translatable("exportWorld.progress.title"), exporter));
+            Minecraft.getInstance().setScreen(new OperationWithProgressScreen("exportWorld.progress.title", exporter));
         }).bounds(centerX - 130, btnY, 120, 20).build();
 
         exportButton.active = (destinationFile != null);

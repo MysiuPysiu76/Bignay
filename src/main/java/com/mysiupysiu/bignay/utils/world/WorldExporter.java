@@ -39,7 +39,7 @@ public class WorldExporter implements OperationWithProgress {
             throw new RuntimeException(e);
         }
 
-        if (canceled && outputZip.exists()) outputZip.delete();
+        if (this.canceled && outputZip.exists()) outputZip.delete();
         this.close();
         this.finish();
     }
@@ -97,24 +97,12 @@ public class WorldExporter implements OperationWithProgress {
         return source;
     }
 
-    public File getDestination() {
-        return destination;
-    }
-
     public void setDestination(File destination) {
         this.destination = destination;
     }
 
-    public String getWorldName() {
-        return worldName;
-    }
-
     public void setWorldName(String worldName) {
         this.worldName = worldName;
-    }
-
-    public boolean isExportPlayerData() {
-        return exportPlayerData;
     }
 
     public void setExportPlayerData(boolean exportPlayerData) {

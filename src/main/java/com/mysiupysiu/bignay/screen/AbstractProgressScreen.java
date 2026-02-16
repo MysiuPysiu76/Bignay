@@ -11,6 +11,7 @@ public abstract class AbstractProgressScreen extends Screen implements ProgressL
 
     private volatile double progress = 0.0;
     private boolean finished = false;
+    private Screen afterFinishScreen;
 
     protected AbstractProgressScreen(Component component) {
         super(component);
@@ -51,10 +52,7 @@ public abstract class AbstractProgressScreen extends Screen implements ProgressL
         String percentText = String.format("%.0f%%", progress * 100);
         graphics.drawCenteredString(this.font, Component.translatable("progressScreen.complete", percentText), centerX, centerY + 24, 0xFFFFFF);
 
-        if (finished) {
-            graphics.drawCenteredString(this.font, Component.translatable("exportWorld.done"), centerX, centerY + 70, 0x00FF00);
-            Minecraft.getInstance().setScreen(null);
-        }
+        if (finished) Minecraft.getInstance().setScreen(this.afterFinishScreen);
 
         super.render(graphics, mouseX, mouseY, partialTicks);
     }
@@ -71,5 +69,9 @@ public abstract class AbstractProgressScreen extends Screen implements ProgressL
 
     public final void finish() {
         this.finished = true;
+    }
+
+    public void setAfterFinishScreen(Screen afterFinishScreen) {
+        this.afterFinishScreen = afterFinishScreen;
     }
 }

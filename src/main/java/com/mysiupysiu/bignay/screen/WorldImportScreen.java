@@ -50,7 +50,7 @@ public class WorldImportScreen extends Screen {
         Button importButton = Button.builder(Component.translatable("importWorld.import"), b -> {
             WorldImporter importer = new WorldImporter(source);
             importer.setWorldName(nameInput.getValue().trim());
-            Minecraft.getInstance().setScreen(new OperationWithProgressScreen(Component.translatable("importWorld.progress.title"), importer));
+            Minecraft.getInstance().setScreen(new OperationWithProgressScreen("importWorld.progress.title", importer));
         }).bounds(centerX - 110, y, 100, 20).build();
         this.addRenderableWidget(importButton);
 

@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mysiupysiu.bignay.screen.file.chooser.FolderChooserScreen;
 import com.mysiupysiu.bignay.utils.FileUtils;
+import com.mysiupysiu.bignay.utils.ScreenshotsExporter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -20,8 +21,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -652,10 +651,8 @@ public class ScreenshotsViewerScreen extends Screen {
     private void exportSelected() {
         FolderChooserScreen folderChooserScreen = new FolderChooserScreen();
         folderChooserScreen.setPreviousScreen(this);
-        folderChooserScreen.setBackToPreviousAfterConfirm(true);
-        folderChooserScreen.setOnConfirm(f -> {
-            FileUtils.zipFiles(getSelected().toList(), f.toPath().resolve(Component.translatable("screenshotsViewer.export.fileName", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy-HH-mm"))).getString()));
-        });
+        folderChooserScreen.setOnConfirm(f -> Minecraft.getInstance()
+            .setScreen(new OperationWithProgressScreen("screenshotsViewer.export.progress", new ScreenshotsExporter(getSelected(), f.toPath()))));
         Minecraft.getInstance().setScreen(folderChooserScreen);
     }
 

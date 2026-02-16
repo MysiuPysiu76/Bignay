@@ -211,7 +211,7 @@ public class WorldEditScreen extends Screen {
                 WorldRestorer restorer = new WorldRestorer(this.levelAccess, new File(backups, be.file()));
                 this.minecraft.setScreen(new ConfirmScreen(is -> {
                     if (is) {
-                        Minecraft.getInstance().setScreen(new OperationWithProgressScreen(Component.translatable("selectWorld.backup.restoring"), restorer));
+                        Minecraft.getInstance().setScreen(new OperationWithProgressScreen("selectWorld.backup.restoring", restorer));
                     } else {
                         this.minecraft.setScreen(this);
                     }
@@ -295,7 +295,7 @@ public class WorldEditScreen extends Screen {
 
     private Button.Builder getDuplicateButton() {
         return Button.builder(Component.translatable("selectWorld.duplicate"), btn ->
-                Minecraft.getInstance().setScreen(new OperationWithProgressScreen(Component.translatable("selectWorld.duplicate"), new WorldDuplicator(this.levelAccess))));
+                Minecraft.getInstance().setScreen(new OperationWithProgressScreen("selectWorld.duplicate", new WorldDuplicator(this.levelAccess))));
     }
 
     private Button.Builder getDeleteButton() {
