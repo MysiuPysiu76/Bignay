@@ -33,13 +33,7 @@ public class ClientModEvents {
             BlockEntityRenderers.register(BlockEntityInit.VERDANT_SIGN.get(), SignRenderer::new);
             BlockEntityRenderers.register(BlockEntityInit.VERDANT_HANGING_SIGN.get(), HangingSignRenderer::new);
 
-            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(BlockInit.VERDANT_FUNGUS.getId(), BlockInit.POTTED_VERDANT_FUNGUS);
-            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(BlockInit.VERDANT_ROOTS.getId(), BlockInit.POTTED_VERDANT_ROOTS);
-            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(BlockInit.PEONY.getId(), BlockInit.POTTED_PEONY);
-            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(BlockInit.LILAC.getId(), BlockInit.POTTED_LILAC);
-            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(BlockInit.HYACINTH.getId(), BlockInit.POTTED_HYACINTH);
-            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(BlockInit.LAPIS_LOTUS.getId(), BlockInit.POTTED_LAPIS_LOTUS);
-            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(BlockInit.PUFFBALLS.getId(), BlockInit.POTTED_PUFFBALLS);
+            registerPots();
 
             BlockColors blockColors = Minecraft.getInstance().getBlockColors();
             blockColors.register((state, world, pos, tintIndex) -> BiomeColors.getAverageFoliageColor(world, pos), BlockInit.PALE_PUMPKIN_STEM.get(), BlockInit.ATTACHED_PALE_PUMPKIN_STEM.get());
@@ -56,5 +50,23 @@ public class ClientModEvents {
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(ModelLayers.QUAD_ITEM_FRAME, QuadItemFrameModel::createBodyLayer);
         event.registerLayerDefinition(ModelLayers.GLOW_QUAD_ITEM_FRAME, GlowQuadItemFrameModel::createBodyLayer);
+    }
+
+    private static void registerPots() {
+        FlowerPotBlock pot = (FlowerPotBlock)Blocks.FLOWER_POT;
+
+        pot.addPlant(BlockInit.PEONY.getId(), BlockInit.POTTED_PEONY);
+        pot.addPlant(BlockInit.LILAC.getId(), BlockInit.POTTED_LILAC);
+        pot.addPlant(BlockInit.HYACINTH.getId(), BlockInit.POTTED_HYACINTH);
+        pot.addPlant(BlockInit.LAPIS_LOTUS.getId(), BlockInit.POTTED_LAPIS_LOTUS);
+
+        pot.addPlant(BlockInit.PUFFBALLS.getId(), BlockInit.POTTED_PUFFBALLS);
+        pot.addPlant(BlockInit.MYCELIUM_ROOTS.getId(), BlockInit.POTTED_MYCELIUM_ROOTS);
+        pot.addPlant(BlockInit.MUSHROOM_CLUSTER.getId(), BlockInit.POTTED_MUSHROOM_CLUSTER);
+        pot.addPlant(BlockInit.BROWN_MUSHROOM_CLUSTER.getId(), BlockInit.POTTED_BROWN_MUSHROOM_CLUSTER);
+        pot.addPlant(BlockInit.RED_MUSHROOM_CLUSTER.getId(), BlockInit.POTTED_RED_MUSHROOM_CLUSTER);
+
+        pot.addPlant(BlockInit.VERDANT_FUNGUS.getId(), BlockInit.POTTED_VERDANT_FUNGUS);
+        pot.addPlant(BlockInit.VERDANT_ROOTS.getId(), BlockInit.POTTED_VERDANT_ROOTS);
     }
 }

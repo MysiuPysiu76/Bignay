@@ -544,6 +544,10 @@ public class BlockInit {
     public static final RegistryObject<Block> POTTED_HYACINTH = registerBlockOnly("potted_hyacinth", () -> flowerPot(HYACINTH.get()));
     public static final RegistryObject<Block> POTTED_LAPIS_LOTUS = registerBlockOnly("potted_lapis_lotus", () -> flowerPot(LAPIS_LOTUS.get()));
     public static final RegistryObject<Block> POTTED_PUFFBALLS = registerBlockOnly("potted_puffballs", () -> flowerPot(PUFFBALLS.get()));
+    public static final RegistryObject<Block> POTTED_MYCELIUM_ROOTS = registerBlockOnly("potted_mycelium_roots", () -> flowerPot(MYCELIUM_ROOTS.get()));
+    public static final RegistryObject<Block> POTTED_MUSHROOM_CLUSTER = registerBlockOnly("potted_mushroom_cluster", () -> flowerPot(MUSHROOM_CLUSTER.get()));
+    public static final RegistryObject<Block> POTTED_BROWN_MUSHROOM_CLUSTER = registerBlockOnly("potted_brown_mushroom_cluster", () -> flowerPot(BROWN_MUSHROOM_CLUSTER.get()));
+    public static final RegistryObject<Block> POTTED_RED_MUSHROOM_CLUSTER = registerBlockOnly("potted_red_mushroom_cluster", () -> flowerPot(RED_MUSHROOM_CLUSTER.get()));
 
     public static final RegistryObject<Block> MOSSY_COBBLED_DEEPSLATE = registerBlock("mossy_cobbled_deepslate", () -> new BuildingBlock(Blocks.COBBLED_DEEPSLATE));
     public static final RegistryObject<Block> MOSSY_COBBLED_DEEPSLATE_SLAB = registerBlock("mossy_cobbled_deepslate_slab", () -> new SlabsBlock(Blocks.COBBLED_DEEPSLATE));

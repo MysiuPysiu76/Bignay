@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/flower_pot_cross",
+  "textures": {
+    "plant": "bignay:block/mycelium_roots_pot"
+  },
+  "render_type": "cutout"
+}
