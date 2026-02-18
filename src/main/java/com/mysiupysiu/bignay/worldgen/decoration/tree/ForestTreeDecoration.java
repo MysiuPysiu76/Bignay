@@ -10,7 +10,7 @@ public class ForestTreeDecoration extends AbstractTrunkVineDecorator {
 
     @Override
     public int getChance() {
-        return 10;
+        return 45;
     }
 
     @Override
