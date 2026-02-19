@@ -1,0 +1,24 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "bignay:item/knife"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [0, 90, 45],
+      "translation": [0, 4.25, 0.5]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [0, -90, -45],
+      "translation": [0, 4, 0.25]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, 90, 0],
+      "translation": [1, 0, 0]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, -90, 0],
+      "translation": [1, 0, 0]
+    }
+  }
+}

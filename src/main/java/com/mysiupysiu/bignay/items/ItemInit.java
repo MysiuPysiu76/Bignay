@@ -42,6 +42,8 @@ public class ItemInit {
 
     public static final RegistryObject<Item> GOLDEN_BERRIES = registerItem("golden_berries", GoldenBerriesItem::new);
 
+    public static final RegistryObject<Item> KNIFE = registerItem("knife", KnifeItem::new);
+
     private static RegistryObject<Item> registerItem(String name, Supplier<Item> supplier) {
         return ITEMS.register(name, supplier);
     }

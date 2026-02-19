@@ -16,3 +16,5 @@ The **Tree cavity, Hyacinth, Peony, Lilac, Lapis Lotus, Mushroom Clusters, Tall 
 Used in the Bignay mod with permission from the original creator - many thanks for allowing me to use them!
 
 The mosaic blocks were inspired by the work of people on Reddit and other mods, viewed on Google Images
+
+The **knife** texture was inspired by [Vanilla Knives](https://www.curseforge.com/minecraft-bedrock/addons/vanilla-knives)
