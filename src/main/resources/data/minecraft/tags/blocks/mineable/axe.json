@@ -4,8 +4,10 @@
     "#bignay:all_vertical_plank_blocks",
     "#bignay:all_wooden_mosaic_blocks",
     "#bignay:bookshelves",
+    "#bignay:carved_pumpkins",
     "#bignay:cavity_logs",
     "#bignay:hollow_logs",
+    "#bignay:jack_o_lanterns",
     "bignay:archaeology_table",
     "bignay:verdant_fungus",
     "bignay:tall_dead_bush",
@@ -14,6 +16,7 @@
     "bignay:mushroom_cluster",
     "bignay:tall_brown_mushroom_cluster",
     "bignay:tall_red_mushroom_cluster",
-    "bignay:puffballs"
+    "bignay:puffballs",
+    "bignay:pale_pumpkin"
   ]
 }

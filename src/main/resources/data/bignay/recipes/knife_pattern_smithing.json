@@ -1,0 +1,9 @@
+{
+  "type": "bignay:knife_pattern_smithing",
+  "base": {
+    "item": "bignay:knife"
+  },
+  "addition": {
+    "tag": "bignay:pumpkin_patterns"
+  }
+}

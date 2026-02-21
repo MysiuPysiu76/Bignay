@@ -44,6 +44,12 @@ public class ItemInit {
 
     public static final RegistryObject<Item> KNIFE = registerItem("knife", KnifeItem::new);
 
+    public static final RegistryObject<Item> ANGRY_PUMPKIN_PATTERN = registerItem("angry_pumpkin_pattern", () -> new PumpkinPatternItem(PumpkinPatternItem.Type.ANGRY));
+    public static final RegistryObject<Item> ANXIOUS_PUMPKIN_PATTERN = registerItem("anxious_pumpkin_pattern", () -> new PumpkinPatternItem(PumpkinPatternItem.Type.ANXIOUS));
+    public static final RegistryObject<Item> DERPY_PUMPKIN_PATTERN = registerItem("derpy_pumpkin_pattern", () -> new PumpkinPatternItem(PumpkinPatternItem.Type.DERPY));
+    public static final RegistryObject<Item> HAPPY_PUMPKIN_PATTERN = registerItem("happy_pumpkin_pattern", () -> new PumpkinPatternItem(PumpkinPatternItem.Type.HAPPY));
+    public static final RegistryObject<Item> SKULL_PUMPKIN_PATTERN = registerItem("skull_pumpkin_pattern", () -> new PumpkinPatternItem(PumpkinPatternItem.Type.SKULL));
+
     private static RegistryObject<Item> registerItem(String name, Supplier<Item> supplier) {
         return ITEMS.register(name, supplier);
     }
