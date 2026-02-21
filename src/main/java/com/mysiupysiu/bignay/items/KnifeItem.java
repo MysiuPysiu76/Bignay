@@ -23,6 +23,9 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -33,8 +36,9 @@ import java.util.List;
 
 public class KnifeItem extends Item implements CreativeTabProvider {
 
-    private final Multimap<Attribute, AttributeModifier> modifiers;
+    private static final List<Enchantment> AVAILABLE_ENCHANTING = List.of(Enchantments.MENDING, Enchantments.UNBREAKING, Enchantments.SHARPNESS, Enchantments.BANE_OF_ARTHROPODS, Enchantments.SMITE, Enchantments.VANISHING_CURSE);
     public static final String PATTERN_KEY = "bignay:pattern";
+    private final Multimap<Attribute, AttributeModifier> modifiers;
 
     public KnifeItem() {
         super(new Item.Properties().stacksTo(1).durability(256));
@@ -137,5 +141,13 @@ public class KnifeItem extends Item implements CreativeTabProvider {
     private Item getSeeds(Block block) {
         if (block.getDescriptionId().contains("pale")) return ItemInit.PALE_PUMPKIN_SEEDS.get();
         return Items.PUMPKIN_SEEDS;
+    }
+
+    @Override
+    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+        for (Enchantment e : EnchantmentHelper.getEnchantments(book).keySet()) {
+            if (!AVAILABLE_ENCHANTING.contains(e)) return false;
+        }
+        return true;
     }
 }
