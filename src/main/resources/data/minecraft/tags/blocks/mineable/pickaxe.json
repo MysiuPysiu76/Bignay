@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "#bignay:stone_vertical_slabs",
     "bignay:wither_bone_block",
     "bignay:cracked_stone_brick_stairs",
     "bignay:cracked_nether_brick_slab",
