@@ -8,6 +8,7 @@ import com.mysiupysiu.bignay.worldgen.ModConfiguredFeatures;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.flag.FeatureFlag;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -20,7 +21,9 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class BlockInit {
 
@@ -597,6 +600,22 @@ public class BlockInit {
 
     public static final RegistryObject<Block> SANDSTONE_VERTICAL_SLAB = registerBlock("sandstone_vertical_slab", () -> new VerticalSlabBlock(Blocks.SANDSTONE));
     public static final RegistryObject<Block> RED_SANDSTONE_VERTICAL_SLAB = registerBlock("red_sandstone_vertical_slab", () -> new VerticalSlabBlock(Blocks.RED_SANDSTONE));
+    public static final RegistryObject<Block> QUARTZ_VERTICAL_SLAB = registerBlock("quartz_vertical_slab", () -> new VerticalSlabBlock(Blocks.QUARTZ_BLOCK));
+    public static final RegistryObject<Block> QUARTZ_BRICK_VERTICAL_SLAB = registerBlock("quartz_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.QUARTZ_BRICKS));
+    public static final RegistryObject<Block> SMOOTH_QUARTZ_VERTICAL_SLAB = registerBlock("smooth_quartz_vertical_slab", () -> new VerticalSlabBlock(Blocks.SMOOTH_QUARTZ));
+    public static final RegistryObject<Block> BLACKSTONE_VERTICAL_SLAB = registerBlock("blackstone_vertical_slab", () -> new VerticalSlabBlock(Blocks.BLACKSTONE));
+    public static final RegistryObject<Block> POLISHED_BLACKSTONE_VERTICAL_SLAB = registerBlock("polished_blackstone_vertical_slab", () -> new VerticalSlabBlock(Blocks.POLISHED_BLACKSTONE));
+    public static final RegistryObject<Block> POLISHED_BLACKSTONE_BRICK_VERTICAL_SLAB = registerBlock("polished_blackstone_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.POLISHED_BLACKSTONE_BRICKS));
+    public static final RegistryObject<Block> CRACKED_POLISHED_BLACKSTONE_BRICK_VERTICAL_SLAB = registerBlock("cracked_polished_blackstone_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS));
+
+    public static final RegistryObject<Block> OXIDIZED_CUT_COPPER_VERTICAL_SLAB = registerBlock("oxidized_cut_copper_vertical_slab", () -> new WeatheringCopperVerticalSlabBlock(WeatheringCopper.WeatherState.OXIDIZED, Blocks.OXIDIZED_CUT_COPPER, null));
+    public static final RegistryObject<Block> WEATHERED_CUT_COPPER_VERTICAL_SLAB = registerBlock("weathered_cut_copper_vertical_slab", () -> new WeatheringCopperVerticalSlabBlock(WeatheringCopper.WeatherState.WEATHERED, Blocks.WEATHERED_CUT_COPPER, OXIDIZED_CUT_COPPER_VERTICAL_SLAB.get()));
+    public static final RegistryObject<Block> EXPOSED_CUT_COPPER_VERTICAL_SLAB = registerBlock("exposed_cut_copper_vertical_slab", () -> new WeatheringCopperVerticalSlabBlock(WeatheringCopper.WeatherState.EXPOSED, Blocks.EXPOSED_CUT_COPPER, WEATHERED_CUT_COPPER_VERTICAL_SLAB.get()));
+    public static final RegistryObject<Block> CUT_COPPER_VERTICAL_SLAB = registerBlock("cut_copper_vertical_slab", () -> new WeatheringCopperVerticalSlabBlock(WeatheringCopper.WeatherState.UNAFFECTED, Blocks.CUT_COPPER, EXPOSED_CUT_COPPER_VERTICAL_SLAB.get()));
+    public static final RegistryObject<Block> WAXED_CUT_COPPER_VERTICAL_SLAB = registerBlock("waxed_cut_copper_vertical_slab", () -> new VerticalSlabBlock(Blocks.WAXED_CUT_COPPER));
+    public static final RegistryObject<Block> WAXED_EXPOSED_CUT_COPPER_VERTICAL_SLAB = registerBlock("waxed_exposed_cut_copper_vertical_slab", () -> new VerticalSlabBlock(Blocks.WAXED_EXPOSED_CUT_COPPER));
+    public static final RegistryObject<Block> WAXED_WEATHERED_CUT_COPPER_VERTICAL_SLAB = registerBlock("waxed_weathered_cut_copper_vertical_slab", () -> new VerticalSlabBlock(Blocks.WAXED_WEATHERED_COPPER));
+    public static final RegistryObject<Block> WAXED_OXIDIZED_CUT_COPPER_VERTICAL_SLAB = registerBlock("waxed_oxidized_cut_copper_vertical_slab", () -> new VerticalSlabBlock(Blocks.WAXED_OXIDIZED_CUT_COPPER));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);

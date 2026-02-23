@@ -25,6 +25,21 @@
     "bignay:prismarine_brick_vertical_slab",
     "bignay:nether_brick_vertical_slab",
     "bignay:sandstone_vertical_slab",
-    "bignay:red_sandstone_vertical_slab"
+    "bignay:red_sandstone_vertical_slab",
+    "bignay:quartz_vertical_slab",
+    "bignay:quartz_brick_vertical_slab",
+    "bignay:smooth_quartz_vertical_slab",
+    "bignay:blackstone_vertical_slab",
+    "bignay:polished_blackstone_vertical_slab",
+    "bignay:polished_blackstone_brick_vertical_slab",
+    "bignay:cracked_polished_blackstone_brick_vertical_slab",
+    "bignay:oxidized_cut_copper_vertical_slab",
+    "bignay:weathered_cut_copper_vertical_slab",
+    "bignay:exposed_cut_copper_vertical_slab",
+    "bignay:cut_copper_vertical_slab",
+    "bignay:waxed_cut_copper_vertical_slab",
+    "bignay:waxed_exposed_cut_copper_vertical_slab",
+    "bignay:waxed_weathered_cut_copper_vertical_slab",
+    "bignay:waxed_oxidized_cut_copper_vertical_slab"
   ]
 }

@@ -190,7 +190,7 @@ public class VerticalSlabBlock extends Block implements CreativeTabProvider, Sim
         builder.add(TYPE, WATERLOGGED);
     }
 
-    private enum Type implements StringRepresentable {
+    protected enum Type implements StringRepresentable {
         NORTH("north"), EAST("east"), SOUTH("south"), WEST("west"), DOUBLE("double");
 
         private final String name;
