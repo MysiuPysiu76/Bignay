@@ -556,6 +556,19 @@ public class BlockInit {
 
     public static final RegistryObject<Block> POT = registerBlock("pot", PotBlock::new);
 
+    public static final RegistryObject<Block> ACACIA_VERTICAL_SLAB = registerBlock("acacia_vertical_slab", () -> new VerticalSlabBlock(Blocks.ACACIA_PLANKS));
+    public static final RegistryObject<Block> BAMBOO_VERTICAL_SLAB = registerBlock("bamboo_vertical_slab", () -> new VerticalSlabBlock(Blocks.BAMBOO_PLANKS));
+    public static final RegistryObject<Block> BIRCH_VERTICAL_SLAB = registerBlock("birch_vertical_slab", () -> new VerticalSlabBlock(Blocks.BIRCH_PLANKS));
+    public static final RegistryObject<Block> CHERRY_VERTICAL_SLAB = registerBlock("cherry_vertical_slab", () -> new VerticalSlabBlock(Blocks.CHERRY_PLANKS));
+    public static final RegistryObject<Block> CRIMSON_VERTICAL_SLAB = registerBlock("crimson_vertical_slab", () -> new VerticalSlabBlock(Blocks.CRIMSON_PLANKS));
+    public static final RegistryObject<Block> DARK_OAK_VERTICAL_SLAB = registerBlock("dark_oak_vertical_slab", () -> new VerticalSlabBlock(Blocks.DARK_OAK_PLANKS));
+    public static final RegistryObject<Block> JUNGLE_VERTICAL_SLAB = registerBlock("jungle_vertical_slab", () -> new VerticalSlabBlock(Blocks.JUNGLE_PLANKS));
+    public static final RegistryObject<Block> MANGROVE_VERTICAL_SLAB = registerBlock("mangrove_vertical_slab", () -> new VerticalSlabBlock(Blocks.MANGROVE_PLANKS));
+    public static final RegistryObject<Block> OAK_VERTICAL_SLAB = registerBlock("oak_vertical_slab", () -> new VerticalSlabBlock(Blocks.OAK_PLANKS));
+    public static final RegistryObject<Block> SPRUCE_VERTICAL_SLAB = registerBlock("spruce_vertical_slab", () -> new VerticalSlabBlock(Blocks.SPRUCE_PLANKS));
+    public static final RegistryObject<Block> VERDANT_VERTICAL_SLAB = registerBlock("verdant_vertical_slab", () -> new VerticalSlabBlock(BlockInit.VERDANT_PLANKS.get()));
+    public static final RegistryObject<Block> WARPED_VERTICAL_SLAB = registerBlock("warped_vertical_slab", () -> new VerticalSlabBlock(Blocks.WARPED_PLANKS));
+
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
         ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
