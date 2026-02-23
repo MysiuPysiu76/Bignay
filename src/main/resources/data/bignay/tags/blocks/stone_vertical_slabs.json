@@ -12,6 +12,19 @@
     "bignay:cobbled_deepslate_vertical_slab",
     "bignay:polished_deepslate_vertical_slab",
     "bignay:prismarine_vertical_slab",
-    "bignay:dark_prismarine_vertical_slab"
+    "bignay:dark_prismarine_vertical_slab",
+    "bignay:stone_brick_vertical_slab",
+    "bignay:mossy_stone_brick_vertical_slab",
+    "bignay:cracked_stone_brick_vertical_slab",
+    "bignay:deepslate_brick_vertical_slab",
+    "bignay:deepslate_tile_vertical_slab",
+    "bignay:cracked_deepslate_brick_vertical_slab",
+    "bignay:cracked_deepslate_tile_vertical_slab",
+    "bignay:brick_vertical_slab",
+    "bignay:mud_brick_vertical_slab",
+    "bignay:prismarine_brick_vertical_slab",
+    "bignay:nether_brick_vertical_slab",
+    "bignay:sandstone_vertical_slab",
+    "bignay:red_sandstone_vertical_slab"
   ]
 }

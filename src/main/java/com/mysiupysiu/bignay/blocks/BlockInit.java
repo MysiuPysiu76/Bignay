@@ -583,6 +583,21 @@ public class BlockInit {
     public static final RegistryObject<Block> PRISMARINE_VERTICAL_SLAB = registerBlock("prismarine_vertical_slab", () -> new VerticalSlabBlock(Blocks.PRISMARINE));
     public static final RegistryObject<Block> DARK_PRISMARINE_VERTICAL_SLAB = registerBlock("dark_prismarine_vertical_slab", () -> new VerticalSlabBlock(Blocks.DARK_PRISMARINE));
 
+    public static final RegistryObject<Block> STONE_BRICK_VERTICAL_SLAB = registerBlock("stone_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.STONE_BRICKS));
+    public static final RegistryObject<Block> MOSSY_STONE_BRICK_VERTICAL_SLAB = registerBlock("mossy_stone_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.MOSSY_STONE_BRICKS));
+    public static final RegistryObject<Block> CRACKED_STONE_BRICK_VERTICAL_SLAB = registerBlock("cracked_stone_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.CRACKED_STONE_BRICKS));
+    public static final RegistryObject<Block> DEEPSLATE_BRICK_VERTICAL_SLAB = registerBlock("deepslate_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.DEEPSLATE_BRICKS));
+    public static final RegistryObject<Block> DEEPSLATE_TILE_VERTICAL_SLAB = registerBlock("deepslate_tile_vertical_slab", () -> new VerticalSlabBlock(Blocks.DEEPSLATE_TILES));
+    public static final RegistryObject<Block> CRACKED_DEEPSLATE_BRICK_VERTICAL_SLAB = registerBlock("cracked_deepslate_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.CRACKED_DEEPSLATE_BRICKS));
+    public static final RegistryObject<Block> CRACKED_DEEPSLATE_TILE_VERTICAL_SLAB = registerBlock("cracked_deepslate_tile_vertical_slab", () -> new VerticalSlabBlock(Blocks.CRACKED_DEEPSLATE_TILES));
+    public static final RegistryObject<Block> BRICK_VERTICAL_SLAB = registerBlock("brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.BRICKS));
+    public static final RegistryObject<Block> MUD_BRICK_BRICK_VERTICAL_SLAB = registerBlock("mud_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.MUD_BRICKS));
+    public static final RegistryObject<Block> PRISMARINE_BRICK_VERTICAL_SLAB = registerBlock("prismarine_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.PRISMARINE_BRICKS));
+    public static final RegistryObject<Block> NETHER_BRICK_VERTICAL_SLAB = registerBlock("nether_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.NETHER_BRICKS));
+
+    public static final RegistryObject<Block> SANDSTONE_VERTICAL_SLAB = registerBlock("sandstone_vertical_slab", () -> new VerticalSlabBlock(Blocks.SANDSTONE));
+    public static final RegistryObject<Block> RED_SANDSTONE_VERTICAL_SLAB = registerBlock("red_sandstone_vertical_slab", () -> new VerticalSlabBlock(Blocks.RED_SANDSTONE));
+
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
         ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
