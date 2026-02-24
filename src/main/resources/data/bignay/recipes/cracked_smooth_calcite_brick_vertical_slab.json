@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "bignay:cracked_smooth_calcite_bricks"
+    }
+  },
+  "pattern": [
+    " # ",
+    " # ",
+    " # "
+  ],
+  "result": {
+    "count": 6,
+    "item": "bignay:cracked_smooth_calcite_brick_vertical_slab"
+  },
+  "show_notification": true
+}

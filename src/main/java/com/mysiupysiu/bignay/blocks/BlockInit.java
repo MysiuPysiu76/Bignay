@@ -8,7 +8,6 @@ import com.mysiupysiu.bignay.worldgen.ModConfiguredFeatures;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.flag.FeatureFlag;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -21,9 +20,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.List;
 import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 public class BlockInit {
 
@@ -212,16 +209,19 @@ public class BlockInit {
     public static final RegistryObject<Block> BASALT_BRICKS = registerBlock("basalt_bricks", () -> new BuildingBlock(Blocks.BASALT));
     public static final RegistryObject<Block> BASALT_BRICK_SLAB = registerBlock("basalt_brick_slab", () -> new SlabsBlock(BASALT_BRICKS));
     public static final RegistryObject<Block> BASALT_BRICK_STAIRS = registerBlock("basalt_brick_stairs", () -> new StairsBlock(BASALT_BRICKS));
+    public static final RegistryObject<Block> BASALT_BRICK_VERTICAL_SLAB = registerBlock("basalt_brick_vertical_slab", () -> new VerticalSlabBlock(BASALT_BRICKS));
     public static final RegistryObject<Block> BASALT_BRICK_WALL = registerBlock("basalt_brick_wall", () -> new WallsBlock(BASALT_BRICKS));
     public static final RegistryObject<Block> CHISELED_BASALT = registerBlock("chiseled_basalt", () -> new BuildingBlock(Blocks.BASALT));
     public static final RegistryObject<Block> BASALT_PILLAR = registerBlock("basalt_pillar", () -> new PillarBlock(BASALT_BRICKS));
     public static final RegistryObject<Block> SMOOTH_BASALT_STAIRS = registerBlock("smooth_basalt_stairs", () -> new StairsBlock(BASALT_BRICKS.get()));
     public static final RegistryObject<Block> SMOOTH_BASALT_SLAB = registerBlock("smooth_basalt_slab", () -> new SlabsBlock(BASALT_BRICKS.get()));
+    public static final RegistryObject<Block> SMOOTH_BASALT_VERTICAL_SLAB = registerBlock("smooth_basalt_vertical_slab", () -> new VerticalSlabBlock(BASALT_BRICKS.get()));
     public static final RegistryObject<Block> COBBLED_BASALT = registerBlock("cobbled_basalt", () -> new PillarBlock(Blocks.BASALT));
     public static final RegistryObject<Block> CRACKED_BASALT_BRICKS = registerBlock("cracked_basalt_bricks", () -> new BuildingBlock(Blocks.BASALT));
     public static final RegistryObject<Block> CRACKED_BASALT_BRICK_SLAB = registerBlock("cracked_basalt_brick_slab", () -> new SlabsBlock(CRACKED_BASALT_BRICKS));
     public static final RegistryObject<Block> CRACKED_BASALT_BRICK_STAIRS = registerBlock("cracked_basalt_brick_stairs", () -> new StairsBlock(CRACKED_BASALT_BRICKS));
     public static final RegistryObject<Block> CRACKED_BASALT_BRICK_WALL = registerBlock("cracked_basalt_brick_wall", () -> new WallsBlock(CRACKED_BASALT_BRICKS));
+    public static final RegistryObject<Block> CRACKED_BASALT_BRICK_VERTICAL_SLAB = registerBlock("cracked_basalt_brick_vertical_slab", () -> new VerticalSlabBlock(CRACKED_BASALT_BRICKS));
     public static final RegistryObject<Block> BASALTIC_LAVA = registerBlock("basaltic_lava", BasalticLavaBlock::new);
 
     public static final RegistryObject<Block> HEAVY_CHAIN = registerBlock("heavy_chain", HeavyChainBlock::new);
@@ -243,19 +243,23 @@ public class BlockInit {
     public static final RegistryObject<Block> BLUE_NETHER_BRICK_SLAB = registerBlock("blue_nether_brick_slab", () -> new SlabsBlock(BLUE_NETHER_BRICKS));
     public static final RegistryObject<Block> BLUE_NETHER_BRICK_STAIRS = registerBlock("blue_nether_brick_stairs", () -> new StairsBlock(BLUE_NETHER_BRICKS));
     public static final RegistryObject<Block> BLUE_NETHER_BRICK_WALL = registerBlock("blue_nether_brick_wall", ()  -> new WallsBlock(BLUE_NETHER_BRICKS));
+    public static final RegistryObject<Block> BLUE_NETHER_BRICK_VERTICAL_SLAB = registerBlock("blue_nether_brick_vertical_slab", () -> new VerticalSlabBlock(BLUE_NETHER_BRICKS));
     public static final RegistryObject<Block> GREEN_NETHER_BRICKS = registerBlock("green_nether_bricks", () -> new BuildingBlock(Blocks.RED_NETHER_BRICKS));
     public static final RegistryObject<Block> GREEN_NETHER_BRICK_SLAB = registerBlock("green_nether_brick_slab", () -> new SlabsBlock(GREEN_NETHER_BRICKS));
     public static final RegistryObject<Block> GREEN_NETHER_BRICK_STAIRS = registerBlock("green_nether_brick_stairs", () -> new StairsBlock(GREEN_NETHER_BRICKS));
     public static final RegistryObject<Block> GREEN_NETHER_BRICK_WALL = registerBlock("green_nether_brick_wall", () -> new WallsBlock(GREEN_NETHER_BRICKS));
+    public static final RegistryObject<Block> GREEN_NETHER_BRICK_VERTICAL_SLAB = registerBlock("green_nether_brick_vertical_slab", () -> new VerticalSlabBlock(GREEN_NETHER_BRICKS));
 
     public static final RegistryObject<Block> MOSSY_STONE = registerBlock("mossy_stone", () -> new BuildingBlock(Blocks.STONE));
-    public static final RegistryObject<Block> MOSSY_STONE_STAIRS = registerBlock("mossy_stone_stairs", () -> new StairsBlock(MOSSY_STONE));
     public static final RegistryObject<Block> MOSSY_STONE_SLAB = registerBlock("mossy_stone_slab", () -> new SlabsBlock(MOSSY_STONE));
+    public static final RegistryObject<Block> MOSSY_STONE_STAIRS = registerBlock("mossy_stone_stairs", () -> new StairsBlock(MOSSY_STONE));
     public static final RegistryObject<Block> MOSSY_STONE_WALL = registerBlock("mossy_stone_wall", () -> new WallsBlock(MOSSY_STONE));
+    public static final RegistryObject<Block> MOSSY_STONE_VERTICAL_SLAB = registerBlock("mossy_stone_vertical_slab", () -> new VerticalSlabBlock(MOSSY_STONE));
     public static final RegistryObject<Block> MOSSY_CRACKED_STONE_BRICKS = registerBlock("mossy_cracked_stone_bricks", () -> new BuildingBlock(Blocks.MOSSY_STONE_BRICKS));
-    public static final RegistryObject<Block> MOSSY_CRACKED_STONE_BRICK_STAIRS = registerBlock("mossy_cracked_stone_brick_stairs", () -> new StairsBlock(MOSSY_CRACKED_STONE_BRICKS));
     public static final RegistryObject<Block> MOSSY_CRACKED_STONE_BRICK_SLAB = registerBlock("mossy_cracked_stone_brick_slab", () -> new SlabsBlock(MOSSY_CRACKED_STONE_BRICKS));
+    public static final RegistryObject<Block> MOSSY_CRACKED_STONE_BRICK_STAIRS = registerBlock("mossy_cracked_stone_brick_stairs", () -> new StairsBlock(MOSSY_CRACKED_STONE_BRICKS));
     public static final RegistryObject<Block> MOSSY_CRACKED_STONE_BRICK_WALL = registerBlock("mossy_cracked_stone_brick_wall", () -> new WallsBlock(MOSSY_CRACKED_STONE_BRICKS));
+    public static final RegistryObject<Block> MOSSY_CRACKED_STONE_BRICK_VERTICAL_SLAB = registerBlock("mossy_cracked_stone_brick_vertical_slab", () -> new VerticalSlabBlock(MOSSY_CRACKED_STONE_BRICKS));
     public static final RegistryObject<Block> MOSSY_CHISELED_STONE_BRICKS = registerBlock("mossy_chiseled_stone_bricks", () -> new BuildingBlock(Blocks.MOSSY_STONE_BRICKS));
 
     public static final RegistryObject<Block> ACACIA_WOOD_FENCE = registerBlock("acacia_wood_fence", () -> new WoodFenceBlock(Blocks.ACACIA_FENCE), 300);
@@ -343,18 +347,22 @@ public class BlockInit {
     public static final RegistryObject<Block> SMOOTH_ANDESITE_SLAB = registerBlock("smooth_andesite_slab", () -> new SlabsBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> SMOOTH_ANDESITE_STAIRS = registerBlock("smooth_andesite_stairs", () -> new StairsBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> SMOOTH_ANDESITE_WALL = registerBlock("smooth_andesite_wall", () -> new WallsBlock(Blocks.POLISHED_ANDESITE));
+    public static final RegistryObject<Block> SMOOTH_ANDESITE_VERTICAL_SLAB = registerBlock("smooth_andesite_vertical_slab", () -> new VerticalSlabBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> ANDESITE_BRICKS = registerBlock("andesite_bricks", () -> new BuildingBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> ANDESITE_BRICK_SLAB = registerBlock("andesite_brick_slab", () -> new SlabsBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> ANDESITE_BRICK_STAIRS = registerBlock("andesite_brick_stairs", () -> new StairsBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> ANDESITE_BRICK_WALL = registerBlock("andesite_brick_wall", () -> new WallsBlock(Blocks.POLISHED_ANDESITE));
+    public static final RegistryObject<Block> ANDESITE_BRICK_VERTICAL_SLAB = registerBlock("andesite_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> CRACKED_ANDESITE_BRICKS = registerBlock("cracked_andesite_bricks", () -> new BuildingBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> CRACKED_ANDESITE_BRICK_SLAB = registerBlock("cracked_andesite_brick_slab", () -> new SlabsBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> CRACKED_ANDESITE_BRICK_STAIRS = registerBlock("cracked_andesite_brick_stairs", () -> new StairsBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> CRACKED_ANDESITE_BRICK_WALL = registerBlock("cracked_andesite_brick_wall", () -> new WallsBlock(Blocks.POLISHED_ANDESITE));
+    public static final RegistryObject<Block> CRACKED_ANDESITE_BRICK_VERTICAL_SLAB = registerBlock("cracked_andesite_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> MOSSY_ANDESITE_BRICKS = registerBlock("mossy_andesite_bricks", () -> new BuildingBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> MOSSY_ANDESITE_BRICK_SLAB = registerBlock("mossy_andesite_brick_slab", () -> new SlabsBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> MOSSY_ANDESITE_BRICK_STAIRS = registerBlock("mossy_andesite_brick_stairs", () -> new StairsBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> MOSSY_ANDESITE_BRICK_WALL = registerBlock("mossy_andesite_brick_wall", () -> new WallsBlock(Blocks.POLISHED_ANDESITE));
+    public static final RegistryObject<Block> MOSSY_ANDESITE_BRICK_VERTICAL_SLAB = registerBlock("mossy_andesite_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> CHISELED_ANDESITE = registerBlock("chiseled_andesite", () -> new BuildingBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistryObject<Block> ANDESITE_PILLAR = registerBlock("andesite_pillar", () -> new PillarBlock(Blocks.POLISHED_ANDESITE));
 
@@ -363,18 +371,22 @@ public class BlockInit {
     public static final RegistryObject<Block> SMOOTH_DIORITE_SLAB = registerBlock("smooth_diorite_slab", () -> new SlabsBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> SMOOTH_DIORITE_STAIRS = registerBlock("smooth_diorite_stairs", () -> new StairsBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> SMOOTH_DIORITE_WALL = registerBlock("smooth_diorite_wall", () -> new WallsBlock(Blocks.POLISHED_DIORITE));
+    public static final RegistryObject<Block> SMOOTH_DIORITE_VERTICAL_SLAB = registerBlock("smooth_diorite_vertical_slab", () -> new VerticalSlabBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> DIORITE_BRICKS = registerBlock("diorite_bricks", () -> new BuildingBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> DIORITE_BRICK_SLAB = registerBlock("diorite_brick_slab", () -> new SlabsBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> DIORITE_BRICK_STAIRS = registerBlock("diorite_brick_stairs", () -> new StairsBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> DIORITE_BRICK_WALL = registerBlock("diorite_brick_wall", () -> new WallsBlock(Blocks.POLISHED_DIORITE));
+    public static final RegistryObject<Block> DIORITE_BRICK_VERTICAL_SLAB = registerBlock("diorite_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> CRACKED_DIORITE_BRICKS = registerBlock("cracked_diorite_bricks", () -> new BuildingBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> CRACKED_DIORITE_BRICK_SLAB = registerBlock("cracked_diorite_brick_slab", () -> new SlabsBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> CRACKED_DIORITE_BRICK_STAIRS = registerBlock("cracked_diorite_brick_stairs", () -> new StairsBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> CRACKED_DIORITE_BRICK_WALL = registerBlock("cracked_diorite_brick_wall", () -> new WallsBlock(Blocks.POLISHED_DIORITE));
+    public static final RegistryObject<Block> CRACKED_DIORITE_BRICK_VERTICAL_SLAB = registerBlock("cracked_diorite_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> MOSSY_DIORITE_BRICKS = registerBlock("mossy_diorite_bricks", () -> new BuildingBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> MOSSY_DIORITE_BRICK_SLAB = registerBlock("mossy_diorite_brick_slab", () -> new SlabsBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> MOSSY_DIORITE_BRICK_STAIRS = registerBlock("mossy_diorite_brick_stairs", () -> new StairsBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> MOSSY_DIORITE_BRICK_WALL = registerBlock("mossy_diorite_brick_wall", () -> new WallsBlock(Blocks.POLISHED_DIORITE));
+    public static final RegistryObject<Block> MOSSY_DIORITE_BRICK_VERTICAL_SLAB = registerBlock("mossy_diorite_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> CHISELED_DIORITE = registerBlock("chiseled_diorite", () -> new BuildingBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> DIORITE_PILLAR = registerBlock("diorite_pillar", () -> new PillarBlock(Blocks.POLISHED_DIORITE));
 
@@ -383,18 +395,22 @@ public class BlockInit {
     public static final RegistryObject<Block> SMOOTH_GRANITE_SLAB = registerBlock("smooth_granite_slab", () -> new SlabsBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> SMOOTH_GRANITE_STAIRS = registerBlock("smooth_granite_stairs", () -> new StairsBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> SMOOTH_GRANITE_WALL = registerBlock("smooth_granite_wall", () -> new WallsBlock(Blocks.POLISHED_GRANITE));
+    public static final RegistryObject<Block> SMOOTH_GRANITE_VERTICAL_SLAB = registerBlock("smooth_granite_vertical_slab", () -> new VerticalSlabBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> GRANITE_BRICKS = registerBlock("granite_bricks", () -> new BuildingBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> GRANITE_BRICK_SLAB = registerBlock("granite_brick_slab", () -> new SlabsBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> GRANITE_BRICK_STAIRS = registerBlock("granite_brick_stairs", () -> new StairsBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> GRANITE_BRICK_WALL = registerBlock("granite_brick_wall", () -> new WallsBlock(Blocks.POLISHED_GRANITE));
+    public static final RegistryObject<Block> GRANITE_BRICK_VERTICAL_SLAB = registerBlock("granite_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> CRACKED_GRANITE_BRICKS = registerBlock("cracked_granite_bricks", () -> new BuildingBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> CRACKED_GRANITE_BRICK_SLAB = registerBlock("cracked_granite_brick_slab", () -> new SlabsBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> CRACKED_GRANITE_BRICK_STAIRS = registerBlock("cracked_granite_brick_stairs", () -> new StairsBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> CRACKED_GRANITE_BRICK_WALL = registerBlock("cracked_granite_brick_wall", () -> new WallsBlock(Blocks.POLISHED_GRANITE));
+    public static final RegistryObject<Block> CRACKED_GRANITE_BRICK_VERTICAL_SLAB = registerBlock("cracked_granite_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> MOSSY_GRANITE_BRICKS = registerBlock("mossy_granite_bricks", () -> new BuildingBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> MOSSY_GRANITE_BRICK_SLAB = registerBlock("mossy_granite_brick_slab", () -> new SlabsBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> MOSSY_GRANITE_BRICK_STAIRS = registerBlock("mossy_granite_brick_stairs", () -> new StairsBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> MOSSY_GRANITE_BRICK_WALL = registerBlock("mossy_granite_brick_wall", () -> new WallsBlock(Blocks.POLISHED_GRANITE));
+    public static final RegistryObject<Block> MOSSY_GRANITE_BRICK_VERTICAL_SLAB = registerBlock("mossy_granite_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> CHISELED_GRANITE = registerBlock("chiseled_granite", () -> new BuildingBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> GRANITE_PILLAR = registerBlock("granite_pillar", () -> new PillarBlock(Blocks.POLISHED_GRANITE));
 
@@ -402,14 +418,17 @@ public class BlockInit {
     public static final RegistryObject<Block> POLISHED_SMOOTH_BASALT_SLAB = registerBlock("polished_smooth_basalt_slab", () -> new SlabsBlock(Blocks.SMOOTH_BASALT));
     public static final RegistryObject<Block> POLISHED_SMOOTH_BASALT_STAIRS = registerBlock("polished_smooth_basalt_stairs", () -> new StairsBlock(Blocks.SMOOTH_BASALT));
     public static final RegistryObject<Block> POLISHED_SMOOTH_BASALT_WALL = registerBlock("polished_smooth_basalt_wall", () -> new WallsBlock(Blocks.SMOOTH_BASALT));
+    public static final RegistryObject<Block> POLISHED_SMOOTH_BASALT_VERTICAL_SLAB = registerBlock("polished_smooth_basalt_vertical_slab", () -> new VerticalSlabBlock(Blocks.SMOOTH_BASALT));
     public static final RegistryObject<Block> SMOOTH_BASALT_BRICKS = registerBlock("smooth_basalt_bricks", () -> new BuildingBlock(Blocks.SMOOTH_BASALT));
     public static final RegistryObject<Block> SMOOTH_BASALT_BRICK_SLAB = registerBlock("smooth_basalt_brick_slab", () -> new SlabsBlock(Blocks.SMOOTH_BASALT));
     public static final RegistryObject<Block> SMOOTH_BASALT_BRICK_STAIRS = registerBlock("smooth_basalt_brick_stairs", () -> new StairsBlock(Blocks.SMOOTH_BASALT));
     public static final RegistryObject<Block> SMOOTH_BASALT_BRICK_WALL = registerBlock("smooth_basalt_brick_wall", () -> new WallsBlock(Blocks.SMOOTH_BASALT));
+    public static final RegistryObject<Block> SMOOTH_BASALT_BRICK_VERTICAL_SLAB = registerBlock("smooth_basalt_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.SMOOTH_BASALT));
     public static final RegistryObject<Block> CRACKED_SMOOTH_BASALT_BRICKS = registerBlock("cracked_smooth_basalt_bricks", () -> new BuildingBlock(Blocks.SMOOTH_BASALT));
     public static final RegistryObject<Block> CRACKED_SMOOTH_BASALT_BRICK_SLAB = registerBlock("cracked_smooth_basalt_brick_slab", () -> new SlabsBlock(Blocks.SMOOTH_BASALT));
     public static final RegistryObject<Block> CRACKED_SMOOTH_BASALT_BRICK_STAIRS = registerBlock("cracked_smooth_basalt_brick_stairs", () -> new StairsBlock(Blocks.SMOOTH_BASALT));
     public static final RegistryObject<Block> CRACKED_SMOOTH_BASALT_BRICK_WALL = registerBlock("cracked_smooth_basalt_brick_wall", () -> new WallsBlock(Blocks.SMOOTH_BASALT));
+    public static final RegistryObject<Block> CRACKED_SMOOTH_BASALT_BRICK_VERTICAL_SLAB = registerBlock("cracked_smooth_basalt_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.SMOOTH_BASALT));
     public static final RegistryObject<Block> CHISELED_SMOOTH_BASALT = registerBlock("chiseled_smooth_basalt", () -> new BuildingBlock(Blocks.SMOOTH_BASALT));
     public static final RegistryObject<Block> SMOOTH_BASALT_PILLAR = registerBlock("smooth_basalt_pillar", () -> new PillarBlock(Blocks.SMOOTH_BASALT));
 
@@ -417,22 +436,27 @@ public class BlockInit {
     public static final RegistryObject<Block> POLISHED_DRIPSTONE_SLAB = registerBlock("polished_dripstone_slab", () -> new SlabsBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> POLISHED_DRIPSTONE_STAIRS = registerBlock("polished_dripstone_stairs", () -> new StairsBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> POLISHED_DRIPSTONE_WALL = registerBlock("polished_dripstone_wall", () -> new WallsBlock(Blocks.DRIPSTONE_BLOCK));
+    public static final RegistryObject<Block> POLISHED_DRIPSTONE_VERTICAL_SLAB = registerBlock("polished_dripstone_vertical_slab", () -> new VerticalSlabBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> DRIPSTONE_BRICKS = registerBlock("dripstone_bricks", () -> new BuildingBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> DRIPSTONE_BRICK_SLAB = registerBlock("dripstone_brick_slab", () -> new SlabsBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> DRIPSTONE_BRICK_STAIRS = registerBlock("dripstone_brick_stairs", () -> new StairsBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> DRIPSTONE_BRICK_WALL = registerBlock("dripstone_brick_wall", () -> new WallsBlock(Blocks.DRIPSTONE_BLOCK));
+    public static final RegistryObject<Block> DRIPSTONE_BRICK_VERTICAL_SLAB = registerBlock("dripstone_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> CRACKED_DRIPSTONE_BRICKS = registerBlock("cracked_dripstone_bricks", () -> new BuildingBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> CRACKED_DRIPSTONE_BRICK_SLAB = registerBlock("cracked_dripstone_brick_slab", () -> new SlabsBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> CRACKED_DRIPSTONE_BRICK_STAIRS = registerBlock("cracked_dripstone_brick_stairs", () -> new StairsBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> CRACKED_DRIPSTONE_BRICK_WALL = registerBlock("cracked_dripstone_brick_wall", () -> new WallsBlock(Blocks.DRIPSTONE_BLOCK));
+    public static final RegistryObject<Block> CRACKED_DRIPSTONE_BRICK_VERTICAL_SLAB = registerBlock("cracked_dripstone_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> DRIPSTONE_TILES = registerBlock("dripstone_tiles", () -> new BuildingBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> DRIPSTONE_TILE_SLAB = registerBlock("dripstone_tile_slab", () -> new SlabsBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> DRIPSTONE_TILE_STAIRS = registerBlock("dripstone_tile_stairs", () -> new StairsBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> DRIPSTONE_TILE_WALL = registerBlock("dripstone_tile_wall", () -> new WallsBlock(Blocks.DRIPSTONE_BLOCK));
+    public static final RegistryObject<Block> DRIPSTONE_TILE_VERTICAL_SLAB = registerBlock("dripstone_tile_vertical_slab", () -> new VerticalSlabBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> CRACKED_DRIPSTONE_TILES = registerBlock("cracked_dripstone_tiles", () -> new BuildingBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> CRACKED_DRIPSTONE_TILE_SLAB = registerBlock("cracked_dripstone_tile_slab", () -> new SlabsBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> CRACKED_DRIPSTONE_TILE_STAIRS = registerBlock("cracked_dripstone_tile_stairs", () -> new StairsBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> CRACKED_DRIPSTONE_TILE_WALL = registerBlock("cracked_dripstone_tile_wall", () -> new WallsBlock(Blocks.DRIPSTONE_BLOCK));
+    public static final RegistryObject<Block> CRACKED_DRIPSTONE_TILE_VERTICAL_SLAB = registerBlock("cracked_dripstone_tile_vertical_slab", () -> new VerticalSlabBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> CHISELED_DRIPSTONE = registerBlock("chiseled_dripstone", () -> new BuildingBlock(Blocks.DRIPSTONE_BLOCK));
     public static final RegistryObject<Block> DRIPSTONE_PILLAR = registerBlock("dripstone_pillar", () -> new PillarBlock(Blocks.DRIPSTONE_BLOCK));
 
@@ -440,34 +464,41 @@ public class BlockInit {
     public static final RegistryObject<Block> POLISHED_CALCITE_SLAB = registerBlock("polished_calcite_slab", () -> new SlabsBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> POLISHED_CALCITE_STAIRS = registerBlock("polished_calcite_stairs", () -> new StairsBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> POLISHED_CALCITE_WALL = registerBlock("polished_calcite_wall", () -> new WallsBlock(Blocks.CALCITE));
+    public static final RegistryObject<Block> POLISHED_CALCITE_VERTICAL_SLAB = registerBlock("polished_calcite_vertical_slab", () -> new VerticalSlabBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> CALCITE_BRICKS = registerBlock("calcite_bricks", () -> new BuildingBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> CALCITE_BRICK_SLAB = registerBlock("calcite_brick_slab", () -> new SlabsBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> CALCITE_BRICK_STAIRS = registerBlock("calcite_brick_stairs", () -> new StairsBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> CALCITE_BRICK_WALL = registerBlock("calcite_brick_wall", () -> new WallsBlock(Blocks.CALCITE));
+    public static final RegistryObject<Block> CALCITE_BRICK_VERTICAL_SLAB = registerBlock("calcite_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> CRACKED_CALCITE_BRICKS = registerBlock("cracked_calcite_bricks", () -> new BuildingBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> CRACKED_CALCITE_BRICK_SLAB = registerBlock("cracked_calcite_brick_slab", () -> new SlabsBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> CRACKED_CALCITE_BRICK_STAIRS = registerBlock("cracked_calcite_brick_stairs", () -> new StairsBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> CRACKED_CALCITE_BRICK_WALL = registerBlock("cracked_calcite_brick_wall", () -> new WallsBlock(Blocks.CALCITE));
+    public static final RegistryObject<Block> CRACKED_CALCITE_BRICK_VERTICAL_SLAB = registerBlock("cracked_calcite_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> CHISELED_CALCITE = registerBlock("chiseled_calcite", () -> new BuildingBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> CALCITE_PILLAR = registerBlock("calcite_pillar", () -> new PillarBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> SMOOTH_CALCITE = registerBlock("smooth_calcite", () -> new BuildingBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> SMOOTH_CALCITE_SLAB = registerBlock("smooth_calcite_slab", () -> new SlabsBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> SMOOTH_CALCITE_STAIRS = registerBlock("smooth_calcite_stairs", () -> new StairsBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> SMOOTH_CALCITE_WALL = registerBlock("smooth_calcite_wall", () -> new WallsBlock(Blocks.CALCITE));
+    public static final RegistryObject<Block> SMOOTH_CALCITE_VERTICAL_SLAB = registerBlock("smooth_calcite_vertical_slab", () -> new VerticalSlabBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> SMOOTH_CALCITE_BRICKS = registerBlock("smooth_calcite_bricks", () -> new BuildingBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> SMOOTH_CALCITE_BRICK_SLAB = registerBlock("smooth_calcite_brick_slab", () -> new SlabsBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> SMOOTH_CALCITE_BRICK_STAIRS = registerBlock("smooth_calcite_brick_stairs", () -> new StairsBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> SMOOTH_CALCITE_BRICK_WALL = registerBlock("smooth_calcite_brick_wall", () -> new WallsBlock(Blocks.CALCITE));
+    public static final RegistryObject<Block> SMOOTH_CALCITE_BRICK_VERTICAL_SLAB = registerBlock("smooth_calcite_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> CRACKED_SMOOTH_CALCITE_BRICKS = registerBlock("cracked_smooth_calcite_bricks", () -> new BuildingBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> CRACKED_SMOOTH_CALCITE_BRICK_SLAB = registerBlock("cracked_smooth_calcite_brick_slab", () -> new SlabsBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> CRACKED_SMOOTH_CALCITE_BRICK_STAIRS = registerBlock("cracked_smooth_calcite_brick_stairs", () -> new StairsBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> CRACKED_SMOOTH_CALCITE_BRICK_WALL = registerBlock("cracked_smooth_calcite_brick_wall", () -> new WallsBlock(Blocks.CALCITE));
+    public static final RegistryObject<Block> CRACKED_SMOOTH_CALCITE_BRICK_VERTICAL_SLAB = registerBlock("cracked_smooth_calcite_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> CHISELED_SMOOTH_CALCITE = registerBlock("chiseled_smooth_calcite", () -> new BuildingBlock(Blocks.CALCITE));
     public static final RegistryObject<Block> SMOOTH_CALCITE_PILLAR = registerBlock("smooth_calcite_pillar", () -> new PillarBlock(Blocks.CALCITE));
 
     public static final RegistryObject<Block> QUARTZ_BRICK_SLAB = registerBlock("quartz_brick_slab", () -> new SlabsBlock(Blocks.QUARTZ_BRICKS));
     public static final RegistryObject<Block> QUARTZ_BRICK_STAIRS = registerBlock("quartz_brick_stairs", () -> new StairsBlock(Blocks.QUARTZ_BRICKS));
     public static final RegistryObject<Block> QUARTZ_BRICK_WALL = registerBlock("quartz_brick_wall", () -> new WallsBlock(Blocks.QUARTZ_BRICKS));
+    public static final RegistryObject<Block> QUARTZ_BRICK_VERTICAL_SLAB = registerBlock("quartz_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.QUARTZ_BRICKS));
 
     public static final RegistryObject<Block> COMPRESSED_STONE = registerBlock("compressed_stone", CompressedStone::new);
 
@@ -475,6 +506,7 @@ public class BlockInit {
     public static final RegistryObject<Block> PRISMARINE_TILE_SLAB = registerBlock("prismarine_tile_slab", () -> new SlabsBlock(Blocks.PRISMARINE));
     public static final RegistryObject<Block> PRISMARINE_TILE_STAIRS = registerBlock("prismarine_tile_stairs", () -> new StairsBlock(Blocks.PRISMARINE));
     public static final RegistryObject<Block> PRISMARINE_TILE_WALL = registerBlock("prismarine_tile_wall", () -> new WallsBlock(Blocks.PRISMARINE));
+    public static final RegistryObject<Block> PRISMARINE_TILE_VERTICAL_SLAB = registerBlock("prismarine_tile_vertical_slab", () -> new VerticalSlabBlock(Blocks.PRISMARINE));
     public static final RegistryObject<Block> PRISMARINE_BRICK_WALL = registerBlock("prismarine_brick_wall", () -> new WallsBlock(Blocks.PRISMARINE));
 
     public static final RegistryObject<Block> RANDOMIZER = registerBlock("randomizer", RandomizerBlock::new);
@@ -556,6 +588,7 @@ public class BlockInit {
     public static final RegistryObject<Block> MOSSY_COBBLED_DEEPSLATE_SLAB = registerBlock("mossy_cobbled_deepslate_slab", () -> new SlabsBlock(Blocks.COBBLED_DEEPSLATE));
     public static final RegistryObject<Block> MOSSY_COBBLED_DEEPSLATE_STAIRS = registerBlock("mossy_cobbled_deepslate_stairs", () -> new StairsBlock(Blocks.COBBLED_DEEPSLATE));
     public static final RegistryObject<Block> MOSSY_COBBLED_DEEPSLATE_WALL = registerBlock("mossy_cobbled_deepslate_wall", () -> new WallsBlock(Blocks.COBBLED_DEEPSLATE));
+    public static final RegistryObject<Block> MOSSY_COBBLED_DEEPSLATE_VERTICAL_SLAB = registerBlock("mossy_cobbled_deepslate_vertical_slab", () -> new VerticalSlabBlock(Blocks.COBBLED_DEEPSLATE));
 
     public static final RegistryObject<Block> POT = registerBlock("pot", PotBlock::new);
 
@@ -597,11 +630,11 @@ public class BlockInit {
     public static final RegistryObject<Block> MUD_BRICK_BRICK_VERTICAL_SLAB = registerBlock("mud_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.MUD_BRICKS));
     public static final RegistryObject<Block> PRISMARINE_BRICK_VERTICAL_SLAB = registerBlock("prismarine_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.PRISMARINE_BRICKS));
     public static final RegistryObject<Block> NETHER_BRICK_VERTICAL_SLAB = registerBlock("nether_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.NETHER_BRICKS));
+    public static final RegistryObject<Block> RED_NETHER_BRICK_VERTICAL_SLAB = registerBlock("red_nether_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.RED_NETHER_BRICKS));
 
     public static final RegistryObject<Block> SANDSTONE_VERTICAL_SLAB = registerBlock("sandstone_vertical_slab", () -> new VerticalSlabBlock(Blocks.SANDSTONE));
     public static final RegistryObject<Block> RED_SANDSTONE_VERTICAL_SLAB = registerBlock("red_sandstone_vertical_slab", () -> new VerticalSlabBlock(Blocks.RED_SANDSTONE));
     public static final RegistryObject<Block> QUARTZ_VERTICAL_SLAB = registerBlock("quartz_vertical_slab", () -> new VerticalSlabBlock(Blocks.QUARTZ_BLOCK));
-    public static final RegistryObject<Block> QUARTZ_BRICK_VERTICAL_SLAB = registerBlock("quartz_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.QUARTZ_BRICKS));
     public static final RegistryObject<Block> SMOOTH_QUARTZ_VERTICAL_SLAB = registerBlock("smooth_quartz_vertical_slab", () -> new VerticalSlabBlock(Blocks.SMOOTH_QUARTZ));
     public static final RegistryObject<Block> BLACKSTONE_VERTICAL_SLAB = registerBlock("blackstone_vertical_slab", () -> new VerticalSlabBlock(Blocks.BLACKSTONE));
     public static final RegistryObject<Block> POLISHED_BLACKSTONE_VERTICAL_SLAB = registerBlock("polished_blackstone_vertical_slab", () -> new VerticalSlabBlock(Blocks.POLISHED_BLACKSTONE));

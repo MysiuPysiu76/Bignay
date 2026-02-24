@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "bignay:mossy_cobbled_deepslate"
+  },
+  "result": "bignay:mossy_cobbled_deepslate_vertical_slab"
+}

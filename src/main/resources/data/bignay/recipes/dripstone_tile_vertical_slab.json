@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "bignay:dripstone_tiles"
+    }
+  },
+  "pattern": [
+    " # ",
+    " # ",
+    " # "
+  ],
+  "result": {
+    "count": 6,
+    "item": "bignay:dripstone_tile_vertical_slab"
+  },
+  "show_notification": true
+}

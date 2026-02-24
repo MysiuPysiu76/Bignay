@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "bignay:cracked_basalt_bricks"
+  },
+  "result": "bignay:cracked_basalt_brick_vertical_slab"
+}

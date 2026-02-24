@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "bignay:polished_dripstone"
+    }
+  },
+  "pattern": [
+    " # ",
+    " # ",
+    " # "
+  ],
+  "result": {
+    "count": 6,
+    "item": "bignay:polished_dripstone_vertical_slab"
+  },
+  "show_notification": true
+}

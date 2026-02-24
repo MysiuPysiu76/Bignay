@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "bignay:smooth_calcite"
+  },
+  "result": "bignay:smooth_calcite_vertical_slab"
+}

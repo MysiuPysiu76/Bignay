@@ -1,0 +1,8 @@
+{
+  "parent": "bignay:block/vertical_slab",
+  "textures": {
+    "bottom": "bignay:block/andesite_bricks",
+    "side": "bignay:block/andesite_bricks",
+    "top": "bignay:block/andesite_bricks"
+  }
+}
