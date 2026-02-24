@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "type=east": {
+      "model": "bignay:block/crimson_mosaic_vertical_slab",
+      "uvlock": true,
+      "y": 270
+    },
+    "type=north": {
+      "model": "bignay:block/crimson_mosaic_vertical_slab",
+      "uvlock": true,
+      "y": 180
+    },
+    "type=south": {
+      "model": "bignay:block/crimson_mosaic_vertical_slab",
+      "uvlock": true,
+      "y": 0
+    },
+    "type=west": {
+      "model": "bignay:block/crimson_mosaic_vertical_slab",
+      "uvlock": true,
+      "y": 90
+    },
+    "type=double": {
+      "model": "bignay:block/crimson_mosaic"
+    }
+  }
+}

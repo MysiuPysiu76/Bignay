@@ -31,6 +31,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
 
@@ -47,6 +48,10 @@ public class VerticalSlabBlock extends Block implements CreativeTabProvider, Sim
     public VerticalSlabBlock(Block block) {
         super(BlockBehaviour.Properties.copy(block));
         this.registerDefaultState(this.stateDefinition.any().setValue(TYPE, Type.NORTH).setValue(WATERLOGGED, false));
+    }
+
+    public VerticalSlabBlock(RegistryObject<Block> block) {
+        this(block.get());
     }
 
     @Override

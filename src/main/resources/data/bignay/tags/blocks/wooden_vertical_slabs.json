@@ -1,5 +1,6 @@
 {
   "values": [
+    "#bignay:wooden_mosaic_vertical_slabs",
     "bignay:acacia_vertical_slab",
     "bignay:bamboo_vertical_slab",
     "bignay:birch_vertical_slab",
@@ -11,6 +12,18 @@
     "bignay:oak_vertical_slab",
     "bignay:spruce_vertical_slab",
     "bignay:verdant_vertical_slab",
-    "bignay:warped_vertical_slab"
+    "bignay:warped_vertical_slab",
+    "bignay:vertical_acacia_plank_vertical_slab",
+    "bignay:vertical_bamboo_plank_vertical_slab",
+    "bignay:vertical_birch_plank_vertical_slab",
+    "bignay:vertical_cherry_plank_vertical_slab",
+    "bignay:vertical_crimson_plank_vertical_slab",
+    "bignay:vertical_dark_oak_plank_vertical_slab",
+    "bignay:vertical_jungle_plank_vertical_slab",
+    "bignay:vertical_mangrove_plank_vertical_slab",
+    "bignay:vertical_oak_plank_vertical_slab",
+    "bignay:vertical_spruce_plank_vertical_slab",
+    "bignay:vertical_verdant_plank_vertical_slab",
+    "bignay:vertical_warped_plank_vertical_slab"
   ]
 }

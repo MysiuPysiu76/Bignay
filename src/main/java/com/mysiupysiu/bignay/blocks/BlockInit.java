@@ -326,15 +326,15 @@ public class BlockInit {
     public static final RegistryObject<Block> VERDANT_MOSAIC_STAIRS = registerBlock("verdant_mosaic_stairs", () -> new StairsBlock(VERDANT_MOSAIC));
     public static final RegistryObject<Block> WARPED_MOSAIC_STAIRS = registerBlock("warped_mosaic_stairs", () -> new StairsBlock(WARPED_MOSAIC));
 
-    public static final RegistryObject<Block> ACACIA_MOSAIC_SLAB = registerBlock("acacia_mosaic_slab", () -> new SlabsBlock(ACACIA_MOSAIC), 300);
-    public static final RegistryObject<Block> BIRCH_MOSAIC_SLAB = registerBlock("birch_mosaic_slab", () -> new SlabsBlock(BIRCH_MOSAIC), 300);
-    public static final RegistryObject<Block> CHERRY_MOSAIC_SLAB = registerBlock("cherry_mosaic_slab", () -> new SlabsBlock(CHERRY_MOSAIC), 300);
+    public static final RegistryObject<Block> ACACIA_MOSAIC_SLAB = registerBlock("acacia_mosaic_slab", () -> new SlabsBlock(ACACIA_MOSAIC), 150);
+    public static final RegistryObject<Block> BIRCH_MOSAIC_SLAB = registerBlock("birch_mosaic_slab", () -> new SlabsBlock(BIRCH_MOSAIC), 150);
+    public static final RegistryObject<Block> CHERRY_MOSAIC_SLAB = registerBlock("cherry_mosaic_slab", () -> new SlabsBlock(CHERRY_MOSAIC), 150);
     public static final RegistryObject<Block> CRIMSON_MOSAIC_SLAB = registerBlock("crimson_mosaic_slab", () -> new SlabsBlock(CRIMSON_MOSAIC));
-    public static final RegistryObject<Block> DARK_OAK_MOSAIC_SLAB = registerBlock("dark_oak_mosaic_slab", () -> new SlabsBlock(DARK_OAK_MOSAIC), 300);
-    public static final RegistryObject<Block> JUNGLE_MOSAIC_SLAB = registerBlock("jungle_mosaic_slab", () -> new SlabsBlock(JUNGLE_MOSAIC), 300);
-    public static final RegistryObject<Block> MANGROVE_MOSAIC_SLAB = registerBlock("mangrove_mosaic_slab", () -> new SlabsBlock(MANGROVE_MOSAIC), 300);
-    public static final RegistryObject<Block> OAK_MOSAIC_SLAB = registerBlock("oak_mosaic_slab", () -> new SlabsBlock(OAK_MOSAIC), 300);
-    public static final RegistryObject<Block> SPRUCE_MOSAIC_SLAB = registerBlock("spruce_mosaic_slab", () -> new SlabsBlock(SPRUCE_MOSAIC), 300);
+    public static final RegistryObject<Block> DARK_OAK_MOSAIC_SLAB = registerBlock("dark_oak_mosaic_slab", () -> new SlabsBlock(DARK_OAK_MOSAIC), 150);
+    public static final RegistryObject<Block> JUNGLE_MOSAIC_SLAB = registerBlock("jungle_mosaic_slab", () -> new SlabsBlock(JUNGLE_MOSAIC), 150);
+    public static final RegistryObject<Block> MANGROVE_MOSAIC_SLAB = registerBlock("mangrove_mosaic_slab", () -> new SlabsBlock(MANGROVE_MOSAIC), 150);
+    public static final RegistryObject<Block> OAK_MOSAIC_SLAB = registerBlock("oak_mosaic_slab", () -> new SlabsBlock(OAK_MOSAIC), 150);
+    public static final RegistryObject<Block> SPRUCE_MOSAIC_SLAB = registerBlock("spruce_mosaic_slab", () -> new SlabsBlock(SPRUCE_MOSAIC), 150);
     public static final RegistryObject<Block> VERDANT_MOSAIC_SLAB = registerBlock("verdant_mosaic_slab", () -> new SlabsBlock(VERDANT_MOSAIC));
     public static final RegistryObject<Block> WARPED_MOSAIC_SLAB = registerBlock("warped_mosaic_slab", () -> new SlabsBlock(WARPED_MOSAIC));
 
@@ -616,6 +616,32 @@ public class BlockInit {
     public static final RegistryObject<Block> WAXED_EXPOSED_CUT_COPPER_VERTICAL_SLAB = registerBlock("waxed_exposed_cut_copper_vertical_slab", () -> new VerticalSlabBlock(Blocks.WAXED_EXPOSED_CUT_COPPER));
     public static final RegistryObject<Block> WAXED_WEATHERED_CUT_COPPER_VERTICAL_SLAB = registerBlock("waxed_weathered_cut_copper_vertical_slab", () -> new VerticalSlabBlock(Blocks.WAXED_WEATHERED_COPPER));
     public static final RegistryObject<Block> WAXED_OXIDIZED_CUT_COPPER_VERTICAL_SLAB = registerBlock("waxed_oxidized_cut_copper_vertical_slab", () -> new VerticalSlabBlock(Blocks.WAXED_OXIDIZED_CUT_COPPER));
+
+    public static final RegistryObject<Block> VERTICAL_ACACIA_PLANK_VERTICAL_SLAB = registerBlock("vertical_acacia_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.ACACIA_PLANKS), 150);
+    public static final RegistryObject<Block> VERTICAL_BAMBOO_PLANK_VERTICAL_SLAB = registerBlock("vertical_bamboo_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.BAMBOO_PLANKS), 150);
+    public static final RegistryObject<Block> VERTICAL_BIRCH_PLANK_VERTICAL_SLAB = registerBlock("vertical_birch_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.BIRCH_PLANKS), 150);
+    public static final RegistryObject<Block> VERTICAL_CHERRY_PLANK_VERTICAL_SLAB = registerBlock("vertical_cherry_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.CHERRY_PLANKS), 150);
+    public static final RegistryObject<Block> VERTICAL_CRIMSON_PLANK_VERTICAL_SLAB = registerBlock("vertical_crimson_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.CRIMSON_PLANKS));
+    public static final RegistryObject<Block> VERTICAL_DARK_OAK_PLANK_VERTICAL_SLAB = registerBlock("vertical_dark_oak_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.DARK_OAK_PLANKS), 150);
+    public static final RegistryObject<Block> VERTICAL_JUNGLE_PLANK_VERTICAL_SLAB = registerBlock("vertical_jungle_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.JUNGLE_PLANKS), 150);
+    public static final RegistryObject<Block> VERTICAL_MANGROVE_PLANK_VERTICAL_SLAB = registerBlock("vertical_mangrove_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.MANGROVE_PLANKS), 150);
+    public static final RegistryObject<Block> VERTICAL_OAK_PLANK_VERTICAL_SLAB = registerBlock("vertical_oak_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.OAK_PLANKS), 150);
+    public static final RegistryObject<Block> VERTICAL_SPRUCE_PLANK_VERTICAL_SLAB = registerBlock("vertical_spruce_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.SPRUCE_PLANKS), 150);
+    public static final RegistryObject<Block> VERTICAL_VERDANT_PLANK_VERTICAL_SLAB = registerBlock("vertical_verdant_plank_vertical_slab", () -> new VerticalSlabBlock(VERDANT_PLANKS.get()));
+    public static final RegistryObject<Block> VERTICAL_WARPED_PLANK_VERTICAL_SLAB = registerBlock("vertical_warped_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.WARPED_PLANKS));
+
+    public static final RegistryObject<Block> ACACIA_MOSAIC_VERTICAL_SLAB = registerBlock("acacia_mosaic_vertical_slab", () -> new VerticalSlabBlock(ACACIA_MOSAIC), 150);
+    public static final RegistryObject<Block> BAMBOO_MOSAIC_VERTICAL_SLAB = registerBlock("bamboo_mosaic_vertical_slab", () -> new VerticalSlabBlock(Blocks.BAMBOO_MOSAIC), 150);
+    public static final RegistryObject<Block> BIRCH_MOSAIC_VERTICAL_SLAB = registerBlock("birch_mosaic_vertical_slab", () -> new VerticalSlabBlock(BIRCH_MOSAIC), 150);
+    public static final RegistryObject<Block> CHERRY_MOSAIC_VERTICAL_SLAB = registerBlock("cherry_mosaic_vertical_slab", () -> new VerticalSlabBlock(CHERRY_MOSAIC), 150);
+    public static final RegistryObject<Block> CRIMSON_MOSAIC_VERTICAL_SLAB = registerBlock("crimson_mosaic_vertical_slab", () -> new VerticalSlabBlock(CRIMSON_MOSAIC));
+    public static final RegistryObject<Block> DARK_OAK_MOSAIC_VERTICAL_SLAB = registerBlock("dark_oak_mosaic_vertical_slab", () -> new VerticalSlabBlock(DARK_OAK_MOSAIC), 150);
+    public static final RegistryObject<Block> JUNGLE_MOSAIC_VERTICAL_SLAB = registerBlock("jungle_mosaic_vertical_slab", () -> new VerticalSlabBlock(JUNGLE_MOSAIC), 150);
+    public static final RegistryObject<Block> MANGROVE_MOSAIC_VERTICAL_SLAB = registerBlock("mangrove_mosaic_vertical_slab", () -> new VerticalSlabBlock(MANGROVE_MOSAIC), 150);
+    public static final RegistryObject<Block> OAK_MOSAIC_VERTICAL_SLAB = registerBlock("oak_mosaic_vertical_slab", () -> new VerticalSlabBlock(OAK_MOSAIC), 150);
+    public static final RegistryObject<Block> SPRUCE_MOSAIC_VERTICAL_SLAB = registerBlock("spruce_mosaic_vertical_slab", () -> new VerticalSlabBlock(SPRUCE_MOSAIC), 150);
+    public static final RegistryObject<Block> VERDANT_MOSAIC_VERTICAL_SLAB = registerBlock("verdant_mosaic_vertical_slab", () -> new VerticalSlabBlock(VERDANT_MOSAIC));
+    public static final RegistryObject<Block> WARPED_MOSAIC_VERTICAL_SLAB = registerBlock("warped_mosaic_vertical_slab", () -> new VerticalSlabBlock(WARPED_MOSAIC));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
