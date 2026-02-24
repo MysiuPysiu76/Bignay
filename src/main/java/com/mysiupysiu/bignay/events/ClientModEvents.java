@@ -60,6 +60,8 @@ public class ClientModEvents {
         pot.addPlant(BlockInit.HYACINTH.getId(), BlockInit.POTTED_HYACINTH);
         pot.addPlant(BlockInit.LAPIS_LOTUS.getId(), BlockInit.POTTED_LAPIS_LOTUS);
         pot.addPlant(BlockInit.GOLDEN_POPPY.getId(), BlockInit.POTTED_GOLDEN_POPPY);
+        pot.addPlant(BlockInit.ROSE.getId(), BlockInit.POTTED_ROSE);
+        pot.addPlant(BlockInit.CYAN_ROSE.getId(), BlockInit.POTTED_CYAN_ROSE);
 
         pot.addPlant(BlockInit.PUFFBALLS.getId(), BlockInit.POTTED_PUFFBALLS);
         pot.addPlant(BlockInit.MYCELIUM_ROOTS.getId(), BlockInit.POTTED_MYCELIUM_ROOTS);

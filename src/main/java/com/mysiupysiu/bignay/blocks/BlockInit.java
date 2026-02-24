@@ -561,6 +561,8 @@ public class BlockInit {
     public static final RegistryObject<Block> HYACINTH = registerBlock("hyacinth", () -> new PlantBlock(MobEffects.POISON, 8));
     public static final RegistryObject<Block> LAPIS_LOTUS = registerBlock("lapis_lotus", () -> new PlantBlock(MobEffects.NIGHT_VISION, 10));
     public static final RegistryObject<Block> GOLDEN_POPPY = registerBlock("golden_poppy", () -> new PlantBlock(MobEffects.HARM, 4));
+    public static final RegistryObject<Block> ROSE = registerBlock("rose", () -> new PlantBlock(MobEffects.MOVEMENT_SPEED, 4));
+    public static final RegistryObject<Block> CYAN_ROSE = registerBlock("cyan_rose", () -> new PlantBlock(MobEffects.MOVEMENT_SPEED, 5));
 
     public static final RegistryObject<Block> CYAN_ROSE_BUSH = registerBlock("cyan_rose_bush", TallPlantBlock::new);
     public static final RegistryObject<Block> MARIGOLD = registerBlock("marigold", TallPlantBlock::new);
@@ -580,6 +582,8 @@ public class BlockInit {
     public static final RegistryObject<Block> POTTED_HYACINTH = registerBlockOnly("potted_hyacinth", () -> flowerPot(HYACINTH.get()));
     public static final RegistryObject<Block> POTTED_LAPIS_LOTUS = registerBlockOnly("potted_lapis_lotus", () -> flowerPot(LAPIS_LOTUS.get()));
     public static final RegistryObject<Block> POTTED_GOLDEN_POPPY = registerBlockOnly("potted_golden_poppy", () -> flowerPot(GOLDEN_POPPY.get()));
+    public static final RegistryObject<Block> POTTED_ROSE = registerBlockOnly("potted_rose", () -> flowerPot(ROSE.get()));
+    public static final RegistryObject<Block> POTTED_CYAN_ROSE = registerBlockOnly("potted_cyan_rose", () -> flowerPot(CYAN_ROSE.get()));
     public static final RegistryObject<Block> POTTED_PUFFBALLS = registerBlockOnly("potted_puffballs", () -> flowerPot(PUFFBALLS.get()));
     public static final RegistryObject<Block> POTTED_MYCELIUM_ROOTS = registerBlockOnly("potted_mycelium_roots", () -> flowerPot(MYCELIUM_ROOTS.get()));
     public static final RegistryObject<Block> POTTED_MUSHROOM_CLUSTER = registerBlockOnly("potted_mushroom_cluster", () -> flowerPot(MUSHROOM_CLUSTER.get()));
