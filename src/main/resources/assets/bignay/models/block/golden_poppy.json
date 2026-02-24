@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "bignay:block/golden_poppy"
+  },
+  "render_type": "cutout"
+}
