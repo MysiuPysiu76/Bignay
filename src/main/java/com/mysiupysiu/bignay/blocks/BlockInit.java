@@ -508,6 +508,7 @@ public class BlockInit {
     public static final RegistryObject<Block> PRISMARINE_TILE_WALL = registerBlock("prismarine_tile_wall", () -> new WallsBlock(Blocks.PRISMARINE));
     public static final RegistryObject<Block> PRISMARINE_TILE_VERTICAL_SLAB = registerBlock("prismarine_tile_vertical_slab", () -> new VerticalSlabBlock(Blocks.PRISMARINE));
     public static final RegistryObject<Block> PRISMARINE_BRICK_WALL = registerBlock("prismarine_brick_wall", () -> new WallsBlock(Blocks.PRISMARINE));
+    public static final RegistryObject<Block> DARK_PRISMARINE_WALL = registerBlock("dark_prismarine_wall", () -> new WallsBlock(Blocks.DARK_PRISMARINE));
 
     public static final RegistryObject<Block> RANDOMIZER = registerBlock("randomizer", RandomizerBlock::new);
 
