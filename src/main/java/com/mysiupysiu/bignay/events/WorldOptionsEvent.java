@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.events;
 
-import com.mysiupysiu.bignay.screen.WorldEditScreen;
+import com.mysiupysiu.bignay.screen.world.WorldEditScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.worldselection.EditWorldScreen;
 import net.minecraftforge.api.distmarker.Dist;

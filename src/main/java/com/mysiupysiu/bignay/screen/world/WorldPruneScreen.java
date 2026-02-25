@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.screen;
+package com.mysiupysiu.bignay.screen.world;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;

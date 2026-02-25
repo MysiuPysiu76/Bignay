@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.events;
 
-import com.mysiupysiu.bignay.screen.WorldImportScreen;
+import com.mysiupysiu.bignay.screen.world.WorldImportScreen;
 import com.mysiupysiu.bignay.screen.file.InvalidFileScreen;
 import com.mysiupysiu.bignay.screen.file.chooser.FileChooserScreen;
 import com.mysiupysiu.bignay.utils.FileType;
