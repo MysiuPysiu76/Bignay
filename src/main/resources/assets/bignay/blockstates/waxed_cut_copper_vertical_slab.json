@@ -21,7 +21,7 @@
       "y": 90
     },
     "type=double": {
-      "model": "minecraft:block/waxed_cut_copper"
+      "model": "minecraft:block/cut_copper"
     }
   }
 }
