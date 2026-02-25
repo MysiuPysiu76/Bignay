@@ -30,6 +30,7 @@ public class BlockInit {
     public static final RegistryObject<Block> WAX_BLOCK = registerBlock("wax_block", WaxBlock::new);
     public static final RegistryObject<Block> WITHER_BONE_BLOCK = registerBlock("wither_bone_block", WitherBoneBlock::new);
     public static final RegistryObject<Block> ARCHAEOLOGY_TABLE_BLOCK = registerBlock("archaeology_table", ArchaeologyTableBlock::new);
+    public static final RegistryObject<Block> CHARCOAL_BLOCK = registerBlock("charcoal_block", () -> new BuildingBlock(Blocks.COAL_BLOCK));
 
     public static final RegistryObject<Block> VERDANT_STEM = registerBlock("verdant_stem", () -> new NaturalNetherStemBlock(MapColor.COLOR_GREEN));
     public static final RegistryObject<Block> STRIPPED_VERDANT_STEM = registerBlock("stripped_verdant_stem", () -> new NetherStemBlock(MapColor.COLOR_GREEN));
@@ -388,7 +389,7 @@ public class BlockInit {
     public static final RegistryObject<Block> MOSSY_DIORITE_BRICK_WALL = registerBlock("mossy_diorite_brick_wall", () -> new WallsBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> MOSSY_DIORITE_BRICK_VERTICAL_SLAB = registerBlock("mossy_diorite_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.POLISHED_DIORITE));
     public static final RegistryObject<Block> CHISELED_DIORITE = registerBlock("chiseled_diorite", () -> new BuildingBlock(Blocks.POLISHED_DIORITE));
-    public static final RegistryObject<Block> DIORITE_PILLAR = registerBlock("diorite_pillar", () -> new PillarBlock(Blocks.POLISHED_DIORITE));
+    public static final RegistryObject<Block> DIORITE_PILLAR = registerBlock("diorite_pillar", () -> new PillarBlock(Blocks.POLISHED_GRANITE));
 
     public static final RegistryObject<Block> POLISHED_GRANITE_WALL = registerBlock("polished_granite_wall", () -> new WallsBlock(Blocks.POLISHED_GRANITE));
     public static final RegistryObject<Block> SMOOTH_GRANITE = registerBlock("smooth_granite", () -> new BuildingBlock(Blocks.POLISHED_GRANITE));

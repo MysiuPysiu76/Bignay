@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "bignay:charcoal_block"
+    }
+  ],
+  "result": {
+    "item": "minecraft:charcoal",
+    "count": 9
+  }
+}
