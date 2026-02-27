@@ -1,5 +1,6 @@
 package com.mysiupysiu.bignay.blocks;
 
+import com.mysiupysiu.bignay.utils.particles.ParticlesInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -31,8 +32,7 @@ public class CandlesCakeBlock extends CandleCakeBlock {
     @Override
     public void animateTick(BlockState bs, Level level, BlockPos pos, RandomSource random) {
         if (bs.getValue(LIT)) {
-            this.getParticleOffsets(bs).forEach((p_220695_) ->
-                    addParticlesAndSound(level, p_220695_.add(pos.getX(), pos.getY(), pos.getZ()), random));
+            this.getParticleOffsets(bs).forEach((p_220695_) -> addParticlesAndSound(level, p_220695_.add(pos.getX(), pos.getY(), pos.getZ()), random));
         }
     }
 
@@ -45,6 +45,6 @@ public class CandlesCakeBlock extends CandleCakeBlock {
             }
         }
 
-        level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, vec3.x, vec3.y, vec3.z, 0.0D, 0.0D, 0.0D);
+        level.addParticle(ParticlesInit.SMALL_SOUL_FLAME.get(), vec3.x, vec3.y, vec3.z, 0.0D, 0.0D, 0.0D);
     }
 }

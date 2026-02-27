@@ -1,6 +1,8 @@
 package com.mysiupysiu.bignay.events;
 
 import com.mysiupysiu.bignay.BignayMod;
+import com.mysiupysiu.bignay.utils.particles.SmallSoulFlameParticle;
+import com.mysiupysiu.bignay.utils.particles.ParticlesInit;
 import com.mysiupysiu.bignay.blocks.BlockEntityInit;
 import com.mysiupysiu.bignay.blocks.BlockInit;
 import com.mysiupysiu.bignay.entities.*;
@@ -17,6 +19,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -71,5 +74,10 @@ public class ClientModEvents {
 
         pot.addPlant(BlockInit.VERDANT_FUNGUS.getId(), BlockInit.POTTED_VERDANT_FUNGUS);
         pot.addPlant(BlockInit.VERDANT_ROOTS.getId(), BlockInit.POTTED_VERDANT_ROOTS);
+    }
+
+    @SubscribeEvent
+    public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(ParticlesInit.SMALL_SOUL_FLAME.get(), SmallSoulFlameParticle.Provider::new);
     }
 }

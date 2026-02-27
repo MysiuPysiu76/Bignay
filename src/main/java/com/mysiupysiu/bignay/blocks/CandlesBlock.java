@@ -1,5 +1,6 @@
 package com.mysiupysiu.bignay.blocks;
 
+import com.mysiupysiu.bignay.utils.particles.ParticlesInit;
 import com.mysiupysiu.bignay.utils.CreativeTabProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -53,7 +54,7 @@ public class CandlesBlock extends CandleBlock implements CreativeTabProvider {
             }
         }
 
-        level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, vec3.x, vec3.y, vec3.z, 0.0D, 0.0D, 0.0D);
+        level.addParticle(ParticlesInit.SMALL_SOUL_FLAME.get(), vec3.x, vec3.y, vec3.z, 0.0D, 0.0D, 0.0D);
     }
 
     @Override
