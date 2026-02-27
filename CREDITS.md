@@ -11,7 +11,7 @@ The **Cobbled Basalt, Basalt Bricks, Chiseled Basalt and Basalt Pillar, Acacia, 
 
 The **Andesite, Diorite, Granite, Dripstone, Calcite variants of Polished, Smooth, Bricks, Pillar and Chiseled block** textures come from [ImXR24](https://www.deviantart.com/imxr24)
 
-The **Tree cavity, Hyacinth, Peony, Lilac, Lapis Lotus, Mushroom Clusters, Tall Dead Bush, Blue Rose, Puffballs, Mycelium Roots and Sprouts** textures come from [Turfnerf(BuildsZenith)](https://x.com/BuildsZenith)
+The **Tree cavity, Charcoal Block, Hyacinth, Peony, Lilac, Lapis Lotus, Mushroom Clusters, Tall Dead Bush, Blue Rose Bush, Puffballs, Rose, Cyan Rose, Golden Poppy, Mycelium Roots and Sprouts** textures come from [Turfnerf(BuildsZenith)](https://x.com/BuildsZenith)
 
 Used in the Bignay mod with permission from the original creator - many thanks for allowing me to use them!
 
