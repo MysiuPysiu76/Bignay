@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.events;
 
-import com.mysiupysiu.bignay.screen.ScreenshotsViewerScreen;
+import com.mysiupysiu.bignay.screen.screenshot.ScreenshotsViewerScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.events.GuiEventListener;

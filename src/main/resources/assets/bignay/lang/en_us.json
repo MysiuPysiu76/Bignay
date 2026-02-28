@@ -677,6 +677,7 @@
   "importWorld.import": "Import",
   "importWorld.file": "File: %s",
   "block.bignay.pot": "Pot",
+  "screenshotsViewer.empty": "No screenshots found. Take some in-game! (F2)",
   "fileChooser.options.reset": "Reset",
   "importWorld.version": "Version: %s",
   "fileChooser.emptyFolder": "Folder is empty or no matching files",

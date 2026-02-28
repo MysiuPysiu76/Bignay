@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.screen;
+package com.mysiupysiu.bignay.screen.screenshot;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -68,7 +68,12 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
     @Override
     public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTick) {
         super.render(gui, mouseX, mouseY, partialTick);
-        manageMemory();
+
+        if (allPaths.isEmpty()) {
+            gui.drawCenteredString(Minecraft.getInstance().font, Component.translatable("screenshotsViewer.empty"), this.width / 2, this.y0 + (this.y1 - this.y0) / 2, 0x777777);
+        } else {
+            manageMemory();
+        }
     }
 
     private void manageMemory() {

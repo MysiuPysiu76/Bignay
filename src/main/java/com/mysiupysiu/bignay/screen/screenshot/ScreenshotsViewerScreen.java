@@ -1,5 +1,6 @@
-package com.mysiupysiu.bignay.screen;
+package com.mysiupysiu.bignay.screen.screenshot;
 
+import com.mysiupysiu.bignay.screen.OperationWithProgressScreen;
 import com.mysiupysiu.bignay.screen.file.chooser.FolderChooserScreen;
 import com.mysiupysiu.bignay.utils.FileUtils;
 import com.mysiupysiu.bignay.utils.ScreenshotsExporter;

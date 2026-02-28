@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.screen;
+package com.mysiupysiu.bignay.screen.screenshot;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
