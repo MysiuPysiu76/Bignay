@@ -10,6 +10,7 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.IOException;
@@ -18,10 +19,12 @@ import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ScreenshotsViewerScreen extends Screen {
 
     private static final Path SCREENSHOTS_DIR = Minecraft.getInstance().gameDirectory.toPath().resolve("screenshots");
+    private static boolean toOldest = true;
     private ScreenshotsGrid grid;
     private Button openButton, exportButton, deleteButton;
 
@@ -43,6 +46,10 @@ public class ScreenshotsViewerScreen extends Screen {
         this.grid = new ScreenshotsGrid(this.minecraft, this.width, this.height, 32, this.height - 40, itemHeight, this);
         this.addRenderableWidget(grid);
 
+        this.addRenderableWidget(Button.builder(Component.translatable("options.title"), btn ->
+                this.minecraft.setScreen(new ScreenshotsOptionsScreen()))
+                .bounds(this.width / 2 + 100, 6, 100, 20).build());
+
         refreshScreenshots();
 
         int y = this.height - 30;
@@ -55,30 +62,38 @@ public class ScreenshotsViewerScreen extends Screen {
         this.deleteButton = addRenderableWidget(Button.builder(Component.translatable("screenshotsViewer.delete"),
                 btn -> deleteSelected()).bounds(this.width / 2 + 4, y, 72, 20).build());
 
-        addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, btn -> onClose())
+        this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, btn -> onClose())
                 .bounds(this.width / 2 + 82, y, 72, 20).build());
 
-        updateButtons();
+        this.updateButtons();
     }
 
     public void refreshScreenshots() {
-        try {
-            if (!Files.exists(SCREENSHOTS_DIR)) return;
-            List<Path> paths = Files.list(SCREENSHOTS_DIR)
+        try (Stream<Path> stream = Files.list(SCREENSHOTS_DIR)) {
+            Comparator<Path> pathComparator = getPathComparator();
+
+            List<Path> paths = stream
                     .filter(p -> p.getFileName().toString().matches("\\d{4}-\\d{2}-\\d{2}_\\d{2}\\.\\d{2}\\.\\d{2}(_\\d+)?\\.png"))
-                    .sorted(Comparator.comparingLong((Path p) -> {
-                        try {
-                            return Files.getLastModifiedTime(p).toMillis();
-                        } catch (IOException e) {
-                            return 0L;
-                        }
-                    }).reversed())
+                    .sorted(pathComparator)
                     .collect(Collectors.toList());
 
             grid.refresh(paths);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static @NotNull Comparator<Path> getPathComparator() {
+        Comparator<Path> pathComparator = Comparator.comparingLong(p -> {
+            try {
+                return Files.getLastModifiedTime(p).toMillis();
+            } catch (IOException e) {
+                return 0L;
+            }
+        });
+
+        if (!toOldest) pathComparator = pathComparator.reversed();
+        return pathComparator;
     }
 
     private void exportSelected() {
@@ -163,5 +178,13 @@ public class ScreenshotsViewerScreen extends Screen {
     public void removed() {
         grid.cleanup();
         super.removed();
+    }
+
+    public static boolean isToOldest() {
+        return toOldest;
+    }
+
+    public static void setToOldest(boolean toOldest) {
+        ScreenshotsViewerScreen.toOldest = toOldest;
     }
 }
