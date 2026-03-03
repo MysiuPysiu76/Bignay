@@ -47,16 +47,19 @@ public class ScreenshotViewScreen extends Screen {
         int y = this.height - 24;
 
         this.addRenderableWidget(Button.builder(Component.translatable("screenshotsViewer.show"), btn -> open())
-                .bounds(this.width / 2 - 154, y, 72, 20).build());
+                .bounds(this.width / 2 - 192, y, 72, 20).build());
+
+        this.addRenderableWidget(Button.builder(Component.translatable("screenshotsViewer.rename"), btn -> rename())
+                .bounds(this.width / 2 - 114, y, 72, 20).build());
 
         this.addRenderableWidget(Button.builder(Component.translatable("screenshotsViewer.export"), btn -> export())
-                .bounds(this.width / 2 - 76, y, 72, 20).build());
+                .bounds(this.width / 2 - 36, y, 72, 20).build());
 
         this.addRenderableWidget(Button.builder(Component.translatable("screenshotsViewer.delete"), btn -> delete())
-                .bounds(this.width / 2 + 4, y, 72, 20).build());
+                .bounds(this.width / 2 + 42, y, 72, 20).build());
 
         this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, btn -> back())
-                .bounds(this.width / 2 + 82, y, 72, 20).build());
+                .bounds(this.width / 2 + 120, y, 72, 20).build());
     }
 
     @Override
@@ -136,6 +139,10 @@ public class ScreenshotViewScreen extends Screen {
 
     private void open() {
         Util.getPlatform().openFile(getFile().toFile());
+    }
+
+    private void rename() {
+        this.minecraft.setScreen(new ScreenshotRenameScreen(list.get(index)));
     }
 
     private void export() {

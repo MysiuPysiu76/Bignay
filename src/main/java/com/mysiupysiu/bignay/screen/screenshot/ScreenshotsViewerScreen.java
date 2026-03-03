@@ -26,7 +26,7 @@ public class ScreenshotsViewerScreen extends Screen {
     private static final Path SCREENSHOTS_DIR = Minecraft.getInstance().gameDirectory.toPath().resolve("screenshots");
     private static boolean toOldest = true;
     private ScreenshotsGrid grid;
-    private Button openButton, exportButton, deleteButton;
+    private Button openButton, renameButton, exportButton, deleteButton;
 
     public ScreenshotsViewerScreen() {
         super(Component.translatable("screenshotsViewer.title"));
@@ -43,6 +43,9 @@ public class ScreenshotsViewerScreen extends Screen {
         int thumbH = (int) (thumbW * (9.0f / 16.0f));
         int itemHeight = thumbH + 20;
 
+        int y = this.height - 30;
+        int x = this.width / 2;
+
         this.grid = new ScreenshotsGrid(this.minecraft, this.width, this.height, 32, this.height - 40, itemHeight, this);
         this.addRenderableWidget(grid);
 
@@ -52,18 +55,20 @@ public class ScreenshotsViewerScreen extends Screen {
 
         refreshScreenshots();
 
-        int y = this.height - 30;
         this.openButton = addRenderableWidget(Button.builder(Component.translatable("screenshotsViewer.open"),
-                btn -> openSelected()).bounds(this.width / 2 - 154, y, 72, 20).build());
+                btn -> openSelected()).bounds(x - 192, y, 72, 20).build());
+
+        this.renameButton = addRenderableWidget(Button.builder(Component.translatable("screenshotsViewer.rename"),
+                btn -> renameSelected()).bounds(x - 114, y, 72, 20).build());
 
         this.exportButton = addRenderableWidget(Button.builder(Component.translatable("screenshotsViewer.export"),
-                btn -> exportSelected()).bounds(this.width / 2 - 76, y, 72, 20).build());
+                btn -> exportSelected()).bounds(x - 36, y, 72, 20).build());
 
         this.deleteButton = addRenderableWidget(Button.builder(Component.translatable("screenshotsViewer.delete"),
-                btn -> deleteSelected()).bounds(this.width / 2 + 4, y, 72, 20).build());
+                btn -> deleteSelected()).bounds(x + 42, y, 72, 20).build());
 
         this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, btn -> onClose())
-                .bounds(this.width / 2 + 82, y, 72, 20).build());
+                .bounds(x + 120, y, 72, 20).build());
 
         this.updateButtons();
     }
@@ -73,7 +78,7 @@ public class ScreenshotsViewerScreen extends Screen {
             Comparator<Path> pathComparator = getPathComparator();
 
             List<Path> paths = stream
-                    .filter(p -> p.getFileName().toString().matches("\\d{4}-\\d{2}-\\d{2}_\\d{2}\\.\\d{2}\\.\\d{2}(_\\d+)?\\.png"))
+                    .filter(p -> p.getFileName().toString().endsWith(".png"))
                     .sorted(pathComparator)
                     .collect(Collectors.toList());
 
@@ -92,7 +97,7 @@ public class ScreenshotsViewerScreen extends Screen {
             }
         });
 
-        if (!toOldest) pathComparator = pathComparator.reversed();
+        if (toOldest) pathComparator = pathComparator.reversed();
         return pathComparator;
     }
 
@@ -114,23 +119,23 @@ public class ScreenshotsViewerScreen extends Screen {
     public void updateButtons() {
         int selCount = grid.getSelectedCount();
         if (openButton != null) openButton.active = (selCount == 1);
+        if (renameButton != null) renameButton.active = (selCount == 1);
         if (exportButton != null) exportButton.active = (selCount > 0);
         if (deleteButton != null) deleteButton.active = (selCount > 0);
     }
 
     @Override
     public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTick) {
-        this.renderBackground(gui);
         super.render(gui, mouseX, mouseY, partialTick);
         gui.drawCenteredString(this.font, this.title, this.width / 2, 12, 0xFFFFFF);
     }
 
-    public void openSelected() {
-        Path p = grid.getSelectedPaths().findFirst().orElse(null);
-        if (p != null) {
-            int idx = grid.getAllPaths().indexOf(p);
-            openScreenshot(idx);
-        }
+    private void renameSelected() {
+        grid.getSelectedPaths().findFirst().ifPresent(p -> this.minecraft.setScreen(new ScreenshotRenameScreen(p)));
+    }
+
+    private void openSelected() {
+        grid.getSelectedPaths().findFirst().ifPresent(p -> openScreenshot(grid.getAllPaths().indexOf(p)));
     }
 
     public void openScreenshot(int idx) {
@@ -146,18 +151,18 @@ public class ScreenshotsViewerScreen extends Screen {
             updateButtons();
             return true;
         }
+
         if (keyCode == GLFW.GLFW_KEY_DELETE && grid.getSelectedCount() > 0) {
             deleteSelected();
             return true;
         }
+
         if ((keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER) && grid.getSelectedCount() == 1) {
             openSelected();
             return true;
         }
 
-        if (grid.keyPressed(keyCode, scanCode, modifiers)) {
-            return true;
-        }
+        if (grid.keyPressed(keyCode, scanCode, modifiers)) return true;
 
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
