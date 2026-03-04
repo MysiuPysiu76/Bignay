@@ -42,7 +42,7 @@ public class ScreenshotViewScreen extends Screen {
 
     @Override
     protected void init() {
-        loadImage();
+        this.loadImage();
 
         int y = this.height - 24;
 
@@ -92,7 +92,8 @@ public class ScreenshotViewScreen extends Screen {
         RenderSystem.setShaderTexture(0, this.texture);
         gui.blit(this.texture, x, y, 0, 0, drawW, drawH, drawW, drawH);
 
-        gui.drawCenteredString(this.font, this.name, this.width / 2, 7, 0xFFFFFF);
+        String title = ScreenshotsGrid.isShowFileExtension() ? name : name.replace(".png", "");
+        gui.drawCenteredString(this.font, title, this.width / 2, 7, 0xFFFFFF);
         super.render(gui, mouseX, mouseY, partialTick);
     }
 

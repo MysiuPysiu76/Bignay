@@ -30,6 +30,7 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
     private int lastSelectedIndex = -1;
     private long lastClickTime = 0;
     private static final long DOUBLE_CLICK_MS = 350L;
+    private static boolean showFileExtension = false;
 
     private final int columns = 4;
     private final int gap = 8;
@@ -39,6 +40,14 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
         t.setDaemon(true);
         return t;
     });
+
+    public static boolean isShowFileExtension() {
+        return showFileExtension;
+    }
+
+    public static void setShowFileExtension(boolean showFileExtension) {
+        ScreenshotsGrid.showFileExtension = showFileExtension;
+    }
 
     public ScreenshotsGrid(Minecraft mc, int width, int height, int top, int bottom, int itemHeight, ScreenshotsViewerScreen parent) {
         super(mc, width, height, top, bottom, itemHeight);
@@ -305,6 +314,7 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
                 }
 
                 String name = p.getFileName().toString();
+                if (!showFileExtension) name = name.replace(".png", "");
                 int nameW = Minecraft.getInstance().font.width(Minecraft.getInstance().font.plainSubstrByWidth(name, maxThumbW));
                 int nameX = ix + (maxThumbW - nameW) / 2;
 

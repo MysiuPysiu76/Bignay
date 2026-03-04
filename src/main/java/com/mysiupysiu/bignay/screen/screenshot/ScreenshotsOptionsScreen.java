@@ -17,6 +17,11 @@ public class ScreenshotsOptionsScreen extends Screen {
         int centerX = this.width / 2;
         int centerY = this.height / 2;
 
+        this.addRenderableWidget(Button.builder(getShowExtensionButtonTitle(), btn -> {
+            ScreenshotsGrid.setShowFileExtension(!ScreenshotsGrid.isShowFileExtension());
+            btn.setMessage(getShowExtensionButtonTitle());
+        }).bounds(centerX - 100, centerY - 50, 200, 20).build());
+
         this.addRenderableWidget(Button.builder(getSortButtonTitle(), btn -> {
             ScreenshotsViewerScreen.setToOldest(!ScreenshotsViewerScreen.isToOldest());
             btn.setMessage(getSortButtonTitle());
@@ -40,5 +45,9 @@ public class ScreenshotsOptionsScreen extends Screen {
 
     private Component getSortButtonTitle() {
         return Component.translatable("screenshotsViewer.options.sort_" + (ScreenshotsViewerScreen.isToOldest() ? "oldest" : "newest"));
+    }
+
+    private Component getShowExtensionButtonTitle() {
+        return  Component.translatable("screenshotsViewer.options.show_extension_" + (ScreenshotsGrid.isShowFileExtension() ? "yes" : "no"));
     }
 }
