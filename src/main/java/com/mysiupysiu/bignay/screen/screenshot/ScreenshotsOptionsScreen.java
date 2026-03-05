@@ -1,6 +1,8 @@
 package com.mysiupysiu.bignay.screen.screenshot;
 
+import net.minecraft.client.Screenshot;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
@@ -17,9 +19,9 @@ public class ScreenshotsOptionsScreen extends Screen {
         int centerX = this.width / 2;
         int centerY = this.height / 2;
 
-        this.addRenderableWidget(Button.builder(getShowExtensionButtonTitle(), btn -> {
-            ScreenshotsGrid.setShowFileExtension(!ScreenshotsGrid.isShowFileExtension());
-            btn.setMessage(getShowExtensionButtonTitle());
+        this.addRenderableWidget(Button.builder(getSortButtonTitle(), btn -> {
+            ScreenshotsViewerScreen.setToOldest(!ScreenshotsViewerScreen.isToOldest());
+            btn.setMessage(getSortButtonTitle());
         }).bounds(centerX - 100, centerY - 75, 200, 20).build());
 
         this.addRenderableWidget(Button.builder(getShowScreenshotNameButtonTitle(), btn -> {
@@ -27,13 +29,35 @@ public class ScreenshotsOptionsScreen extends Screen {
             btn.setMessage(getShowScreenshotNameButtonTitle());
         }).bounds(centerX - 100, centerY - 50, 200, 20).build());
 
-        this.addRenderableWidget(Button.builder(getSortButtonTitle(), btn -> {
-            ScreenshotsViewerScreen.setToOldest(!ScreenshotsViewerScreen.isToOldest());
-            btn.setMessage(getSortButtonTitle());
+        this.addRenderableWidget(Button.builder(getShowExtensionButtonTitle(), btn -> {
+            ScreenshotsGrid.setShowFileExtension(!ScreenshotsGrid.isShowFileExtension());
+            btn.setMessage(getShowExtensionButtonTitle());
         }).bounds(centerX - 100, centerY - 25, 200, 20).build());
 
+        int min = 2;
+        int max = 8;
+
+        double initialSliderValue = (double)(ScreenshotsViewerScreen.getColumns() - min) / (max - min);
+
+        this.addRenderableWidget(new AbstractSliderButton(centerX - 100, centerY, 200, 20, Component.empty(), initialSliderValue) {
+            {
+                this.updateMessage();
+            }
+
+            @Override
+            protected void updateMessage() {
+                int currentVal = (int) Math.round(this.value * (max - min) + min);
+                this.setMessage(Component.translatable("screenshotsViewer.options.columns", currentVal));
+            }
+
+            @Override
+            protected void applyValue() {
+                ScreenshotsViewerScreen.setColumns((int) Math.round(this.value * (max - min) + min));
+            }
+        });
+
         this.addRenderableWidget(Button.builder(CommonComponents.GUI_DONE, btn -> this.onClose())
-                .bounds(centerX - 100, centerY + 20, 200, 20).build());
+                .bounds(centerX - 100, centerY + 40, 200, 20).build());
     }
 
     @Override

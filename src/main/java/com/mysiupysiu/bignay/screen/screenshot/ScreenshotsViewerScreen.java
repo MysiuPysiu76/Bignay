@@ -27,6 +27,7 @@ public class ScreenshotsViewerScreen extends Screen {
     private static boolean toOldest = true;
     private ScreenshotsGrid grid;
     private Button openButton, renameButton, exportButton, deleteButton;
+    private static int columns = 4;
 
     public ScreenshotsViewerScreen() {
         super(Component.translatable("screenshotsViewer.title"));
@@ -36,7 +37,6 @@ public class ScreenshotsViewerScreen extends Screen {
     protected void init() {
         super.init();
 
-        int columns = 4;
         int gap = 8;
         int gridWidth = this.width - 50;
 
@@ -78,6 +78,14 @@ public class ScreenshotsViewerScreen extends Screen {
                 .bounds(x + 120, y, 72, 20).build());
 
         this.updateButtons();
+    }
+
+    public static int getColumns() {
+        return columns;
+    }
+
+    public static void setColumns(int columns) {
+        ScreenshotsViewerScreen.columns = columns;
     }
 
     public void refreshScreenshots() {
