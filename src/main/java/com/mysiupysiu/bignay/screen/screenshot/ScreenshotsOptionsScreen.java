@@ -20,6 +20,11 @@ public class ScreenshotsOptionsScreen extends Screen {
         this.addRenderableWidget(Button.builder(getShowExtensionButtonTitle(), btn -> {
             ScreenshotsGrid.setShowFileExtension(!ScreenshotsGrid.isShowFileExtension());
             btn.setMessage(getShowExtensionButtonTitle());
+        }).bounds(centerX - 100, centerY - 75, 200, 20).build());
+
+        this.addRenderableWidget(Button.builder(getShowScreenshotNameButtonTitle(), btn -> {
+            ScreenshotsGrid.setShowScreenName(!ScreenshotsGrid.isShowScreenName());
+            btn.setMessage(getShowScreenshotNameButtonTitle());
         }).bounds(centerX - 100, centerY - 50, 200, 20).build());
 
         this.addRenderableWidget(Button.builder(getSortButtonTitle(), btn -> {
@@ -45,6 +50,10 @@ public class ScreenshotsOptionsScreen extends Screen {
 
     private Component getSortButtonTitle() {
         return Component.translatable("screenshotsViewer.options.sort_" + (ScreenshotsViewerScreen.isToOldest() ? "oldest" : "newest"));
+    }
+
+    private Component getShowScreenshotNameButtonTitle() {
+        return  Component.translatable("screenshotsViewer.options.show_screenshot_name_" + (ScreenshotsGrid.isShowScreenName() ? "yes" : "no"));
     }
 
     private Component getShowExtensionButtonTitle() {

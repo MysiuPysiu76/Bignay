@@ -30,16 +30,29 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
     private int lastSelectedIndex = -1;
     private long lastClickTime = 0;
     private static final long DOUBLE_CLICK_MS = 350L;
-    private static boolean showFileExtension = false;
 
-    private final int columns = 4;
-    private final int gap = 8;
+    private static boolean showFileExtension = false;
+    private static boolean showScreenName = true;
+
+    private final int thumbWidth;
+    private final int thumbHeight;
+    private final int textHeight;
+    private final int gap;
+    private final int columns;
 
     private final ExecutorService loader = Executors.newFixedThreadPool(4, r -> {
         Thread t = new Thread(r, "screenshot-loader");
         t.setDaemon(true);
         return t;
     });
+
+    public static boolean isShowScreenName() {
+        return showScreenName;
+    }
+
+    public static void setShowScreenName(boolean showScreenName) {
+        ScreenshotsGrid.showScreenName = showScreenName;
+    }
 
     public static boolean isShowFileExtension() {
         return showFileExtension;
@@ -49,9 +62,14 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
         ScreenshotsGrid.showFileExtension = showFileExtension;
     }
 
-    public ScreenshotsGrid(Minecraft mc, int width, int height, int top, int bottom, int itemHeight, ScreenshotsViewerScreen parent) {
+    public ScreenshotsGrid(Minecraft mc, int width, int height, int top, int bottom, int itemHeight, int thumbWidth, int thumbHeight, int textHeight, int gap, int columns, ScreenshotsViewerScreen parent) {
         super(mc, width, height, top, bottom, itemHeight);
         this.parent = parent;
+        this.thumbWidth = Math.max(1, thumbWidth);
+        this.thumbHeight = Math.max(1, thumbHeight);
+        this.textHeight = Math.max(0, textHeight);
+        this.gap = gap;
+        this.columns = columns;
     }
 
     @Override
@@ -183,18 +201,6 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
         }
     }
 
-    @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        boolean clickedSomething = super.mouseClicked(mouseX, mouseY, button);
-
-        if (this.isMouseOver(mouseX, mouseY)) {
-            if (!clickedSomething && button == 0) {
-                clearSelection();
-            }
-        }
-        return clickedSomething;
-    }
-
     private void setSelectedIndex(int index, boolean shift) {
         if (shift && lastSelectedIndex != -1) {
             selectedIndices.clear();
@@ -220,8 +226,6 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
         ResourceLocation resource;
         volatile boolean loading = false;
         volatile boolean shouldUnload = false;
-        int width = 1;
-        int height = 1;
 
         TextureHolder(Path p) {
             this.path = p;
@@ -235,18 +239,12 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
             loader.submit(() -> {
                 try (InputStream is = Files.newInputStream(path)) {
                     NativeImage img = NativeImage.read(is);
-                    int iw = img.getWidth();
-                    int ih = img.getHeight();
-
                     Minecraft.getInstance().execute(() -> {
                         if (shouldUnload) {
                             img.close();
                             loading = false;
                             return;
                         }
-
-                        this.width = iw;
-                        this.height = ih;
                         resource = new ResourceLocation("bignay", "thumb_" + UUID.randomUUID());
                         Minecraft.getInstance().getTextureManager().register(resource, new DynamicTexture(img));
                         loading = false;
@@ -276,49 +274,43 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
         }
 
         @Override
-        public void render(GuiGraphics gui, int index, int y, int x, int rowWidth, int rowHeight, int mouseX, int mouseY, boolean isHovered, float partialTick) {
-            int maxThumbW = (rowWidth - (columns - 1) * gap) / columns;
-            int maxThumbH = rowHeight - 20;
+        public void render(GuiGraphics gui, int index, int slotY, int x, int rowWidth, int rowHeight, int mouseX, int mouseY, boolean isHovered, float partialTick) {
+            int totalRowContentWidth = (columns * thumbWidth) + ((columns - 1) * gap);
+            int startX = x + (rowWidth - totalRowContentWidth) / 2;
 
             for (int i = 0; i < rowPaths.size(); i++) {
                 int globalIdx = startIndex + i;
                 Path p = rowPaths.get(i);
-                int ix = x + i * (maxThumbW + gap);
+
+                int slotX = startX + i * (thumbWidth + gap);
 
                 textures.computeIfAbsent(p, TextureHolder::new);
                 TextureHolder holder = textures.get(p);
 
-                int drawW = maxThumbW;
-                int drawH = maxThumbH;
-                int drawX = ix;
-                int drawY = y;
+                int pad = 1;
+                gui.fill(slotX - pad, slotY - pad, slotX + thumbWidth + pad, slotY + thumbHeight + pad, 0x66000000);
 
-                if (holder.resource != null) {
-                    float scale = Math.min((float) maxThumbW / holder.width, (float) maxThumbH / holder.height);
-                    drawW = (int) (holder.width * scale);
-                    drawH = (int) (holder.height * scale);
-
-                    drawX = ix + (maxThumbW - drawW) / 2;
-                    drawY = y + (maxThumbH - drawH) / 2;
-                }
-
-                gui.fill(drawX, drawY, drawX + drawW, drawY + drawH, 0x66000000);
-
-                if (holder.resource != null) {
+                if (holder != null && holder.resource != null) {
                     RenderSystem.setShaderTexture(0, holder.resource);
-                    gui.blit(holder.resource, drawX, drawY, 0, 0, drawW, drawH, drawW, drawH);
+                    gui.blit(holder.resource, slotX, slotY, 0, 0, thumbWidth, thumbHeight, thumbWidth, thumbHeight);
                 }
 
                 if (selectedIndices.contains(globalIdx)) {
-                    renderOutline(gui, drawX, drawY, drawW, drawH);
+                    renderOutline(gui, slotX - pad + 1, slotY - pad + 1, thumbWidth + pad * 2 - 2, thumbHeight + pad * 2 - 2);
                 }
 
-                String name = p.getFileName().toString();
-                if (!showFileExtension) name = name.replace(".png", "");
-                int nameW = Minecraft.getInstance().font.width(Minecraft.getInstance().font.plainSubstrByWidth(name, maxThumbW));
-                int nameX = ix + (maxThumbW - nameW) / 2;
+                if (textHeight > 0) {
+                    String name = p.getFileName().toString();
+                    if (!showFileExtension) name = name.replaceAll("\\.png$", "");
 
-                gui.drawString(Minecraft.getInstance().font, Minecraft.getInstance().font.plainSubstrByWidth(name, maxThumbW), nameX, y + maxThumbH + 4, 0xAAAAAA, false);
+                    String display = Minecraft.getInstance().font.plainSubstrByWidth(name, thumbWidth);
+                    int nameW = Minecraft.getInstance().font.width(display);
+                    int nameX = slotX + (thumbWidth - nameW) / 2;
+                    int nameY = slotY + thumbHeight + 3;
+
+                    gui.fill(nameX - 2, nameY - 1, nameX + nameW + 2, nameY + Minecraft.getInstance().font.lineHeight, 0x22000000);
+                    gui.drawString(Minecraft.getInstance().font, display, nameX, nameY, 0xAAAAAA, false);
+                }
             }
         }
 
@@ -331,34 +323,15 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
 
         @Override
         public boolean mouseClicked(double mouseX, double mouseY, int button) {
-            int maxThumbW = (getRowWidth() - (columns - 1) * gap) / columns;
-            int maxThumbH = ScreenshotsGrid.this.itemHeight - 20;
-            int rowX = getRowLeft();
-
+            int totalRowContentWidth = (columns * thumbWidth) + ((columns - 1) * gap);
+            int startX = getRowLeft() + (getRowWidth() - totalRowContentWidth) / 2;
             int rowIndex = ScreenshotsGrid.this.children().indexOf(this);
-            int y = ScreenshotsGrid.this.getRowTop(rowIndex);
+            int slotY = ScreenshotsGrid.this.getRowTop(rowIndex);
 
             for (int i = 0; i < rowPaths.size(); i++) {
-                Path p = rowPaths.get(i);
-                int ix = rowX + i * (maxThumbW + gap);
+                int slotX = startX + i * (thumbWidth + gap);
 
-                TextureHolder holder = textures.get(p);
-
-                int drawW = maxThumbW;
-                int drawH = maxThumbH;
-                int drawX = ix;
-                int drawY = y;
-
-                if (holder != null && holder.resource != null) {
-                    float scale = Math.min((float) maxThumbW / holder.width, (float) maxThumbH / holder.height);
-                    drawW = (int) (holder.width * scale);
-                    drawH = (int) (holder.height * scale);
-
-                    drawX = ix + (maxThumbW - drawW) / 2;
-                    drawY = y + (maxThumbH - drawH) / 2;
-                }
-
-                if (mouseX >= drawX && mouseX <= drawX + drawW && mouseY >= drawY && mouseY <= drawY + drawH) {
+                if (mouseX >= slotX && mouseX <= slotX + thumbWidth && mouseY >= slotY && mouseY <= slotY + thumbHeight) {
                     handleSelection(startIndex + i);
                     return true;
                 }

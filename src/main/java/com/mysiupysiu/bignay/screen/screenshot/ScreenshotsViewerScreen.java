@@ -39,21 +39,28 @@ public class ScreenshotsViewerScreen extends Screen {
         int columns = 4;
         int gap = 8;
         int gridWidth = this.width - 50;
+
         int thumbW = (gridWidth - (columns - 1) * gap) / columns;
         int thumbH = (int) (thumbW * (9.0f / 16.0f));
-        int itemHeight = thumbH + 20;
 
-        int y = this.height - 30;
-        int x = this.width / 2;
+        int textHeight = ScreenshotsGrid.isShowScreenName() ? this.minecraft.font.lineHeight + 4 : 0;
 
-        this.grid = new ScreenshotsGrid(this.minecraft, this.width, this.height, 32, this.height - 40, itemHeight, this);
+        int itemHeight = thumbH + textHeight + gap;
+
+        this.grid = new ScreenshotsGrid(
+                this.minecraft, this.width, this.height, 32, this.height - 28, itemHeight,
+                thumbW, thumbH, textHeight, gap, columns, this
+        );
         this.addRenderableWidget(grid);
 
         this.addRenderableWidget(Button.builder(Component.translatable("options.title"), btn ->
-                this.minecraft.setScreen(new ScreenshotsOptionsScreen()))
+                        this.minecraft.setScreen(new ScreenshotsOptionsScreen()))
                 .bounds(this.width / 2 + 100, 6, 100, 20).build());
 
         refreshScreenshots();
+
+        int y = this.height - 24;
+        int x = this.width / 2;
 
         this.openButton = addRenderableWidget(Button.builder(Component.translatable("screenshotsViewer.open"),
                 btn -> openSelected()).bounds(x - 192, y, 72, 20).build());
@@ -151,31 +158,25 @@ public class ScreenshotsViewerScreen extends Screen {
             updateButtons();
             return true;
         }
-
         if (keyCode == GLFW.GLFW_KEY_DELETE && grid.getSelectedCount() > 0) {
             deleteSelected();
             return true;
         }
-
         if ((keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER) && grid.getSelectedCount() == 1) {
             openSelected();
             return true;
         }
-
         if (grid.keyPressed(keyCode, scanCode, modifiers)) return true;
-
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         boolean clicked = super.mouseClicked(mouseX, mouseY, button);
-
         if (!clicked && button == 0) {
             grid.clearSelection();
             return true;
         }
-
         return clicked;
     }
 
