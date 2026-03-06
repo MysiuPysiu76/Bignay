@@ -1,7 +1,9 @@
-package com.mysiupysiu.bignay.utils;
+package com.mysiupysiu.bignay.utils.screenshot;
 
 import com.mysiupysiu.bignay.screen.OperationWithProgressScreen;
 import com.mysiupysiu.bignay.screen.screenshot.ScreenshotsViewerScreen;
+import com.mysiupysiu.bignay.utils.OperationWithProgress;
+import com.mysiupysiu.bignay.utils.ProgressListener;
 import net.minecraft.network.chat.Component;
 
 import java.io.FileInputStream;

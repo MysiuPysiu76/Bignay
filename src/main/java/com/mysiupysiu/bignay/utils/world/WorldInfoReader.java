@@ -189,26 +189,27 @@ public class WorldInfoReader {
 
     public UUID getWorldUUID() {
         try {
-            Path dataDir = this.levelAccess.getLevelPath(LevelResource.ROOT).resolve("data");
-            Files.createDirectories(dataDir);
-
-            Path file = dataDir.resolve("uuid.dat");
-
-            if (Files.exists(file)) {
-                CompoundTag tag = NbtIo.readCompressed(file.toFile());
-                if (tag.hasUUID("UUID")) {
-                    return tag.getUUID("UUID");
-                }
-            }
-
-            createWorldUUID(file.toFile());
-            return getWorldUUID();
+            return getWorldUUID(this.levelAccess.getLevelPath(LevelResource.ROOT).toFile());
         } catch (Exception e) {
             throw new RuntimeException("Failed to read/create world UUID", e);
         }
     }
 
-    private void createWorldUUID(File file) {
+    public static UUID getWorldUUID(File worldDir) throws IOException {
+        Path file = worldDir.toPath().resolve("data").resolve("uuid.dat");
+
+        if (Files.exists(file)) {
+            CompoundTag tag = NbtIo.readCompressed(file.toFile());
+            if (tag.hasUUID("UUID")) {
+                return tag.getUUID("UUID");
+            }
+        }
+
+        createWorldUUID(file.toFile());
+        return getWorldUUID(worldDir);
+    }
+
+    private static void createWorldUUID(File file) {
         try {
             UUID uuid = UUID.randomUUID();
             CompoundTag tag = new CompoundTag();

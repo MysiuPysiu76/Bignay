@@ -1,6 +1,5 @@
 package com.mysiupysiu.bignay.screen.screenshot;
 
-import net.minecraft.client.Screenshot;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.client.gui.components.Button;
@@ -10,7 +9,7 @@ import net.minecraft.network.chat.Component;
 
 public class ScreenshotsOptionsScreen extends Screen {
 
-    protected ScreenshotsOptionsScreen() {
+    public ScreenshotsOptionsScreen() {
         super(Component.translatable("screenshotsViewer.options.title"));
     }
 

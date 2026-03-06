@@ -1,7 +1,7 @@
 package com.mysiupysiu.bignay.blocks;
 
-import com.mysiupysiu.bignay.utils.particles.ParticlesInit;
 import com.mysiupysiu.bignay.utils.CreativeTabProvider;
+import com.mysiupysiu.bignay.utils.particles.ParticlesInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceKey;
