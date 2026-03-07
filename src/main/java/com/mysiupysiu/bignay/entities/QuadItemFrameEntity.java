@@ -2,7 +2,6 @@ package com.mysiupysiu.bignay.entities;
 
 import com.mojang.logging.LogUtils;
 import com.mysiupysiu.bignay.items.ItemInit;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -511,12 +510,10 @@ public class QuadItemFrameEntity extends HangingEntity {
 
     @Override
     public ItemStack getPickResult() {
-        if (this.level().isClientSide) {
-            Player player = Minecraft.getInstance().player;
-            if (player != null) {
-                int slot = this.getQuadrantFromHit(player);
-                ItemStack s = this.getItem(slot);
-                if (!s.isEmpty()) return s.copy();
+        for (int i = 0; i < 4; i++) {
+            ItemStack s = this.getItem(i);
+            if (!s.isEmpty()) {
+                return s.copy();
             }
         }
         return this.getFrameItemStack();

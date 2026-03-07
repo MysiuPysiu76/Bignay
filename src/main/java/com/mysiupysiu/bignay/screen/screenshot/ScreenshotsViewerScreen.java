@@ -5,6 +5,7 @@ import com.mysiupysiu.bignay.screen.file.chooser.FolderChooserScreen;
 import com.mysiupysiu.bignay.utils.FileUtils;
 import com.mysiupysiu.bignay.utils.screenshot.ScreenshotsExporter;
 import com.mysiupysiu.bignay.utils.screenshot.ScreenshotsManager;
+import com.mysiupysiu.bignay.utils.screenshot.WorldSelectorData;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.CycleButton;
@@ -14,10 +15,7 @@ import net.minecraft.network.chat.Component;
 import org.lwjgl.glfw.GLFW;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class ScreenshotsViewerScreen extends Screen {
 
@@ -51,48 +49,23 @@ public class ScreenshotsViewerScreen extends Screen {
         this.addRenderableWidget(grid);
 
         this.addRenderableWidget(Button.builder(Component.translatable("options.title"), btn ->
-                this.minecraft.setScreen(new ScreenshotsOptionsScreen())).bounds(this.width / 2 + 106, 6, 100, 20).build());
+                this.minecraft.setScreen(new ScreenshotsOptionsScreen())).bounds(this.width / 2 + 101, 6, 110, 20).build());
 
-        List<Map.Entry<UUID, ScreenshotsManager.WorldScreenshots>> sorted = ScreenshotsManager.getWorldsSortedByCountDesc();
+        WorldSelectorData selectorData = WorldSelectorData.prepare();
+        if (!selectorData.values().contains(this.currentWorld)) this.currentWorld = "all";
 
-        List<String> values = new ArrayList<>();
-        values.add("all");
-        for (Map.Entry<UUID, ScreenshotsManager.WorldScreenshots> e : sorted) {
-            values.add(e.getKey().toString());
-        }
-
-        if (!values.contains(this.currentWorld)) {
-            this.currentWorld = "all";
-        }
-
-        final int totalFilesForAll = ScreenshotsManager.getAll().size();
-
-        this.worldSelector = CycleButton.builder((String value) -> {
-                    if ("all".equals(value)) {
-                        return Component.translatable("screenshotsViewer.all", totalFilesForAll);
-                    } else {
-                        try {
-                            UUID uid = UUID.fromString(value);
-                            ScreenshotsManager.WorldScreenshots ws = ScreenshotsManager.getWorlds().get(uid);
-                            int count = ws == null ? 0 : ws.screenshots.size();
-                            String folder = ws == null ? value : ws.folder;
-                            return Component.literal(folder + " (" + count + ")");
-                        } catch (IllegalArgumentException ex) {
-                            return Component.literal(value);
-                        }
-                    }
-                })
-                .withValues(values)
+        this.worldSelector = CycleButton.builder(selectorData::getLabel)
+                .withValues(selectorData.values())
                 .withInitialValue(this.currentWorld)
                 .displayOnlyValue()
-                .create(x - 206, 6, 100, 20, Component.empty(), (button, newValue) -> {
+                .create(x - 211, 6, 110, 20, Component.empty(), (button, newValue) -> {
                     this.currentWorld = newValue;
-                    if (values.size() > 1) this.refreshScreenshots();
+                    if (selectorData.values().size() > 1) this.refreshScreenshots();
                 });
 
         this.addRenderableWidget(this.worldSelector);
 
-        refreshScreenshots();
+        this.refreshScreenshots();
 
         this.openButton = addRenderableWidget(Button.builder(Component.translatable("screenshotsViewer.open"), btn ->
                 openSelected()).bounds(x - 192, y, 72, 20).build());
@@ -116,14 +89,21 @@ public class ScreenshotsViewerScreen extends Screen {
         List<Path> paths;
         if ("all".equals(this.currentWorld)) {
             paths = ScreenshotsManager.getAll();
-        } else {
+        } else if (this.currentWorld.startsWith("single:")) {
+            String uuidStr = this.currentWorld.substring("single:".length());
             try {
-                UUID uid = UUID.fromString(this.currentWorld);
-                paths = ScreenshotsManager.getPathsForWorld(uid);
+                UUID uid = UUID.fromString(uuidStr);
+                paths = ScreenshotsManager.getPathsForSingleplayer(uid);
             } catch (IllegalArgumentException ex) {
                 paths = ScreenshotsManager.getAll();
             }
+        } else if (this.currentWorld.startsWith("multi:")) {
+            String ip = this.currentWorld.substring("multi:".length());
+            paths = ScreenshotsManager.getPathsForMultiplayer(ip);
+        } else {
+            paths = ScreenshotsManager.getAll();
         }
+
         grid.refresh(paths);
 
         try {
@@ -163,7 +143,9 @@ public class ScreenshotsViewerScreen extends Screen {
     }
 
     private void renameSelected() {
-        grid.getSelectedPaths().findFirst().ifPresent(p -> this.minecraft.setScreen(new ScreenshotRenameScreen(p)));
+        grid.getSelectedPaths().findFirst().ifPresent(p -> {
+            this.minecraft.setScreen(new ScreenshotRenameScreen(p));
+        });
     }
 
     private void openSelected() {
@@ -189,6 +171,10 @@ public class ScreenshotsViewerScreen extends Screen {
         }
         if ((keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER) && grid.getSelectedCount() == 1) {
             openSelected();
+            return true;
+        }
+        if (keyCode == GLFW.GLFW_KEY_F5) {
+            this.refreshScreenshots();
             return true;
         }
         if (grid.keyPressed(keyCode, scanCode, modifiers)) return true;

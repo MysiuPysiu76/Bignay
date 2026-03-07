@@ -5,6 +5,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mysiupysiu.bignay.screen.screenshot.ScreenshotsViewerScreen;
 import net.minecraft.client.Minecraft;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtIo;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -29,49 +31,90 @@ public class ScreenshotsManager {
         public List<String> screenshots = new ArrayList<>();
     }
 
-    public static void saveScreenshot(UUID uuid, String folderName, String screenshotName) {
+    private static class Sections {
+        public Map<String, WorldScreenshots> singleplayer = new HashMap<>();
+        public Map<String, WorldScreenshots> multiplayer = new HashMap<>();
+    }
+
+    private static class Root {
+        public Sections screenshots = new Sections();
+    }
+
+    public static void saveSingleplayerScreenshot(UUID uuid, String folderName, String screenshotName) {
+        if (uuid == null || screenshotName == null) return;
+        String key = uuid.toString();
         try {
-            Map<UUID, WorldScreenshots> data = getFromFile();
-
-            WorldScreenshots ws = data.getOrDefault(uuid, new WorldScreenshots());
+            Root root = readRoot();
+            WorldScreenshots ws = root.screenshots.singleplayer.getOrDefault(key, new WorldScreenshots());
             ws.folder = folderName;
+            if (ws.screenshots == null) ws.screenshots = new ArrayList<>();
             ws.screenshots.add(screenshotName);
-            data.put(uuid, ws);
-
-            FileWriter writer = new FileWriter(SCREENSHOTS);
-            GSON.toJson(data, writer);
-            writer.close();
+            root.screenshots.singleplayer.put(key, ws);
+            writeRoot(root);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void saveMultiplayerScreenshot(String ip, String name, String screenshotName) {
+        if (ip == null || screenshotName == null) return;
+        String key = normalizeIpKey(ip);
+        try {
+            Root root = readRoot();
+            WorldScreenshots ws = root.screenshots.multiplayer.getOrDefault(key, new WorldScreenshots());
+            ws.folder = name;
+            if (ws.screenshots == null) ws.screenshots = new ArrayList<>();
+            ws.screenshots.add(screenshotName);
+            root.screenshots.multiplayer.put(key, ws);
+            writeRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static String normalizeIpKey(String ip) {
+        return ip == null ? "unknown" : ip.trim().toLowerCase(Locale.ROOT);
     }
 
     public static List<Path> getAll() {
         try {
             if (!Files.exists(SCREENSHOTS_DIR)) return Collections.emptyList();
             try (Stream<Path> stream = Files.list(SCREENSHOTS_DIR)) {
-                return stream.filter(p -> p.getFileName().toString().toLowerCase(Locale.ROOT).endsWith(".png"))
-                        .sorted(getPathComparator())
-                        .collect(Collectors.toList());
+                return stream.filter(p -> p.getFileName().toString().toLowerCase(Locale.ROOT).endsWith(".png")).sorted(getPathComparator()).collect(Collectors.toList());
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static List<String> getPerWorld(UUID uuid) {
-        Map<UUID, WorldScreenshots> data = getFromFile();
-        WorldScreenshots ws = data.get(uuid);
-        if (ws != null) return new ArrayList<>(ws.screenshots);
+    public static List<String> getPerSingleplayer(UUID uuid) {
+        if (uuid == null) return Collections.emptyList();
+        Root root = readRootNoThrow();
+        WorldScreenshots ws = root.screenshots.singleplayer.get(uuid.toString());
+        if (ws != null && ws.screenshots != null) return new ArrayList<>(ws.screenshots);
         return Collections.emptyList();
     }
 
-    public static Map<UUID, WorldScreenshots> getWorlds() {
-        return Collections.unmodifiableMap(getFromFile());
+    public static List<String> getPerMultiplayer(String ip) {
+        if (ip == null) return Collections.emptyList();
+        String key = normalizeIpKey(ip);
+        Root root = readRootNoThrow();
+        WorldScreenshots ws = root.screenshots.multiplayer.get(key);
+        if (ws != null && ws.screenshots != null) return new ArrayList<>(ws.screenshots);
+        return Collections.emptyList();
     }
 
-    public static List<Path> getPathsForWorld(UUID uuid) {
-        List<String> names = getPerWorld(uuid);
+    public static List<Path> getPathsForSingleplayer(UUID uuid) {
+        List<String> names = getPerSingleplayer(uuid);
+        return namesToExistingPaths(names);
+    }
+
+    public static List<Path> getPathsForMultiplayer(String ip) {
+        List<String> names = getPerMultiplayer(ip);
+        return namesToExistingPaths(names);
+    }
+
+    private static List<Path> namesToExistingPaths(List<String> names) {
         if (names.isEmpty()) return Collections.emptyList();
         List<Path> out = new ArrayList<>(names.size());
         for (String n : names) {
@@ -82,34 +125,78 @@ public class ScreenshotsManager {
         return out;
     }
 
-    public static List<Map.Entry<UUID, WorldScreenshots>> getWorldsSortedByCountDesc() {
-        Map<UUID, WorldScreenshots> data = getFromFile();
-        List<Map.Entry<UUID, WorldScreenshots>> entries = new ArrayList<>(data.entrySet());
-        entries.sort((a, b) -> Integer.compare(b.getValue().screenshots.size(), a.getValue().screenshots.size()));
+    public static List<Map.Entry<String, WorldScreenshots>> getWorldsSortedByCountDesc() {
+        Root root = readRootNoThrow();
+        List<Map.Entry<String, WorldScreenshots>> entries = new ArrayList<>();
+
+        root.screenshots.singleplayer.forEach((k, v) -> entries.add(new AbstractMap.SimpleEntry<>("single:" + k, v)));
+        root.screenshots.multiplayer.forEach((k, v) -> entries.add(new AbstractMap.SimpleEntry<>("multi:" + k, v)));
+
+        entries.sort((a, b) -> Integer.compare(safeSize(b.getValue().screenshots), safeSize(a.getValue().screenshots)));
         return entries;
     }
 
+    public static int safeSize(List<String> l) {
+        return l == null ? 0 : l.size();
+    }
+
     public static void tryRename(String oldName, String newName) {
+        if (oldName == null || newName == null) return;
         try {
-            Map<UUID, WorldScreenshots> data = getFromFile();
+            Root root = readRoot();
             boolean changed = false;
 
-            for (WorldScreenshots ws : data.values()) {
-                for (int i = 0; i < ws.screenshots.size(); i++) {
-                    if (ws.screenshots.get(i).equals(oldName)) {
-                        ws.screenshots.set(i, newName);
-                        changed = true;
-                        break;
+            for (WorldScreenshots ws : root.screenshots.singleplayer.values()) {
+                if (ws.screenshots != null) {
+                    for (int i = 0; i < ws.screenshots.size(); i++) {
+                        if (oldName.equals(ws.screenshots.get(i))) {
+                            ws.screenshots.set(i, newName);
+                            changed = true;
+                            break;
+                        }
                     }
                 }
             }
 
-            if (changed) {
-                FileWriter writer = new FileWriter(SCREENSHOTS);
-                GSON.toJson(data, writer);
-                writer.close();
+            for (WorldScreenshots ws : root.screenshots.multiplayer.values()) {
+                if (ws.screenshots != null) {
+                    for (int i = 0; i < ws.screenshots.size(); i++) {
+                        if (oldName.equals(ws.screenshots.get(i))) {
+                            ws.screenshots.set(i, newName);
+                            changed = true;
+                            break;
+                        }
+                    }
+                }
             }
 
+            if (changed) writeRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void tryDelete(List<String> names) {
+        try {
+            if (names == null || names.isEmpty()) return;
+            Set<String> toDelete = new HashSet<>(names);
+
+            Root root = readRoot();
+            boolean changed = false;
+
+            for (WorldScreenshots ws : root.screenshots.singleplayer.values()) {
+                if (ws.screenshots != null) {
+                    if (ws.screenshots.removeIf(toDelete::contains)) changed = true;
+                }
+            }
+
+            for (WorldScreenshots ws : root.screenshots.multiplayer.values()) {
+                if (ws.screenshots != null) {
+                    if (ws.screenshots.removeIf(toDelete::contains)) changed = true;
+                }
+            }
+
+            if (changed) writeRoot(root);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -119,48 +206,68 @@ public class ScreenshotsManager {
         tryDelete(List.of(name));
     }
 
-    public static void tryDelete(List<String> names) {
+
+    private static Root readRootNoThrow() {
         try {
-            if (names == null || names.isEmpty()) return;
-
-            Set<String> toDelete = new HashSet<>(names);
-            Map<UUID, WorldScreenshots> data = getFromFile();
-            boolean changed = false;
-
-            for (WorldScreenshots ws : data.values()) {
-                if (ws.screenshots.removeIf(toDelete::contains)) {
-                    changed = true;
-                }
-            }
-
-            if (changed) {
-                FileWriter writer = new FileWriter(SCREENSHOTS);
-                GSON.toJson(data, writer);
-                writer.close();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
+            return readRoot();
+        } catch (Exception e) {
+            return new Root();
         }
     }
 
-    private static Map<UUID, WorldScreenshots> getFromFile() {
-        if (!SCREENSHOTS.exists()) return new HashMap<>();
+    private static Root readRoot() throws IOException {
+        if (!SCREENSHOTS.exists()) return new Root();
 
         try (FileReader reader = new FileReader(SCREENSHOTS)) {
-            Type type = new TypeToken<Map<UUID, WorldScreenshots>>() {}.getType();
-            Map<UUID, WorldScreenshots> data = GSON.fromJson(reader, type);
-
-            if (data == null) return new HashMap<>();
+            Type type = new TypeToken<Root>() {
+            }.getType();
+            Root data = GSON.fromJson(reader, type);
+            if (data == null) return new Root();
+            if (data.screenshots == null) data.screenshots = new Sections();
+            if (data.screenshots.singleplayer == null) data.screenshots.singleplayer = new HashMap<>();
+            if (data.screenshots.multiplayer == null) data.screenshots.multiplayer = new HashMap<>();
             return data;
-
         } catch (Exception e) {
             try {
-                File backup = new File(SCREENSHOTS.getParent(), "screenshots_old.json");
+                File backup = new File(SCREENSHOTS.getParentFile(), "screenshots_broken.json");
                 SCREENSHOTS.renameTo(backup);
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
+            return new Root();
+        }
+    }
 
-            return new HashMap<>();
+    public static String getSingleplayerWorldName(String worldFolderName) {
+        try {
+            File savesFolder = new File(Minecraft.getInstance().gameDirectory, "saves");
+            File worldFolder = new File(savesFolder, worldFolderName);
+            File levelDat = new File(worldFolder, "level.dat");
+
+            if (!levelDat.exists()) return worldFolderName;
+
+            CompoundTag rootTag = NbtIo.readCompressed(levelDat);
+            if (rootTag == null) return worldFolderName;
+
+            CompoundTag dataTag = rootTag.contains("Data") ? rootTag.getCompound("Data") : rootTag;
+            if (dataTag.contains("LevelName")) {
+                String levelName = dataTag.getString("LevelName");
+                if (!levelName.isEmpty()) {
+                    return levelName;
+                }
+            }
+
+            return worldFolderName;
+        } catch (Exception e) {
+            return worldFolderName;
+        }
+    }
+
+    private static void writeRoot(Root root) throws IOException {
+        File parent = SCREENSHOTS.getParentFile();
+        if (parent != null && !parent.exists()) parent.mkdirs();
+
+        try (FileWriter writer = new FileWriter(SCREENSHOTS)) {
+            GSON.toJson(root, writer);
         }
     }
 
