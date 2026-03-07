@@ -89,17 +89,78 @@ public class ScreenshotsManager {
         return entries;
     }
 
-    private static Map<UUID, WorldScreenshots> getFromFile() {
+    public static void tryRename(String oldName, String newName) {
         try {
-            if (!SCREENSHOTS.exists()) return new HashMap<>();
-            FileReader reader = new FileReader(SCREENSHOTS);
+            Map<UUID, WorldScreenshots> data = getFromFile();
+            boolean changed = false;
+
+            for (WorldScreenshots ws : data.values()) {
+                for (int i = 0; i < ws.screenshots.size(); i++) {
+                    if (ws.screenshots.get(i).equals(oldName)) {
+                        ws.screenshots.set(i, newName);
+                        changed = true;
+                        break;
+                    }
+                }
+            }
+
+            if (changed) {
+                FileWriter writer = new FileWriter(SCREENSHOTS);
+                GSON.toJson(data, writer);
+                writer.close();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void tryDelete(String name) {
+        tryDelete(List.of(name));
+    }
+
+    public static void tryDelete(List<String> names) {
+        try {
+            if (names == null || names.isEmpty()) return;
+
+            Set<String> toDelete = new HashSet<>(names);
+            Map<UUID, WorldScreenshots> data = getFromFile();
+            boolean changed = false;
+
+            for (WorldScreenshots ws : data.values()) {
+                if (ws.screenshots.removeIf(toDelete::contains)) {
+                    changed = true;
+                }
+            }
+
+            if (changed) {
+                FileWriter writer = new FileWriter(SCREENSHOTS);
+                GSON.toJson(data, writer);
+                writer.close();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static Map<UUID, WorldScreenshots> getFromFile() {
+        if (!SCREENSHOTS.exists()) return new HashMap<>();
+
+        try (FileReader reader = new FileReader(SCREENSHOTS)) {
             Type type = new TypeToken<Map<UUID, WorldScreenshots>>() {}.getType();
             Map<UUID, WorldScreenshots> data = GSON.fromJson(reader, type);
-            reader.close();
-            if (data == null) data = new HashMap<>();
+
+            if (data == null) return new HashMap<>();
             return data;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+
+        } catch (Exception e) {
+            try {
+                File backup = new File(SCREENSHOTS.getParent(), "screenshots_old.json");
+                SCREENSHOTS.renameTo(backup);
+            } catch (Exception ignored) {}
+
+            return new HashMap<>();
         }
     }
 

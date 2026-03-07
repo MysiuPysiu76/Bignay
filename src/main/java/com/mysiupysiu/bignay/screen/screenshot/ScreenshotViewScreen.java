@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mysiupysiu.bignay.screen.file.chooser.FolderChooserScreen;
 import com.mysiupysiu.bignay.utils.FileUtils;
+import com.mysiupysiu.bignay.utils.screenshot.ScreenshotsManager;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -14,6 +15,7 @@ import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -134,7 +136,9 @@ public class ScreenshotViewScreen extends Screen {
     }
 
     private void delete() {
-        FileUtils.delete(getFile());
+        File file = getFile().toFile();
+        ScreenshotsManager.tryDelete(file.getName());
+        FileUtils.delete(file);
         back();
     }
 

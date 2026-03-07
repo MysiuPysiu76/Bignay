@@ -87,7 +87,7 @@ public class ScreenshotsViewerScreen extends Screen {
                 .displayOnlyValue()
                 .create(x - 206, 6, 100, 20, Component.empty(), (button, newValue) -> {
                     this.currentWorld = newValue;
-                    this.refreshScreenshots();
+                    if (values.size() > 1) this.refreshScreenshots();
                 });
 
         this.addRenderableWidget(this.worldSelector);
@@ -141,7 +141,9 @@ public class ScreenshotsViewerScreen extends Screen {
     }
 
     public void deleteSelected() {
-        grid.getSelectedPaths().forEach(FileUtils::delete);
+        List<Path> files = grid.getSelectedPaths().toList();
+        ScreenshotsManager.tryDelete(files.stream().map(p -> p.getFileName().toString()).toList());
+        files.forEach(FileUtils::delete);
         refreshScreenshots();
         updateButtons();
     }

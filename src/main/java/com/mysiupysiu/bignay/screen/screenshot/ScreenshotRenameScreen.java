@@ -1,5 +1,6 @@
 package com.mysiupysiu.bignay.screen.screenshot;
 
+import com.mysiupysiu.bignay.utils.screenshot.ScreenshotsManager;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
@@ -50,11 +51,13 @@ public class ScreenshotRenameScreen extends Screen {
     }
 
     private void renameFile() {
-        String newName = nameBox.getValue().trim();
-        if (newName.isEmpty()) return;
-
         try {
-            Files.move(file, file.resolveSibling(newName + ".png"));
+            String newName = nameBox.getValue().trim();
+            if (newName.isEmpty()) return;
+            newName += ".png";
+
+            Files.move(file, file.resolveSibling(newName));
+            ScreenshotsManager.tryRename(file.getFileName().toString(), newName);
         } catch (IOException e) {
             e.printStackTrace();
         }
