@@ -20,6 +20,11 @@
         },
         {
           "type": "minecraft:item",
+          "name": "bignay:happy_pumpkin_pattern",
+          "weight": 35
+        },
+        {
+          "type": "minecraft:item",
           "functions": [
             {
               "function": "minecraft:enchant_randomly"
