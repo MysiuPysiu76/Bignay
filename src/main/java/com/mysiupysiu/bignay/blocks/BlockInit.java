@@ -648,6 +648,8 @@ public class BlockInit {
     public static final RegistryObject<Block> POLISHED_BLACKSTONE_VERTICAL_SLAB = registerBlock("polished_blackstone_vertical_slab", () -> new VerticalSlabBlock(Blocks.POLISHED_BLACKSTONE));
     public static final RegistryObject<Block> POLISHED_BLACKSTONE_BRICK_VERTICAL_SLAB = registerBlock("polished_blackstone_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.POLISHED_BLACKSTONE_BRICKS));
     public static final RegistryObject<Block> CRACKED_POLISHED_BLACKSTONE_BRICK_VERTICAL_SLAB = registerBlock("cracked_polished_blackstone_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS));
+    public static final RegistryObject<Block> ENDSTONE_BRICK_VERTICAL_SLAB = registerBlock("end_stone_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.END_STONE_BRICKS));
+    public static final RegistryObject<Block> PURPUR_VERTICAL_SLAB = registerBlock("purpur_vertical_slab", () -> new VerticalSlabBlock(Blocks.PURPUR_BLOCK));
 
     public static final RegistryObject<Block> VERTICAL_ACACIA_PLANK_VERTICAL_SLAB = registerBlock("vertical_acacia_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.ACACIA_PLANKS), 150);
     public static final RegistryObject<Block> VERTICAL_BAMBOO_PLANK_VERTICAL_SLAB = registerBlock("vertical_bamboo_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.BAMBOO_PLANKS), 150);
