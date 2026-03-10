@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "bignay:heavy_chain"
+          "name": "bignay:golden_heavy_chain"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "bignay:blocks/heavy_chain"
+  "random_sequence": "bignay:blocks/golden_heavy_chain"
 }

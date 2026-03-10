@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "#bignay:stone_vertical_slabs",
+    "#bignay:chains",
     "bignay:wither_bone_block",
     "bignay:cracked_stone_brick_stairs",
     "bignay:cracked_nether_brick_slab",
@@ -28,7 +29,6 @@
     "bignay:cracked_basalt_bricks",
     "bignay:cracked_basalt_brick_stairs",
     "bignay:cracked_basalt_brick_slab",
-    "bignay:heavy_chain",
     "bignay:cracked_smooth_basalt_brick_wall",
     "bignay:cracked_smooth_basalt_brick_stairs",
     "bignay:cracked_smooth_basalt_brick_slab",

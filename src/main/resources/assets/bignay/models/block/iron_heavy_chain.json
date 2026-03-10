@@ -1,8 +1,8 @@
 {
   "parent": "block/block",
   "textures": {
-    "particle": "bignay:block/heavy_chain",
-    "all": "bignay:block/heavy_chain"
+    "particle": "bignay:block/iron_heavy_chain",
+    "all": "bignay:block/iron_heavy_chain"
   },
   "render_type": "cutout",
 	"elements": [

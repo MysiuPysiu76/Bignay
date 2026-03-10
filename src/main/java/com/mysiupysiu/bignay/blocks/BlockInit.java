@@ -225,7 +225,9 @@ public class BlockInit {
     public static final RegistryObject<Block> CRACKED_BASALT_BRICK_VERTICAL_SLAB = registerBlock("cracked_basalt_brick_vertical_slab", () -> new VerticalSlabBlock(CRACKED_BASALT_BRICKS));
     public static final RegistryObject<Block> BASALTIC_LAVA = registerBlock("basaltic_lava", BasalticLavaBlock::new);
 
-    public static final RegistryObject<Block> HEAVY_CHAIN = registerBlock("heavy_chain", HeavyChainBlock::new);
+    public static final RegistryObject<Block> IRON_HEAVY_CHAIN = registerBlock("iron_heavy_chain", HeavyChainBlock::new);
+    public static final RegistryObject<Block> GOLDEN_CHAIN = registerBlock("golden_chain", ChainsBlock::new);
+    public static final RegistryObject<Block> GOLDEN_HEAVY_CHAIN = registerBlock("golden_heavy_chain", HeavyChainBlock::new);
 
     public static final RegistryObject<Block> ACACIA_BOOKSHELF = registerBlock("acacia_bookshelf", BookshelfBlock::new, 300);
     public static final RegistryObject<Block> BAMBOO_BOOKSHELF = registerBlock("bamboo_bookshelf", BookshelfBlock::new, 300);

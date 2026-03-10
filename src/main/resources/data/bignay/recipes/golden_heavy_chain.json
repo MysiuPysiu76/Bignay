@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "/",
+        "o",
+        "/"
+    ],
+    "key": {
+        "/": {
+          "item": "minecraft:gold_ingot"
+        },
+        "o": {
+          "item": "minecraft:gold_nugget"
+        }
+    },
+    "result": {
+        "item": "bignay:golden_heavy_chain",
+        "count": 1
+    }
+}

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "bignay:item/heavy_chain"
+    "layer0": "bignay:item/golden_chain"
   }
 }

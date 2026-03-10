@@ -1,15 +1,15 @@
 {
   "variants": {
     "axis=x": {
-      "model": "bignay:block/heavy_chain",
+      "model": "bignay:block/golden_chain",
       "x": 90,
       "y": 90
     },
     "axis=y": {
-      "model": "bignay:block/heavy_chain"
+      "model": "bignay:block/golden_chain"
     },
     "axis=z": {
-      "model": "bignay:block/heavy_chain",
+      "model": "bignay:block/golden_chain",
       "x": 90
     }
   }
