@@ -594,6 +594,9 @@ public class BlockInit {
     public static final RegistryObject<Block> POTTED_MUSHROOM_CLUSTER = registerBlockOnly("potted_mushroom_cluster", () -> flowerPot(MUSHROOM_CLUSTER.get()));
     public static final RegistryObject<Block> POTTED_BROWN_MUSHROOM_CLUSTER = registerBlockOnly("potted_brown_mushroom_cluster", () -> flowerPot(BROWN_MUSHROOM_CLUSTER.get()));
     public static final RegistryObject<Block> POTTED_RED_MUSHROOM_CLUSTER = registerBlockOnly("potted_red_mushroom_cluster", () -> flowerPot(RED_MUSHROOM_CLUSTER.get()));
+    public static final RegistryObject<Block> POTTED_LARGE_FERN = registerBlockOnly("potted_large_fern", () -> flowerPot(Blocks.LARGE_FERN));
+    public static final RegistryObject<Block> POTTED_TWISTING_VINES = registerBlockOnly("potted_twisting_vines", () -> flowerPot(Blocks.TWISTING_VINES));
+    public static final RegistryObject<Block> POTTED_WEEPING_VINES = registerBlockOnly("potted_weeping_vines", () -> flowerPot(Blocks.WEEPING_VINES));
 
     public static final RegistryObject<Block> MOSSY_COBBLED_DEEPSLATE = registerBlock("mossy_cobbled_deepslate", () -> new BuildingBlock(Blocks.COBBLED_DEEPSLATE));
     public static final RegistryObject<Block> MOSSY_COBBLED_DEEPSLATE_SLAB = registerBlock("mossy_cobbled_deepslate_slab", () -> new SlabsBlock(Blocks.COBBLED_DEEPSLATE));
