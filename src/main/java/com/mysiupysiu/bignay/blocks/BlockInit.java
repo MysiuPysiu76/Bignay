@@ -2,6 +2,7 @@ package com.mysiupysiu.bignay.blocks;
 
 import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.items.BurnableBlockItem;
+import com.mysiupysiu.bignay.items.EquipablePumpkinItem;
 import com.mysiupysiu.bignay.items.ItemInit;
 import com.mysiupysiu.bignay.utils.CreativeTabProvider;
 import com.mysiupysiu.bignay.worldgen.ModConfiguredFeatures;
@@ -169,39 +170,39 @@ public class BlockInit {
     public static final RegistryObject<Block> CRIMSON_SPROUTS = registerBlock("crimson_sprouts", () -> new SproutsBlock(MapColor.CRIMSON_NYLIUM));
 
     public static final RegistryObject<Block> PALE_PUMPKIN = registerBlock("pale_pumpkin", () -> new PumpkinBlock(MapColor.COLOR_LIGHT_GRAY));
-    public static final RegistryObject<Block> CARVED_PALE_PUMPKIN = registerBlock("carved_pale_pumpkin", EquipablePumpkinBlock.PalePumpkin::new);
+    public static final RegistryObject<Block> CARVED_PALE_PUMPKIN = equipablePumpkin("carved_pale_pumpkin", EquipablePumpkinBlock.PalePumpkin::new);
     public static final RegistryObject<Block> PALE_PUMPKIN_STEM = registerBlockOnly("pale_pumpkin_stem", () -> new StemBlock((StemGrownBlock) PALE_PUMPKIN.get(), ItemInit.PALE_PUMPKIN_SEEDS, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.HARD_CROP).pushReaction(PushReaction.DESTROY)));
     public static final RegistryObject<Block> ATTACHED_PALE_PUMPKIN_STEM = registerBlockOnly("attached_pale_pumpkin_stem", () -> new AttachedStemBlock((StemGrownBlock) PALE_PUMPKIN.get(), ItemInit.PALE_PUMPKIN_SEEDS, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY)));
     public static final RegistryObject<Block> PALE_JACK_O_LANTERN = registerBlock("pale_jack_o_lantern", JackOLantern.Pale::new);
     public static final RegistryObject<Block> SOUL_JACK_O_LANTERN = registerBlock("soul_jack_o_lantern", JackOLantern.Soul::new);
     public static final RegistryObject<Block> SOUL_PALE_JACK_O_LANTERN = registerBlock("soul_pale_jack_o_lantern", JackOLantern.SoulPale::new);
 
-    public static final RegistryObject<Block> HAPPY_CARVED_PUMPKIN = registerBlock("happy_carved_pumpkin", EquipablePumpkinBlock::new);
-    public static final RegistryObject<Block> HAPPY_CARVED_PALE_PUMPKIN = registerBlock("happy_carved_pale_pumpkin", EquipablePumpkinBlock.PalePumpkin::new);
+    public static final RegistryObject<Block> HAPPY_CARVED_PUMPKIN = equipablePumpkin("happy_carved_pumpkin", EquipablePumpkinBlock::new);
+    public static final RegistryObject<Block> HAPPY_CARVED_PALE_PUMPKIN = equipablePumpkin("happy_carved_pale_pumpkin", EquipablePumpkinBlock.PalePumpkin::new);
     public static final RegistryObject<Block> HAPPY_JACK_O_LANTERN = registerBlock("happy_jack_o_lantern", JackOLantern::new);
     public static final RegistryObject<Block> HAPPY_PALE_JACK_O_LANTERN = registerBlock("happy_pale_jack_o_lantern", JackOLantern.Pale::new);
     public static final RegistryObject<Block> HAPPY_SOUL_JACK_O_LANTERN = registerBlock("happy_soul_jack_o_lantern", JackOLantern.Soul::new);
     public static final RegistryObject<Block> HAPPY_SOUL_PALE_JACK_O_LANTERN = registerBlock("happy_soul_pale_jack_o_lantern", JackOLantern.SoulPale::new);
-    public static final RegistryObject<Block> ANXIOUS_CARVED_PUMPKIN = registerBlock("anxious_carved_pumpkin", EquipablePumpkinBlock::new);
-    public static final RegistryObject<Block> ANXIOUS_CARVED_PALE_PUMPKIN = registerBlock("anxious_carved_pale_pumpkin", EquipablePumpkinBlock.PalePumpkin::new);
+    public static final RegistryObject<Block> ANXIOUS_CARVED_PUMPKIN = equipablePumpkin("anxious_carved_pumpkin", EquipablePumpkinBlock::new);
+    public static final RegistryObject<Block> ANXIOUS_CARVED_PALE_PUMPKIN = equipablePumpkin("anxious_carved_pale_pumpkin", EquipablePumpkinBlock.PalePumpkin::new);
     public static final RegistryObject<Block> ANXIOUS_JACK_O_LANTERN = registerBlock("anxious_jack_o_lantern", JackOLantern::new);
     public static final RegistryObject<Block> ANXIOUS_PALE_JACK_O_LANTERN = registerBlock("anxious_pale_jack_o_lantern", JackOLantern.Pale::new);
     public static final RegistryObject<Block> ANXIOUS_SOUL_JACK_O_LANTERN = registerBlock("anxious_soul_jack_o_lantern", JackOLantern.Soul::new);
     public static final RegistryObject<Block> ANXIOUS_SOUL_PALE_JACK_O_LANTERN = registerBlock("anxious_soul_pale_jack_o_lantern", JackOLantern.SoulPale::new);
-    public static final RegistryObject<Block> SKULL_CARVED_PUMPKIN = registerBlock("skull_carved_pumpkin", EquipablePumpkinBlock::new);
-    public static final RegistryObject<Block> SKULL_CARVED_PALE_PUMPKIN = registerBlock("skull_carved_pale_pumpkin", EquipablePumpkinBlock.PalePumpkin::new);
+    public static final RegistryObject<Block> SKULL_CARVED_PUMPKIN = equipablePumpkin("skull_carved_pumpkin", EquipablePumpkinBlock::new);
+    public static final RegistryObject<Block> SKULL_CARVED_PALE_PUMPKIN = equipablePumpkin("skull_carved_pale_pumpkin", EquipablePumpkinBlock.PalePumpkin::new);
     public static final RegistryObject<Block> SKULL_JACK_O_LANTERN = registerBlock("skull_jack_o_lantern", JackOLantern::new);
     public static final RegistryObject<Block> SKULL_PALE_JACK_O_LANTERN = registerBlock("skull_pale_jack_o_lantern", JackOLantern.Pale::new);
     public static final RegistryObject<Block> SKULL_SOUL_JACK_O_LANTERN = registerBlock("skull_soul_jack_o_lantern", JackOLantern.Soul::new);
     public static final RegistryObject<Block> SKULL_SOUL_PALE_JACK_O_LANTERN = registerBlock("skull_soul_pale_jack_o_lantern", JackOLantern.SoulPale::new);
-    public static final RegistryObject<Block> DERPY_CARVED_PUMPKIN = registerBlock("derpy_carved_pumpkin", EquipablePumpkinBlock::new);
-    public static final RegistryObject<Block> DERPY_CARVED_PALE_PUMPKIN = registerBlock("derpy_carved_pale_pumpkin", EquipablePumpkinBlock.PalePumpkin::new);
+    public static final RegistryObject<Block> DERPY_CARVED_PUMPKIN = equipablePumpkin("derpy_carved_pumpkin", EquipablePumpkinBlock::new);
+    public static final RegistryObject<Block> DERPY_CARVED_PALE_PUMPKIN = equipablePumpkin("derpy_carved_pale_pumpkin", EquipablePumpkinBlock.PalePumpkin::new);
     public static final RegistryObject<Block> DERPY_JACK_O_LANTERN = registerBlock("derpy_jack_o_lantern", JackOLantern::new);
     public static final RegistryObject<Block> DERPY_PALE_JACK_O_LANTERN = registerBlock("derpy_pale_jack_o_lantern", JackOLantern.Pale::new);
     public static final RegistryObject<Block> DERPY_SOUL_JACK_O_LANTERN = registerBlock("derpy_soul_jack_o_lantern", JackOLantern.Soul::new);
     public static final RegistryObject<Block> DERPY_SOUL_PALE_JACK_O_LANTERN = registerBlock("derpy_soul_pale_jack_o_lantern", JackOLantern.SoulPale::new);
-    public static final RegistryObject<Block> ANGRY_CARVED_PUMPKIN = registerBlock("angry_carved_pumpkin", EquipablePumpkinBlock::new);
-    public static final RegistryObject<Block> ANGRY_CARVED_PALE_PUMPKIN = registerBlock("angry_carved_pale_pumpkin", EquipablePumpkinBlock.PalePumpkin::new);
+    public static final RegistryObject<Block> ANGRY_CARVED_PUMPKIN = equipablePumpkin("angry_carved_pumpkin", EquipablePumpkinBlock::new);
+    public static final RegistryObject<Block> ANGRY_CARVED_PALE_PUMPKIN = equipablePumpkin("angry_carved_pale_pumpkin", EquipablePumpkinBlock.PalePumpkin::new);
     public static final RegistryObject<Block> ANGRY_JACK_O_LANTERN = registerBlock("angry_jack_o_lantern", JackOLantern::new);
     public static final RegistryObject<Block> ANGRY_PALE_JACK_O_LANTERN = registerBlock("angry_pale_jack_o_lantern", JackOLantern.Pale::new);
     public static final RegistryObject<Block> ANGRY_SOUL_JACK_O_LANTERN = registerBlock("angry_soul_jack_o_lantern", JackOLantern.Soul::new);
@@ -717,6 +718,12 @@ public class BlockInit {
         }
 
         return new FlowerPotBlock(p_278261_, blockbehaviour$properties);
+    }
+
+    private static RegistryObject<Block> equipablePumpkin(String name, Supplier<Block> b) {
+        RegistryObject<Block> block = BLOCKS.register(name, b);
+        ITEMS.register(name, () -> new EquipablePumpkinItem(block.get()));
+        return block;
     }
 
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {

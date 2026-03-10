@@ -59,7 +59,7 @@ public class FileUtils {
     public static boolean deleteWorld(File file) {
         if (!file.isDirectory()) throw new IllegalArgumentException("File is File (Not a folder)");
 
-        Arrays.asList(file.listFiles()).stream().filter(f -> f.getName().contains("level.dat")).forEach(File::delete);
+        Arrays.stream(file.listFiles()).filter(f -> f.getName().contains("level.dat")).forEach(File::delete);
 
         return delete(file);
     }
