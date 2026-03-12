@@ -4,6 +4,7 @@ import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mysiupysiu.bignay.screen.screenshot.ScreenshotsViewerScreen;
+import com.mysiupysiu.bignay.utils.ModConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
@@ -280,7 +281,7 @@ public class ScreenshotsManager {
             }
         });
 
-        if (ScreenshotsViewerScreen.isToOldest()) pathComparator = pathComparator.reversed();
+        if (ModConfig.SCREENSHOTS_VIEWER_SORT_TO_OLDEST.get()) pathComparator = pathComparator.reversed();
         return pathComparator;
     }
 }

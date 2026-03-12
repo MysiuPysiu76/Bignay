@@ -1,6 +1,7 @@
 package com.mysiupysiu.bignay.screen.file.chooser;
 
 import com.mysiupysiu.bignay.utils.FileType;
+import com.mysiupysiu.bignay.utils.ModConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -22,9 +23,10 @@ import java.util.stream.Stream;
 abstract class AbstractFileChooserScreen extends Screen {
 
     private final boolean requireDirectory = isRequireDirectory();
-    private static boolean showHidden = false;
-    private static int columns = 6;
     private static final int MARGIN = 20;
+
+    private boolean showHidden = ModConfig.FILE_CHOOSER_SHOW_HIDDEN_FILES.get();
+    private int columns = ModConfig.FILE_CHOOSER_COLUMNS.get();
 
     private Screen previousScreen;
     private FilesSelectionGrid list;
@@ -50,6 +52,9 @@ abstract class AbstractFileChooserScreen extends Screen {
     @Override
     protected void init() {
         super.init();
+
+        this.showHidden = ModConfig.FILE_CHOOSER_SHOW_HIDDEN_FILES.get();
+        this.columns = ModConfig.FILE_CHOOSER_COLUMNS.get();
 
         int btnWidth = 90;
         int btnHeight = 20;
@@ -192,21 +197,5 @@ abstract class AbstractFileChooserScreen extends Screen {
 
     void setPath(Path path) {
         this.currentDir = path;
-    }
-
-    static void setShowHidden(boolean s) {
-        showHidden = s;
-    }
-
-    static boolean isShowHidden() {
-        return showHidden;
-    }
-
-    static void setColumns(int c) {
-        columns = c;
-    }
-
-    static int getColumns() {
-        return columns;
     }
 }

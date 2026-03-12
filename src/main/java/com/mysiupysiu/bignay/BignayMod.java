@@ -5,10 +5,12 @@ import com.mysiupysiu.bignay.blocks.BlockInit;
 import com.mysiupysiu.bignay.entities.EntityInit;
 import com.mysiupysiu.bignay.items.ItemInit;
 import com.mysiupysiu.bignay.menu.MenuInit;
+import com.mysiupysiu.bignay.utils.ModConfig;
 import com.mysiupysiu.bignay.utils.RecipeSerializersInit;
 import com.mysiupysiu.bignay.utils.particles.ParticlesInit;
 import com.mysiupysiu.bignay.worldgen.decoration.DecoratorInit;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -34,5 +36,7 @@ public class BignayMod {
         e.addListener(ItemInit::addCreative);
         e.addListener(MenuInit::onClientSetup);
         e.addListener(BlockEntityInit::onClientSetup);
+
+        ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, ModConfig.SPEC);
     }
 }

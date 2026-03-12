@@ -2,6 +2,7 @@ package com.mysiupysiu.bignay.screen.file.chooser;
 
 import com.mysiupysiu.bignay.utils.FileType;
 import com.mysiupysiu.bignay.utils.FileUtils;
+import com.mysiupysiu.bignay.utils.ModConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ObjectSelectionList;
@@ -36,7 +37,7 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
     private long lastClickTime = 0;
     private File lastClickedFile = null;
     private boolean draggingScrollbar = false;
-    private int columns = 6;
+    private int columns = ModConfig.FILE_CHOOSER_COLUMNS.get();
 
     public FilesSelectionGrid(int width, int height, int top, int bottom, AbstractFileChooserScreen screen) {
         super(Minecraft.getInstance(), width, height, top, bottom, CELL_SIZE + CELL_GAP + 5);

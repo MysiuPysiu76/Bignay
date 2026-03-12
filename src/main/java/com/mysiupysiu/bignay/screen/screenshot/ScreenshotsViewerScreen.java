@@ -19,13 +19,11 @@ import java.util.*;
 
 public class ScreenshotsViewerScreen extends Screen {
 
-    private static boolean toOldest = true;
-    private ScreenshotsGrid grid;
+    private CycleButton<String> worldSelector;
     private Button openButton, renameButton, exportButton, deleteButton;
-    private static int columns = 4;
+    private ScreenshotsGrid grid;
 
     private String currentWorld = "all";
-    private CycleButton<String> worldSelector;
 
     public ScreenshotsViewerScreen() {
         super(Component.translatable("screenshotsViewer.title"));
@@ -35,17 +33,10 @@ public class ScreenshotsViewerScreen extends Screen {
     protected void init() {
         super.init();
 
-        int gap = 8;
-        int gridWidth = this.width - 50;
         int y = this.height - 24;
         int x = this.width / 2;
 
-        int thumbW = (gridWidth - (columns - 1) * gap) / columns;
-        int thumbH = (int) (thumbW * (9.0f / 16.0f));
-        int textHeight = ScreenshotsGrid.isShowScreenName() ? this.minecraft.font.lineHeight + 4 : 0;
-        int itemHeight = thumbH + textHeight + gap;
-
-        this.grid = new ScreenshotsGrid(this.minecraft, this.width, this.height, 32, this.height - 28, itemHeight, thumbW, thumbH, textHeight, gap, columns, this);
+        this.grid = new ScreenshotsGrid(this.minecraft, this.width, this.height, 32, this.height - 28, this);
         this.addRenderableWidget(grid);
 
         this.addRenderableWidget(Button.builder(Component.translatable("options.title"), btn ->
@@ -195,21 +186,5 @@ public class ScreenshotsViewerScreen extends Screen {
     public void removed() {
         grid.cleanup();
         super.removed();
-    }
-
-    public static int getColumns() {
-        return columns;
-    }
-
-    public static void setColumns(int columns) {
-        ScreenshotsViewerScreen.columns = columns;
-    }
-
-    public static boolean isToOldest() {
-        return toOldest;
-    }
-
-    public static void setToOldest(boolean toOldest) {
-        ScreenshotsViewerScreen.toOldest = toOldest;
     }
 }

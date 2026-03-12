@@ -1,5 +1,6 @@
 package com.mysiupysiu.bignay.screen.file.chooser;
 
+import com.mysiupysiu.bignay.utils.ModConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -8,10 +9,10 @@ import net.minecraft.network.chat.Component;
 
 class FileChooserOptionsScreen extends Screen {
 
-    private final Screen parent;
-    private boolean showHidden = AbstractFileChooserScreen.isShowHidden();
-    private int columns = AbstractFileChooserScreen.getColumns();
+    private boolean showHidden = ModConfig.FILE_CHOOSER_SHOW_HIDDEN_FILES.get();
+    private int columns = ModConfig.FILE_CHOOSER_COLUMNS.get();
 
+    private final Screen parent;
     private Button showHiddenButton;
     private Button columnsButton;
 
@@ -32,18 +33,15 @@ class FileChooserOptionsScreen extends Screen {
                 .bounds(centerX - 80, this.height / 2 - 60, btnW, btnH).build();
         this.addRenderableWidget(this.showHiddenButton);
 
-        this.columnsButton = Button.builder(Component.literal("Columns: " + columns), btn ->
-                incrementColumns()
-        ).bounds(centerX - 80, this.height / 2 - 30, btnW, btnH).build();
+        this.columnsButton = Button.builder(Component.translatable("fileChooser.options.columns", columns), btn -> incrementColumns())
+                .bounds(centerX - 80, this.height / 2 - 30, btnW, btnH).build();
         this.addRenderableWidget(this.columnsButton);
 
-        this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.options.reset"), btn ->
-                resetSettings()
-        ).bounds(centerX - 110, this.height / 2 + 80, 100, 20).build());
+        this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.options.reset"), btn -> resetSettings())
+                .bounds(centerX - 110, this.height / 2 + 80, 100, 20).build());
 
-        this.addRenderableWidget(Button.builder(Component.translatable("gui.back"), btn ->
-                onClose()
-        ).bounds(centerX + 10, this.height / 2 + 80, 100, 20).build());
+        this.addRenderableWidget(Button.builder(Component.translatable("gui.back"), btn -> onClose())
+                .bounds(centerX + 10, this.height / 2 + 80, 100, 20).build());
     }
 
     @Override
@@ -57,8 +55,8 @@ class FileChooserOptionsScreen extends Screen {
     @Override
     public void onClose() {
         super.onClose();
-        AbstractFileChooserScreen.setShowHidden(this.showHidden);
-        AbstractFileChooserScreen.setColumns(this.columns);
+        ModConfig.FILE_CHOOSER_COLUMNS.set(this.columns);
+        ModConfig.FILE_CHOOSER_SHOW_HIDDEN_FILES.set(this.showHidden);
         Minecraft.getInstance().setScreen(this.parent);
     }
 
@@ -78,7 +76,7 @@ class FileChooserOptionsScreen extends Screen {
     }
 
     private void resetSettings() {
-        this.showHidden = false;
-        this.columns = 6;
+        ModConfig.FILE_CHOOSER_SHOW_HIDDEN_FILES.set(false);
+        ModConfig.FILE_CHOOSER_COLUMNS.set(6);
     }
 }

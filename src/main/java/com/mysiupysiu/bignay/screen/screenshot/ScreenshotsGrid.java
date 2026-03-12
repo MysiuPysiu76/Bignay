@@ -2,6 +2,7 @@ package com.mysiupysiu.bignay.screen.screenshot;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mysiupysiu.bignay.utils.ModConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ObjectSelectionList;
@@ -22,6 +23,7 @@ import java.util.concurrent.Executors;
 import java.util.stream.Stream;
 
 public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntry> {
+
     private final ScreenshotsViewerScreen parent;
     private final List<Path> allPaths = new ArrayList<>();
     private final Map<Path, TextureHolder> textures = new HashMap<>();
@@ -30,9 +32,6 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
     private int lastSelectedIndex = -1;
     private long lastClickTime = 0;
     private static final long DOUBLE_CLICK_MS = 350L;
-
-    private static boolean showFileExtension = false;
-    private static boolean showScreenName = true;
 
     private final int thumbWidth;
     private final int thumbHeight;
@@ -46,30 +45,14 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
         return t;
     });
 
-    public static boolean isShowScreenName() {
-        return showScreenName;
-    }
-
-    public static void setShowScreenName(boolean showScreenName) {
-        ScreenshotsGrid.showScreenName = showScreenName;
-    }
-
-    public static boolean isShowFileExtension() {
-        return showFileExtension;
-    }
-
-    public static void setShowFileExtension(boolean showFileExtension) {
-        ScreenshotsGrid.showFileExtension = showFileExtension;
-    }
-
-    public ScreenshotsGrid(Minecraft mc, int width, int height, int top, int bottom, int itemHeight, int thumbWidth, int thumbHeight, int textHeight, int gap, int columns, ScreenshotsViewerScreen parent) {
-        super(mc, width, height, top, bottom, itemHeight);
+    public ScreenshotsGrid(Minecraft mc, int width, int height, int top, int bottom, ScreenshotsViewerScreen parent) {
+        super(mc, width, height, top, bottom, (ModConfig.SCREENSHOTS_VIEWER_SHOW_FILE_NAME.get() ? Minecraft.getInstance().font.lineHeight + 4 : 0) + ModConfig.SCREENSHOTS_VIEWER_GAP.get() + Math.max(1, (int)(Math.max(1, ((width - 50) - (ModConfig.SCREENSHOTS_VIEWER_COLUMNS.get() - 1) * ModConfig.SCREENSHOTS_VIEWER_GAP.get()) / ModConfig.SCREENSHOTS_VIEWER_COLUMNS.get()) * (9.0f / 16.0f))));
         this.parent = parent;
-        this.thumbWidth = Math.max(1, thumbWidth);
-        this.thumbHeight = Math.max(1, thumbHeight);
-        this.textHeight = Math.max(0, textHeight);
-        this.gap = gap;
-        this.columns = columns;
+        this.columns = ModConfig.SCREENSHOTS_VIEWER_COLUMNS.get();
+        this.gap = ModConfig.SCREENSHOTS_VIEWER_GAP.get();
+        this.thumbWidth = Math.max(1, ((width - 50) - (columns - 1) * gap) / columns);
+        this.thumbHeight = Math.max(1, (int)(thumbWidth * (9.0f / 16.0f)));
+        this.textHeight = Math.max(0, ModConfig.SCREENSHOTS_VIEWER_SHOW_FILE_NAME.get() ? this.minecraft.font.lineHeight + 4 : 0);
     }
 
     @Override
@@ -301,7 +284,7 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
 
                 if (textHeight > 0) {
                     String name = p.getFileName().toString();
-                    if (!showFileExtension) name = name.replaceAll("\\.png$", "");
+                    if (!ModConfig.SCREENSHOTS_VIEWER_SHOW_FILE_EXTENSION.get()) name = name.replaceAll("\\.png$", "");
 
                     String display = Minecraft.getInstance().font.plainSubstrByWidth(name, thumbWidth);
                     int nameW = Minecraft.getInstance().font.width(display);
