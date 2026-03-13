@@ -20,15 +20,19 @@ public record WorldSelectorData(List<String> values, Map<String, Component> cach
             ScreenshotsManager.WorldScreenshots ws = entry.getValue();
             int count = (ws == null || ws.screenshots == null) ? 0 : ws.screenshots.size();
 
-            values.add(key);
+            if (count > 0) values.add(key);
 
             if (key.startsWith("single:")) {
                 String folder = (ws == null || ws.folder == null) ? key.substring(7) : ws.folder;
                 String displayName = ScreenshotsManager.getSingleplayerWorldName(folder);
-                cache.put(key, Component.literal(displayName + " (" + count + ")"));
+                if (count > 0) {
+                    cache.put(key, Component.literal(displayName + " (" + count + ")"));
+                }
             } else if (key.startsWith("multi:")) {
                 String folder = (ws == null || ws.folder == null) ? key.substring(6) : ws.folder;
-                cache.put(key, Component.literal(folder + " (" + count + ")"));
+                if (count > 0) {
+                    cache.put(key, Component.literal(folder + " (" + count + ")"));
+                }
             }
         }
 

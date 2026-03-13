@@ -19,7 +19,6 @@ import java.util.*;
 
 public class ScreenshotsViewerScreen extends Screen {
 
-    private CycleButton<String> worldSelector;
     private Button openButton, renameButton, exportButton, deleteButton;
     private ScreenshotsGrid grid;
 
@@ -45,7 +44,7 @@ public class ScreenshotsViewerScreen extends Screen {
         WorldSelectorData selectorData = WorldSelectorData.prepare();
         if (!selectorData.values().contains(this.currentWorld)) this.currentWorld = "all";
 
-        this.worldSelector = CycleButton.builder(selectorData::getLabel)
+        CycleButton<String> worldSelector = CycleButton.builder(selectorData::getLabel)
                 .withValues(selectorData.values())
                 .withInitialValue(this.currentWorld)
                 .displayOnlyValue()
@@ -54,7 +53,7 @@ public class ScreenshotsViewerScreen extends Screen {
                     if (selectorData.values().size() > 1) this.refreshScreenshots();
                 });
 
-        this.addRenderableWidget(this.worldSelector);
+        this.addRenderableWidget(worldSelector);
 
         this.refreshScreenshots();
 
