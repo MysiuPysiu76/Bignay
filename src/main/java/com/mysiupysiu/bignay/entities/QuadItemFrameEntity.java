@@ -415,7 +415,7 @@ public class QuadItemFrameEntity extends HangingEntity {
         this.fixed = p_31795_.getBoolean("Fixed");
     }
 
-    private int getQuadrantFromHit(Player player) {
+    int getQuadrantFromHit(Player player) {
         Vec3 rayOrigin = player.getEyePosition(1.0F);
         Vec3 rayDir = player.getViewVector(1.0F).normalize();
         Vec3 planeCenter = new Vec3(this.getX(), this.getY(), this.getZ());
@@ -510,12 +510,7 @@ public class QuadItemFrameEntity extends HangingEntity {
 
     @Override
     public ItemStack getPickResult() {
-        for (int i = 0; i < 4; i++) {
-            ItemStack s = this.getItem(i);
-            if (!s.isEmpty()) {
-                return s.copy();
-            }
-        }
+        if (this.level().isClientSide) return QuadItemFrameClientService.getCustomPickResult(this);
         return this.getFrameItemStack();
     }
 
