@@ -7,13 +7,17 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.ResourceOrTagKeyArgument;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.concurrent.CompletableFuture;
@@ -25,9 +29,24 @@ public class LocateBlockCommand {
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("locate").then(Commands.literal("block").then(Commands.argument("block_or_tag", ResourceOrTagKeyArgument.resourceOrTagKey(Registries.BLOCK)).executes(ctx -> {
-            DynamicCommandExceptionType NOT_FOUND_EXCEPTION = new DynamicCommandExceptionType((obj) -> Component.translatable("commands.locate.block.invalid", obj));
-
+            DynamicCommandExceptionType NOT_FOUND_EXCEPTION = new DynamicCommandExceptionType((obj) -> Component.literal("invalid"));
             var arg = ResourceOrTagKeyArgument.getResourceOrTagKey(ctx, "block_or_tag", Registries.BLOCK, NOT_FOUND_EXCEPTION);
+
+            var content = arg.unwrap();
+
+            if (content.left().isPresent()) {
+                ResourceLocation id = content.left().get().location();
+                if (!BuiltInRegistries.BLOCK.containsKey(id)) {
+                    ctx.getSource().sendFailure(Component.translatable("argument.resource.not_found", id, "block"));
+                    return 0;
+                }
+            } else if (content.right().isPresent()) {
+                TagKey<Block> tagKey = content.right().get();
+                if (BuiltInRegistries.BLOCK.getTag(tagKey).isEmpty()) {
+                    ctx.getSource().sendFailure(Component.translatable("argument.resource_tag.not_found", tagKey.location(), "block"));
+                    return 0;
+                }
+            }
 
             String displayName = arg.unwrap().map(key -> key.location().toString(), tag -> "#" + tag.location());
             Predicate<BlockState> predicate = state -> arg.test(state.getBlockHolder());
