@@ -38,6 +38,42 @@ public class FileUtils {
                 .sum();
     }
 
+    public static long calculateSize(List<Path> files) {
+        return files.stream()
+                .filter(p -> Files.exists(p) && Files.isRegularFile(p))
+                .mapToLong(p -> {
+                    try {
+                        return Files.size(p);
+                    } catch (IOException e) {
+                        return 0L;
+                    }
+                })
+                .sum();
+    }
+
+    public static Path generateUniquePath(Path originalPath) {
+        String fileName = originalPath.getFileName().toString();
+        String baseName = fileName;
+        String extension = "";
+
+        int dotIndex = fileName.lastIndexOf('.');
+        if (dotIndex > 0) {
+            baseName = fileName.substring(0, dotIndex);
+            extension = fileName.substring(dotIndex);
+        }
+
+        Path parent = originalPath.getParent();
+        int counter = 1;
+        Path newPath = originalPath;
+
+        while (Files.exists(newPath)) {
+            String newName = String.format("%s (%d)%s", baseName, counter++, extension);
+            newPath = (parent != null) ? parent.resolve(newName) : Path.of(newName);
+        }
+
+        return newPath;
+    }
+
     public static boolean delete(File file) {
         if (!file.exists()) return false;
         if (file.isDirectory()) {

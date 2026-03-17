@@ -75,77 +75,10 @@ public class ScreenshotsViewerScreen extends Screen {
         this.updateButtons();
     }
 
-    public void refreshScreenshots() {
-        List<Path> paths;
-        if ("all".equals(this.currentWorld)) {
-            paths = ScreenshotsManager.getAll();
-        } else if (this.currentWorld.startsWith("single:")) {
-            String uuidStr = this.currentWorld.substring("single:".length());
-            try {
-                UUID uid = UUID.fromString(uuidStr);
-                paths = ScreenshotsManager.getPathsForSingleplayer(uid);
-            } catch (IllegalArgumentException ex) {
-                paths = ScreenshotsManager.getAll();
-            }
-        } else if (this.currentWorld.startsWith("multi:")) {
-            String ip = this.currentWorld.substring("multi:".length());
-            paths = ScreenshotsManager.getPathsForMultiplayer(ip);
-        } else {
-            paths = ScreenshotsManager.getAll();
-        }
-
-        grid.refresh(paths);
-
-        try {
-            grid.setScrollAmount(0);
-        } catch (Throwable ignored) {}
-
-        updateButtons();
-    }
-
-    private void exportSelected() {
-        FolderChooserScreen folderChooserScreen = new FolderChooserScreen();
-        folderChooserScreen.setPreviousScreen(this);
-        folderChooserScreen.setOnConfirm(f -> this.minecraft.setScreen(new OperationWithProgressScreen("screenshotsViewer.export.progress", new ScreenshotsExporter(grid.getSelectedPaths(), f.toPath()))));
-        this.minecraft.setScreen(folderChooserScreen);
-    }
-
-    public void deleteSelected() {
-        List<Path> files = grid.getSelectedPaths().toList();
-        ScreenshotsManager.tryDelete(files.stream().map(p -> p.getFileName().toString()).toList());
-        files.forEach(FileUtils::delete);
-        refreshScreenshots();
-        updateButtons();
-    }
-
-    public void updateButtons() {
-        int selCount = grid.getSelectedCount();
-        if (openButton != null) openButton.active = (selCount == 1);
-        if (renameButton != null) renameButton.active = (selCount == 1);
-        if (exportButton != null) exportButton.active = (selCount > 0);
-        if (deleteButton != null) deleteButton.active = (selCount > 0);
-    }
-
     @Override
     public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTick) {
         super.render(gui, mouseX, mouseY, partialTick);
         gui.drawCenteredString(this.font, this.title, this.width / 2, 12, 0xFFFFFF);
-    }
-
-    private void renameSelected() {
-        grid.getSelectedPaths().findFirst().ifPresent(p -> {
-            this.minecraft.setScreen(new ScreenshotRenameScreen(p));
-        });
-    }
-
-    private void openSelected() {
-        grid.getSelectedPaths().findFirst().ifPresent(p -> openScreenshot(grid.getAllPaths().indexOf(p)));
-    }
-
-    public void openScreenshot(int idx) {
-        if (idx >= 0 && idx < grid.getAllPaths().size()) {
-            this.minecraft.setScreen(new ScreenshotViewScreen(grid.getAllPaths(), idx, this));
-        }
     }
 
     @Override
@@ -185,5 +118,72 @@ public class ScreenshotsViewerScreen extends Screen {
     public void removed() {
         grid.cleanup();
         super.removed();
+    }
+
+    public void refreshScreenshots() {
+        List<Path> paths;
+        if ("all".equals(this.currentWorld)) {
+            paths = ScreenshotsManager.getAll();
+        } else if (this.currentWorld.startsWith("single:")) {
+            String uuidStr = this.currentWorld.substring("single:".length());
+            try {
+                UUID uid = UUID.fromString(uuidStr);
+                paths = ScreenshotsManager.getPathsForSingleplayer(uid);
+            } catch (IllegalArgumentException ex) {
+                paths = ScreenshotsManager.getAll();
+            }
+        } else if (this.currentWorld.startsWith("multi:")) {
+            String ip = this.currentWorld.substring("multi:".length());
+            paths = ScreenshotsManager.getPathsForMultiplayer(ip);
+        } else {
+            paths = ScreenshotsManager.getAll();
+        }
+
+        grid.refresh(paths);
+
+        try {
+            grid.setScrollAmount(0);
+        } catch (Throwable ignored) {}
+
+        updateButtons();
+    }
+
+    private void exportSelected() {
+        FolderChooserScreen folderChooserScreen = new FolderChooserScreen();
+        folderChooserScreen.setPreviousScreen(this);
+        folderChooserScreen.setOnConfirm(f ->
+                this.minecraft.setScreen(new OperationWithProgressScreen("screenshotsViewer.export.progress", new ScreenshotsExporter(grid.getSelectedPaths(), f.toPath()))));
+        this.minecraft.setScreen(folderChooserScreen);
+    }
+
+    public void deleteSelected() {
+        List<Path> files = grid.getSelectedPaths().toList();
+        ScreenshotsManager.tryDelete(files.stream().map(p -> p.getFileName().toString()).toList());
+        files.forEach(FileUtils::delete);
+        refreshScreenshots();
+        updateButtons();
+    }
+
+    public void updateButtons() {
+        int selCount = grid.getSelectedCount();
+        if (openButton != null) openButton.active = (selCount == 1);
+        if (renameButton != null) renameButton.active = (selCount == 1);
+        if (exportButton != null) exportButton.active = (selCount > 0);
+        if (deleteButton != null) deleteButton.active = (selCount > 0);
+    }
+
+    private void renameSelected() {
+        grid.getSelectedPaths().findFirst().ifPresent(p ->
+            this.minecraft.setScreen(new ScreenshotRenameScreen(p)));
+    }
+
+    private void openSelected() {
+        grid.getSelectedPaths().findFirst().ifPresent(p -> openScreenshot(grid.getAllPaths().indexOf(p)));
+    }
+
+    public void openScreenshot(int idx) {
+        if (idx >= 0 && idx < grid.getAllPaths().size()) {
+            this.minecraft.setScreen(new ScreenshotViewScreen(grid.getAllPaths(), idx, this));
+        }
     }
 }

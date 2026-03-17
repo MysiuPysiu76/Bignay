@@ -2,6 +2,7 @@ package com.mysiupysiu.bignay.utils.screenshot;
 
 import com.mysiupysiu.bignay.screen.OperationWithProgressScreen;
 import com.mysiupysiu.bignay.screen.screenshot.ScreenshotsViewerScreen;
+import com.mysiupysiu.bignay.utils.FileUtils;
 import com.mysiupysiu.bignay.utils.OperationWithProgress;
 import com.mysiupysiu.bignay.utils.ProgressListener;
 import net.minecraft.network.chat.Component;
@@ -9,6 +10,7 @@ import net.minecraft.network.chat.Component;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
@@ -30,18 +32,6 @@ public class ScreenshotsExporter implements OperationWithProgress {
         this.files = paths.toList();
     }
 
-    private long calculateSize() {
-        long total = 0;
-        for (Path p : this.files) {
-            try {
-                if (Files.exists(p) && Files.isRegularFile(p)) {
-                    total += Files.size(p);
-                }
-            } catch (IOException ignored) {}
-        }
-        return total;
-    }
-
     @Override
     public void setProgressScreen(ProgressListener progressListener) {
         this.progressListener = (OperationWithProgressScreen)progressListener;
@@ -50,7 +40,12 @@ public class ScreenshotsExporter implements OperationWithProgress {
 
     @Override
     public void execute() {
-        long totalSize = calculateSize();
+        if (files.size() == 1) {
+            exportSingleScreenshot();
+            return;
+        }
+
+        long totalSize = FileUtils.calculateSize(files);
         long[] processed = {0};
 
         try (ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(this.destination.toFile()))) {
@@ -77,7 +72,6 @@ public class ScreenshotsExporter implements OperationWithProgress {
                     zos.closeEntry();
                 }
             }
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -99,6 +93,19 @@ public class ScreenshotsExporter implements OperationWithProgress {
     public void finish() {
         if (this.progressListener != null) {
             this.progressListener.onFinish();
+        }
+    }
+
+    private void exportSingleScreenshot() {
+        Path source = this.files.get(0);
+        Path target = this.destination.resolveSibling(source.getFileName());
+
+        try {
+            if (Files.exists(target)) target = FileUtils.generateUniquePath(target);
+            Files.copy(source, target);
+            finish();
+        } catch (IOException e) {
+            throw new UncheckedIOException("Unable to export screenshot", e);
         }
     }
 }
