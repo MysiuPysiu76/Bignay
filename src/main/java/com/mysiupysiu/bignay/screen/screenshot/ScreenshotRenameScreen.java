@@ -37,11 +37,12 @@ public class ScreenshotRenameScreen extends Screen {
 
         String currentName = file.getFileName().toString().replace(".png", "");
 
-        nameBox = new EditBox(this.font, centerX - boxWidth / 2, centerY - 10, boxWidth, boxHeight, Component.literal(""));
-        nameBox.setValue(currentName);
-        nameBox.setMaxLength(100);
-        nameBox.setFocused(true);
-        this.addRenderableWidget(nameBox);
+        this.nameBox = new EditBox(this.font, centerX - boxWidth / 2, centerY - 10, boxWidth, boxHeight, Component.literal(""));
+        this.setInitialFocus(this.nameBox);
+        this.nameBox.setValue(currentName);
+        this.nameBox.setMaxLength(100);
+        this.nameBox.setFocused(true);
+        this.addRenderableWidget(this.nameBox);
 
         this.addRenderableWidget(Button.builder(Component.translatable("screenshotsViewer.rename"),
                 btn -> renameFile()).bounds(centerX - 100, centerY + 20, 95, 20).build());
@@ -52,17 +53,17 @@ public class ScreenshotRenameScreen extends Screen {
 
     private void renameFile() {
         try {
-            String newName = nameBox.getValue().trim();
+            String newName = this.nameBox.getValue().trim();
             if (newName.isEmpty()) return;
             newName += ".png";
 
-            Files.move(file, file.resolveSibling(newName));
-            ScreenshotsManager.tryRename(file.getFileName().toString(), newName);
+            Files.move(this.file, this.file.resolveSibling(newName));
+            ScreenshotsManager.tryRename(this.file.getFileName().toString(), newName);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        this.minecraft.setScreen(parent);
+        this.minecraft.setScreen(this.parent);
     }
 
     @Override
@@ -75,6 +76,6 @@ public class ScreenshotRenameScreen extends Screen {
     @Override
     public void onClose() {
         super.onClose();
-        this.minecraft.setScreen(parent);
+        this.minecraft.setScreen(this.parent);
     }
 }
