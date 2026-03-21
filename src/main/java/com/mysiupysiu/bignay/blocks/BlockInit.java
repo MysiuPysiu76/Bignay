@@ -696,6 +696,8 @@ public class BlockInit {
     public static final RegistryObject<Block> WAXED_WEATHERED_CUT_COPPER_VERTICAL_SLAB = registerBlock("waxed_weathered_cut_copper_vertical_slab", () -> new VerticalSlabBlock(Blocks.WAXED_WEATHERED_COPPER));
     public static final RegistryObject<Block> WAXED_OXIDIZED_CUT_COPPER_VERTICAL_SLAB = registerBlock("waxed_oxidized_cut_copper_vertical_slab", () -> new VerticalSlabBlock(Blocks.WAXED_OXIDIZED_CUT_COPPER));
 
+    public static final RegistryObject<Block> GOLD_BARS = registerBlock("gold_bars", BarsBlock::new);
+
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
         ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
