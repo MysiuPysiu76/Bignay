@@ -14,6 +14,7 @@ public class BignayTags {
     }
 
     public static class Items {
+        public static final TagKey<Item> HORNS = TagKey.create(Registries.ITEM, new ResourceLocation("bignay", "horns"));
         public static final TagKey<Item> BIG_ITEMS = TagKey.create(Registries.ITEM, new ResourceLocation("bignay", "big_items"));
         public static final TagKey<Item> POTTERY_SHERDS = TagKey.create(Registries.ITEM, new ResourceLocation("bignay", "pottery_sherds"));
     }
