@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.utils;
+package com.mysiupysiu.bignay.utils.recipes;
 
 import com.mysiupysiu.bignay.BignayMod;
 import net.minecraft.world.item.crafting.RecipeSerializer;

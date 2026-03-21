@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class ModInstruments {
+public class InstrumentsInit {
 
     public static final DeferredRegister<Instrument> INSTRUMENTS = DeferredRegister.create(Registries.INSTRUMENT, BignayMod.MODID);
     private static final List<RegistryObject<Instrument>> COPPER_HORNS = new ArrayList<>();

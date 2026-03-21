@@ -6,8 +6,8 @@ import com.mysiupysiu.bignay.entities.EntityInit;
 import com.mysiupysiu.bignay.items.ItemInit;
 import com.mysiupysiu.bignay.menu.MenuInit;
 import com.mysiupysiu.bignay.utils.ModConfig;
-import com.mysiupysiu.bignay.utils.ModInstruments;
-import com.mysiupysiu.bignay.utils.RecipeSerializersInit;
+import com.mysiupysiu.bignay.utils.InstrumentsInit;
+import com.mysiupysiu.bignay.utils.recipes.RecipeSerializersInit;
 import com.mysiupysiu.bignay.utils.SoundsInit;
 import com.mysiupysiu.bignay.utils.particles.ParticlesInit;
 import com.mysiupysiu.bignay.worldgen.decoration.DecoratorInit;
@@ -34,11 +34,11 @@ public class BignayMod {
         RecipeSerializersInit.register(e);
         ParticlesInit.register(e);
         SoundsInit.register(e);
-        ModInstruments.register(e);
+        InstrumentsInit.register(e);
 
         e.addListener(BlockInit::addCreative);
         e.addListener(ItemInit::addCreative);
-        e.addListener(ModInstruments::addCreative);
+        e.addListener(InstrumentsInit::addCreative);
         e.addListener(MenuInit::onClientSetup);
         e.addListener(BlockEntityInit::onClientSetup);
 

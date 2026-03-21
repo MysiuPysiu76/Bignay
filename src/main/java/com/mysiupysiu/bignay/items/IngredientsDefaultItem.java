@@ -14,6 +14,10 @@ public class IngredientsDefaultItem extends Item implements CreativeTabProvider 
         super(new Properties());
     }
 
+    public IngredientsDefaultItem(Item.Properties properties) {
+        super(properties);
+    }
+
     @Override
     public List<ResourceKey<CreativeModeTab>> getCreativeTabs() {
         return List.of(CreativeModeTabs.INGREDIENTS);

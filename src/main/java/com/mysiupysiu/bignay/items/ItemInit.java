@@ -22,13 +22,16 @@ public class ItemInit {
     public static final RegistryObject<Item> POTTER_SHERD = registerItem("pottery_sherd", IngredientsDefaultItem::new);
     public static final RegistryObject<Item> TOTEM_OF_KEEPING_INVENTORY = registerItem("totem_of_keeping_inventory", TotemOfKeepingInventory::new);
     public static final RegistryObject<Item> RAVAGER_HIDE = registerItem("ravager_hide", IngredientsDefaultItem::new);
-    public static final RegistryObject<Item> QUAD_ITEM_FRAME = registerItem("quad_item_frame", () -> new QuadItemFrameItem(new Item.Properties().stacksTo(64)));
-    public static final RegistryObject<Item> GLOW_QUAD_ITEM_FRAME = registerItem("glow_quad_item_frame", () -> new GlowQuadItemFrameItem(new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> KNIFE = registerItem("knife", KnifeItem::new);
+    public static final RegistryObject<Item> COPPER_HORN = registerItem("copper_horn", CopperHorn::new);
+    public static final RegistryObject<Item> GOLDEN_BERRIES = registerItem("golden_berries", GoldenBerriesItem::new);
+    public static final RegistryObject<Item> PALE_PUMPKIN_SEEDS = registerItem("pale_pumpkin_seeds", () -> new SeedsItem(BlockInit.PALE_PUMPKIN_STEM.get()));
 
     public static final RegistryObject<Item> VERDANT_SIGN = registerItem("verdant_sign", () -> new SignsItem(BlockInit.VERDANT_SIGN.get(), BlockInit.VERDANT_WALL_SIGN.get()));
     public static final RegistryObject<Item> VERDANT_HANGING_SIGN = registerItem("verdant_hanging_sign", () -> new SignsItem(BlockInit.VERDANT_HANGING_SIGN.get(), BlockInit.VERDANT_WALL_HANGING_SIGN.get()));
 
-    public static final RegistryObject<Item> PALE_PUMPKIN_SEEDS = registerItem("pale_pumpkin_seeds", () -> new SeedsItem(BlockInit.PALE_PUMPKIN_STEM.get()));
+    public static final RegistryObject<Item> QUAD_ITEM_FRAME = registerItem("quad_item_frame", () -> new QuadItemFrameItem(new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> GLOW_QUAD_ITEM_FRAME = registerItem("glow_quad_item_frame", () -> new GlowQuadItemFrameItem(new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> ENDERMAN_HEAD = registerItem("enderman_head", () -> new HeadItem(BlockInit.ENDERMAN_HEAD.get(), BlockInit.ENDERMAN_WALL_HEAD.get()));
     public static final RegistryObject<Item> SPIDER_HEAD = registerItem("spider_head", () -> new HeadItem(BlockInit.SPIDER_HEAD.get(), BlockInit.SPIDER_WALL_HEAD.get()));
@@ -40,17 +43,11 @@ public class ItemInit {
     public static final RegistryObject<Item> DROWNED_HEAD = registerItem("drowned_head", () -> new HeadItem(BlockInit.DROWNED_HEAD.get(), BlockInit.DROWNED_WALL_HEAD.get()));
     public static final RegistryObject<Item> STRAY_SKULL = registerItem("stray_skull", () -> new HeadItem(BlockInit.STRAY_SKULL.get(), BlockInit.STRAY_WALL_SKULL.get()));
 
-    public static final RegistryObject<Item> GOLDEN_BERRIES = registerItem("golden_berries", GoldenBerriesItem::new);
-
-    public static final RegistryObject<Item> KNIFE = registerItem("knife", KnifeItem::new);
-
     public static final RegistryObject<Item> ANGRY_PUMPKIN_PATTERN = registerItem("angry_pumpkin_pattern", () -> new PumpkinPatternItem(PumpkinPatternItem.Type.ANGRY));
     public static final RegistryObject<Item> ANXIOUS_PUMPKIN_PATTERN = registerItem("anxious_pumpkin_pattern", () -> new PumpkinPatternItem(PumpkinPatternItem.Type.ANXIOUS));
     public static final RegistryObject<Item> DERPY_PUMPKIN_PATTERN = registerItem("derpy_pumpkin_pattern", () -> new PumpkinPatternItem(PumpkinPatternItem.Type.DERPY));
     public static final RegistryObject<Item> HAPPY_PUMPKIN_PATTERN = registerItem("happy_pumpkin_pattern", () -> new PumpkinPatternItem(PumpkinPatternItem.Type.HAPPY));
     public static final RegistryObject<Item> SKULL_PUMPKIN_PATTERN = registerItem("skull_pumpkin_pattern", () -> new PumpkinPatternItem(PumpkinPatternItem.Type.SKULL));
-
-    public static final RegistryObject<Item> COPPER_HORN = registerItem("copper_horn", CopperHorn::new);
 
     private static RegistryObject<Item> registerItem(String name, Supplier<Item> supplier) {
         return ITEMS.register(name, supplier);

@@ -51,6 +51,7 @@ public class ClientForgeEvents {
             guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
         }
     }
+
     @SubscribeEvent
     public static void onGoatHornUse(PlayerInteractEvent.RightClickItem event) {
         Player player = event.getEntity();

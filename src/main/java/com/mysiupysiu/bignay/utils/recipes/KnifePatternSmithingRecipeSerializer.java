@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.utils;
+package com.mysiupysiu.bignay.utils.recipes;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;

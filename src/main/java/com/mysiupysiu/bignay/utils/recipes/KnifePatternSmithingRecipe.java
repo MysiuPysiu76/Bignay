@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.utils;
+package com.mysiupysiu.bignay.utils.recipes;
 
 import com.mysiupysiu.bignay.items.PumpkinPatternItem;
 import net.minecraft.core.RegistryAccess;
