@@ -15,7 +15,8 @@ import net.minecraft.network.chat.Component;
 import org.lwjgl.glfw.GLFW;
 
 import java.nio.file.Path;
-import java.util.*;
+import java.util.List;
+import java.util.UUID;
 
 public class ScreenshotsViewerScreen extends Screen {
 

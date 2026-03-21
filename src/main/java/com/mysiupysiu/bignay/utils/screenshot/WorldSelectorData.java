@@ -1,7 +1,11 @@
 package com.mysiupysiu.bignay.utils.screenshot;
 
 import net.minecraft.network.chat.Component;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public record WorldSelectorData(List<String> values, Map<String, Component> cache) {
 

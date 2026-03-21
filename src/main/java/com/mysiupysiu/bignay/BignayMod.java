@@ -6,7 +6,9 @@ import com.mysiupysiu.bignay.entities.EntityInit;
 import com.mysiupysiu.bignay.items.ItemInit;
 import com.mysiupysiu.bignay.menu.MenuInit;
 import com.mysiupysiu.bignay.utils.ModConfig;
+import com.mysiupysiu.bignay.utils.ModInstruments;
 import com.mysiupysiu.bignay.utils.RecipeSerializersInit;
+import com.mysiupysiu.bignay.utils.SoundsInit;
 import com.mysiupysiu.bignay.utils.particles.ParticlesInit;
 import com.mysiupysiu.bignay.worldgen.decoration.DecoratorInit;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -31,9 +33,12 @@ public class BignayMod {
         DecoratorInit.register(e);
         RecipeSerializersInit.register(e);
         ParticlesInit.register(e);
+        SoundsInit.register(e);
+        ModInstruments.register(e);
 
         e.addListener(BlockInit::addCreative);
         e.addListener(ItemInit::addCreative);
+        e.addListener(ModInstruments::addCreative);
         e.addListener(MenuInit::onClientSetup);
         e.addListener(BlockEntityInit::onClientSetup);
 

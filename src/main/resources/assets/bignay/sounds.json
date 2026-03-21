@@ -1,0 +1,182 @@
+{
+  "horn.harmony.0": {
+    "sounds": [
+      "bignay:item/copper_horn/harmony_0"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.harmony.1": {
+    "sounds": [
+      "bignay:item/copper_horn/harmony_1"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.harmony.2": {
+    "sounds": [
+      "bignay:item/copper_horn/harmony_2"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.harmony.3": {
+    "sounds": [
+      "bignay:item/copper_horn/harmony_3"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.harmony.4": {
+    "sounds": [
+      "bignay:item/copper_horn/harmony_4"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.harmony.5": {
+    "sounds": [
+      "bignay:item/copper_horn/harmony_5"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.harmony.6": {
+    "sounds": [
+      "bignay:item/copper_horn/harmony_6"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.harmony.7": {
+    "sounds": [
+      "bignay:item/copper_horn/harmony_7"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.harmony.8": {
+    "sounds": [
+      "bignay:item/copper_horn/harmony_8"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.harmony.9": {
+    "sounds": [
+      "bignay:item/copper_horn/harmony_9"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.melody.0": {
+    "sounds": [
+      "bignay:item/copper_horn/melody_0"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.melody.1": {
+    "sounds": [
+      "bignay:item/copper_horn/melody_1"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.melody.2": {
+    "sounds": [
+      "bignay:item/copper_horn/melody_2"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.melody.3": {
+    "sounds": [
+      "bignay:item/copper_horn/melody_3"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.melody.4": {
+    "sounds": [
+      "bignay:item/copper_horn/melody_4"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.melody.5": {
+    "sounds": [
+      "bignay:item/copper_horn/melody_5"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.melody.6": {
+    "sounds": [
+      "bignay:item/copper_horn/melody_6"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.melody.7": {
+    "sounds": [
+      "bignay:item/copper_horn/melody_7"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.melody.8": {
+    "sounds": [
+      "bignay:item/copper_horn/melody_8"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.melody.9": {
+    "sounds": [
+      "bignay:item/copper_horn/melody_9"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.bass.0": {
+    "sounds": [
+      "bignay:item/copper_horn/bass_0"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.bass.1": {
+    "sounds": [
+      "bignay:item/copper_horn/bass_1"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.bass.2": {
+    "sounds": [
+      "bignay:item/copper_horn/bass_2"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.bass.3": {
+    "sounds": [
+      "bignay:item/copper_horn/bass_3"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.bass.4": {
+    "sounds": [
+      "bignay:item/copper_horn/bass_4"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.bass.5": {
+    "sounds": [
+      "bignay:item/copper_horn/bass_5"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.bass.6": {
+    "sounds": [
+      "bignay:item/copper_horn/bass_6"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.bass.7": {
+    "sounds": [
+      "bignay:item/copper_horn/bass_7"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.bass.8": {
+    "sounds": [
+      "bignay:item/copper_horn/bass_8"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "horn.bass.9": {
+    "sounds": [
+      "bignay:item/copper_horn/bass_9"
+    ],
+    "subtitle": "subtitles.item.copper_horn.play"
+  }
+}

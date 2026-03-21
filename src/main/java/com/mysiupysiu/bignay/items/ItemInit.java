@@ -50,6 +50,8 @@ public class ItemInit {
     public static final RegistryObject<Item> HAPPY_PUMPKIN_PATTERN = registerItem("happy_pumpkin_pattern", () -> new PumpkinPatternItem(PumpkinPatternItem.Type.HAPPY));
     public static final RegistryObject<Item> SKULL_PUMPKIN_PATTERN = registerItem("skull_pumpkin_pattern", () -> new PumpkinPatternItem(PumpkinPatternItem.Type.SKULL));
 
+    public static final RegistryObject<Item> COPPER_HORN = registerItem("copper_horn", CopperHorn::new);
+
     private static RegistryObject<Item> registerItem(String name, Supplier<Item> supplier) {
         return ITEMS.register(name, supplier);
     }

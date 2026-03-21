@@ -3,7 +3,6 @@ package com.mysiupysiu.bignay.utils.screenshot;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.mysiupysiu.bignay.screen.screenshot.ScreenshotsViewerScreen;
 import com.mysiupysiu.bignay.utils.ModConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
