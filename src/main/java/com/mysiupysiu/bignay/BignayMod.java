@@ -7,6 +7,7 @@ import com.mysiupysiu.bignay.items.ItemInit;
 import com.mysiupysiu.bignay.menu.MenuInit;
 import com.mysiupysiu.bignay.utils.ModConfig;
 import com.mysiupysiu.bignay.utils.InstrumentsInit;
+import com.mysiupysiu.bignay.utils.loot.ModLootModifiers;
 import com.mysiupysiu.bignay.utils.recipes.RecipeSerializersInit;
 import com.mysiupysiu.bignay.utils.SoundsInit;
 import com.mysiupysiu.bignay.utils.particles.ParticlesInit;
@@ -35,6 +36,7 @@ public class BignayMod {
         ParticlesInit.register(e);
         SoundsInit.register(e);
         InstrumentsInit.register(e);
+        ModLootModifiers.register(e);
 
         e.addListener(BlockInit::addCreative);
         e.addListener(ItemInit::addCreative);
