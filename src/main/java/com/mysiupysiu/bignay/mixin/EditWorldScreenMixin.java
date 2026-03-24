@@ -14,7 +14,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(EditWorldScreen.class)
 public abstract class EditWorldScreenMixin {
 
-    @Shadow @Final private LevelStorageSource.LevelStorageAccess levelAccess;
+    @Shadow
+    @Final
+    private LevelStorageSource.LevelStorageAccess levelAccess;
 
     @Inject(method = "init", at = @At("HEAD"), cancellable = true)
     private void onInit(CallbackInfo ci) {
