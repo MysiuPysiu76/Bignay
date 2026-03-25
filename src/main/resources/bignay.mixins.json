@@ -11,7 +11,9 @@
     "TitleScreenMixin"
   ],
   "mixins": [
+    "AxeItemMixin",
     "CreateWorldMixin",
+    "HoneycombItemMixin",
     "LivingEntityMixin"
   ]
 }
