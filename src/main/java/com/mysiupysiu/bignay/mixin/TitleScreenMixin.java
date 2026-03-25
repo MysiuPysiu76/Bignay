@@ -29,7 +29,7 @@ public abstract class TitleScreenMixin extends Screen {
 
         this.removeWidget(realms);
 
-        this.addRenderableWidget(Button.builder(Component.literal("Screenshots"), b -> {
+        this.addRenderableWidget(Button.builder(Component.translatable("menu.screenshots"), b -> {
             this.minecraft.setScreen(new ScreenshotsViewerScreen());
         }).bounds(this.width / 2 + 2, this.height / 4 + 48 + 24 * 2, 98, 20).build());
     }
