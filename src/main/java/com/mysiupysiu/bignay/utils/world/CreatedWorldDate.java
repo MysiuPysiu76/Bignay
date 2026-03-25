@@ -1,20 +1,27 @@
-package com.mysiupysiu.bignay.utils;
+package com.mysiupysiu.bignay.utils.world;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.time.Instant;
 
 public class CreatedWorldDate {
 
     public static void setCreatedDate(String levelId) throws IOException {
-        Path file = Minecraft.getInstance().gameDirectory.toPath().resolve("saves").resolve(levelId).resolve("data").resolve("bignay.dat");
-        CompoundTag root = new CompoundTag();
-        root.putLong("CreatedDate", Instant.now().toEpochMilli());
-        NbtIo.writeCompressed(root, file.toFile());
+        try {
+            Path file = Minecraft.getInstance().gameDirectory.toPath().resolve("saves").resolve(levelId).resolve("data").resolve("bignay.dat");
+            file.toFile().getParentFile().mkdir();
+            CompoundTag root = new CompoundTag();
+            root.putLong("CreatedDate", Instant.now().toEpochMilli());
+            NbtIo.writeCompressed(root, file.toFile());
+        } catch (Exception e) {
+            LoggerFactory.getLogger(CreatedWorldDate.class).error("Could not save created world date: ", e);
+        }
     }
 
     public static Long getCreatedDate(String levelId) {

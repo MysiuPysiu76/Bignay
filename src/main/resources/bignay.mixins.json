@@ -6,9 +6,12 @@
   "refmap": "bignay.refmap.json",
   "client": [
     "EditWorldScreenMixin",
-    "LivingEntityMixin",
     "ScreenshotMixin",
     "SelectWorldScreenMixin",
     "TitleScreenMixin"
+  ],
+  "mixins": [
+    "CreateWorldMixin",
+    "LivingEntityMixin"
   ]
 }
