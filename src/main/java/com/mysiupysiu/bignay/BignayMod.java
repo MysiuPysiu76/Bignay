@@ -6,7 +6,7 @@ import com.mysiupysiu.bignay.entities.EntityInit;
 import com.mysiupysiu.bignay.items.ItemInit;
 import com.mysiupysiu.bignay.menu.MenuInit;
 import com.mysiupysiu.bignay.utils.ModConfig;
-import com.mysiupysiu.bignay.utils.InstrumentsInit;
+import com.mysiupysiu.bignay.utils.instrument.InstrumentsInit;
 import com.mysiupysiu.bignay.utils.loot.ModLootModifiers;
 import com.mysiupysiu.bignay.utils.recipes.RecipeSerializersInit;
 import com.mysiupysiu.bignay.utils.SoundsInit;
