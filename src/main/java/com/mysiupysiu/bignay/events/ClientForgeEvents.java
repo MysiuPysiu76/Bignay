@@ -3,19 +3,14 @@ package com.mysiupysiu.bignay.events;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.items.EquipablePumpkinItem;
-import com.mysiupysiu.bignay.items.ItemInit;
-import com.mysiupysiu.bignay.utils.BignayTags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -49,15 +44,6 @@ public class ClientForgeEvents {
             RenderSystem.enableDepthTest();
 
             guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-        }
-    }
-
-    @SubscribeEvent
-    public static void onGoatHornUse(PlayerInteractEvent.RightClickItem event) {
-        Player player = event.getEntity();
-        if (event.getItemStack().is(BignayTags.Items.HORNS)) {
-            player.getCooldowns().addCooldown(Items.GOAT_HORN, 140);
-            player.getCooldowns().addCooldown(ItemInit.COPPER_HORN.get(), 140);
         }
     }
 }
