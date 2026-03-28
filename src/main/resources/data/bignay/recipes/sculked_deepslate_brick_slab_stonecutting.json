@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "bignay:sculked_deepslate_bricks"
+  },
+  "result": "bignay:sculked_deepslate_brick_slab"
+}

@@ -698,6 +698,12 @@ public class BlockInit {
 
     public static final RegistryObject<Block> GOLD_BARS = registerBlock("gold_bars", BarsBlock::new);
 
+    public static final RegistryObject<Block> SCULKED_DEEPSLATE_BRICKS = registerBlock("sculked_deepslate_bricks", () -> new BuildingBlock(Blocks.DEEPSLATE_BRICKS));
+    public static final RegistryObject<Block> SCULKED_DEEPSLATE_BRICK_SLAB = registerBlock("sculked_deepslate_brick_slab", () -> new SlabsBlock(Blocks.DEEPSLATE_BRICKS));
+    public static final RegistryObject<Block> SCULKED_DEEPSLATE_BRICK_STAIRS = registerBlock("sculked_deepslate_brick_stairs", () -> new StairsBlock(Blocks.DEEPSLATE_BRICKS));
+    public static final RegistryObject<Block> SCULKED_DEEPSLATE_BRICK_WALL = registerBlock("sculked_deepslate_brick_wall", () -> new WallsBlock(Blocks.DEEPSLATE_BRICKS));
+    public static final RegistryObject<Block> SCULKED_DEEPSLATE_BRICK_VERTICAL_SLAB = registerBlock("sculked_deepslate_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.DEEPSLATE_BRICKS));
+
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);
         ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
