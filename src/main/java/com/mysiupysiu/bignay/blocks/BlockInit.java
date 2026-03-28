@@ -703,6 +703,11 @@ public class BlockInit {
     public static final RegistryObject<Block> SCULKED_DEEPSLATE_BRICK_STAIRS = registerBlock("sculked_deepslate_brick_stairs", () -> new StairsBlock(Blocks.DEEPSLATE_BRICKS));
     public static final RegistryObject<Block> SCULKED_DEEPSLATE_BRICK_WALL = registerBlock("sculked_deepslate_brick_wall", () -> new WallsBlock(Blocks.DEEPSLATE_BRICKS));
     public static final RegistryObject<Block> SCULKED_DEEPSLATE_BRICK_VERTICAL_SLAB = registerBlock("sculked_deepslate_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.DEEPSLATE_BRICKS));
+    public static final RegistryObject<Block> SCULKED_DEEPSLATE_TILES = registerBlock("sculked_deepslate_tiles", () -> new BuildingBlock(Blocks.DEEPSLATE_TILES));
+    public static final RegistryObject<Block> SCULKED_DEEPSLATE_TILE_SLAB = registerBlock("sculked_deepslate_tile_slab", () -> new SlabsBlock(Blocks.DEEPSLATE_TILES));
+    public static final RegistryObject<Block> SCULKED_DEEPSLATE_TILE_STAIRS = registerBlock("sculked_deepslate_tile_stairs", () -> new StairsBlock(Blocks.DEEPSLATE_TILES));
+    public static final RegistryObject<Block> SCULKED_DEEPSLATE_TILE_WALL = registerBlock("sculked_deepslate_tile_wall", () -> new WallsBlock(Blocks.DEEPSLATE_TILES));
+    public static final RegistryObject<Block> SCULKED_DEEPSLATE_TILE_VERTICAL_SLAB = registerBlock("sculked_deepslate_tile_vertical_slab", () -> new VerticalSlabBlock(Blocks.DEEPSLATE_TILES));
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> blockSupplier) {
         RegistryObject<Block> block = BLOCKS.register(name, blockSupplier);

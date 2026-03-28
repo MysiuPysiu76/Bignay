@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:deepslate_tiles"
+    },
+    {
+      "item": "minecraft:sculk_vein"
+    }
+  ],
+  "result": {
+    "item": "bignay:sculked_deepslate_tiles",
+    "count": 1
+  }
+}
