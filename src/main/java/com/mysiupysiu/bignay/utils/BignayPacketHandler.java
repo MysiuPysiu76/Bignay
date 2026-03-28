@@ -16,6 +16,7 @@ public class BignayPacketHandler {
         int id = 0;
         INSTANCE.registerMessage(id++, SortPacket.class, SortPacket::encode, SortPacket::decode, SortPacket::handle);
         INSTANCE.registerMessage(id++, TransferPacket.class, TransferPacket::encode, TransferPacket::decode, TransferPacket::handle);
+        INSTANCE.registerMessage(id++, WithdrawPacket.class, WithdrawPacket::encode, WithdrawPacket::decode, WithdrawPacket::handle);
     }
 
     public static class SortPacket {
@@ -38,9 +39,9 @@ public class BignayPacketHandler {
                 ServerPlayer player = ctx.get().getSender();
                 if (player != null && player.containerMenu != null) {
                     if (msg.isPlayerInventory) {
-                        InventorySorter.sortPlayerInventory(player.containerMenu);
+                        ContainersManager.sortPlayerInventory(player.containerMenu);
                     } else {
-                        InventorySorter.sortContainer(player.containerMenu);
+                        ContainersManager.sortContainer(player.containerMenu);
                     }
                     player.containerMenu.sendAllDataToRemote();
                 }
@@ -62,7 +63,24 @@ public class BignayPacketHandler {
             ctx.get().enqueueWork(() -> {
                 ServerPlayer player = ctx.get().getSender();
                 if (player != null && player.containerMenu != null) {
-                    InventorySorter.transferToContainer(player.containerMenu);
+                    ContainersManager.transferToContainer(player.containerMenu);
+                    player.containerMenu.sendAllDataToRemote();
+                }
+            });
+            ctx.get().setPacketHandled(true);
+        }
+    }
+
+    public static class WithdrawPacket {
+        public WithdrawPacket() {}
+        public static void encode(WithdrawPacket msg, net.minecraft.network.FriendlyByteBuf buf) {}
+        public static WithdrawPacket decode(net.minecraft.network.FriendlyByteBuf buf) { return new WithdrawPacket(); }
+
+        public static void handle(WithdrawPacket msg, Supplier<NetworkEvent.Context> ctx) {
+            ctx.get().enqueueWork(() -> {
+                ServerPlayer player = ctx.get().getSender();
+                if (player != null && player.containerMenu != null) {
+                    ContainersManager.transferToPlayer(player.containerMenu);
                     player.containerMenu.sendAllDataToRemote();
                 }
             });

@@ -24,6 +24,7 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
 
     private static final ResourceLocation SORT_TEXTURE = new ResourceLocation("bignay", "textures/gui/widget/sort.png");
     private static final ResourceLocation UP_TEXTURE = new ResourceLocation("bignay", "textures/gui/widget/up.png");
+    private static final ResourceLocation DOWN_TEXTURE = new ResourceLocation("bignay", "textures/gui/widget/down.png");
 
     @Shadow
     protected int leftPos;
@@ -80,6 +81,9 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
 
             this.bignay$addSafeButton(xPos - 13, this.topPos + invMinY - 13, "container.up", UP_TEXTURE, btn ->
                     BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.TransferPacket()));
+
+            this.bignay$addSafeButton(xPos - 26, this.topPos + invMinY - 13, "container.down", DOWN_TEXTURE, btn ->
+                    BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.WithdrawPacket()));
         }
     }
 
