@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "bignay.refmap.json",
   "client": [
+    "AbstractContainerScreenMixin",
     "EditWorldScreenMixin",
     "ScreenshotMixin",
     "SelectWorldScreenMixin",
