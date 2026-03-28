@@ -94,4 +94,60 @@ public class InventorySorter {
             }
         }
     }
+
+    public static void transferToContainer(AbstractContainerMenu menu) {
+        List<Slot> playerSlots = new ArrayList<>();
+        List<Slot> containerSlots = new ArrayList<>();
+
+        for (Slot slot : menu.slots) {
+            if (slot.container instanceof Inventory) {
+                int slotIndex = slot.getContainerSlot();
+                if (slotIndex >= 9 && slotIndex <= 35) {
+                    playerSlots.add(slot);
+                }
+            } else {
+                containerSlots.add(slot);
+            }
+        }
+
+        for (Slot pSlot : playerSlots) {
+            if (!pSlot.hasItem()) continue;
+            ItemStack pStack = pSlot.getItem();
+
+            for (Slot cSlot : containerSlots) {
+                if (!cSlot.hasItem() || !cSlot.mayPlace(pStack)) continue;
+                ItemStack cStack = cSlot.getItem();
+
+                if (ItemStack.isSameItemSameTags(pStack, cStack)) {
+                    int spaceLeft = cStack.getMaxStackSize() - cStack.getCount();
+                    if (spaceLeft > 0) {
+                        int amountToMove = Math.min(spaceLeft, pStack.getCount());
+                        cStack.grow(amountToMove);
+                        pStack.shrink(amountToMove);
+                        cSlot.setChanged();
+
+                        if (pStack.isEmpty()) break;
+                    }
+                }
+            }
+
+            if (!pStack.isEmpty()) {
+                for (Slot cSlot : containerSlots) {
+                    if (!cSlot.hasItem() && cSlot.mayPlace(pStack)) {
+                        cSlot.set(pStack.copy());
+                        pStack.setCount(0);
+                        cSlot.setChanged();
+                        break;
+                    }
+                }
+            }
+
+            if (pStack.isEmpty()) {
+                pSlot.set(ItemStack.EMPTY);
+            } else {
+                pSlot.set(pStack);
+            }
+            pSlot.setChanged();
+        }
+    }
 }

@@ -15,6 +15,7 @@ public class BignayPacketHandler {
     public static void register() {
         int id = 0;
         INSTANCE.registerMessage(id++, SortPacket.class, SortPacket::encode, SortPacket::decode, SortPacket::handle);
+        INSTANCE.registerMessage(id++, TransferPacket.class, TransferPacket::encode, TransferPacket::decode, TransferPacket::handle);
     }
 
     public static class SortPacket {
@@ -41,6 +42,27 @@ public class BignayPacketHandler {
                     } else {
                         InventorySorter.sortContainer(player.containerMenu);
                     }
+                    player.containerMenu.sendAllDataToRemote();
+                }
+            });
+            ctx.get().setPacketHandled(true);
+        }
+    }
+
+    public static class TransferPacket {
+        public TransferPacket() {}
+
+        public static void encode(TransferPacket msg, net.minecraft.network.FriendlyByteBuf buf) {}
+
+        public static TransferPacket decode(net.minecraft.network.FriendlyByteBuf buf) {
+            return new TransferPacket();
+        }
+
+        public static void handle(TransferPacket msg, Supplier<NetworkEvent.Context> ctx) {
+            ctx.get().enqueueWork(() -> {
+                ServerPlayer player = ctx.get().getSender();
+                if (player != null && player.containerMenu != null) {
+                    InventorySorter.transferToContainer(player.containerMenu);
                     player.containerMenu.sendAllDataToRemote();
                 }
             });

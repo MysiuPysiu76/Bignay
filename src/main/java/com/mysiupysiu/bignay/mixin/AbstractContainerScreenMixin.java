@@ -22,7 +22,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(AbstractContainerScreen.class)
 public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMenu> extends Screen {
 
-    private static final ResourceLocation SORT_TEXTURE = new ResourceLocation("bignay", "textures/gui/sort.png");
+    private static final ResourceLocation SORT_TEXTURE = new ResourceLocation("bignay", "textures/gui/widget/sort.png");
+    private static final ResourceLocation UP_TEXTURE = new ResourceLocation("bignay", "textures/gui/widget/up.png");
 
     @Shadow
     protected int leftPos;
@@ -70,20 +71,21 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
 
         int xPos = this.leftPos + this.imageWidth - 18;
 
-        this.bignay$addSafeButton(xPos, this.topPos + invMinY - 13, "container.sort_inventory", (btn) -> {
-            BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.SortPacket(true));
-        });
+        this.bignay$addSafeButton(xPos, this.topPos + invMinY - 13, "container.sort_inventory", SORT_TEXTURE, btn ->
+                BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.SortPacket(true)));
 
         if (isChest && hasContainer && contMinY != Integer.MAX_VALUE) {
-            this.bignay$addSafeButton(xPos, this.topPos + contMinY - 13, "container.sort", (btn) -> {
-                BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.SortPacket(false));
-            });
+            this.bignay$addSafeButton(xPos, this.topPos + contMinY - 13, "container.sort", SORT_TEXTURE, btn ->
+                    BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.SortPacket(false)));
+
+            this.bignay$addSafeButton(xPos - 13, this.topPos + invMinY - 13, "container.up", UP_TEXTURE, btn ->
+                    BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.TransferPacket()));
         }
     }
 
     @Unique
-    private void bignay$addSafeButton(int x, int y, String langKey, Button.OnPress onPress) {
-        ImageButton btn = new ImageButton(x, y, 11, 11, 0, 0, 11, SORT_TEXTURE, 16, 32, onPress) {
+    private void bignay$addSafeButton(int x, int y, String langKey, ResourceLocation icon, Button.OnPress onPress) {
+        ImageButton btn = new ImageButton(x, y, 11, 11, 0, 0, 11, icon, 16, 32, onPress) {
             @Override
             public void onClick(double mouseX, double mouseY) {
                 super.onClick(mouseX, mouseY);
