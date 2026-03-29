@@ -22,16 +22,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(AbstractContainerScreen.class)
 public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMenu> extends Screen {
 
-    private static final ResourceLocation SORT_TEXTURE = new ResourceLocation("bignay", "textures/gui/widget/sort.png");
-    private static final ResourceLocation UP_TEXTURE = new ResourceLocation("bignay", "textures/gui/widget/up.png");
-    private static final ResourceLocation DOWN_TEXTURE = new ResourceLocation("bignay", "textures/gui/widget/down.png");
+    @Unique
+    private static final ResourceLocation B_SORT_TEXTURE = new ResourceLocation("bignay", "textures/gui/widget/sort.png");
+    @Unique
+    private static final ResourceLocation B_UP_TEXTURE = new ResourceLocation("bignay", "textures/gui/widget/up.png");
+    @Unique
+    private static final ResourceLocation B_DOWN_TEXTURE = new ResourceLocation("bignay", "textures/gui/widget/down.png");
 
     @Shadow
     protected int leftPos;
     @Shadow
     protected int topPos;
-    @Shadow
-    protected int imageWidth;
     @Shadow
     @Final
     protected T menu;
@@ -45,7 +46,6 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
         if (this.minecraft == null || this.minecraft.player == null) return;
 
         Object self = this;
-
         boolean isInv = self instanceof InventoryScreen;
         boolean isChest = self instanceof ContainerScreen;
         boolean isMachine = self instanceof FurnaceScreen || self instanceof CraftingScreen || self instanceof AbstractFurnaceScreen || self instanceof StonecutterScreen;
@@ -53,6 +53,7 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
         if (!isInv && !isChest && !isMachine) return;
 
         int invMinY = Integer.MAX_VALUE;
+        int invMaxX = Integer.MIN_VALUE;
         int contMinY = Integer.MAX_VALUE;
         boolean hasContainer = false;
 
@@ -62,34 +63,43 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
                 if (slotIndex >= 9 && slotIndex <= 35) {
                     if (slot.y < invMinY) invMinY = slot.y;
                 }
+                if (slot.x > invMaxX) invMaxX = slot.x;
             } else {
                 if (slot.y < contMinY) contMinY = slot.y;
                 hasContainer = true;
             }
         }
 
-        if (invMinY == Integer.MAX_VALUE) return;
+        if (invMaxX == Integer.MIN_VALUE) return;
 
-        int xPos = this.leftPos + this.imageWidth - 18;
+        final int xOffset = invMaxX + 6;
 
-        this.bignay$addSafeButton(xPos, this.topPos + invMinY - 13, "container.sort_inventory", SORT_TEXTURE, btn ->
+        this.bignay$addSafeButton(xOffset, invMinY - 13, "container.sort_inventory", B_SORT_TEXTURE, btn ->
                 BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.SortPacket(true)));
 
         if (isChest && hasContainer && contMinY != Integer.MAX_VALUE) {
-            this.bignay$addSafeButton(xPos, this.topPos + contMinY - 13, "container.sort", SORT_TEXTURE, btn ->
+            this.bignay$addSafeButton(xOffset, contMinY - 13, "container.sort", B_SORT_TEXTURE, btn ->
                     BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.SortPacket(false)));
 
-            this.bignay$addSafeButton(xPos - 13, this.topPos + invMinY - 13, "container.up", UP_TEXTURE, btn ->
+            this.bignay$addSafeButton(xOffset - 13, invMinY - 13, "container.up", B_UP_TEXTURE, btn ->
                     BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.TransferPacket()));
 
-            this.bignay$addSafeButton(xPos - 26, this.topPos + invMinY - 13, "container.down", DOWN_TEXTURE, btn ->
+            this.bignay$addSafeButton(xOffset - 26, invMinY - 13, "container.down", B_DOWN_TEXTURE, btn ->
                     BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.WithdrawPacket()));
         }
     }
 
     @Unique
-    private void bignay$addSafeButton(int x, int y, String langKey, ResourceLocation icon, Button.OnPress onPress) {
-        ImageButton btn = new ImageButton(x, y, 11, 11, 0, 0, 11, icon, 16, 32, onPress) {
+    private void bignay$addSafeButton(int xOffset, int yOffset, String langKey, ResourceLocation icon, Button.OnPress onPress) {
+        ImageButton btn = new ImageButton(0, 0, 11, 11, 0, 0, 11, icon, 16, 32, onPress) {
+            @Override
+            public void renderWidget(net.minecraft.client.gui.GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+                this.setX(((AbstractContainerScreenMixin<?>) (Object) AbstractContainerScreenMixin.this).leftPos + xOffset);
+                this.setY(((AbstractContainerScreenMixin<?>) (Object) AbstractContainerScreenMixin.this).topPos + yOffset);
+
+                super.renderWidget(guiGraphics, mouseX, mouseY, partialTick);
+            }
+
             @Override
             public void onClick(double mouseX, double mouseY) {
                 super.onClick(mouseX, mouseY);
