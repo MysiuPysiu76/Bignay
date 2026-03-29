@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.mixin;
 
-import com.mysiupysiu.bignay.utils.BignayPacketHandler;
+import com.mysiupysiu.bignay.utils.containers.BignayPacketHandler;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Tooltip;

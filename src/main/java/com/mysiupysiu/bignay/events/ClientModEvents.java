@@ -4,7 +4,7 @@ import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.blocks.BlockEntityInit;
 import com.mysiupysiu.bignay.blocks.BlockInit;
 import com.mysiupysiu.bignay.entities.*;
-import com.mysiupysiu.bignay.utils.BignayPacketHandler;
+import com.mysiupysiu.bignay.utils.containers.BignayPacketHandler;
 import com.mysiupysiu.bignay.utils.ModelLayers;
 import com.mysiupysiu.bignay.utils.particles.ParticlesInit;
 import com.mysiupysiu.bignay.utils.particles.SmallSoulFlameParticle;

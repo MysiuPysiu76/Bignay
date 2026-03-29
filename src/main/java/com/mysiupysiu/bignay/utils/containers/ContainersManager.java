@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.utils;
+package com.mysiupysiu.bignay.utils.containers;
 
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -8,90 +8,13 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContainersManager {
+class ContainersManager {
 
-    public static void sortPlayerInventory(AbstractContainerMenu menu) {
-        List<Slot> playerSlots = new ArrayList<>();
-
-        for (Slot slot : menu.slots) {
-            if (slot.container instanceof Inventory) {
-                int slotIndex = slot.getContainerSlot();
-                if (slotIndex >= 9 && slotIndex <= 35) {
-                    playerSlots.add(slot);
-                }
-            }
-        }
-
-        sortSlotList(playerSlots);
-    }
-
-    public static void sortContainer(AbstractContainerMenu menu) {
-        List<Slot> containerSlots = new ArrayList<>();
-
-        for (Slot slot : menu.slots) {
-            if (!(slot.container instanceof Inventory)) {
-                containerSlots.add(slot);
-            }
-        }
-
-        sortSlotList(containerSlots);
-    }
-
-    private static void sortSlotList(List<Slot> slots) {
-        if (slots.isEmpty()) return;
-
-        List<ItemStack> items = new ArrayList<>();
-        for (Slot slot : slots) {
-            if (slot.hasItem()) {
-                items.add(slot.getItem().copy());
-                slot.set(ItemStack.EMPTY);
-            }
-        }
-
-        if (items.isEmpty()) return;
-
-        List<ItemStack> mergedItems = new ArrayList<>();
-        for (ItemStack stack : items) {
-            boolean added = false;
-
-            for (ItemStack existing : mergedItems) {
-                if (ItemStack.isSameItemSameTags(existing, stack)) {
-                    int spaceLeft = existing.getMaxStackSize() - existing.getCount();
-                    if (spaceLeft > 0) {
-                        int amountToAdd = Math.min(spaceLeft, stack.getCount());
-                        existing.grow(amountToAdd);
-                        stack.shrink(amountToAdd);
-
-                        if (stack.isEmpty()) {
-                            added = true;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            if (!stack.isEmpty()) {
-                mergedItems.add(stack);
-            }
-        }
-
-        mergedItems.sort((stack1, stack2) -> {
-            String name1 = stack1.getHoverName().getString();
-            String name2 = stack2.getHoverName().getString();
-
-            int nameCompare = name1.compareToIgnoreCase(name2);
-            if (nameCompare != 0) {
-                return nameCompare;
-            }
-
-            return Integer.compare(stack2.getCount(), stack1.getCount());
-        });
-
-        for (int i = 0; i < mergedItems.size(); i++) {
-            if (i < slots.size()) {
-                slots.get(i).set(mergedItems.get(i));
-                slots.get(i).setChanged();
-            }
+    public static void sort(AbstractContainerMenu container, boolean isInventory) {
+        if (isInventory) {
+            Sorter.sortInventory(container);
+        } else  {
+            Sorter.sortContainer(container);
         }
     }
 

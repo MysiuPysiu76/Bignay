@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.utils;
+package com.mysiupysiu.bignay.utils.containers;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -38,11 +38,7 @@ public class BignayPacketHandler {
             ctx.get().enqueueWork(() -> {
                 ServerPlayer player = ctx.get().getSender();
                 if (player != null && player.containerMenu != null) {
-                    if (msg.isPlayerInventory) {
-                        ContainersManager.sortPlayerInventory(player.containerMenu);
-                    } else {
-                        ContainersManager.sortContainer(player.containerMenu);
-                    }
+                    ContainersManager.sort(player.containerMenu, msg.isPlayerInventory);
                     player.containerMenu.sendAllDataToRemote();
                 }
             });
