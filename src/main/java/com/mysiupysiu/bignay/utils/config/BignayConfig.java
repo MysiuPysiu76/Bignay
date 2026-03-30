@@ -1,8 +1,8 @@
-package com.mysiupysiu.bignay.utils;
+package com.mysiupysiu.bignay.utils.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class ModConfig {
+public class BignayConfig {
 
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec SPEC;
@@ -15,6 +15,12 @@ public class ModConfig {
 
     public static final ForgeConfigSpec.BooleanValue FILE_CHOOSER_SHOW_HIDDEN_FILES;
     public static final ForgeConfigSpec.IntValue FILE_CHOOSER_COLUMNS;
+
+    public static final ForgeConfigSpec.EnumValue<SortMode> CONTAINER_SORT_MODE;
+    public static final ForgeConfigSpec.BooleanValue CONTAINER_SHOW_SORT_INVENTORY;
+    public static final ForgeConfigSpec.BooleanValue CONTAINER_SHOW_SORT_CONTAINER;
+    public static final ForgeConfigSpec.BooleanValue CONTAINER_SHOW_TRANSFER_TO_INVENTORY;
+    public static final ForgeConfigSpec.BooleanValue CONTAINER_SHOW_TRANSFER_TO_CONTAINER;
 
     static {
         BUILDER.push("screenshots_viewer").translation("config.bignay.category.screenshots_viewer");
@@ -58,6 +64,35 @@ public class ModConfig {
                 .defineInRange("columns", 6, 4, 7);
 
         BUILDER.pop();
+        BUILDER.push("containers").translation("config.bignay.category.containers");
+
+        CONTAINER_SORT_MODE = BUILDER
+                .comment("A method for sorting items such as chests and inventory")
+                .translation("config.bignay.container_sort_mode")
+                .defineEnum("sortMode", SortMode.QUANTITY);
+
+        CONTAINER_SHOW_SORT_INVENTORY = BUILDER
+                .comment("Displays the inventory sort button")
+                .translation("config.bignay.container_show_sort_inventory")
+                .define("showSortInventory", true);
+
+        CONTAINER_SHOW_SORT_CONTAINER = BUILDER
+                .comment("Displays the chest sort button")
+                .translation("config.bignay.container_show_sort_container")
+                .define("showSortContainer", true);
+
+        CONTAINER_SHOW_TRANSFER_TO_INVENTORY = BUILDER
+                .comment("Displays a button to quickly move items to your inventory")
+                .translation("config.bignay.container_transfer_to_inventory")
+                .define("showTransferToInventory", true);
+
+        CONTAINER_SHOW_TRANSFER_TO_CONTAINER = BUILDER
+                .comment("Displays a button to quickly move items to a container")
+                .translation("config.bignay.container_transfer_to_container")
+                .define("showTransferToContainer", true);
+
+        BUILDER.pop();
+
         SPEC = BUILDER.build();
     }
 }

@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.screen.file.chooser;
 
-import com.mysiupysiu.bignay.utils.ModConfig;
+import com.mysiupysiu.bignay.utils.config.BignayConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -9,8 +9,8 @@ import net.minecraft.network.chat.Component;
 
 class FileChooserOptionsScreen extends Screen {
 
-    private boolean showHidden = ModConfig.FILE_CHOOSER_SHOW_HIDDEN_FILES.get();
-    private int columns = ModConfig.FILE_CHOOSER_COLUMNS.get();
+    private boolean showHidden = BignayConfig.FILE_CHOOSER_SHOW_HIDDEN_FILES.get();
+    private int columns = BignayConfig.FILE_CHOOSER_COLUMNS.get();
 
     private final Screen parent;
     private Button showHiddenButton;
@@ -55,8 +55,8 @@ class FileChooserOptionsScreen extends Screen {
     @Override
     public void onClose() {
         super.onClose();
-        ModConfig.FILE_CHOOSER_COLUMNS.set(this.columns);
-        ModConfig.FILE_CHOOSER_SHOW_HIDDEN_FILES.set(this.showHidden);
+        BignayConfig.FILE_CHOOSER_COLUMNS.set(this.columns);
+        BignayConfig.FILE_CHOOSER_SHOW_HIDDEN_FILES.set(this.showHidden);
         Minecraft.getInstance().setScreen(this.parent);
     }
 
@@ -76,7 +76,7 @@ class FileChooserOptionsScreen extends Screen {
     }
 
     private void resetSettings() {
-        ModConfig.FILE_CHOOSER_SHOW_HIDDEN_FILES.set(false);
-        ModConfig.FILE_CHOOSER_COLUMNS.set(6);
+        BignayConfig.FILE_CHOOSER_SHOW_HIDDEN_FILES.set(false);
+        BignayConfig.FILE_CHOOSER_COLUMNS.set(6);
     }
 }

@@ -1,5 +1,7 @@
 package com.mysiupysiu.bignay.utils.containers;
 
+import com.mysiupysiu.bignay.utils.config.BignayConfig;
+import com.mysiupysiu.bignay.utils.config.SortMode;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
@@ -9,11 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Sorter {
-
-    public enum SortMode {
-        ALPHABETICAL,
-        QUANTITY
-    }
 
     public static void sortInventory(AbstractContainerMenu menu) {
         List<Slot> playerSlots = new ArrayList<>();
@@ -27,7 +24,7 @@ public class Sorter {
             }
         }
 
-        sortSlotList(playerSlots, SortMode.QUANTITY);
+        sortSlotList(playerSlots);
     }
 
     public static void sortContainer(AbstractContainerMenu menu) {
@@ -39,10 +36,10 @@ public class Sorter {
             }
         }
 
-        sortSlotList(containerSlots, SortMode.QUANTITY);
+        sortSlotList(containerSlots);
     }
 
-    private static void sortSlotList(List<Slot> slots, SortMode mode) {
+    private static void sortSlotList(List<Slot> slots) {
         if (slots.isEmpty()) return;
 
         List<ItemStack> items = new ArrayList<>();
@@ -86,7 +83,7 @@ public class Sorter {
             int count1 = stack1.getCount();
             int count2 = stack2.getCount();
 
-            if (mode == SortMode.QUANTITY) {
+            if (BignayConfig.CONTAINER_SORT_MODE.get() == SortMode.QUANTITY) {
                 int countCompare = Integer.compare(count2, count1);
                 if (countCompare != 0) return countCompare;
                 return name1.compareToIgnoreCase(name2);

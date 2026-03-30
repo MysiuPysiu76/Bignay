@@ -1,5 +1,6 @@
 package com.mysiupysiu.bignay.mixin;
 
+import com.mysiupysiu.bignay.utils.config.BignayConfig;
 import com.mysiupysiu.bignay.utils.containers.BignayPacketHandler;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ImageButton;
@@ -74,18 +75,26 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
 
         final int xOffset = invMaxX + 6;
 
-        this.bignay$addSafeButton(xOffset, invMinY - 13, "container.sort_inventory", B_SORT_TEXTURE, btn ->
-                BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.SortPacket(true)));
+        if (BignayConfig.CONTAINER_SHOW_SORT_INVENTORY.get()) {
+            this.bignay$addSafeButton(xOffset, invMinY - 13, "container.sort_inventory", B_SORT_TEXTURE, btn ->
+                    BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.SortPacket(true)));
+        }
 
         if (isChest && hasContainer && contMinY != Integer.MAX_VALUE) {
-            this.bignay$addSafeButton(xOffset, contMinY - 13, "container.sort", B_SORT_TEXTURE, btn ->
-                    BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.SortPacket(false)));
+            if (BignayConfig.CONTAINER_SHOW_SORT_CONTAINER.get()) {
+                this.bignay$addSafeButton(xOffset, contMinY - 13, "container.sort", B_SORT_TEXTURE, btn ->
+                        BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.SortPacket(false)));
+            }
 
-            this.bignay$addSafeButton(xOffset - 13, invMinY - 13, "container.up", B_UP_TEXTURE, btn ->
-                    BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.TransferPacket()));
+            if (BignayConfig.CONTAINER_SHOW_TRANSFER_TO_CONTAINER.get()) {
+                this.bignay$addSafeButton(xOffset - 13, invMinY - 13, "container.up", B_UP_TEXTURE, btn ->
+                        BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.TransferPacket()));
+            }
 
-            this.bignay$addSafeButton(xOffset - 26, invMinY - 13, "container.down", B_DOWN_TEXTURE, btn ->
-                    BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.WithdrawPacket()));
+            if (BignayConfig.CONTAINER_SHOW_TRANSFER_TO_INVENTORY.get()) {
+                this.bignay$addSafeButton(xOffset - 26, invMinY - 13, "container.down", B_DOWN_TEXTURE, btn ->
+                        BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.WithdrawPacket()));
+            }
         }
     }
 

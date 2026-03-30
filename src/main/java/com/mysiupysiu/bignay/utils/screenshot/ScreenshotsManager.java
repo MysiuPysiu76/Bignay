@@ -3,7 +3,7 @@ package com.mysiupysiu.bignay.utils.screenshot;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.mysiupysiu.bignay.utils.ModConfig;
+import com.mysiupysiu.bignay.utils.config.BignayConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
@@ -280,7 +280,7 @@ public class ScreenshotsManager {
             }
         });
 
-        if (ModConfig.SCREENSHOTS_VIEWER_SORT_TO_OLDEST.get()) pathComparator = pathComparator.reversed();
+        if (BignayConfig.SCREENSHOTS_VIEWER_SORT_TO_OLDEST.get()) pathComparator = pathComparator.reversed();
         return pathComparator;
     }
 }

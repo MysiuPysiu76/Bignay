@@ -5,7 +5,7 @@ import com.mysiupysiu.bignay.blocks.BlockInit;
 import com.mysiupysiu.bignay.entities.EntityInit;
 import com.mysiupysiu.bignay.items.ItemInit;
 import com.mysiupysiu.bignay.menu.MenuInit;
-import com.mysiupysiu.bignay.utils.ModConfig;
+import com.mysiupysiu.bignay.utils.config.BignayConfig;
 import com.mysiupysiu.bignay.utils.SoundsInit;
 import com.mysiupysiu.bignay.utils.instrument.InstrumentsInit;
 import com.mysiupysiu.bignay.utils.loot.ModLootModifiers;
@@ -44,6 +44,6 @@ public class BignayMod {
         e.addListener(MenuInit::onClientSetup);
         e.addListener(BlockEntityInit::onClientSetup);
 
-        ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, ModConfig.SPEC);
+        ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, BignayConfig.SPEC);
     }
 }

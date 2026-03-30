@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.screen.screenshot;
 
-import com.mysiupysiu.bignay.utils.ModConfig;
+import com.mysiupysiu.bignay.utils.config.BignayConfig;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.client.gui.components.Button;
@@ -20,24 +20,24 @@ public class ScreenshotsOptionsScreen extends Screen {
         int centerY = this.height / 2;
 
         this.addRenderableWidget(Button.builder(getSortButtonTitle(), btn -> {
-            ModConfig.SCREENSHOTS_VIEWER_SORT_TO_OLDEST.set(ModConfig.SCREENSHOTS_VIEWER_SORT_TO_OLDEST.get());
+            BignayConfig.SCREENSHOTS_VIEWER_SORT_TO_OLDEST.set(BignayConfig.SCREENSHOTS_VIEWER_SORT_TO_OLDEST.get());
             btn.setMessage(getSortButtonTitle());
         }).bounds(centerX - 100, centerY - 75, 200, 20).build());
 
         this.addRenderableWidget(Button.builder(getShowScreenshotNameButtonTitle(), btn -> {
-            ModConfig.SCREENSHOTS_VIEWER_SHOW_FILE_NAME.set(!ModConfig.SCREENSHOTS_VIEWER_SHOW_FILE_NAME.get());
+            BignayConfig.SCREENSHOTS_VIEWER_SHOW_FILE_NAME.set(!BignayConfig.SCREENSHOTS_VIEWER_SHOW_FILE_NAME.get());
             btn.setMessage(getShowScreenshotNameButtonTitle());
         }).bounds(centerX - 100, centerY - 50, 200, 20).build());
 
         this.addRenderableWidget(Button.builder(getShowExtensionButtonTitle(), btn -> {
-            ModConfig.SCREENSHOTS_VIEWER_SHOW_FILE_EXTENSION.set(!ModConfig.SCREENSHOTS_VIEWER_SHOW_FILE_EXTENSION.get());
+            BignayConfig.SCREENSHOTS_VIEWER_SHOW_FILE_EXTENSION.set(!BignayConfig.SCREENSHOTS_VIEWER_SHOW_FILE_EXTENSION.get());
             btn.setMessage(getShowExtensionButtonTitle());
         }).bounds(centerX - 100, centerY - 25, 200, 20).build());
 
         int min = 2;
         int max = 8;
 
-        double initialSliderValue = (double)(ModConfig.SCREENSHOTS_VIEWER_COLUMNS.get() - min) / (max - min);
+        double initialSliderValue = (double)(BignayConfig.SCREENSHOTS_VIEWER_COLUMNS.get() - min) / (max - min);
 
         this.addRenderableWidget(new AbstractSliderButton(centerX - 100, centerY, 200, 20, Component.empty(), initialSliderValue) {
             {
@@ -52,7 +52,7 @@ public class ScreenshotsOptionsScreen extends Screen {
 
             @Override
             protected void applyValue() {
-                ModConfig.SCREENSHOTS_VIEWER_COLUMNS.set((int) Math.round(this.value * (max - min) + min));
+                BignayConfig.SCREENSHOTS_VIEWER_COLUMNS.set((int) Math.round(this.value * (max - min) + min));
             }
         });
 
@@ -73,14 +73,14 @@ public class ScreenshotsOptionsScreen extends Screen {
     }
 
     private Component getSortButtonTitle() {
-        return Component.translatable("screenshotsViewer.options.sort_" + (ModConfig.SCREENSHOTS_VIEWER_SORT_TO_OLDEST.get() ? "oldest" : "newest"));
+        return Component.translatable("screenshotsViewer.options.sort_" + (BignayConfig.SCREENSHOTS_VIEWER_SORT_TO_OLDEST.get() ? "oldest" : "newest"));
     }
 
     private Component getShowScreenshotNameButtonTitle() {
-        return  Component.translatable("screenshotsViewer.options.show_screenshot_name_" + (ModConfig.SCREENSHOTS_VIEWER_SHOW_FILE_NAME.get() ? "yes" : "no"));
+        return  Component.translatable("screenshotsViewer.options.show_screenshot_name_" + (BignayConfig.SCREENSHOTS_VIEWER_SHOW_FILE_NAME.get() ? "yes" : "no"));
     }
 
     private Component getShowExtensionButtonTitle() {
-        return  Component.translatable("screenshotsViewer.options.show_extension_" + (ModConfig.SCREENSHOTS_VIEWER_SHOW_FILE_EXTENSION.get() ? "yes" : "no"));
+        return  Component.translatable("screenshotsViewer.options.show_extension_" + (BignayConfig.SCREENSHOTS_VIEWER_SHOW_FILE_EXTENSION.get() ? "yes" : "no"));
     }
 }

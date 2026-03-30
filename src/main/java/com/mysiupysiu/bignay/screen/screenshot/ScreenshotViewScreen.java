@@ -4,7 +4,7 @@ import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mysiupysiu.bignay.screen.file.chooser.FolderChooserScreen;
 import com.mysiupysiu.bignay.utils.FileUtils;
-import com.mysiupysiu.bignay.utils.ModConfig;
+import com.mysiupysiu.bignay.utils.config.BignayConfig;
 import com.mysiupysiu.bignay.utils.screenshot.ScreenshotsManager;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
@@ -95,7 +95,7 @@ public class ScreenshotViewScreen extends Screen {
         RenderSystem.setShaderTexture(0, this.texture);
         gui.blit(this.texture, x, y, 0, 0, drawW, drawH, drawW, drawH);
 
-        String title = ModConfig.SCREENSHOTS_VIEWER_SHOW_FILE_EXTENSION.get() ? name : name.replace(".png", "");
+        String title = BignayConfig.SCREENSHOTS_VIEWER_SHOW_FILE_EXTENSION.get() ? name : name.replace(".png", "");
         gui.drawCenteredString(this.font, title, this.width / 2, 7, 0xFFFFFF);
         super.render(gui, mouseX, mouseY, partialTick);
     }

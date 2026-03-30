@@ -1,7 +1,7 @@
 package com.mysiupysiu.bignay.screen.file.chooser;
 
 import com.mysiupysiu.bignay.utils.FileType;
-import com.mysiupysiu.bignay.utils.ModConfig;
+import com.mysiupysiu.bignay.utils.config.BignayConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -25,8 +25,8 @@ abstract class AbstractFileChooserScreen extends Screen {
     private final boolean requireDirectory = isRequireDirectory();
     private static final int MARGIN = 20;
 
-    private boolean showHidden = ModConfig.FILE_CHOOSER_SHOW_HIDDEN_FILES.get();
-    private int columns = ModConfig.FILE_CHOOSER_COLUMNS.get();
+    private boolean showHidden = BignayConfig.FILE_CHOOSER_SHOW_HIDDEN_FILES.get();
+    private int columns = BignayConfig.FILE_CHOOSER_COLUMNS.get();
 
     private Screen previousScreen;
     private FilesSelectionGrid list;
@@ -53,8 +53,8 @@ abstract class AbstractFileChooserScreen extends Screen {
     protected void init() {
         super.init();
 
-        this.showHidden = ModConfig.FILE_CHOOSER_SHOW_HIDDEN_FILES.get();
-        this.columns = ModConfig.FILE_CHOOSER_COLUMNS.get();
+        this.showHidden = BignayConfig.FILE_CHOOSER_SHOW_HIDDEN_FILES.get();
+        this.columns = BignayConfig.FILE_CHOOSER_COLUMNS.get();
 
         int btnWidth = 90;
         int btnHeight = 20;

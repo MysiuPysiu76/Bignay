@@ -2,7 +2,7 @@ package com.mysiupysiu.bignay.screen.screenshot;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mysiupysiu.bignay.utils.ModConfig;
+import com.mysiupysiu.bignay.utils.config.BignayConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ObjectSelectionList;
@@ -46,13 +46,13 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
     });
 
     public ScreenshotsGrid(Minecraft mc, int width, int height, int top, int bottom, ScreenshotsViewerScreen parent) {
-        super(mc, width, height, top, bottom, (ModConfig.SCREENSHOTS_VIEWER_SHOW_FILE_NAME.get() ? Minecraft.getInstance().font.lineHeight + 4 : 0) + ModConfig.SCREENSHOTS_VIEWER_GAP.get() + Math.max(1, (int)(Math.max(1, ((width - 50) - (ModConfig.SCREENSHOTS_VIEWER_COLUMNS.get() - 1) * ModConfig.SCREENSHOTS_VIEWER_GAP.get()) / ModConfig.SCREENSHOTS_VIEWER_COLUMNS.get()) * (9.0f / 16.0f))));
+        super(mc, width, height, top, bottom, (BignayConfig.SCREENSHOTS_VIEWER_SHOW_FILE_NAME.get() ? Minecraft.getInstance().font.lineHeight + 4 : 0) + BignayConfig.SCREENSHOTS_VIEWER_GAP.get() + Math.max(1, (int)(Math.max(1, ((width - 50) - (BignayConfig.SCREENSHOTS_VIEWER_COLUMNS.get() - 1) * BignayConfig.SCREENSHOTS_VIEWER_GAP.get()) / BignayConfig.SCREENSHOTS_VIEWER_COLUMNS.get()) * (9.0f / 16.0f))));
         this.parent = parent;
-        this.columns = ModConfig.SCREENSHOTS_VIEWER_COLUMNS.get();
-        this.gap = ModConfig.SCREENSHOTS_VIEWER_GAP.get();
+        this.columns = BignayConfig.SCREENSHOTS_VIEWER_COLUMNS.get();
+        this.gap = BignayConfig.SCREENSHOTS_VIEWER_GAP.get();
         this.thumbWidth = Math.max(1, ((width - 50) - (columns - 1) * gap) / columns);
         this.thumbHeight = Math.max(1, (int)(thumbWidth * (9.0f / 16.0f)));
-        this.textHeight = Math.max(0, ModConfig.SCREENSHOTS_VIEWER_SHOW_FILE_NAME.get() ? this.minecraft.font.lineHeight + 4 : 0);
+        this.textHeight = Math.max(0, BignayConfig.SCREENSHOTS_VIEWER_SHOW_FILE_NAME.get() ? this.minecraft.font.lineHeight + 4 : 0);
     }
 
     @Override
@@ -284,7 +284,7 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
 
                 if (textHeight > 0) {
                     String name = p.getFileName().toString();
-                    if (!ModConfig.SCREENSHOTS_VIEWER_SHOW_FILE_EXTENSION.get()) name = name.replaceAll("\\.png$", "");
+                    if (!BignayConfig.SCREENSHOTS_VIEWER_SHOW_FILE_EXTENSION.get()) name = name.replaceAll("\\.png$", "");
 
                     String display = Minecraft.getInstance().font.plainSubstrByWidth(name, thumbWidth);
                     int nameW = Minecraft.getInstance().font.width(display);
