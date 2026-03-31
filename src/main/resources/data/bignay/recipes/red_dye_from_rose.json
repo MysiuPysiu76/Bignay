@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "bignay:rose"
+    }
+  ],
+  "result": {
+    "item": "minecraft:red_dye",
+    "count": 1
+  }
+}
