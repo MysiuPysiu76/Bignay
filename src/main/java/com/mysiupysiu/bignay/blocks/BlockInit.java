@@ -568,6 +568,7 @@ public class BlockInit {
     public static final RegistryObject<Block> GOLDEN_POPPY = registerBlock("golden_poppy", () -> new PlantBlock(MobEffects.HARM, 4));
     public static final RegistryObject<Block> ROSE = registerBlock("rose", () -> new PlantBlock(MobEffects.MOVEMENT_SPEED, 4));
     public static final RegistryObject<Block> CYAN_ROSE = registerBlock("cyan_rose", () -> new PlantBlock(MobEffects.MOVEMENT_SPEED, 5));
+    public static final RegistryObject<Block> HELIOTROPE = registerBlock("heliotrope", () -> new PlantBlock(MobEffects.REGENERATION, 5));
 
     public static final RegistryObject<Block> CYAN_ROSE_BUSH = registerBlock("cyan_rose_bush", TallPlantBlock::new);
     public static final RegistryObject<Block> MARIGOLD = registerBlock("marigold", TallPlantBlock::new);
@@ -594,6 +595,7 @@ public class BlockInit {
     public static final RegistryObject<Block> POTTED_MUSHROOM_CLUSTER = registerBlockOnly("potted_mushroom_cluster", () -> flowerPot(MUSHROOM_CLUSTER.get()));
     public static final RegistryObject<Block> POTTED_BROWN_MUSHROOM_CLUSTER = registerBlockOnly("potted_brown_mushroom_cluster", () -> flowerPot(BROWN_MUSHROOM_CLUSTER.get()));
     public static final RegistryObject<Block> POTTED_RED_MUSHROOM_CLUSTER = registerBlockOnly("potted_red_mushroom_cluster", () -> flowerPot(RED_MUSHROOM_CLUSTER.get()));
+    public static final RegistryObject<Block> POTTED_HELIOTROPE = registerBlockOnly("potted_heliotrope", () -> flowerPot(HELIOTROPE.get()));
 
     public static final RegistryObject<Block> POTTED_LARGE_FERN = registerBlockOnly("potted_large_fern", () -> flowerPot(Blocks.LARGE_FERN));
     public static final RegistryObject<Block> POTTED_TWISTING_VINES = registerBlockOnly("potted_twisting_vines", () -> flowerPot(Blocks.TWISTING_VINES));
