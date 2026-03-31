@@ -6,7 +6,7 @@
       "loot_table_id": "minecraft:chests/woodland_mansion"
     }
   ],
-  "item": "bignay:pale_pumpkin_seeds",
+  "id": "bignay:pale_pumpkin_seeds",
   "min": 2,
   "max": 4,
   "chance": 0.15

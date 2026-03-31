@@ -6,6 +6,6 @@
       "loot_table_id": "minecraft:chests/abandoned_mineshaft"
     }
   ],
-  "item": "bignay:anxious_pumpkin_pattern",
+  "id": "bignay:anxious_pumpkin_pattern",
   "chance": 0.25
 }

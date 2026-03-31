@@ -6,6 +6,6 @@
       "loot_table_id": "minecraft:chests/ancient_city"
     }
   ],
-  "item": "bignay:skull_pumpkin_pattern",
+  "id": "bignay:skull_pumpkin_pattern",
   "chance": 0.3
 }

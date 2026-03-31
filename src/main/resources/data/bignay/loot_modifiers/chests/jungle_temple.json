@@ -6,6 +6,6 @@
       "loot_table_id": "minecraft:chests/jungle_temple"
     }
   ],
-  "item": "bignay:derpy_pumpkin_pattern",
+  "id": "bignay:derpy_pumpkin_pattern",
   "chance": 0.3
 }

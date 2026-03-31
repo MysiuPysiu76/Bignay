@@ -7,7 +7,7 @@ MixinConfigs = "bignay.mixins.json"
     modId = "bignay"
     version = "1.1.1"
     displayName = "Bignay"
-    authors = "Mysiu Pysiu"
+    authors = "MysiuPysiu"
     description = '''Small things, improving Minecraft bit by bit'''
 
 [[dependencies.bignay]]
