@@ -14,6 +14,7 @@ public class ModLootModifiers {
 
     public static final RegistryObject<Codec<? extends IGlobalLootModifier>> ADD_ITEM = LOOT_MODIFIER_SERIALIZERS.register("add_item", AddItemModifier.CODEC);
     public static final RegistryObject<Codec<? extends IGlobalLootModifier>> ADD_ITEM_RANGE = LOOT_MODIFIER_SERIALIZERS.register("add_item_range", AddItemRangeModifier.CODEC);
+    public static final RegistryObject<Codec<? extends IGlobalLootModifier>> ADD_COPPER_HORN = LOOT_MODIFIER_SERIALIZERS.register("add_copper_horn", AddHornModifier.CODEC);
 
     public static void register(IEventBus eventBus) {
         LOOT_MODIFIER_SERIALIZERS.register(eventBus);

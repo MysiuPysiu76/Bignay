@@ -1,0 +1,12 @@
+{
+  "type": "bignay:add_copper_horn",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/pillager_outpost"
+    }
+  ],
+  "id": "bignay:copper_horn",
+  "instrument": "bignay:lake_copper_horn",
+  "chance": 0.1
+}

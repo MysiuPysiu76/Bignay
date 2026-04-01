@@ -3,11 +3,13 @@
   "entries": [
     "bignay:chests/abandoned_mineshaft_seeds",
     "bignay:chests/abandoned_mineshaft_patterns",
-    "bignay:chests/ancient_city",
+    "bignay:chests/ancient_city_patterns",
+    "bignay:chests/ancient_city_copper_horns",
     "bignay:chests/igloo",
     "bignay:chests/jungle_temple",
     "bignay:chests/pillager_outpost_seeds",
     "bignay:chests/pillager_outpost_patterns",
+    "bignay:chests/pillager_outpost_copper_horns",
     "bignay:chests/woodland_mansion"
   ]
 }
