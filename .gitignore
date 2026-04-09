@@ -16,6 +16,7 @@
 *.nar
 *.ear
 *.tar.gz
+*.tgz
 *.rar
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
@@ -25,14 +26,18 @@ replay_pid*
 /.gradle
 /.idea
 /build
-/run
 todo
-/.idea_old
-/common/build
-/fabric/run
-/forge/build
-/forge/run
-/fabric/build
+changelog
+
 /common/.gradle
+/common/build
+
 /fabric/.gradle
+/fabric/build
+/fabric/client
+/fabric/server
+
 /forge/.gradle
+/forge/build
+/forge/client
+/forge/server
