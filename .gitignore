@@ -28,3 +28,11 @@ replay_pid*
 /run
 todo
 /.idea_old
+/common/build
+/fabric/run
+/forge/build
+/forge/run
+/fabric/build
+/common/.gradle
+/fabric/.gradle
+/forge/.gradle

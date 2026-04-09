@@ -1,0 +1,11 @@
+accessWidener v2 named
+accessible method net/minecraft/world/level/levelgen/feature/treedecorators/TreeDecoratorType <init> (Lcom/mojang/serialization/Codec;)V
+
+accessible class net/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier
+
+accessible method net/minecraft/world/level/block/entity/BlockEntityType$Builder of (Lnet/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier;[Lnet/minecraft/world/level/block/Block;)Lnet/minecraft/world/level/block/entity/BlockEntityType$Builder;
+
+accessible method net/minecraft/world/level/block/entity/BlockEntityType$Builder <init> (Lnet/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier;Ljava/util/Set;)V
+
+accessible class net/minecraft/world/inventory/MenuType$MenuSupplier
+accessible method net/minecraft/world/inventory/MenuType <init> (Lnet/minecraft/world/inventory/MenuType$MenuSupplier;Lnet/minecraft/world/flag/FeatureFlagSet;)V
