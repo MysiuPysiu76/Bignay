@@ -23,9 +23,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class CustomCampfireBlockEntity extends BlockEntity {
+public class CampfiresBlockEntity extends BlockEntity {
 
-    private static final Map<Block, BlockEntityType<CustomCampfireBlockEntity>> ENTITY_TYPES = new HashMap<>();
+    private static final Map<Block, BlockEntityType<CampfiresBlockEntity>> ENTITY_TYPES = new HashMap<>();
 
     private final NonNullList<ItemStack> items = NonNullList.withSize(4, ItemStack.EMPTY);
     private final int[] cookingProgress = new int[4];
@@ -35,15 +35,15 @@ public class CustomCampfireBlockEntity extends BlockEntity {
         registerEntityTypes();
     }
 
-    public CustomCampfireBlockEntity(BlockPos pos, BlockState state) {
+    public CampfiresBlockEntity(BlockPos pos, BlockState state) {
         super(getEntityType(state.getBlock()), pos, state);
     }
 
-    public static BlockEntityType<CustomCampfireBlockEntity> getEntityType(Block block) {
-        return ENTITY_TYPES.getOrDefault(block, (BlockEntityType<CustomCampfireBlockEntity>) BignayBlockEntities.OAK_CAMPFIRE.get());
+    public static BlockEntityType<CampfiresBlockEntity> getEntityType(Block block) {
+        return ENTITY_TYPES.getOrDefault(block, (BlockEntityType<CampfiresBlockEntity>) BignayBlockEntities.OAK_CAMPFIRE.get());
     }
 
-    public static void serverTick(Level level, BlockPos pos, BlockState state, CustomCampfireBlockEntity campfire) {
+    public static void serverTick(Level level, BlockPos pos, BlockState state, CampfiresBlockEntity campfire) {
         if (!state.getValue(CampfireBlock.LIT)) return;
 
         for (int i = 0; i < campfire.items.size(); ++i) {
@@ -97,7 +97,7 @@ public class CustomCampfireBlockEntity extends BlockEntity {
     }
 
     private static void add(Supplier<Block> blockSupplier, Supplier<BlockEntityType<?>> entitySupplier) {
-        ENTITY_TYPES.put(blockSupplier.get(), (BlockEntityType<CustomCampfireBlockEntity>) entitySupplier.get());
+        ENTITY_TYPES.put(blockSupplier.get(), (BlockEntityType<CampfiresBlockEntity>) entitySupplier.get());
     }
 
     public boolean placeFood(ItemStack stack, int slot) {

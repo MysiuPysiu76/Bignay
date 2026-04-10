@@ -2,7 +2,7 @@ package com.mysiupysiu.bignay.client.menu;
 
 import com.mysiupysiu.bignay.registry.init.BignayItems;
 import com.mysiupysiu.bignay.registry.init.MenuInit;
-import com.mysiupysiu.bignay.utils.BignayTags;
+import com.mysiupysiu.bignay.world.tags.BignayTags;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;

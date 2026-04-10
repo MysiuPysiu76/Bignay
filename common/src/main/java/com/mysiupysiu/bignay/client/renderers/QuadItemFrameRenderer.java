@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.mysiupysiu.bignay.client.models.GlowQuadItemFrameModel;
 import com.mysiupysiu.bignay.client.models.QuadItemFrameModel;
-import com.mysiupysiu.bignay.utils.BignayTags;
+import com.mysiupysiu.bignay.world.tags.BignayTags;
 import com.mysiupysiu.bignay.world.entities.GlowQuadItemFrameEntity;
 import com.mysiupysiu.bignay.world.entities.QuadItemFrameEntity;
 import net.minecraft.client.Minecraft;

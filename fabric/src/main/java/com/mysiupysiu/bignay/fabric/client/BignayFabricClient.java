@@ -2,13 +2,13 @@ package com.mysiupysiu.bignay.fabric.client;
 
 import com.mysiupysiu.bignay.client.menu.ArchaeologyTableScreen;
 import com.mysiupysiu.bignay.client.models.QuadItemFrameModel;
-import com.mysiupysiu.bignay.client.renderers.CustomCampfireRenderer;
+import com.mysiupysiu.bignay.client.renderers.CampfiresRenderer;
 import com.mysiupysiu.bignay.client.renderers.GlowQuadItemFrameRenderer;
 import com.mysiupysiu.bignay.client.renderers.QuadItemFrameRenderer;
 import com.mysiupysiu.bignay.registry.RegistrySupplier;
 import com.mysiupysiu.bignay.registry.init.*;
 import com.mysiupysiu.bignay.client.particles.SmallSoulFlameParticle;
-import com.mysiupysiu.bignay.world.blocks.be.CustomCampfireBlockEntity;
+import com.mysiupysiu.bignay.world.blocks.be.CampfiresBlockEntity;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
@@ -62,6 +62,6 @@ public class BignayFabricClient implements ClientModInitializer {
     }
 
     private void registerCampfire(RegistrySupplier<BlockEntityType<?>> supplier) {
-        BlockEntityRendererRegistry.register((BlockEntityType<CustomCampfireBlockEntity>) supplier.get(), CustomCampfireRenderer::new);
+        BlockEntityRendererRegistry.register((BlockEntityType<CampfiresBlockEntity>) supplier.get(), CampfiresRenderer::new);
     }
 }

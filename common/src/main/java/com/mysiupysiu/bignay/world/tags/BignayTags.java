@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.utils;
+package com.mysiupysiu.bignay.world.tags;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
