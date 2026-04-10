@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.mysiupysiu.bignay.registry.init.BignayBlocks;
 import com.mysiupysiu.bignay.registry.init.BignayItems;
-import com.mysiupysiu.bignay.utils.BignayTags;
+import com.mysiupysiu.bignay.world.tags.BignayTags;
 import com.mysiupysiu.bignay.world.items.tabs.BignayTabs;
 import com.mysiupysiu.bignay.world.items.tabs.CreativeTabProvider;
 import net.minecraft.core.BlockPos;

@@ -1,12 +1,10 @@
 package com.mysiupysiu.bignay.world.blocks.custom;
 
-import com.mysiupysiu.bignay.registry.init.BignayBlockEntities;
-import com.mysiupysiu.bignay.world.blocks.be.CustomCampfireBlockEntity;
+import com.mysiupysiu.bignay.world.blocks.be.CampfiresBlockEntity;
 import com.mysiupysiu.bignay.world.items.tabs.FunctionalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -28,11 +26,11 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 
-public class CustomCampfireBlock extends CampfireBlock implements FunctionalBlocks {
+public class CampfiresBlock extends CampfireBlock implements FunctionalBlocks {
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
-    public CustomCampfireBlock() {
+    public CampfiresBlock() {
         super(false, 1, BlockBehaviour.Properties.copy(Blocks.CAMPFIRE));
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(LIT, true)
@@ -41,11 +39,11 @@ public class CustomCampfireBlock extends CampfireBlock implements FunctionalBloc
                 .setValue(FACING, Direction.NORTH));
     }
 
-    public CustomCampfireBlock(Block block) {
+    public CampfiresBlock(Block block) {
         super(false, 1, BlockBehaviour.Properties.copy(block));
     }
 
-    public static class SoulCampfire extends CustomCampfireBlock {
+    public static class SoulCampfire extends CampfiresBlock {
         public SoulCampfire() {
             super(Blocks.SOUL_CAMPFIRE);
         }
@@ -53,12 +51,12 @@ public class CustomCampfireBlock extends CampfireBlock implements FunctionalBloc
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new CustomCampfireBlockEntity(pos, state);
+        return new CampfiresBlockEntity(pos, state);
     }
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        BlockEntityType<CustomCampfireBlockEntity> expectedType = CustomCampfireBlockEntity.getEntityType(state.getBlock());
+        BlockEntityType<CampfiresBlockEntity> expectedType = CampfiresBlockEntity.getEntityType(state.getBlock());
 
         return createTickerHelper(type, expectedType, (lvl, pos, st, be) -> {
             if (lvl.isClientSide) {
@@ -66,7 +64,7 @@ public class CustomCampfireBlock extends CampfireBlock implements FunctionalBloc
                     addCampfireParticles(lvl, pos, st.getValue(SIGNAL_FIRE));
                 }
             } else {
-                CustomCampfireBlockEntity.serverTick(lvl, pos, st, be);
+                CampfiresBlockEntity.serverTick(lvl, pos, st, be);
             }
         });
     }
@@ -156,7 +154,7 @@ public class CustomCampfireBlock extends CampfireBlock implements FunctionalBloc
         }
 
         BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof CustomCampfireBlockEntity campfire) {
+        if (be instanceof CampfiresBlockEntity campfire) {
             for (int i = 0; i < 4; i++) {
                 if (campfire.placeFood(itemstack, i)) {
                     if (!player.getAbilities().instabuild) {
@@ -174,7 +172,7 @@ public class CustomCampfireBlock extends CampfireBlock implements FunctionalBloc
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock())) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof CustomCampfireBlockEntity campfireEntity) {
+            if (blockEntity instanceof CampfiresBlockEntity campfireEntity) {
                 for (int i = 0; i < 4; ++i) {
                     ItemStack itemstack = campfireEntity.getItem(i);
                     if (!itemstack.isEmpty()) {

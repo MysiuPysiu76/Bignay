@@ -2,7 +2,7 @@ package com.mysiupysiu.bignay.client.renderers;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import com.mysiupysiu.bignay.world.blocks.be.CustomCampfireBlockEntity;
+import com.mysiupysiu.bignay.world.blocks.be.CampfiresBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -11,16 +11,16 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-public class CustomCampfireRenderer implements BlockEntityRenderer<CustomCampfireBlockEntity> {
+public class CampfiresRenderer implements BlockEntityRenderer<CampfiresBlockEntity> {
 
     private final ItemRenderer itemRenderer;
 
-    public CustomCampfireRenderer(BlockEntityRendererProvider.Context context) {
+    public CampfiresRenderer(BlockEntityRendererProvider.Context context) {
         this.itemRenderer = Minecraft.getInstance().getItemRenderer();
     }
 
     @Override
-    public void render(CustomCampfireBlockEntity campfire, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+    public void render(CampfiresBlockEntity campfire, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
         for (int i = 0; i < 4; ++i) {
             ItemStack stack = campfire.getItem(i);
             if (!stack.isEmpty()) {

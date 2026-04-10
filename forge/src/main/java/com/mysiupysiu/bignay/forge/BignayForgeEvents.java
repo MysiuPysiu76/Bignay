@@ -1,9 +1,9 @@
 package com.mysiupysiu.bignay.forge;
 
-import com.mysiupysiu.bignay.client.renderers.CustomCampfireRenderer;
+import com.mysiupysiu.bignay.client.renderers.CampfiresRenderer;
 import com.mysiupysiu.bignay.registry.RegistrySupplier;
 import com.mysiupysiu.bignay.registry.init.BignayBlockEntities;
-import com.mysiupysiu.bignay.world.blocks.be.CustomCampfireBlockEntity;
+import com.mysiupysiu.bignay.world.blocks.be.CampfiresBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
@@ -43,6 +43,6 @@ public class BignayForgeEvents {
     }
 
     private static <T extends BlockEntity> void registerCampfire(EntityRenderersEvent.RegisterRenderers event, @UnknownNullability RegistrySupplier<BlockEntityType<?>> supplier) {
-        event.registerBlockEntityRenderer((BlockEntityType<CustomCampfireBlockEntity>) supplier.get(), CustomCampfireRenderer::new);
+        event.registerBlockEntityRenderer((BlockEntityType<CampfiresBlockEntity>) supplier.get(), CampfiresRenderer::new);
     }
 }
