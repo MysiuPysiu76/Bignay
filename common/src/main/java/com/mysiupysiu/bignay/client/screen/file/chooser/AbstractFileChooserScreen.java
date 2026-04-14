@@ -1,7 +1,7 @@
 package com.mysiupysiu.bignay.client.screen.file.chooser;
 
 import com.mysiupysiu.bignay.utils.FileType;
-//import com.mysiupysiu.bignay.utils.config.BignayConfig;
+import com.mysiupysiu.bignay.config.BignayConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -23,12 +23,10 @@ import java.util.stream.Stream;
 abstract class AbstractFileChooserScreen extends Screen {
 
     private final boolean requireDirectory = isRequireDirectory();
-    private static final int MARGIN = 20;
+    protected abstract Stream<File> getFiles(File[] files);
+    private boolean backToPreviousAfterConfirm = false;
 
-    private boolean showHidden = false;
-//            BignayConfig.FILE_CHOOSER_SHOW_HIDDEN_FILES.get();
-    private int columns = 6;
-//        BignayConfig.FILE_CHOOSER_COLUMNS.get();
+    private static final int MARGIN = 20;
 
     private Screen previousScreen;
     private FilesSelectionGrid list;
@@ -40,23 +38,16 @@ abstract class AbstractFileChooserScreen extends Screen {
     protected Component filterComponent = Component.empty();
     private boolean draggingScrollbar = false;
 
-    private boolean backToPreviousAfterConfirm = false;
+    protected abstract boolean isRequireDirectory();
 
     public AbstractFileChooserScreen(Component component) {
         super(component);
         this.fileTypes = new LinkedHashSet<>();
     }
 
-    protected abstract Stream<File> getFiles(File[] files);
-
-    protected abstract boolean isRequireDirectory();
-
     @Override
     protected void init() {
         super.init();
-
-//        this.showHidden = BignayConfig.FILE_CHOOSER_SHOW_HIDDEN_FILES.get();
-//        this.columns = BignayConfig.FILE_CHOOSER_COLUMNS.get();
 
         int btnWidth = 90;
         int btnHeight = 20;
@@ -65,7 +56,6 @@ abstract class AbstractFileChooserScreen extends Screen {
 
         this.list = new FilesSelectionGrid(this.width, this.height, 65, this.height - 40, this);
         this.goHome();
-        this.list.setColumns(columns);
         this.list.setPath(this.currentDir);
         this.list.setOnPathUpdate(file -> this.currentDir = file.toPath());
         this.addRenderableWidget(this.list);
@@ -93,12 +83,10 @@ abstract class AbstractFileChooserScreen extends Screen {
         int bottomY = this.height - 30;
 
         this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.confirm"), b ->
-            this.fileConfirm()
-        ).bounds(centerX + 5, bottomY, btnWidth, btnHeight).build());
+                this.fileConfirm()).bounds(centerX + 5, bottomY, btnWidth, btnHeight).build());
 
         this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.cancel"), b ->
-            Minecraft.getInstance().setScreen(this.previousScreen)
-        ).bounds(centerX + 105, bottomY, btnWidth, btnHeight).build());
+                Minecraft.getInstance().setScreen(this.previousScreen)).bounds(centerX + 105, bottomY, btnWidth, btnHeight).build());
     }
 
     @Override
@@ -174,11 +162,7 @@ abstract class AbstractFileChooserScreen extends Screen {
         File[] files = dir.listFiles();
         if (files == null) files = new File[0];
 
-        return getFiles(files)
-                .filter(f -> !f.isHidden() || this.showHidden)
-                .sorted(Comparator.comparing((File f) -> !f.isDirectory())
-                .thenComparing(File::getName, String.CASE_INSENSITIVE_ORDER))
-                .toList();
+        return getFiles(files).filter(f -> !f.isHidden() || BignayConfig.files.showHidden.get()).sorted(Comparator.comparing((File f) -> !f.isDirectory()).thenComparing(File::getName, String.CASE_INSENSITIVE_ORDER)).toList();
     }
 
     public void setPreviousScreen(Screen previousScreen) {

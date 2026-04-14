@@ -1,8 +1,8 @@
 package com.mysiupysiu.bignay.client.screen.file.chooser;
 
+import com.mysiupysiu.bignay.config.BignayConfig;
 import com.mysiupysiu.bignay.utils.FileType;
 import com.mysiupysiu.bignay.utils.FileUtils;
-//import com.mysiupysiu.bignay.utils.config.BignayConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ObjectSelectionList;
@@ -10,8 +10,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-//import net.minecraftforge.api.distmarker.Dist;
-//import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -20,7 +18,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-//@OnlyIn(Dist.CLIENT)
 public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.RowEntry> {
 
     private static final int CELL_SIZE = 50;
@@ -37,8 +34,7 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
     private long lastClickTime = 0;
     private File lastClickedFile = null;
     private boolean draggingScrollbar = false;
-    private int columns = 5;
-//            BignayConfig.FILE_CHOOSER_COLUMNS.get();
+    private int columns = BignayConfig.files.columns.get();
 
     public FilesSelectionGrid(int width, int height, int top, int bottom, AbstractFileChooserScreen screen) {
         super(Minecraft.getInstance(), width, height, top, bottom, CELL_SIZE + CELL_GAP + 5);

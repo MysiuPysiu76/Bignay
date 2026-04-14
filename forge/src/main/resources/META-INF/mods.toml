@@ -6,7 +6,7 @@ logoFile = "icon.png"
 
 [[mods]]
     modId = "bignay"
-    version = "1.1.2"
+    version = "${mod_version}"
     displayName = "Bignay"
     authors = "MysiuPysiu"
     description = '''Small things, improving Minecraft bit by bit'''

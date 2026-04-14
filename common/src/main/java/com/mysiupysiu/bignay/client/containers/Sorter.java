@@ -1,5 +1,7 @@
 package com.mysiupysiu.bignay.client.containers;
 
+import com.mysiupysiu.bignay.config.BignayConfig;
+import com.mysiupysiu.bignay.config.SortMode;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
@@ -81,15 +83,15 @@ public class Sorter {
             int count1 = stack1.getCount();
             int count2 = stack2.getCount();
 
-//            if (BignayConfig.CONTAINER_SORT_MODE.get() == SortMode.QUANTITY) {
+            if (BignayConfig.containers.sortMode.get() == SortMode.QUANTITY) {
                 int countCompare = Integer.compare(count2, count1);
                 if (countCompare != 0) return countCompare;
                 return name1.compareToIgnoreCase(name2);
-//            } else {
-//                int nameCompare = name1.compareToIgnoreCase(name2);
-//                if (nameCompare != 0) return nameCompare;
-//                return Integer.compare(count2, count1);
-//            }
+            } else {
+                int nameCompare = name1.compareToIgnoreCase(name2);
+                if (nameCompare != 0) return nameCompare;
+                return Integer.compare(count2, count1);
+            }
         });
 
         for (int i = 0; i < mergedItems.size(); i++) {

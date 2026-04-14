@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.client.screen.screenshot;
 
-//import com.mysiupysiu.bignay.utils.config.BignayConfig;
+import com.mysiupysiu.bignay.config.BignayConfig;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
@@ -9,54 +9,36 @@ import net.minecraft.network.chat.Component;
 
 public class ScreenshotsOptionsScreen extends Screen {
 
+    private ColumnsSliderButton columnsButton;
+
     public ScreenshotsOptionsScreen() {
         super(Component.translatable("screenshotsViewer.options.title"));
     }
 
     @Override
     protected void init() {
-        int centerX = this.width / 2;
-        int centerY = this.height / 2;
+        int x = this.width / 2 - 100;
+        int y = this.height / 2 - 75;
 
-        this.addRenderableWidget(Button.builder(getSortButtonTitle(), btn -> {
-//            BignayConfig.SCREENSHOTS_VIEWER_SORT_TO_OLDEST.set(BignayConfig.SCREENSHOTS_VIEWER_SORT_TO_OLDEST.get());
-            btn.setMessage(getSortButtonTitle());
-        }).bounds(centerX - 100, centerY - 75, 200, 20).build());
+        this.addRenderableWidget(Button.builder(getSortTitle(), btn -> {
+            BignayConfig.screenshots.sortToOldest.set(!BignayConfig.screenshots.sortToOldest.get());
+            btn.setMessage(getSortTitle());
+        }).bounds(x, y, 200, 20).build());
 
-        this.addRenderableWidget(Button.builder(getShowScreenshotNameButtonTitle(), btn -> {
-//            BignayConfig.SCREENSHOTS_VIEWER_SHOW_FILE_NAME.set(!BignayConfig.SCREENSHOTS_VIEWER_SHOW_FILE_NAME.get());
-            btn.setMessage(getShowScreenshotNameButtonTitle());
-        }).bounds(centerX - 100, centerY - 50, 200, 20).build());
+        this.addRenderableWidget(Button.builder(getNameTitle(), btn -> {
+            BignayConfig.screenshots.showFileName.set(!BignayConfig.screenshots.showFileName.get());
+            btn.setMessage(getNameTitle());
+        }).bounds(x, y + 25, 200, 20).build());
 
-        this.addRenderableWidget(Button.builder(getShowExtensionButtonTitle(), btn -> {
-//            BignayConfig.SCREENSHOTS_VIEWER_SHOW_FILE_EXTENSION.set(!BignayConfig.SCREENSHOTS_VIEWER_SHOW_FILE_EXTENSION.get());
-            btn.setMessage(getShowExtensionButtonTitle());
-        }).bounds(centerX - 100, centerY - 25, 200, 20).build());
+        this.addRenderableWidget(Button.builder(getExtTitle(), btn -> {
+            BignayConfig.screenshots.showFileExtension.set(!BignayConfig.screenshots.showFileExtension.get());
+            btn.setMessage(getExtTitle());
+        }).bounds(x, y + 50, 200, 20).build());
 
-        int min = 2;
-        int max = 8;
-
-//        double initialSliderValue = (double)(BignayConfig.SCREENSHOTS_VIEWER_COLUMNS.get() - min) / (max - min);
-//
-//        this.addRenderableWidget(new AbstractSliderButton(centerX - 100, centerY, 200, 20, Component.empty(), initialSliderValue) {
-//            {
-//                this.updateMessage();
-//            }
-//
-//            @Override
-//            protected void updateMessage() {
-//                int currentVal = (int) Math.round(this.value * (max - min) + min);
-//                this.setMessage(Component.translatable("screenshotsViewer.options.columns", currentVal));
-//            }
-//
-//            @Override
-//            protected void applyValue() {
-//                BignayConfig.SCREENSHOTS_VIEWER_COLUMNS.set((int) Math.round(this.value * (max - min) + min));
-//            }
-//        });
+        this.columnsButton = this.addRenderableWidget(new ColumnsSliderButton(x, y + 75, 200, 20));
 
         this.addRenderableWidget(Button.builder(CommonComponents.GUI_DONE, btn -> this.onClose())
-                .bounds(centerX - 100, centerY + 40, 200, 20).build());
+                .bounds(x, y + 115, 200, 20).build());
     }
 
     @Override
@@ -68,24 +50,24 @@ public class ScreenshotsOptionsScreen extends Screen {
 
     @Override
     public void onClose() {
-        this.minecraft.setScreen(new ScreenshotsViewerScreen());
+        BignayConfig.screenshots.columns.set(columnsButton.getPosition());
+
+        BignayConfig.save();
+
+        if (this.minecraft != null) {
+            this.minecraft.setScreen(new ScreenshotsViewerScreen());
+        }
     }
 
-    private Component getSortButtonTitle() {
-        return Component.translatable("screenshotsViewer.options.sort_" + (
-//                BignayConfig.SCREENSHOTS_VIEWER_SORT_TO_OLDEST.get() ? "oldest" :
-                        "newest"));
+    private Component getSortTitle() {
+        return Component.translatable("screenshotsViewer.options.sort_" + (BignayConfig.screenshots.sortToOldest.get() ? "oldest" : "newest"));
     }
 
-    private Component getShowScreenshotNameButtonTitle() {
-        return  Component.translatable("screenshotsViewer.options.show_screenshot_name_" + (
-//                BignayConfig.SCREENSHOTS_VIEWER_SHOW_FILE_NAME.get() ? "yes" :
-                        "no"));
+    private Component getNameTitle() {
+        return Component.translatable("screenshotsViewer.options.show_screenshot_name_" + (BignayConfig.screenshots.showFileName.get() ? "yes" : "no"));
     }
 
-    private Component getShowExtensionButtonTitle() {
-        return  Component.translatable("screenshotsViewer.options.show_extension_" + (
-//                BignayConfig.SCREENSHOTS_VIEWER_SHOW_FILE_EXTENSION.get() ? "yes" :
-                        "no"));
+    private Component getExtTitle() {
+        return Component.translatable("screenshotsViewer.options.show_extension_" + (BignayConfig.screenshots.showFileExtension.get() ? "yes" : "no"));
     }
 }
