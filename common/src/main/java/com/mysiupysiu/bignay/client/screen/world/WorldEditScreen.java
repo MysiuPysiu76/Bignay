@@ -87,7 +87,7 @@ public class WorldEditScreen extends Screen {
         this.addRenderableWidget(getDuplicateButton().bounds(startX_Right, startY + 96, 150, 20).build());
 
         this.addRenderableWidget(getDeleteButton().bounds(startX_Left, startY + 120, 150, 20).build());
-//        this.addRenderableWidget(getExportButton().bounds(startX_Right, startY + 120, 150, 20).build());
+        this.addRenderableWidget(getExportButton().bounds(startX_Right, startY + 120, 150, 20).build());
 
         int bottomY = this.height / 4 + 149;
         Button saveButton = this.addRenderableWidget(Button.builder(Component.translatable("selectWorld.edit.save"), b -> onSave()).bounds(centerX - 135, bottomY, 130, 20).build());
@@ -318,10 +318,10 @@ public class WorldEditScreen extends Screen {
         });
     }
 
-//    private Button.Builder getExportButton() {
-//        return Button.builder(Component.translatable("selectWorld.edit.export"), btn ->
-//                Minecraft.getInstance().setScreen(new WorldExportScreen(this, levelAccess)));
-//    }
+    private Button.Builder getExportButton() {
+        return Button.builder(Component.translatable("selectWorld.edit.export"), btn ->
+                Minecraft.getInstance().setScreen(new WorldExportScreen(this, levelAccess)));
+    }
 
     private boolean makeBackupAndShowToast(LevelStorageSource.LevelStorageAccess access) {
         try {

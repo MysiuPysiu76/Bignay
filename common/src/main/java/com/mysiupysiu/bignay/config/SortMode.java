@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.forge.config;
+package com.mysiupysiu.bignay.config;
 
 public enum SortMode {
     ALPHABETICAL,

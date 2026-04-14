@@ -3,6 +3,7 @@ package com.mysiupysiu.bignay.client.screen.screenshot;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mysiupysiu.bignay.client.screen.file.chooser.FolderChooserScreen;
+import com.mysiupysiu.bignay.config.BignayConfig;
 import com.mysiupysiu.bignay.utils.FileUtils;
 //import com.mysiupysiu.bignay.utils.config.BignayConfig;
 import com.mysiupysiu.bignay.utils.screenshot.ScreenshotsManager;
@@ -95,8 +96,8 @@ public class ScreenshotViewScreen extends Screen {
         RenderSystem.setShaderTexture(0, this.texture);
         gui.blit(this.texture, x, y, 0, 0, drawW, drawH, drawW, drawH);
 
-//        String title = BignayConfig.SCREENSHOTS_VIEWER_SHOW_FILE_EXTENSION.get() ? name : name.replace(".png", "");
-//        gui.drawCenteredString(this.font, title, this.width / 2, 7, 0xFFFFFF);
+        String title = BignayConfig.screenshots.showFileExtension.get() ? name : name.replace(".png", "");
+        gui.drawCenteredString(this.font, title, this.width / 2, 7, 0xFFFFFF);
         super.render(gui, mouseX, mouseY, partialTick);
     }
 
