@@ -1,14 +1,20 @@
 package com.mysiupysiu.bignay.world.blocks;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.ImmutableBiMap;
 import com.mysiupysiu.bignay.registry.RegistrySupplier;
+import com.mysiupysiu.bignay.registry.init.BignayBlocks;
 import com.mysiupysiu.bignay.world.items.tabs.BignayTabs;
 import com.mysiupysiu.bignay.world.items.tabs.BuildingBlocks;
 import com.mysiupysiu.bignay.world.items.tabs.CreativeTabProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -26,6 +32,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
@@ -34,24 +41,22 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import java.util.List;
+import java.util.Optional;
+import java.util.function.Supplier;
 
 public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterloggedBlock, BuildingBlocks {
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    public static final Supplier<BiMap<Block, Block>> LOGS = HollowLogBlock::getLogs;
 
     public HollowLogBlock() {
         super(Properties.copy(Blocks.STONE).noOcclusion());
-        this.registerDefaultState(this.defaultBlockState()
-                .setValue(AXIS, Direction.Axis.Y)
-                .setValue(WATERLOGGED, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(AXIS, Direction.Axis.Y).setValue(WATERLOGGED, false));
     }
 
     public HollowLogBlock(Block block) {
         super(Properties.copy(block).noOcclusion());
-        this.registerDefaultState(this.defaultBlockState()
-                .setValue(AXIS, Direction.Axis.Y)
-                .setValue(WATERLOGGED, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(AXIS, Direction.Axis.Y).setValue(WATERLOGGED, false));
     }
 
     public HollowLogBlock(RegistrySupplier<Block> block) {
@@ -67,16 +72,12 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         FluidState fluid = context.getLevel().getFluidState(context.getClickedPos());
         boolean isWater = fluid.getType() == Fluids.WATER;
-        return this.defaultBlockState()
-                .setValue(AXIS, context.getClickedFace().getAxis())
-                .setValue(WATERLOGGED, isWater);
+        return this.defaultBlockState().setValue(AXIS, context.getClickedFace().getAxis()).setValue(WATERLOGGED, isWater);
     }
 
     @Override
     public FluidState getFluidState(BlockState state) {
-        return state.getValue(WATERLOGGED)
-                ? Fluids.WATER.getSource(false)
-                : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
@@ -96,15 +97,9 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
 
     private VoxelShape getHollowShape(Direction.Axis axis) {
         return switch (axis) {
-            case X -> Shapes.join(Shapes.block(),
-                    Shapes.box(0.0, 0.125, 0.125, 1.0, 0.875, 0.875),
-                    BooleanOp.ONLY_FIRST);
-            case Y -> Shapes.join(Shapes.block(),
-                    Shapes.box(0.125, 0.0, 0.125, 0.875, 1.0, 0.875),
-                    BooleanOp.ONLY_FIRST);
-            case Z -> Shapes.join(Shapes.block(),
-                    Shapes.box(0.125, 0.125, 0.0, 0.875, 0.875, 1.0),
-                    BooleanOp.ONLY_FIRST);
+            case X -> Shapes.join(Shapes.block(), Shapes.box(0.0, 0.125, 0.125, 1.0, 0.875, 0.875), BooleanOp.ONLY_FIRST);
+            case Y -> Shapes.join(Shapes.block(), Shapes.box(0.125, 0.0, 0.125, 0.875, 1.0, 0.875), BooleanOp.ONLY_FIRST);
+            case Z -> Shapes.join(Shapes.block(), Shapes.box(0.125, 0.125, 0.0, 0.875, 0.875, 1.0), BooleanOp.ONLY_FIRST);
         };
     }
 
@@ -112,35 +107,20 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ItemStack stack = player.getItemInHand(hand);
 
-//        if (stack.getItem() instanceof AxeItem) {
-//            ResourceLocation key = ForgeRegistries.BLOCKS.getKey(this);
-//            if (key != null && !key.getPath().contains("stripped")) {
-//                String newName = "hollow_stripped_" + key.getPath().substring(7);
-//                Block stripped = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(key.getNamespace(), newName));
-//                if (stripped != null && stripped != Blocks.AIR) {
-//                    BlockState ns = stripped.defaultBlockState()
-//                            .setValue(AXIS, state.getValue(AXIS))
-//                            .setValue(WATERLOGGED, state.getValue(WATERLOGGED));
-//                    level.setBlock(pos, ns, 11);
-//                    level.playSound(player, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1f, 1f);
-//                    if (!level.isClientSide()) stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
-//                    return InteractionResult.sidedSuccess(level.isClientSide());
-//                }
-//            }
-//        }
+        if (stack.is(ItemTags.AXES)) {
+            return getStripped(state).map(strippedState -> {
+                level.playSound(player, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
 
-//        if (stack.getItem() instanceof BucketItem bucket && bucket.getFluid() == Fluids.WATER) {
-//            if (!state.getValue(WATERLOGGED)) {
-//                if (!level.isClientSide()) {
-//                    level.setBlock(pos, state.setValue(WATERLOGGED, true), 3);
-//                    level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
-//
-//                    level.playSound(player, pos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1f, 1f);
-//                    if (!player.isCreative()) player.setItemInHand(hand, new ItemStack(Items.BUCKET));
-//                }
-//                return InteractionResult.sidedSuccess(level.isClientSide());
-//            }
-//        }
+                if (player instanceof ServerPlayer) {
+                    stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+                }
+
+                level.setBlock(pos, strippedState, 11);
+                level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, strippedState));
+
+                return InteractionResult.sidedSuccess(level.isClientSide);
+            }).orElse(InteractionResult.PASS);
+        }
 
         if (stack.getItem() == Items.BUCKET && state.getValue(WATERLOGGED)) {
             if (!level.isClientSide()) {
@@ -154,8 +134,28 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
         return super.use(state, level, pos, player, hand, hit);
     }
 
-//    @Override
+    public static Optional<BlockState> getStripped(BlockState blockState) {
+        return Optional.ofNullable(LOGS.get().get(blockState.getBlock())).map(block -> block.withPropertiesOf(blockState));
+    }
+
     public boolean isLadder(BlockState state, LevelReader level, BlockPos pos, LivingEntity entity) {
         return true;
+    }
+
+    public static BiMap<Block, Block> getLogs() {
+        return ImmutableBiMap.<Block, Block>builder()
+                .put(BignayBlocks.HOLLOW_ACACIA_LOG.get(), BignayBlocks.HOLLOW_STRIPPED_ACACIA_LOG.get())
+                .put(BignayBlocks.HOLLOW_BAMBOO_BLOCK.get(), BignayBlocks.HOLLOW_STRIPPED_BAMBOO_BLOCK.get())
+                .put(BignayBlocks.HOLLOW_BIRCH_LOG.get(), BignayBlocks.HOLLOW_STRIPPED_BIRCH_LOG.get())
+                .put(BignayBlocks.HOLLOW_CHERRY_LOG.get(), BignayBlocks.HOLLOW_STRIPPED_CHERRY_LOG.get())
+                .put(BignayBlocks.HOLLOW_CRIMSON_STEM.get(), BignayBlocks.HOLLOW_STRIPPED_CRIMSON_STEM.get())
+                .put(BignayBlocks.HOLLOW_DARK_OAK_LOG.get(), BignayBlocks.HOLLOW_STRIPPED_DARK_OAK_LOG.get())
+                .put(BignayBlocks.HOLLOW_JUNGLE_LOG.get(), BignayBlocks.HOLLOW_STRIPPED_JUNGLE_LOG.get())
+                .put(BignayBlocks.HOLLOW_MANGROVE_LOG.get(), BignayBlocks.HOLLOW_STRIPPED_MANGROVE_LOG.get())
+                .put(BignayBlocks.HOLLOW_OAK_LOG.get(), BignayBlocks.HOLLOW_STRIPPED_OAK_LOG.get())
+                .put(BignayBlocks.HOLLOW_SPRUCE_LOG.get(), BignayBlocks.HOLLOW_STRIPPED_SPRUCE_LOG.get())
+                .put(BignayBlocks.HOLLOW_VERDANT_STEM.get(), BignayBlocks.HOLLOW_STRIPPED_VERDANT_STEM.get())
+                .put(BignayBlocks.HOLLOW_WARPED_STEM.get(), BignayBlocks.HOLLOW_STRIPPED_WARPED_STEM.get())
+                .build();
     }
 }
