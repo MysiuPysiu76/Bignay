@@ -67,6 +67,7 @@
   "block.bignay.cracked_stone_brick_slab": "Cracked Stone Brick Slab",
   "block.bignay.cracked_polished_blackstone_brick_stairs": "Cracked Polished Blackstone Brick Stairs",
   "block.bignay.cracked_polished_blackstone_brick_slab": "Cracked Polished Blackstone Brick Slab",
+  "exportWorld.exportPlayerData.tooltip": "Defines whether to export things like achievements or statistics",
   "block.bignay.cracked_deepslate_brick_slab": "Cracked Deepslate Brick Slab",
   "block.bignay.cracked_deepslate_brick_stairs": "Cracked Deepslate Brick Stairs",
   "block.bignay.cracked_deepslate_tile_slab": "Cracked Deepslate Tile Slab",
