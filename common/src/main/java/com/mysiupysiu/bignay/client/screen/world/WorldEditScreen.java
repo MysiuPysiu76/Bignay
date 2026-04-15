@@ -112,7 +112,7 @@ public class WorldEditScreen extends Screen {
     @Override
     public void onClose() {
         try {
-            levelAccess.close();
+            this.levelAccess.close();
             Minecraft.getInstance().setScreen(new SelectWorldScreen(null));
         } catch (IOException e) {
             throw new RuntimeException(e);
