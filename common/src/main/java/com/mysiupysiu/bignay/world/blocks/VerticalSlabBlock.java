@@ -33,8 +33,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import java.util.List;
-
 public class VerticalSlabBlock extends Block implements BuildingBlocks, SimpleWaterloggedBlock {
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -77,9 +75,7 @@ public class VerticalSlabBlock extends Block implements BuildingBlocks, SimpleWa
     private boolean isFrontBlocked(Level level, BlockPos pos, BlockState slabState) {
         Direction front = slabFront(slabState.getValue(TYPE));
         BlockPos frontPos = pos.relative(front);
-
         BlockState frontState = level.getBlockState(frontPos);
-
         return !frontState.isAir() && frontState.isSolid();
     }
 
@@ -112,12 +108,18 @@ public class VerticalSlabBlock extends Block implements BuildingBlocks, SimpleWa
         boolean water = level.getFluidState(clickedPos).getType() == Fluids.WATER;
 
         if (clickedState.is(this) && clickedState.getValue(TYPE) != Type.DOUBLE) {
-            return clickedState.setValue(TYPE, Type.DOUBLE).setValue(WATERLOGGED, false);
+            Type existingType = clickedState.getValue(TYPE);
+            Direction existingFront = slabFront(existingType);
+
+            if (clickedFace == existingFront.getOpposite()) {
+                return clickedState.setValue(TYPE, Type.DOUBLE).setValue(WATERLOGGED, false);
+            } else {
+                return null;
+            }
         }
 
         BlockPos behindPos = clickedPos.relative(clickedFace.getOpposite());
         BlockState behindState = level.getBlockState(behindPos);
-
         if (behindState.is(this) && behindState.getValue(TYPE) != Type.DOUBLE) {
             Direction front = slabFront(behindState.getValue(TYPE));
             if (clickedFace == front.getOpposite()) {
@@ -138,23 +140,36 @@ public class VerticalSlabBlock extends Block implements BuildingBlocks, SimpleWa
             }
         }
 
+        Vec3 hit = ctx.getClickLocation();
+        double localX = hit.x - clickedPos.getX();
+        double localZ = hit.z - clickedPos.getZ();
+        Direction playerFacing = ctx.getHorizontalDirection();
+        Type choose;
+
         if (clickedFace == Direction.UP || clickedFace == Direction.DOWN) {
-            Vec3 hit = ctx.getClickLocation();
-            double x = hit.x - clickedPos.getX();
-            double z = hit.z - clickedPos.getZ();
+            double margin = 0.1875;
 
-            Type choose = (Math.abs(x - 0.5) > Math.abs(z - 0.5)) ? (x < 0.5 ? Type.WEST : Type.EAST) : (z < 0.5 ? Type.NORTH : Type.SOUTH);
-
-            return defaultBlockState().setValue(TYPE, choose).setValue(WATERLOGGED, water);
+            if (playerFacing.getAxis() == Direction.Axis.Z) {
+                if (localX < margin) choose = Type.WEST;
+                else if (localX > (1.0 - margin)) choose = Type.EAST;
+                else choose = (localZ < 0.5) ? Type.NORTH : Type.SOUTH;
+            } else {
+                if (localZ < margin) choose = Type.NORTH;
+                else if (localZ > (1.0 - margin)) choose = Type.SOUTH;
+                else choose = (localX < 0.5) ? Type.WEST : Type.EAST;
+            }
+        }
+        else {
+            choose = switch (clickedFace) {
+                case NORTH -> Type.SOUTH;
+                case SOUTH -> Type.NORTH;
+                case WEST -> Type.EAST;
+                case EAST -> Type.WEST;
+                default -> Type.NORTH;
+            };
         }
 
-        return switch (clickedFace) {
-            case NORTH -> defaultBlockState().setValue(TYPE, Type.SOUTH).setValue(WATERLOGGED, water);
-            case SOUTH -> defaultBlockState().setValue(TYPE, Type.NORTH).setValue(WATERLOGGED, water);
-            case WEST -> defaultBlockState().setValue(TYPE, Type.EAST).setValue(WATERLOGGED, water);
-            case EAST -> defaultBlockState().setValue(TYPE, Type.WEST).setValue(WATERLOGGED, water);
-            default -> defaultBlockState().setValue(WATERLOGGED, water);
-        };
+        return defaultBlockState().setValue(TYPE, choose).setValue(WATERLOGGED, water);
     }
 
     private boolean isClickInFreeHalf(BlockPlaceContext ctx, BlockState slabState) {
