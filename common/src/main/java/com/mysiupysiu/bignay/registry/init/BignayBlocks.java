@@ -9,6 +9,7 @@ import com.mysiupysiu.bignay.world.blocks.custom.PalePumpkinBlock;
 import com.mysiupysiu.bignay.world.items.BurnableBlockItem;
 import com.mysiupysiu.bignay.world.items.EquipablePumpkinItem;
 import com.mysiupysiu.bignay.world.items.ItemForBlock;
+import com.mysiupysiu.bignay.world.worldgen.BignayConfiguredFeatures;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
@@ -161,10 +162,10 @@ public class BignayBlocks {
     public static final RegistrySupplier<Block> VERTICAL_WARPED_PLANK_SLAB = block("vertical_warped_plank_slab", () -> new SlabsBlock(Blocks.WARPED_PLANKS));
 
     public static final RegistrySupplier<Block> VERDANT_NYLIUM = block("verdant_nylium", () -> new NetherNyliumBlock(MapColor.COLOR_GREEN));
-    //    public static final RegistrySupplier<Block> VERDANT_FUNGUS = block("verdant_fungus", () -> new NetherFungusBlock(ModConfiguredFeatures.VERDANT_FUNGUS, VERDANT_NYLIUM.get()));
+    public static final RegistrySupplier<Block> VERDANT_FUNGUS = block("verdant_fungus", () -> new NetherFungusBlock(BignayConfiguredFeatures.VERDANT_FUNGUS, VERDANT_NYLIUM.get()));
     public static final RegistrySupplier<Block> VERDANT_ROOTS = block("verdant_roots", () -> new NetherRootsBlock(MapColor.COLOR_GREEN));
     public static final RegistrySupplier<Block> VERDANT_WART_BLOCK = block("verdant_wart_block", () -> new NetherWartBlock(MapColor.COLOR_GREEN));
-    //    public static final RegistrySupplier<Block> POTTED_VERDANT_FUNGUS = blockOnly("potted_verdant_fungus", () -> new FlowerPotsBlock(VERDANT_FUNGUS));
+    public static final RegistrySupplier<Block> POTTED_VERDANT_FUNGUS = blockOnly("potted_verdant_fungus", () -> new FlowerPotsBlock(VERDANT_FUNGUS));
     public static final RegistrySupplier<Block> POTTED_VERDANT_ROOTS = blockOnly("potted_verdant_roots", () -> new FlowerPotsBlock(VERDANT_ROOTS));
     public static final RegistrySupplier<Block> VERDANT_SPROUTS = block("verdant_sprouts", () -> new SproutsBlock(MapColor.COLOR_GREEN));
     public static final RegistrySupplier<Block> CRIMSON_SPROUTS = block("crimson_sprouts", () -> new SproutsBlock(MapColor.CRIMSON_NYLIUM));
