@@ -44,10 +44,8 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
     @Override
     protected int getScrollbarPosition() {
         int gridWidth = this.columns * CELL_SIZE + (this.columns - 1) * CELL_GAP;
-//        int startX = this.getLeft() + (this.width - gridWidth) / 2;
-//        return startX + gridWidth + 10;
-
-        return 10;
+        int startX = this.getLeft() + (this.width - gridWidth) / 2;
+        return startX + gridWidth + 10;
     }
 
     @Override
@@ -55,62 +53,62 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
         int mx = (int) Math.floor(mouseX);
         int my = (int) Math.floor(mouseY);
 
-//        int viewTop = this.getTop();
-//        int viewBottom = this.getBottom();
-//        int viewLeft = this.getLeft();
-//        int viewRight = this.getRight() - 8;
+        int viewTop = this.getTop();
+        int viewBottom = this.getBottom();
+        int viewLeft = this.getLeft();
+        int viewRight = this.getRight() - 8;
 
-//        if (mx < viewLeft || mx > viewRight || my < viewTop || my > viewBottom) {
-//            return false;
-//        }
-//
-//        int gridWidth = this.columns * CELL_SIZE + (this.columns - 1) * CELL_GAP;
-//        int startX = this.getRowLeft() + (this.getRowWidth() - gridWidth) / 2;
-//
-//        List<RowEntry> rows = this.children();
-//        if (rows.isEmpty()) return false;
-//
-//        long now = System.currentTimeMillis();
-//
-//        for (int rowIndex = 0; rowIndex < rows.size(); rowIndex++) {
-//            int rowTop = this.getRowTop(rowIndex);
-//            int rowBottom = rowTop + this.itemHeight;
-//
-//            if (my < rowTop || my > rowBottom) continue;
-//
-//            RowEntry row = rows.get(rowIndex);
-//            List<File> files = row.getFiles();
-//
-//            for (int col = 0; col < files.size(); col++) {
-//                int drawX = startX + col * (CELL_SIZE + CELL_GAP);
-//                int drawY = rowTop + 4;
-//                int drawRight = drawX + CELL_SIZE;
-//                int drawBottom = drawY + CELL_SIZE;
-//
-//                if (mx >= drawX && mx <= drawRight && my >= drawY && my <= drawBottom) {
-//
-//                    File clicked = files.get(col);
-//
-//                    this.selectedFile = clicked;
-//
-//                    boolean isDoubleClick = clicked.equals(this.lastClickedFile) && (now - this.lastClickTime) <= DOUBLE_CLICK_MS;
-//
-//                    this.lastClickTime = now;
-//                    this.lastClickedFile = clicked;
-//
-//                    if (isDoubleClick) {
-//                        this.path = this.selectedFile.toPath();
-//                        if (clicked.isDirectory()) {
-//                            this.rootScreen.setPath(this.path);
-//                            this.setContent(this.rootScreen.getEntries(clicked));
-//                        } else {
-//                            this.rootScreen.fileConfirm();
-//                        }
-//                    }
-//                    return true;
-//                }
-//            }
-//        }
+        if (mx < viewLeft || mx > viewRight || my < viewTop || my > viewBottom) {
+            return false;
+        }
+
+        int gridWidth = this.columns * CELL_SIZE + (this.columns - 1) * CELL_GAP;
+        int startX = this.getRowLeft() + (this.getRowWidth() - gridWidth) / 2;
+
+        List<RowEntry> rows = this.children();
+        if (rows.isEmpty()) return false;
+
+        long now = System.currentTimeMillis();
+
+        for (int rowIndex = 0; rowIndex < rows.size(); rowIndex++) {
+            int rowTop = this.getRowTop(rowIndex);
+            int rowBottom = rowTop + this.itemHeight;
+
+            if (my < rowTop || my > rowBottom) continue;
+
+            RowEntry row = rows.get(rowIndex);
+            List<File> files = row.getFiles();
+
+            for (int col = 0; col < files.size(); col++) {
+                int drawX = startX + col * (CELL_SIZE + CELL_GAP);
+                int drawY = rowTop + 4;
+                int drawRight = drawX + CELL_SIZE;
+                int drawBottom = drawY + CELL_SIZE;
+
+                if (mx >= drawX && mx <= drawRight && my >= drawY && my <= drawBottom) {
+
+                    File clicked = files.get(col);
+
+                    this.selectedFile = clicked;
+
+                    boolean isDoubleClick = clicked.equals(this.lastClickedFile) && (now - this.lastClickTime) <= DOUBLE_CLICK_MS;
+
+                    this.lastClickTime = now;
+                    this.lastClickedFile = clicked;
+
+                    if (isDoubleClick) {
+                        this.path = this.selectedFile.toPath();
+                        if (clicked.isDirectory()) {
+                            this.rootScreen.setPath(this.path);
+                            this.setContent(this.rootScreen.getEntries(clicked));
+                        } else {
+                            this.rootScreen.fileConfirm();
+                        }
+                    }
+                    return true;
+                }
+            }
+        }
 
         int scrollbarX = getScrollbarPosition();
 
@@ -239,15 +237,15 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
         double targetBottom = targetTop + this.itemHeight;
 
         double visibleTop = this.getScrollAmount();
-//        double visibleBottom = visibleTop + (this.getBottom() - this.getTop() - this.itemHeight);
-//
-//        if (targetTop < visibleTop) {
-//            this.setScrollAmount(targetTop);
-//        } else if (targetBottom > visibleBottom) {
-//            double newScroll = targetBottom - (this.getBottom() - this.getTop() - this.itemHeight);
-//            newScroll = Mth.clamp(newScroll, 0.0D, this.getMaxScroll());
-//            this.setScrollAmount(newScroll);
-//        }
+        double visibleBottom = visibleTop + (this.getBottom() - this.getTop() - this.itemHeight);
+
+        if (targetTop < visibleTop) {
+            this.setScrollAmount(targetTop);
+        } else if (targetBottom > visibleBottom) {
+            double newScroll = targetBottom - (this.getBottom() - this.getTop() - this.itemHeight);
+            newScroll = Mth.clamp(newScroll, 0.0D, this.getMaxScroll());
+            this.setScrollAmount(newScroll);
+        }
 
         return true;
     }
@@ -269,9 +267,9 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
             var font = Minecraft.getInstance().font;
 
             int centerX = this.getRowLeft() + this.getRowWidth() / 2;
-//            int centerY = this.getTop() + (this.getBottom() - this.getTop()) / 2;
+            int centerY = this.getTop() + (this.getBottom() - this.getTop()) / 2;
 
-//            g.drawCenteredString(font, Component.translatable("fileChooser.emptyFolder"), centerX, centerY, 0xFFFFFF);
+            g.drawCenteredString(font, Component.translatable("fileChooser.emptyFolder"), centerX, centerY, 0xFFFFFF);
         }
 
         this.setFocused(wasFocused);
@@ -359,15 +357,15 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
         double targetTop = row * (double) this.itemHeight;
         double targetBottom = targetTop + this.itemHeight;
         double visibleTop = this.getScrollAmount();
-//        double visibleBottom = visibleTop + (this.getBottom() - this.getTop());
-//
-//        if (targetTop < visibleTop) {
-//            this.setScrollAmount(Math.max(0.0D, Math.min(targetTop, this.getMaxScroll())));
-//        } else if (targetBottom > visibleBottom) {
-//            double newScroll = targetBottom - (this.getBottom() - this.getTop());
-//            newScroll = Math.max(0.0D, Math.min(newScroll, this.getMaxScroll()));
-//            this.setScrollAmount(newScroll);
-//        }
+        double visibleBottom = visibleTop + (this.getBottom() - this.getTop());
+
+        if (targetTop < visibleTop) {
+            this.setScrollAmount(Math.max(0.0D, Math.min(targetTop, this.getMaxScroll())));
+        } else if (targetBottom > visibleBottom) {
+            double newScroll = targetBottom - (this.getBottom() - this.getTop());
+            newScroll = Math.max(0.0D, Math.min(newScroll, this.getMaxScroll()));
+            this.setScrollAmount(newScroll);
+        }
     }
 
     public File getSelectedFile() {
@@ -418,5 +416,21 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
             }
         }
         if (!row.isEmpty()) addEntry(new RowEntry(new ArrayList<>(row)));
+    }
+
+    public int getBottom() {
+        return this.y1;
+    }
+
+    public int getTop() {
+        return this.y0;
+    }
+
+    public int getLeft() {
+        return this.x0;
+    }
+
+    public int getRight() {
+        return this.x1;
     }
 }
