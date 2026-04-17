@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.forge;
+package com.mysiupysiu.bignay.forge.events;
 
 import com.mysiupysiu.bignay.client.renderers.CampfiresRenderer;
 import com.mysiupysiu.bignay.registry.RegistrySupplier;
@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.UnknownNullability;
 
 @Mod.EventBusSubscriber(modid = "bignay", bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-public class BignayForgeEvents {
+public class Campfires {
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers e) {

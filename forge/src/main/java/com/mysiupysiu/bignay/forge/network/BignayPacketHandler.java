@@ -10,22 +10,16 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import java.util.function.Supplier;
 
 public class BignayPacketHandler {
+
     private static final String PROTOCOL_VERSION = "1";
-    public static  SimpleChannel INSTANCE;
-            //NetworkRegistry.newSimpleChannel(new ResourceLocation("bignay", "main"), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
+    public static SimpleChannel INSTANCE;
 
     public static void register() {
-        INSTANCE = NetworkRegistry.newSimpleChannel(
-                new ResourceLocation("bignay", "main"),
-                () -> PROTOCOL_VERSION,
-                PROTOCOL_VERSION::equals,
-                PROTOCOL_VERSION::equals
-        );
+        INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation("bignay", "main"), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
 
-        int id = 0;
-        INSTANCE.registerMessage(id++, SortPacket.class, SortPacket::encode, SortPacket::decode, SortPacket::handle);
-        INSTANCE.registerMessage(id++, TransferPacket.class, TransferPacket::encode, TransferPacket::decode, TransferPacket::handle);
-        INSTANCE.registerMessage(id++, WithdrawPacket.class, WithdrawPacket::encode, WithdrawPacket::decode, WithdrawPacket::handle);
+        INSTANCE.registerMessage(1, SortPacket.class, SortPacket::encode, SortPacket::decode, SortPacket::handle);
+        INSTANCE.registerMessage(2, TransferPacket.class, TransferPacket::encode, TransferPacket::decode, TransferPacket::handle);
+        INSTANCE.registerMessage(3, WithdrawPacket.class, WithdrawPacket::encode, WithdrawPacket::decode, WithdrawPacket::handle);
     }
 
     public static class SortPacket {
@@ -78,8 +72,12 @@ public class BignayPacketHandler {
 
     public static class WithdrawPacket {
         public WithdrawPacket() {}
+
         public static void encode(WithdrawPacket msg, net.minecraft.network.FriendlyByteBuf buf) {}
-        public static WithdrawPacket decode(net.minecraft.network.FriendlyByteBuf buf) { return new WithdrawPacket(); }
+
+        public static WithdrawPacket decode(net.minecraft.network.FriendlyByteBuf buf) {
+            return new WithdrawPacket();
+        }
 
         public static void handle(WithdrawPacket msg, Supplier<NetworkEvent.Context> ctx) {
             ctx.get().enqueueWork(() -> {
