@@ -2,6 +2,7 @@ package com.mysiupysiu.bignay.forge.events;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mysiupysiu.bignay.BignayMod;
+import com.mysiupysiu.bignay.world.items.EquipablePumpkinItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
@@ -27,22 +28,22 @@ public class PumpkinOverlay {
 
         ItemStack helmet = mc.player.getItemBySlot(EquipmentSlot.HEAD);
 
-//        if (helmet.getItem() instanceof EquipablePumpkinItem && mc.options.getCameraType().isFirstPerson()) {
-//            GuiGraphics guiGraphics = event.getGuiGraphics();
-//
-//            int width = guiGraphics.guiWidth();
-//            int height = guiGraphics.guiHeight();
-//
-//            RenderSystem.disableDepthTest();
-//            RenderSystem.depthMask(false);
-//
-//            guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-//            guiGraphics.blit(PUMPKIN_BLUR, 0, 0, -90, 0.0F, 0.0F, width, height, width, height);
-//
-//            RenderSystem.depthMask(true);
-//            RenderSystem.enableDepthTest();
-//
-//            guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-//        }
+        if (helmet.getItem() instanceof EquipablePumpkinItem && mc.options.getCameraType().isFirstPerson()) {
+            GuiGraphics guiGraphics = event.getGuiGraphics();
+
+            int width = guiGraphics.guiWidth();
+            int height = guiGraphics.guiHeight();
+
+            RenderSystem.disableDepthTest();
+            RenderSystem.depthMask(false);
+
+            guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+            guiGraphics.blit(PUMPKIN_BLUR, 0, 0, -90, 0.0F, 0.0F, width, height, width, height);
+
+            RenderSystem.depthMask(true);
+            RenderSystem.enableDepthTest();
+
+            guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+        }
     }
 }

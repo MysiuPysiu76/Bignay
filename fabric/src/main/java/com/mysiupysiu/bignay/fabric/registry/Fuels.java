@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.fabric;
+package com.mysiupysiu.bignay.fabric.registry;
 
 import com.mysiupysiu.bignay.registry.init.BignayItems;
 import net.fabricmc.fabric.api.registry.FuelRegistry;

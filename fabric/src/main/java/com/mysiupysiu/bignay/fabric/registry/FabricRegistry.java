@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.fabric;
+package com.mysiupysiu.bignay.fabric.registry;
 
 import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.registry.Registrar;

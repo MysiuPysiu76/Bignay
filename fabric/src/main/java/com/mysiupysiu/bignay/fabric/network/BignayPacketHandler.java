@@ -34,8 +34,6 @@ public class BignayPacketHandler {
         });
     }
 
-    // --- Metody pomocnicze dla Klienta ---
-
     @Environment(EnvType.CLIENT)
     public static void sendSortPacket(boolean isPlayerInventory) {
         FriendlyByteBuf buf = PacketByteBufs.create();
@@ -54,8 +52,6 @@ public class BignayPacketHandler {
         FriendlyByteBuf buf = PacketByteBufs.create();
         ClientPlayNetworking.send(WITHDRAW, buf);
     }
-
-    // =========================
 
     public static class SortPacket {
         private final boolean isPlayerInventory;
@@ -80,8 +76,6 @@ public class BignayPacketHandler {
         }
     }
 
-    // =========================
-
     public static class TransferPacket {
 
         public TransferPacket() {}
@@ -99,8 +93,6 @@ public class BignayPacketHandler {
             }
         }
     }
-
-    // =========================
 
     public static class WithdrawPacket {
 

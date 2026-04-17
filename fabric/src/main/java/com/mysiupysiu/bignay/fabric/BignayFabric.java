@@ -2,11 +2,10 @@ package com.mysiupysiu.bignay.fabric;
 
 import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.fabric.network.BignayPacketHandler;
+import com.mysiupysiu.bignay.fabric.registry.Commands;
+import com.mysiupysiu.bignay.fabric.registry.FabricRegistry;
+import com.mysiupysiu.bignay.fabric.registry.Fuels;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.network.FriendlyByteBuf;
 
 public class BignayFabric implements ModInitializer {
     @Override
@@ -20,11 +19,5 @@ public class BignayFabric implements ModInitializer {
         Fuels.register();
 
         BignayPacketHandler.register();
-
-
-
-
     }
-
-
 }
