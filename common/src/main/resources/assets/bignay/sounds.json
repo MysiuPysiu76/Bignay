@@ -178,5 +178,10 @@
       "bignay:item/copper_horn/bass_9"
     ],
     "subtitle": "subtitles.item.copper_horn.play"
+  },
+  "loading_screen": {
+    "sounds": [
+      "bignay:loading_screen"
+    ]
   }
 }
