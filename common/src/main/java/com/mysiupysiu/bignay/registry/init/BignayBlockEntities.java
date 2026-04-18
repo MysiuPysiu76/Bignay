@@ -3,6 +3,7 @@ package com.mysiupysiu.bignay.registry.init;
 import com.mysiupysiu.bignay.registry.Registrar;
 import com.mysiupysiu.bignay.registry.RegistrySupplier;
 import com.mysiupysiu.bignay.world.blocks.be.CampfiresBlockEntity;
+import com.mysiupysiu.bignay.world.blocks.be.SignsBlockEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
@@ -34,7 +35,7 @@ public class BignayBlockEntities {
     public static final RegistrySupplier<BlockEntityType<?>> SOUL_WARPED_CAMPFIRE = BLOCK_ENTITIES.register("soul_warped_campfire", () -> BlockEntityType.Builder.of(CampfiresBlockEntity::new, BignayBlocks.SOUL_WARPED_CAMPFIRE.get()).build(null));
     public static final RegistrySupplier<BlockEntityType<?>> SOUL_VERDANT_CAMPFIRE = BLOCK_ENTITIES.register("soul_verdant_campfire", () -> BlockEntityType.Builder.of(CampfiresBlockEntity::new, BignayBlocks.SOUL_VERDANT_CAMPFIRE.get()).build(null));
 
-//    public static final RegistrySupplier<BlockEntityType<SignsBlockEntity>> VERDANT_SIGN = BLOCK_ENTITIES.register("verdant_sign", () -> BlockEntityType.Builder.of(SignsBlockEntity::new, BlockInit.VERDANT_SIGN.get(), BlockInit.VERDANT_WALL_SIGN.get()).build(null));
+    public static final RegistrySupplier<BlockEntityType<?>> VERDANT_SIGN = BLOCK_ENTITIES.register("verdant_sign", () -> BlockEntityType.Builder.of(SignsBlockEntity::new, BignayBlocks.VERDANT_SIGN.get(), BignayBlocks.VERDANT_WALL_SIGN.get()).build(null));
 //    public static final RegistrySupplier<BlockEntityType<CustomHangingSignBlockEntity>> VERDANT_HANGING_SIGN = BLOCK_ENTITIES.register("verdant_hanging_sign", () -> BlockEntityType.Builder.of(CustomHangingSignBlockEntity::new, BlockInit.VERDANT_HANGING_SIGN.get(), BlockInit.VERDANT_WALL_HANGING_SIGN.get()).build(null));
 
     private static RegistrySupplier<BlockEntityType<?>> campfire(String id, RegistrySupplier<Block> block) {
