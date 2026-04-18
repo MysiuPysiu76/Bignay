@@ -15,7 +15,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 
@@ -47,10 +46,10 @@ public class BignayBlocks {
     public static final RegistrySupplier<Block> VERDANT_TRAPDOOR = block("verdant_trapdoor", () -> new TrapDoorsBlock(Blocks.WARPED_TRAPDOOR, BignayWoodType.VERDANT.setType()));
     public static final RegistrySupplier<Block> VERDANT_PRESSURE_PLATE = block("verdant_pressure_plate", () -> new PressurePlatesBock(Blocks.WARPED_PRESSURE_PLATE, BignayWoodType.VERDANT.setType()));
     public static final RegistrySupplier<Block> VERDANT_BUTTON = block("verdant_button", () -> new WoodButtonBlock(Blocks.WARPED_BUTTON, BignayWoodType.VERDANT.setType()));
-    public static final RegistrySupplier<Block> VERDANT_SIGN = blockOnly("verdant_sign", () -> new SignsBlock(Blocks.CRIMSON_SIGN, BignayWoodType.VERDANT));
-    public static final RegistrySupplier<Block> VERDANT_WALL_SIGN = blockOnly("verdant_wall_sign", () -> new WallSignsBlock(Blocks.CRIMSON_WALL_SIGN, BignayWoodType.VERDANT));
-//    public static final RegistrySupplier<Block> VERDANT_HANGING_SIGN = registerBlockOnly("verdant_hanging_sign", () -> new CustomHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_HANGING_SIGN), BignayWoodType.VERDANT));
-//    public static final RegistrySupplier<Block> VERDANT_WALL_HANGING_SIGN = registerBlockOnly("verdant_wall_hanging_sign", () -> new CustomWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_WALL_HANGING_SIGN), BignayWoodType.VERDANT));
+    public static final RegistrySupplier<Block> VERDANT_SIGN = blockOnly("verdant_sign", () -> new SignsBlock(Blocks.WARPED_SIGN, BignayWoodType.VERDANT));
+    public static final RegistrySupplier<Block> VERDANT_WALL_SIGN = blockOnly("verdant_wall_sign", () -> new WallSignsBlock(Blocks.WARPED_WALL_SIGN, BignayWoodType.VERDANT));
+    public static final RegistrySupplier<Block> VERDANT_HANGING_SIGN = blockOnly("verdant_hanging_sign", () -> new HangingSignsBlock(BlockBehaviour.Properties.copy(Blocks.WARPED_HANGING_SIGN), BignayWoodType.VERDANT));
+    public static final RegistrySupplier<Block> VERDANT_WALL_HANGING_SIGN = blockOnly("verdant_wall_hanging_sign", () -> new WallHangingSignsBlock(BlockBehaviour.Properties.copy(Blocks.WARPED_WALL_HANGING_SIGN), BignayWoodType.VERDANT));
 
     public static final RegistrySupplier<Block> ACACIA_CAMPFIRE = block("acacia_campfire", CampfiresBlock::new);
     public static final RegistrySupplier<Block> BIRCH_CAMPFIRE = block("birch_campfire", CampfiresBlock::new);
