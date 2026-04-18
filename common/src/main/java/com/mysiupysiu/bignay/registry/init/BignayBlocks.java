@@ -2,6 +2,7 @@ package com.mysiupysiu.bignay.registry.init;
 
 import com.mysiupysiu.bignay.registry.Registrar;
 import com.mysiupysiu.bignay.registry.RegistrySupplier;
+import com.mysiupysiu.bignay.utils.BignayWoodType;
 import com.mysiupysiu.bignay.world.blocks.*;
 import com.mysiupysiu.bignay.world.blocks.custom.NetherWartBlock;
 import com.mysiupysiu.bignay.world.blocks.custom.*;
@@ -15,7 +16,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 
@@ -42,13 +42,13 @@ public class BignayBlocks {
     public static final RegistrySupplier<Block> VERDANT_STAIRS = block("verdant_stairs", StairsBlock::new);
     public static final RegistrySupplier<Block> VERDANT_SLAB = block("verdant_slab", SlabsBlock::new);
     public static final RegistrySupplier<Block> VERDANT_FENCE = block("verdant_fence", () -> new WoodFenceBlock(Blocks.CRIMSON_FENCE_GATE));
-    public static final RegistrySupplier<Block> VERDANT_FENCE_GATE = block("verdant_fence_gate", () -> new FenceGatesBlock(Blocks.WARPED_FENCE_GATE, WoodType.WARPED));
-    public static final RegistrySupplier<Block> VERDANT_DOOR = block("verdant_door", () -> new DoorsBlock(Blocks.WARPED_TRAPDOOR, BlockSetType.WARPED));
-    public static final RegistrySupplier<Block> VERDANT_TRAPDOOR = block("verdant_trapdoor", () -> new TrapDoorsBlock(Blocks.WARPED_TRAPDOOR, BlockSetType.WARPED));
-    public static final RegistrySupplier<Block> VERDANT_PRESSURE_PLATE = block("verdant_pressure_plate", () -> new PressurePlatesBock(Blocks.WARPED_PRESSURE_PLATE, BlockSetType.WARPED));
-    public static final RegistrySupplier<Block> VERDANT_BUTTON = block("verdant_button", () -> new WoodButtonBlock(Blocks.WARPED_BUTTON, BlockSetType.WARPED));
-//    public static final RegistrySupplier<Block> VERDANT_SIGN = registerBlockOnly("verdant_sign", () -> new SignsBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_SIGN), BignayWoodType.VERDANT));
-//    public static final RegistrySupplier<Block> VERDANT_WALL_SIGN = registerBlockOnly("verdant_wall_sign", () -> new WallSignsBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_WALL_SIGN), BignayWoodType.VERDANT));
+    public static final RegistrySupplier<Block> VERDANT_FENCE_GATE = block("verdant_fence_gate", () -> new FenceGatesBlock(Blocks.WARPED_FENCE_GATE, BignayWoodType.VERDANT));
+    public static final RegistrySupplier<Block> VERDANT_DOOR = block("verdant_door", () -> new DoorsBlock(Blocks.WARPED_TRAPDOOR, BignayWoodType.VERDANT.setType()));
+    public static final RegistrySupplier<Block> VERDANT_TRAPDOOR = block("verdant_trapdoor", () -> new TrapDoorsBlock(Blocks.WARPED_TRAPDOOR, BignayWoodType.VERDANT.setType()));
+    public static final RegistrySupplier<Block> VERDANT_PRESSURE_PLATE = block("verdant_pressure_plate", () -> new PressurePlatesBock(Blocks.WARPED_PRESSURE_PLATE, BignayWoodType.VERDANT.setType()));
+    public static final RegistrySupplier<Block> VERDANT_BUTTON = block("verdant_button", () -> new WoodButtonBlock(Blocks.WARPED_BUTTON, BignayWoodType.VERDANT.setType()));
+    public static final RegistrySupplier<Block> VERDANT_SIGN = blockOnly("verdant_sign", () -> new SignsBlock(Blocks.CRIMSON_SIGN, BignayWoodType.VERDANT));
+    public static final RegistrySupplier<Block> VERDANT_WALL_SIGN = blockOnly("verdant_wall_sign", () -> new WallSignsBlock(Blocks.CRIMSON_WALL_SIGN, BignayWoodType.VERDANT));
 //    public static final RegistrySupplier<Block> VERDANT_HANGING_SIGN = registerBlockOnly("verdant_hanging_sign", () -> new CustomHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_HANGING_SIGN), BignayWoodType.VERDANT));
 //    public static final RegistrySupplier<Block> VERDANT_WALL_HANGING_SIGN = registerBlockOnly("verdant_wall_hanging_sign", () -> new CustomWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_WALL_HANGING_SIGN), BignayWoodType.VERDANT));
 

@@ -5,6 +5,7 @@ import com.mysiupysiu.bignay.client.models.QuadItemFrameModel;
 import com.mysiupysiu.bignay.client.renderers.CampfiresRenderer;
 import com.mysiupysiu.bignay.client.renderers.GlowQuadItemFrameRenderer;
 import com.mysiupysiu.bignay.client.renderers.QuadItemFrameRenderer;
+import com.mysiupysiu.bignay.fabric.registry.Signs;
 import com.mysiupysiu.bignay.registry.RegistrySupplier;
 import com.mysiupysiu.bignay.registry.init.*;
 import com.mysiupysiu.bignay.client.particles.SmallSoulFlameParticle;
@@ -17,8 +18,11 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
 
 public class BignayFabricClient implements ClientModInitializer {
 
@@ -57,6 +61,8 @@ public class BignayFabricClient implements ClientModInitializer {
         registerCampfire(BignayBlockEntities.SOUL_SPRUCE_CAMPFIRE);
         registerCampfire(BignayBlockEntities.SOUL_VERDANT_CAMPFIRE);
         registerCampfire(BignayBlockEntities.SOUL_WARPED_CAMPFIRE);
+
+        Signs.register();
 
         MenuScreens.register(MenuInit.ARCHAEOLOGY_TABLE_MENU.get(), ArchaeologyTableScreen::new);
     }
