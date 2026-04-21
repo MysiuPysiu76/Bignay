@@ -1,6 +1,7 @@
 package com.mysiupysiu.bignay.fabric;
 
 import com.mysiupysiu.bignay.BignayMod;
+import com.mysiupysiu.bignay.fabric.config.FabricConfig;
 import com.mysiupysiu.bignay.fabric.network.BignayPacketHandler;
 import com.mysiupysiu.bignay.fabric.registry.Commands;
 import com.mysiupysiu.bignay.fabric.registry.FabricRegistry;
@@ -19,5 +20,6 @@ public class BignayFabric implements ModInitializer {
         Fuels.register();
 
         BignayPacketHandler.register();
+        FabricConfig.register();
     }
 }

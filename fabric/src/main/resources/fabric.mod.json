@@ -15,6 +15,9 @@
     ],
     "client": [
       "com.mysiupysiu.bignay.fabric.client.BignayFabricClient"
+    ],
+    "modmenu": [
+      "com.mysiupysiu.bignay.fabric.config.ModMenuIntegration"
     ]
   },
   "mixins": [
