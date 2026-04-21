@@ -1,5 +1,6 @@
 package com.mysiupysiu.bignay.fabric.mixin;
 
+import com.mysiupysiu.bignay.config.BignayConfig;
 import com.mysiupysiu.bignay.fabric.network.BignayPacketHandler;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ImageButton;
@@ -73,27 +74,27 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
         if (invMaxX == Integer.MIN_VALUE) return;
 
         final int xOffset = invMaxX + 6;
-//
-////        if (BignayConfig.CONTAINER_SHOW_SORT_INVENTORY.get()) {
+
+        if (BignayConfig.containers.showSortInventory.get()) {
         this.bignay$addSafeButton(xOffset, invMinY - 13, "container.sort_inventory", B_SORT_TEXTURE, btn ->
                 BignayPacketHandler.sendSortPacket(true));
-////        }
-//
+        }
+
         if (isChest && hasContainer && contMinY != Integer.MAX_VALUE) {
-////            if (BignayConfig.CONTAINER_SHOW_SORT_CONTAINER.get()) {
+            if (BignayConfig.containers.showSortContainer.get()) {
             this.bignay$addSafeButton(xOffset, contMinY - 13, "container.sort", B_SORT_TEXTURE, btn ->
                     BignayPacketHandler.sendSortPacket(false));
-////            }
-//
-////            if (BignayConfig.CONTAINER_SHOW_TRANSFER_TO_CONTAINER.get()) {
+            }
+
+           if (BignayConfig.containers.showTransferToContainer.get()) {
             this.bignay$addSafeButton(xOffset - 13, invMinY - 13, "container.up", B_UP_TEXTURE, btn ->
                     BignayPacketHandler.sendTransferPacket());
-////            }
-//
-////            if (BignayConfig.CONTAINER_SHOW_TRANSFER_TO_INVENTORY.get()) {
+            }
+
+            if (BignayConfig.containers.showTransferToInventory.get()) {
             this.bignay$addSafeButton(xOffset - 26, invMinY - 13, "container.down", B_DOWN_TEXTURE, btn ->
                     BignayPacketHandler.sendWithdrawPacket());
-////            }
+            }
         }
     }
 
