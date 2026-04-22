@@ -1,0 +1,14 @@
+package com.mysiupysiu.bignay.fabric.registry;
+
+import com.mysiupysiu.bignay.world.worldgen.biome.BignayNetherRegion;
+import net.minecraft.resources.ResourceLocation;
+import terrablender.api.Regions;
+import terrablender.api.TerraBlenderApi;
+
+public class FabricTerraBlenderIntegration implements TerraBlenderApi {
+
+    @Override
+    public void onTerraBlenderInitialized() {
+        Regions.register(new BignayNetherRegion(new ResourceLocation("bignay", "nether_region"), 2));
+    }
+}
