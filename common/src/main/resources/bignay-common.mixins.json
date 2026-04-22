@@ -9,6 +9,8 @@
     "HoneycombItemMixin",
     "ItemStackMixin",
     "LivingEntityMixin",
+    "LivingEntityTotemMixin",
+    "ServerPlayerMixin",
     "SporeBlossomMixin"
   ],
   "client": [

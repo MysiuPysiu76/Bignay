@@ -5,6 +5,7 @@ import com.mysiupysiu.bignay.client.models.QuadItemFrameModel;
 import com.mysiupysiu.bignay.client.renderers.CampfiresRenderer;
 import com.mysiupysiu.bignay.client.renderers.GlowQuadItemFrameRenderer;
 import com.mysiupysiu.bignay.client.renderers.QuadItemFrameRenderer;
+import com.mysiupysiu.bignay.fabric.network.BignayFabricClientNetwork;
 import com.mysiupysiu.bignay.fabric.registry.Signs;
 import com.mysiupysiu.bignay.registry.RegistrySupplier;
 import com.mysiupysiu.bignay.registry.init.*;
@@ -65,6 +66,8 @@ public class BignayFabricClient implements ClientModInitializer {
         Signs.register();
 
         MenuScreens.register(MenuInit.ARCHAEOLOGY_TABLE_MENU.get(), ArchaeologyTableScreen::new);
+
+        BignayFabricClientNetwork.register();
     }
 
     private void registerCampfire(RegistrySupplier<BlockEntityType<?>> supplier) {

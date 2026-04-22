@@ -1,6 +1,7 @@
 package com.mysiupysiu.bignay.fabric.network;
 
 import com.mysiupysiu.bignay.client.containers.ContainersManager;
+import com.mysiupysiu.bignay.utils.BignayNetworking;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -9,14 +10,17 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
 
 public class BignayPacketHandler {
 
     public static final ResourceLocation SORT = new ResourceLocation("bignay", "sort");
     public static final ResourceLocation TRANSFER = new ResourceLocation("bignay", "transfer");
     public static final ResourceLocation WITHDRAW = new ResourceLocation("bignay", "withdraw");
+    public static final ResourceLocation TOTEM_ACTIVATION = new ResourceLocation("bignay", "totem_activation");
 
     public static void register() {
+        BignayNetworking.init(BignayPacketHandler::sendTotemActivation);
 
         ServerPlayNetworking.registerGlobalReceiver(SORT, (server, player, handler, buf, responseSender) -> {
             SortPacket msg = SortPacket.decode(buf);
@@ -53,6 +57,14 @@ public class BignayPacketHandler {
         ClientPlayNetworking.send(WITHDRAW, buf);
     }
 
+    public static void sendTotemActivation(ServerPlayer player, ItemStack stack) {
+        if (player == null || stack == null || stack.isEmpty()) return;
+
+        FriendlyByteBuf buf = PacketByteBufs.create();
+        buf.writeItem(stack.copy());
+        ServerPlayNetworking.send(player, TOTEM_ACTIVATION, buf);
+    }
+
     public static class SortPacket {
         private final boolean isPlayerInventory;
 
@@ -77,14 +89,10 @@ public class BignayPacketHandler {
     }
 
     public static class TransferPacket {
-
         public TransferPacket() {}
 
         public static void encode(TransferPacket msg, FriendlyByteBuf buf) {}
-
-        public static TransferPacket decode(FriendlyByteBuf buf) {
-            return new TransferPacket();
-        }
+        public static TransferPacket decode(FriendlyByteBuf buf) { return new TransferPacket(); }
 
         public void handle(ServerPlayer player) {
             if (player != null && player.containerMenu != null) {
@@ -95,14 +103,10 @@ public class BignayPacketHandler {
     }
 
     public static class WithdrawPacket {
-
         public WithdrawPacket() {}
 
         public static void encode(WithdrawPacket msg, FriendlyByteBuf buf) {}
-
-        public static WithdrawPacket decode(FriendlyByteBuf buf) {
-            return new WithdrawPacket();
-        }
+        public static WithdrawPacket decode(FriendlyByteBuf buf) { return new WithdrawPacket(); }
 
         public void handle(ServerPlayer player) {
             if (player != null && player.containerMenu != null) {
