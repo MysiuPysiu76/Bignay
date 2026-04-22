@@ -4,7 +4,9 @@
   "version": "${version}",
   "name": "Bignay",
   "description": "A lightweight mod that adds missing blocks and items to improve your Minecraft experience.\n",
-  "authors": ["MysiuPysiu"],
+  "authors": [
+    "MysiuPysiu"
+  ],
   "contact": {},
   "license": "GNU GPL 3.0",
   "icon": "pack.png",
@@ -18,6 +20,9 @@
     ],
     "modmenu": [
       "com.mysiupysiu.bignay.fabric.config.ModMenuIntegration"
+    ],
+    "terrablender": [
+      "com.mysiupysiu.bignay.fabric.registry.FabricTerraBlenderIntegration"
     ]
   },
   "mixins": [
