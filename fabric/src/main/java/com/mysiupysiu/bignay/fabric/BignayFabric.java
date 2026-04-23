@@ -3,6 +3,7 @@ package com.mysiupysiu.bignay.fabric;
 import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.fabric.config.FabricConfig;
 import com.mysiupysiu.bignay.fabric.network.BignayPacketHandler;
+import com.mysiupysiu.bignay.fabric.registry.LootModifiers;
 import com.mysiupysiu.bignay.fabric.registry.Commands;
 import com.mysiupysiu.bignay.fabric.registry.FabricRegistry;
 import com.mysiupysiu.bignay.fabric.registry.Fuels;
@@ -21,5 +22,7 @@ public class BignayFabric implements ModInitializer {
 
         BignayPacketHandler.register();
         FabricConfig.register();
+
+        LootModifiers.register();
     }
 }
