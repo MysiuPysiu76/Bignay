@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "minecraft:birch_planks"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "/ /",
+    "/#/",
+    "/ /"
+  ],
+  "result": {
+    "item": "bignay:birch_ladder",
+    "count": 4
+  }
+}
