@@ -1,12 +1,12 @@
 package com.mysiupysiu.bignay.forge.events;
 
 import com.mysiupysiu.bignay.BignayMod;
+import com.mysiupysiu.bignay.client.layers.ModelLayers;
 import com.mysiupysiu.bignay.client.models.GlowQuadItemFrameModel;
 import com.mysiupysiu.bignay.client.models.QuadItemFrameModel;
 import com.mysiupysiu.bignay.client.renderers.GlowQuadItemFrameRenderer;
 import com.mysiupysiu.bignay.client.renderers.QuadItemFrameRenderer;
 import com.mysiupysiu.bignay.registry.init.BignayEntities;
-import com.mysiupysiu.bignay.client.layers.ModelLayers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

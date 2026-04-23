@@ -1,9 +1,9 @@
 package com.mysiupysiu.bignay.world.blocks.custom;
 
 import com.mysiupysiu.bignay.registry.init.BignayParticles;
-import com.mysiupysiu.bignay.world.tags.BignayTags;
 import com.mysiupysiu.bignay.world.items.tabs.BignayTabs;
 import com.mysiupysiu.bignay.world.items.tabs.CreativeTabProvider;
+import com.mysiupysiu.bignay.world.tags.BignayTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;

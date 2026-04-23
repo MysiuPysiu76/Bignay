@@ -1,12 +1,9 @@
 package com.mysiupysiu.bignay.world.blocks;
 
-import com.mysiupysiu.bignay.world.items.tabs.CreativeTabProvider;
 import com.mysiupysiu.bignay.world.items.tabs.NaturalBlocks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.flag.FeatureFlagSet;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -14,8 +11,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-
-import java.util.List;
 
 public class TallDeadBushBlock extends DoublePlantBlock implements NaturalBlocks {
 

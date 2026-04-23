@@ -7,8 +7,6 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.block.Block;
 
-import net.minecraft.world.item.StandingAndWallBlockItem;
-
 public class HeadItem extends StandingAndWallBlockItem implements FunctionalBlocks {
 
     public HeadItem(RegistrySupplier<Block> standing, RegistrySupplier<Block> wall) {

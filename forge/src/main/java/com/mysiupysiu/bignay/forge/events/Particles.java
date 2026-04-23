@@ -2,8 +2,8 @@ package com.mysiupysiu.bignay.forge.events;
 
 import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.client.menu.ArchaeologyTableScreen;
-import com.mysiupysiu.bignay.registry.init.BignayParticles;
 import com.mysiupysiu.bignay.client.particles.SmallSoulFlameParticle;
+import com.mysiupysiu.bignay.registry.init.BignayParticles;
 import com.mysiupysiu.bignay.registry.init.MenuInit;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.particles.SimpleParticleType;

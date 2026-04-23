@@ -1,7 +1,7 @@
 package com.mysiupysiu.bignay.client.screen.file.chooser;
 
-import com.mysiupysiu.bignay.utils.FileType;
 import com.mysiupysiu.bignay.config.BignayConfig;
+import com.mysiupysiu.bignay.utils.FileType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
