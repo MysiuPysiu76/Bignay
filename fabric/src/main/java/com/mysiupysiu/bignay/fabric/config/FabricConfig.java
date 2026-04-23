@@ -45,7 +45,6 @@ public class FabricConfig {
                 }
             }
         } catch (IOException e) {
-            System.err.println("Could not load Bignay config!");
             e.printStackTrace();
         }
     }
@@ -63,7 +62,6 @@ public class FabricConfig {
         } else if (option instanceof EnumOption<?> enumOpt) {
             String jsonValue = json.get(name).getAsString();
 
-            // Szukamy pasującego Enuma w dostępnych wartościach
             for (Object enumConstant : enumOpt.getValues()) {
                 if (enumConstant.toString().equalsIgnoreCase(jsonValue)) {
                     ((ConfigOption<Object>) enumOpt).set(enumConstant);

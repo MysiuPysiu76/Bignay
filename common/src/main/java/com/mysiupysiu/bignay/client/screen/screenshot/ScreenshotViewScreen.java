@@ -5,7 +5,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mysiupysiu.bignay.client.screen.file.chooser.FolderChooserScreen;
 import com.mysiupysiu.bignay.config.BignayConfig;
 import com.mysiupysiu.bignay.utils.FileUtils;
-//import com.mysiupysiu.bignay.utils.config.BignayConfig;
 import com.mysiupysiu.bignay.utils.screenshot.ScreenshotsManager;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
