@@ -8,11 +8,24 @@ public class BignayConfig {
     public static final List<ConfigCategory> CATEGORIES = new ArrayList<>();
     public static Runnable saveCallback;
 
+    public static final Biomes biomes = new Biomes();
     public static final Containers containers = new Containers();
     public static final Files files = new Files();
     public static final Screenshots screenshots = new Screenshots();
 
-    public static class Containers extends ConfigCategory {
+    public static final class Biomes extends ConfigCategory {
+
+        public final BooleanOption verdantForest = add(new BooleanOption.Builder("verdantForest", false)
+                .comment("Determines whether the verdant forest biome should be generated on the world")
+                .translation("config.bignay.generate_verdant_forest")
+                .build());
+
+        private Biomes() {
+            super("biomes");
+        }
+    }
+
+    public static final class Containers extends ConfigCategory {
 
         public final EnumOption<SortMode> sortMode = add(new EnumOption.Builder<>("sortMode", SortMode.QUANTITY)
                 .comment("A method for sorting items such as chests and inventory\nAvailable values: ALPHABETICAL, QUANTITY")
@@ -39,12 +52,12 @@ public class BignayConfig {
                 .translation("config.bignay.container_transfer_to_container")
                 .build());
 
-        public Containers() {
+        private Containers() {
             super("containers");
         }
     }
 
-    public static class Files extends ConfigCategory {
+    public static final class Files extends ConfigCategory {
 
         public final IntOption columns = add(new IntOption.Builder("columns", 6)
                 .comment("The number of columns to display in the file chooser.")
@@ -57,12 +70,12 @@ public class BignayConfig {
                 .translation("config.bignay.show_hidden_files")
                 .build());
 
-        public Files() {
+        private Files() {
             super("file_chooser");
         }
     }
 
-    public static class Screenshots extends ConfigCategory {
+    public static final class Screenshots extends ConfigCategory {
 
         public final BooleanOption showFileName = add(new BooleanOption.Builder("showFileName", true)
                 .comment("Whether to display the file name underneath the image.")
@@ -91,7 +104,7 @@ public class BignayConfig {
                 .range(1, 32)
                 .build());
 
-        public Screenshots() {
+        private Screenshots() {
             super("screenshots_viewer");
         }
     }

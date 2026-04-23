@@ -721,6 +721,8 @@
   "fileChooser.options.title": "Edit File Chooser Options",
   "fileChooser.home.description": "Open home folder",
   "block.bignay.sculked_deepslate_bricks": "Sculked Deepslate Bricks",
+  "config.bignay.generate_verdant_forest": "Verdant Forest",
+  "config.bignay.category.biomes": "Biomes",
   "block.bignay.sculked_deepslate_brick_slab": "Sculked Deepslate Brick Slab",
   "config.bignay.title": "Bignay Mod Config",
   "block.bignay.sculked_deepslate_brick_stairs": "Sculked Deepslate Brick Stairs",

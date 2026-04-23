@@ -1,6 +1,7 @@
 package com.mysiupysiu.bignay.world.worldgen.biome;
 
 import com.mojang.datafixers.util.Pair;
+import com.mysiupysiu.bignay.config.BignayConfig;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -11,14 +12,16 @@ import terrablender.api.RegionType;
 
 import java.util.function.Consumer;
 
-public class BignayNetherRegion extends Region {
+public class VerdantForestBiome extends Region {
 
-    public BignayNetherRegion(ResourceLocation name, int weight) {
-        super(name, RegionType.NETHER, weight);
+    public VerdantForestBiome() {
+        super(new ResourceLocation("bignay", "nether_region"), RegionType.NETHER, 1);
     }
 
     @Override
     public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {
+        if (!BignayConfig.biomes.verdantForest.get()) return;
+
         Climate.ParameterPoint verdantConditions = Climate.parameters(
                 Climate.Parameter.span(0.1F, 1.0F),
                 Climate.Parameter.span(0.3F, 1.0F),
