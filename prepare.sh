@@ -1,7 +1,5 @@
 #!/bin/bash
 
-rm -rf build
-
 ./gradlew :fabric:runClient &
 PROCESS=$!
 sleep 15
