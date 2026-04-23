@@ -4,7 +4,6 @@ import com.mysiupysiu.bignay.registry.RegistrySupplier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.AttachedStemBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.StemBlock;
 import net.minecraft.world.level.block.StemGrownBlock;
 
 import java.util.function.Supplier;

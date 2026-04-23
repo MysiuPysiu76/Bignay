@@ -2,7 +2,10 @@ package com.mysiupysiu.bignay.world.blocks.custom;
 
 import com.mysiupysiu.bignay.registry.init.BignayBlocks;
 import com.mysiupysiu.bignay.world.items.tabs.NaturalBlocks;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.AttachedStemBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.StemBlock;
+import net.minecraft.world.level.block.StemGrownBlock;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;

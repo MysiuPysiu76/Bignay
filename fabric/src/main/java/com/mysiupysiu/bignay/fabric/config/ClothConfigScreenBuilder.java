@@ -1,6 +1,9 @@
 package com.mysiupysiu.bignay.fabric.config;
 
-import com.mysiupysiu.bignay.config.*;
+import com.mysiupysiu.bignay.config.BignayConfig;
+import com.mysiupysiu.bignay.config.BooleanOption;
+import com.mysiupysiu.bignay.config.ConfigOption;
+import com.mysiupysiu.bignay.config.IntOption;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;

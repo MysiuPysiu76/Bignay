@@ -14,7 +14,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.storage.LevelStorageSource;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Path;
 
 public class WorldExportScreen extends Screen {

@@ -1,6 +1,5 @@
 package com.mysiupysiu.bignay.fabric.network;
 
-import com.mysiupysiu.bignay.client.containers.ContainersManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;

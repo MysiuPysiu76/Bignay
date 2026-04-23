@@ -4,7 +4,6 @@ import com.mysiupysiu.bignay.client.menu.ArchaeologyTableMenu;
 import com.mysiupysiu.bignay.registry.Registrar;
 import com.mysiupysiu.bignay.registry.RegistrySupplier;
 import net.minecraft.world.flag.FeatureFlags;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 
 public class MenuInit {

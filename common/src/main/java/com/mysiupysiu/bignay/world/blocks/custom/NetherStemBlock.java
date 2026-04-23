@@ -1,16 +1,11 @@
 package com.mysiupysiu.bignay.world.blocks.custom;
 
 import com.mysiupysiu.bignay.world.items.tabs.BuildingBlocks;
-import com.mysiupysiu.bignay.world.items.tabs.CreativeTabProvider;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
-
-import java.util.List;
 
 public class NetherStemBlock extends RotatedPillarBlock implements BuildingBlocks {
 
