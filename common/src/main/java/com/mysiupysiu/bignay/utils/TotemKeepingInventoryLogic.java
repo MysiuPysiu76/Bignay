@@ -7,6 +7,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -44,15 +45,6 @@ public final class TotemKeepingInventoryLogic {
         } catch (Throwable ignored) {}
     }
 
-    public static void removeFreshTag(ServerPlayer player) {
-        if (player == null) return;
-        if (!(player instanceof ITotemKeepingInventoryData data)) return;
-
-        try {
-            data.bignay$setUsedTotemTime(Long.MIN_VALUE);
-        } catch (Throwable ignored) {}
-    }
-
     public static ItemStack findTotemInHand(ServerPlayer player) {
         if (player == null) return ItemStack.EMPTY;
 
@@ -75,6 +67,7 @@ public final class TotemKeepingInventoryLogic {
 
         try {
             stack.shrink(1);
+            player.awardStat(Stats.ITEM_USED.get(BignayItems.TOTEM_OF_KEEPING_INVENTORY.get()));
             return true;
         } catch (Throwable ignored) {
             return false;
