@@ -135,10 +135,6 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
         return Optional.ofNullable(LOGS.get().get(blockState.getBlock())).map(block -> block.withPropertiesOf(blockState));
     }
 
-    public boolean isLadder(BlockState state, LevelReader level, BlockPos pos, LivingEntity entity) {
-        return true;
-    }
-
     public static BiMap<Block, Block> getLogs() {
         return ImmutableBiMap.<Block, Block>builder()
                 .put(BignayBlocks.HOLLOW_ACACIA_LOG.get(), BignayBlocks.HOLLOW_STRIPPED_ACACIA_LOG.get())

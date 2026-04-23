@@ -704,6 +704,13 @@ public class BignayBlocks {
     public static final RegistrySupplier<Block> SCULKED_DEEPSLATE_TILE_WALL = block("sculked_deepslate_tile_wall", () -> new WallsBlock(Blocks.DEEPSLATE_TILES));
     public static final RegistrySupplier<Block> SCULKED_DEEPSLATE_TILE_VERTICAL_SLAB = block("sculked_deepslate_tile_vertical_slab", () -> new VerticalSlabBlock(Blocks.DEEPSLATE_TILES));
 
+    public static final RegistrySupplier<Block> ACACIA_LADDER = block("acacia_ladder", LaddersBlock::new);
+    public static final RegistrySupplier<Block> BAMBOO_LADDER = block("bamboo_ladder", LaddersBlock::new);
+    public static final RegistrySupplier<Block> BIRCH_LADDER = block("birch_ladder", LaddersBlock::new);
+    public static final RegistrySupplier<Block> CHERRY_LADDER = block("cherry_ladder", LaddersBlock::new);
+    public static final RegistrySupplier<Block> CRIMSON_LADDER = block("crimson_ladder", LaddersBlock::new);
+    public static final RegistrySupplier<Block> DARK_OAK_LADDER = block("dark_oak_ladder", LaddersBlock::new);
+
     private static RegistrySupplier<Block> block(String id, Supplier<Block> blockSupplier) {
         RegistrySupplier<Block> block = BLOCKS.register(id, blockSupplier);
         BignayItems.ITEMS.register(id, () -> new ItemForBlock(block::get));
