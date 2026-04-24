@@ -1,0 +1,6 @@
+{
+    "parent": "bignay:block/ladder",
+    "textures": {
+        "texture": "bignay:block/warped_ladder"
+    }
+}

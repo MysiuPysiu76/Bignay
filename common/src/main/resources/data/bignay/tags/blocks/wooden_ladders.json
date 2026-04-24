@@ -5,6 +5,12 @@
     "bignay:birch_ladder",
     "bignay:cherry_ladder",
     "bignay:crimson_ladder",
-    "bignay:dark_oak_ladder"
+    "bignay:dark_oak_ladder",
+    "bignay:jungle_ladder",
+    "bignay:mangrove_ladder",
+    "bignay:oak_ladder",
+    "bignay:spruce_ladder",
+    "bignay:verdant_ladder",
+    "bignay:warped_ladder"
   ]
 }
