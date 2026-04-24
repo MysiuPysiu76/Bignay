@@ -202,6 +202,12 @@ public class BignayBlocks {
     public static final RegistrySupplier<Block> DERPY_PALE_JACK_O_LANTERN = block("derpy_pale_jack_o_lantern", JackOLantern.Pale::new);
     public static final RegistrySupplier<Block> DERPY_SOUL_JACK_O_LANTERN = block("derpy_soul_jack_o_lantern", JackOLantern.Soul::new);
     public static final RegistrySupplier<Block> DERPY_SOUL_PALE_JACK_O_LANTERN = block("derpy_soul_pale_jack_o_lantern", JackOLantern.SoulPale::new);
+    public static final RegistrySupplier<Block> GHOST_CARVED_PUMPKIN = equipablePumpkin("ghost_carved_pumpkin", EquipablePumpkinBlock::new);
+    public static final RegistrySupplier<Block> GHOST_CARVED_PALE_PUMPKIN = equipablePumpkin("ghost_carved_pale_pumpkin", EquipablePumpkinBlock.PalePumpkin::new);
+    public static final RegistrySupplier<Block> GHOST_JACK_O_LANTERN = block("ghost_jack_o_lantern", JackOLantern::new);
+    public static final RegistrySupplier<Block> GHOST_PALE_JACK_O_LANTERN = block("ghost_pale_jack_o_lantern", JackOLantern.Pale::new);
+    public static final RegistrySupplier<Block> GHOST_SOUL_JACK_O_LANTERN = block("ghost_soul_jack_o_lantern", JackOLantern.Soul::new);
+    public static final RegistrySupplier<Block> GHOST_SOUL_PALE_JACK_O_LANTERN = block("ghost_soul_pale_jack_o_lantern", JackOLantern.SoulPale::new);
     public static final RegistrySupplier<Block> HAPPY_CARVED_PUMPKIN = equipablePumpkin("happy_carved_pumpkin", EquipablePumpkinBlock::new);
     public static final RegistrySupplier<Block> HAPPY_CARVED_PALE_PUMPKIN = equipablePumpkin("happy_carved_pale_pumpkin", EquipablePumpkinBlock.PalePumpkin::new);
     public static final RegistrySupplier<Block> HAPPY_JACK_O_LANTERN = block("happy_jack_o_lantern", JackOLantern::new);
