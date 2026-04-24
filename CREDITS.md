@@ -5,11 +5,13 @@
 The **Verdant Stem** texture used in this mod has been slightly modified by me.  
 The original texture comes from the project hosted at: [More Wood Addon](https://mcpedl.com/more-wood-addon/)
 
-The **Happy, Angry, Derpy, Skull and Anxious Carved Pumpkin** texture variants, as well as the glowing **Jack O’Lantern** variants, come from [Varied Pumpkins](https://www.planetminecraft.com/texture-pack/variated-pumpkins/) and were created by [Amaro_Lunatico](https://www.planetminecraft.com/member/amaro_lunatico/).  
+The **Happy, Angry, Derpy, Skull, Ghost, Creeper and Anxious Carved Pumpkin** texture variants, as well as the glowing **Jack O’Lantern** variants, come from [Varied Pumpkins](https://www.planetminecraft.com/texture-pack/variated-pumpkins/) and were created by [Amaro_Lunatico](https://www.planetminecraft.com/member/amaro_lunatico/).  
 
 The **Cobbled Basalt, Basalt Bricks, Chiseled Basalt and Basalt Pillar, Acacia, Birch, Crimson, Dark Oak, Jungle, Spruce, Warped Bookshelf and Prismarine Tiles** texture was created by [MCjossic](https://www.reddit.com/user/MCjossic/).  
 
 The **Andesite, Diorite, Granite, Dripstone, Calcite variants of Polished, Smooth, Bricks, Pillar and Chiseled block** textures come from [ImXR24](https://www.deviantart.com/imxr24)
+
+The **Ladders** textures come from [SmallBlueSlime](https://www.reddit.com/user/SmallBlueSlime/)
 
 The **Tree cavity, Charcoal Block, Hyacinth, Peony, Lilac, Lapis Lotus, Heliotrope, Mushroom Clusters, Tall Dead Bush, Blue Rose Bush, Puffballs, Rose, Cyan Rose, Golden Poppy, Mycelium Roots and Sprouts** textures come from [Turfnerf(BuildsZenith)](https://x.com/BuildsZenith)
 
