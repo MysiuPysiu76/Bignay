@@ -710,6 +710,12 @@ public class BignayBlocks {
     public static final RegistrySupplier<Block> CHERRY_LADDER = block("cherry_ladder", LaddersBlock::new);
     public static final RegistrySupplier<Block> CRIMSON_LADDER = block("crimson_ladder", LaddersBlock::new);
     public static final RegistrySupplier<Block> DARK_OAK_LADDER = block("dark_oak_ladder", LaddersBlock::new);
+    public static final RegistrySupplier<Block> JUNGLE_LADDER = block("jungle_ladder", LaddersBlock::new);
+    public static final RegistrySupplier<Block> MANGROVE_LADDER = block("mangrove_ladder", LaddersBlock::new);
+    public static final RegistrySupplier<Block> OAK_LADDER = block("oak_ladder", LaddersBlock::new);
+    public static final RegistrySupplier<Block> SPRUCE_LADDER = block("spruce_ladder", LaddersBlock::new);
+    public static final RegistrySupplier<Block> VERDANT_LADDER = block("verdant_ladder", LaddersBlock::new);
+    public static final RegistrySupplier<Block> WARPED_LADDER = block("warped_ladder", LaddersBlock::new);
 
     private static RegistrySupplier<Block> block(String id, Supplier<Block> blockSupplier) {
         RegistrySupplier<Block> block = BLOCKS.register(id, blockSupplier);

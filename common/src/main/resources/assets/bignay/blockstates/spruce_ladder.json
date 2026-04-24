@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "bignay:block/spruce_ladder",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "bignay:block/spruce_ladder"
+    },
+    "facing=south": {
+      "model": "bignay:block/spruce_ladder",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "bignay:block/spruce_ladder",
+      "y": 270
+    }
+  }
+}
