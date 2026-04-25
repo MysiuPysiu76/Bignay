@@ -33,7 +33,7 @@ public class BignayItems {
 
     public static final RegistrySupplier<Item> VERDANT_SIGN = item("verdant_sign", () -> new SignsItem(BignayBlocks.VERDANT_SIGN, BignayBlocks.VERDANT_WALL_SIGN));
     public static final RegistrySupplier<Item> VERDANT_HANGING_SIGN = item("verdant_hanging_sign", () -> new SignsItem(BignayBlocks.VERDANT_HANGING_SIGN, BignayBlocks.VERDANT_WALL_HANGING_SIGN));
-//
+
     public static final RegistrySupplier<Item> QUAD_ITEM_FRAME = item("quad_item_frame", () -> new QuadItemFrameItem(new Item.Properties().stacksTo(64)));
     public static final RegistrySupplier<Item> GLOW_QUAD_ITEM_FRAME = item("glow_quad_item_frame", () -> new GlowQuadItemFrameItem(new Item.Properties().stacksTo(64)));
 
@@ -49,7 +49,9 @@ public class BignayItems {
 
     public static final RegistrySupplier<Item> ANGRY_PUMPKIN_PATTERN = item("angry_pumpkin_pattern", () -> new PumpkinPatternItem(PumpkinPatternItem.Type.ANGRY));
     public static final RegistrySupplier<Item> ANXIOUS_PUMPKIN_PATTERN = item("anxious_pumpkin_pattern", () -> new PumpkinPatternItem(PumpkinPatternItem.Type.ANXIOUS));
+    public static final RegistrySupplier<Item> CREEPER_PUMPKIN_PATTERN = item("creeper_pumpkin_pattern", () -> new PumpkinPatternItem(PumpkinPatternItem.Type.CREEPER));
     public static final RegistrySupplier<Item> DERPY_PUMPKIN_PATTERN = item("derpy_pumpkin_pattern", () -> new PumpkinPatternItem(PumpkinPatternItem.Type.DERPY));
+    public static final RegistrySupplier<Item> GHOST_PUMPKIN_PATTERN = item("ghost_pumpkin_pattern", () -> new PumpkinPatternItem(PumpkinPatternItem.Type.GHOST));
     public static final RegistrySupplier<Item> HAPPY_PUMPKIN_PATTERN = item("happy_pumpkin_pattern", () -> new PumpkinPatternItem(PumpkinPatternItem.Type.HAPPY));
     public static final RegistrySupplier<Item> SKULL_PUMPKIN_PATTERN = item("skull_pumpkin_pattern", () -> new PumpkinPatternItem(PumpkinPatternItem.Type.SKULL));
 

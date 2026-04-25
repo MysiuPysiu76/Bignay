@@ -41,10 +41,12 @@ public class PumpkinPatternItem extends Item implements Ingredients {
     public enum Type {
         ANGRY("angry"),
         ANXIOUS("anxious"),
-        DERPY("derpy"),
-        HAPPY("happy"),
+        CREEPER("creeper"),
         DEFAULT("default"),
-        SKULL("skull"),;
+        DERPY("derpy"),
+        GHOST("ghost"),
+        HAPPY("happy"),
+        SKULL("skull");
 
         public final String name;
 
