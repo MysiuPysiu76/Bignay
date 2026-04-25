@@ -20,6 +20,8 @@ public class LootModifiers {
     private static final ResourceLocation IGLOO_CHEST = new ResourceLocation("minecraft", "chests/igloo_chest");
     private static final ResourceLocation JUNGLE_TEMPLE = new ResourceLocation("minecraft", "chests/jungle_temple");
     private static final ResourceLocation PILLAGER_OUTPOST = new ResourceLocation("minecraft", "chests/pillager_outpost");
+    private static final ResourceLocation NETHER_BRIDGE = new ResourceLocation("minecraft", "chests/nether_bridge");
+    private static final ResourceLocation SIMPLE_DUNGEON = new ResourceLocation("minecraft", "chests/simple_dungeon");
     private static final ResourceLocation WOODLAND_MANSION = new ResourceLocation("minecraft", "chests/woodland_mansion");
 
     public static void register() {
@@ -42,6 +44,14 @@ public class LootModifiers {
 
             if (id.equals(JUNGLE_TEMPLE)) {
                 addSingleItem(tableBuilder, BignayItems.DERPY_PUMPKIN_PATTERN.get(), 0.3f);
+            }
+
+            if (id.equals(NETHER_BRIDGE)) {
+                addSingleItem(tableBuilder, BignayItems.GHOST_PUMPKIN_PATTERN.get(), 0.13f);
+            }
+
+            if (id.equals(SIMPLE_DUNGEON)) {
+                addSingleItem(tableBuilder, BignayItems.CREEPER_PUMPKIN_PATTERN.get(), 0.3f);
             }
 
             if (id.equals(PILLAGER_OUTPOST)) {
