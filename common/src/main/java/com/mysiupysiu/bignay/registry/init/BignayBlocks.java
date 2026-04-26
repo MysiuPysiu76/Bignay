@@ -33,6 +33,7 @@ public class BignayBlocks {
     public static final RegistrySupplier<Block> POT = block("pot", PotBlock::new);
     public static final RegistrySupplier<Block> GOLD_BARS = block("gold_bars", BarsBlock::new);
     public static final RegistrySupplier<Block> RANDOMIZER = block("randomizer", RandomizerBlock::new);
+    public static final RegistrySupplier<Block> AWAKENED_SOUL_SAND = block("awakened_soul_sand", AwakenedSoulSandBlock::new);
 
     public static final RegistrySupplier<Block> VERDANT_STEM = block("verdant_stem", () -> new NaturalNetherStemBlock(MapColor.COLOR_GREEN));
     public static final RegistrySupplier<Block> STRIPPED_VERDANT_STEM = block("stripped_verdant_stem", () -> new NetherStemBlock(MapColor.COLOR_GREEN));
