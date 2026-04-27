@@ -1,7 +1,6 @@
 {
-  "repace": false,
+  "replace": false,
   "values": [
-    "bignay:verdant_wart_block",
     "bignay:awakened_soul_sand"
   ]
 }

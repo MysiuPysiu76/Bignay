@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "minecraft:soul_sand_valley",
+  "features": "bignay:awakened_soul_sand_patch",
+  "step": "underground_ores"
+}
