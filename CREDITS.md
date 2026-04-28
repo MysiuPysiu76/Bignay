@@ -21,4 +21,6 @@ The mosaic blocks were inspired by the work of people on Reddit and other mods, 
 
 The Mojang animated logo texture comes from [Mojangs loading screen](https://www.curseforge.com/minecraft/texture-packs/the-mojangs-loading-screen)
 
+The Ancient vines texture comes from [Sniffer Lichen](https://www.planetminecraft.com/member/joaocomtil/)
+
 The **knife** texture was inspired by [Vanilla Knives](https://www.curseforge.com/minecraft-bedrock/addons/vanilla-knives)

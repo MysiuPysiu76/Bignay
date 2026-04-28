@@ -1,0 +1,163 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "north": "true",
+        "flowers": "0"
+      },
+      "apply": {
+        "model": "bignay:block/ancient_vines_0"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "flowers": "1"
+      },
+      "apply": {
+        "model": "bignay:block/ancient_vines_1"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "flowers": "2"
+      },
+      "apply": {
+        "model": "bignay:block/ancient_vines_2"
+      }
+    },
+    {
+      "when": {
+        "east": "true",
+        "flowers": "0"
+      },
+      "apply": {
+        "model": "bignay:block/ancient_vines_0",
+        "y": 90,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "east": "true",
+        "flowers": "1"
+      },
+      "apply": {
+        "model": "bignay:block/ancient_vines_1",
+        "y": 90,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "east": "true",
+        "flowers": "2"
+      },
+      "apply": {
+        "model": "bignay:block/ancient_vines_2",
+        "y": 90,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "south": "true",
+        "flowers": "0"
+      },
+      "apply": {
+        "model": "bignay:block/ancient_vines_0",
+        "y": 180,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "south": "true",
+        "flowers": "1"
+      },
+      "apply": {
+        "model": "bignay:block/ancient_vines_1",
+        "y": 180,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "south": "true",
+        "flowers": "2"
+      },
+      "apply": {
+        "model": "bignay:block/ancient_vines_2",
+        "y": 180,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "west": "true",
+        "flowers": "0"
+      },
+      "apply": {
+        "model": "bignay:block/ancient_vines_0",
+        "y": 270,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "west": "true",
+        "flowers": "1"
+      },
+      "apply": {
+        "model": "bignay:block/ancient_vines_1",
+        "y": 270,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "west": "true",
+        "flowers": "2"
+      },
+      "apply": {
+        "model": "bignay:block/ancient_vines_2",
+        "y": 270,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "up": "true",
+        "flowers": "0"
+      },
+      "apply": {
+        "model": "bignay:block/ancient_vines_0",
+        "x": 270,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "up": "true",
+        "flowers": "1"
+      },
+      "apply": {
+        "model": "bignay:block/ancient_vines_1",
+        "x": 270,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "up": "true",
+        "flowers": "2"
+      },
+      "apply": {
+        "model": "bignay:block/ancient_vines_2",
+        "x": 270,
+        "uvlock": true
+      }
+    }
+  ]
+}
