@@ -1,5 +1,6 @@
 package com.mysiupysiu.bignay.world.blocks;
 
+import com.mysiupysiu.bignay.world.items.tabs.NaturalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -23,7 +24,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
-public class AncientVinesBlock extends VineBlock {
+public class AncientVinesBlock extends VineBlock implements NaturalBlocks {
 
     public static final IntegerProperty FLOWERS = IntegerProperty.create("flowers", 0, 2);
     public static final BooleanProperty CAN_GROW = BooleanProperty.create("can_grow");
