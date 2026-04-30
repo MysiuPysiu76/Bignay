@@ -741,6 +741,7 @@ public class BignayBlocks {
     public static final RegistrySupplier<Block> BEDROCK_BRICK_STAIRS = block("bedrock_brick_stairs", () -> new StairsBlock(Blocks.BEDROCK));
     public static final RegistrySupplier<Block> BEDROCK_BRICK_VERTICAL_SLAB = block("bedrock_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.BEDROCK));
     public static final RegistrySupplier<Block> BEDROCK_BRICK_WALL = block("bedrock_brick_wall", () -> new WallsBlock(Blocks.BEDROCK));
+    public static final RegistrySupplier<Block> CHISELED_BEDROCK = block("chiseled_bedrock", () -> new BuildingBlock(Blocks.BEDROCK));
 
     private static RegistrySupplier<Block> block(String id, Supplier<Block> blockSupplier) {
         RegistrySupplier<Block> block = BLOCKS.register(id, blockSupplier);
