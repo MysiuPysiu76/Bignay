@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "#bignay:bedrock_blocks",
     "bignay:basaltic_lava"
   ]
 }

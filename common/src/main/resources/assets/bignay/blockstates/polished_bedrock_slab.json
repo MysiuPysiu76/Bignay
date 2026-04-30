@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bignay:block/polished_bedrock_slab"
+    },
+    "type=double": {
+      "model": "bignay:block/polished_bedrock"
+    },
+    "type=top": {
+      "model": "bignay:block/polished_bedrock_slab_top"
+    }
+  }
+}

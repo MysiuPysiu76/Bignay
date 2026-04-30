@@ -618,8 +618,8 @@ public class BignayBlocks {
     public static final RegistrySupplier<Block> MOSSY_COBBLED_DEEPSLATE = block("mossy_cobbled_deepslate", () -> new BuildingBlock(Blocks.COBBLED_DEEPSLATE));
     public static final RegistrySupplier<Block> MOSSY_COBBLED_DEEPSLATE_SLAB = block("mossy_cobbled_deepslate_slab", () -> new SlabsBlock(Blocks.COBBLED_DEEPSLATE));
     public static final RegistrySupplier<Block> MOSSY_COBBLED_DEEPSLATE_STAIRS = block("mossy_cobbled_deepslate_stairs", () -> new StairsBlock(Blocks.COBBLED_DEEPSLATE));
-    public static final RegistrySupplier<Block> MOSSY_COBBLED_DEEPSLATE_WALL = block("mossy_cobbled_deepslate_wall", () -> new WallsBlock(Blocks.COBBLED_DEEPSLATE));
     public static final RegistrySupplier<Block> MOSSY_COBBLED_DEEPSLATE_VERTICAL_SLAB = block("mossy_cobbled_deepslate_vertical_slab", () -> new VerticalSlabBlock(Blocks.COBBLED_DEEPSLATE));
+    public static final RegistrySupplier<Block> MOSSY_COBBLED_DEEPSLATE_WALL = block("mossy_cobbled_deepslate_wall", () -> new WallsBlock(Blocks.COBBLED_DEEPSLATE));
 
     public static final RegistrySupplier<Block> ACACIA_VERTICAL_SLAB = block("acacia_vertical_slab", () -> new VerticalSlabBlock(Blocks.ACACIA_PLANKS), 150);
     public static final RegistrySupplier<Block> BAMBOO_VERTICAL_SLAB = block("bamboo_vertical_slab", () -> new VerticalSlabBlock(Blocks.BAMBOO_PLANKS), 150);
@@ -730,6 +730,12 @@ public class BignayBlocks {
     public static final RegistrySupplier<Block> SPRUCE_LADDER = block("spruce_ladder", LaddersBlock::new);
     public static final RegistrySupplier<Block> VERDANT_LADDER = block("verdant_ladder", LaddersBlock::new);
     public static final RegistrySupplier<Block> WARPED_LADDER = block("warped_ladder", LaddersBlock::new);
+
+    public static final RegistrySupplier<Block> POLISHED_BEDROCK = block("polished_bedrock", () -> new BuildingBlock(Blocks.BEDROCK));
+    public static final RegistrySupplier<Block> POLISHED_BEDROCK_SLAB = block("polished_bedrock_slab", () -> new SlabsBlock(Blocks.BEDROCK));
+    public static final RegistrySupplier<Block> POLISHED_BEDROCK_STAIRS = block("polished_bedrock_stairs", () -> new StairsBlock(Blocks.BEDROCK));
+    public static final RegistrySupplier<Block> POLISHED_BEDROCK_VERTICAL_SLAB = block("polished_bedrock_vertical_slab", () -> new VerticalSlabBlock(Blocks.BEDROCK));
+    public static final RegistrySupplier<Block> POLISHED_BEDROCK_WALL = block("polished_bedrock_wall", () -> new WallsBlock(Blocks.BEDROCK));
 
     private static RegistrySupplier<Block> block(String id, Supplier<Block> blockSupplier) {
         RegistrySupplier<Block> block = BLOCKS.register(id, blockSupplier);
