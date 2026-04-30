@@ -4,6 +4,11 @@
     "bignay:polished_bedrock_slab",
     "bignay:polished_bedrock_stairs",
     "bignay:polished_bedrock_vertical_slab",
-    "bignay:polished_bedrock_wall"
+    "bignay:polished_bedrock_wall",
+    "bignay:bedrock_bricks",
+    "bignay:bedrock_brick_slab",
+    "bignay:bedrock_brick_stairs",
+    "bignay:bedrock_brick_wall",
+    "bignay:bedrock_brick_vertical_slab"
   ]
 }
