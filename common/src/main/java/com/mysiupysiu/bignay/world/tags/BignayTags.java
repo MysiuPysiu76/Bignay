@@ -11,6 +11,7 @@ public class BignayTags {
 
     public static class Blocks {
         public static final TagKey<Block> PUMPKINS = TagKey.create(Registries.BLOCK, new ResourceLocation("bignay", "pumpkins"));
+        public static final TagKey<Block> END_CRYSTAL_PLACEABLE = TagKey.create(Registries.BLOCK, new ResourceLocation("bignay", "end_crystal_placeable"));
     }
 
     public static class Items {

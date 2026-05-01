@@ -6,6 +6,9 @@
   "mixins": [
     "AxeItemMixin",
     "CreateWorldMixin",
+    "EndCrystalItemMixin",
+    "EndDragonFightMixin",
+    "EndPodiumMixin",
     "HoneycombItemMixin",
     "ItemStackMixin",
     "LivingEntityMixin",
