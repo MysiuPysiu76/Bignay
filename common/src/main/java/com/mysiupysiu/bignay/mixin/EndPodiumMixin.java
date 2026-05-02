@@ -1,5 +1,6 @@
 package com.mysiupysiu.bignay.mixin;
 
+import com.mysiupysiu.bignay.config.BignayConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -30,6 +31,8 @@ public abstract class EndPodiumMixin {
 
     @Inject(method = "place", at = @At("HEAD"), cancellable = true)
     private void replaceWithNBTStructure(FeaturePlaceContext<NoneFeatureConfiguration> context, CallbackInfoReturnable<Boolean> cir) {
+        if (!BignayConfig.features.betterEndPodium.get()) return;
+
         WorldGenLevel level = context.level();
         BlockPos origin = context.origin();
 

@@ -10,6 +10,7 @@ public class BignayConfig {
 
     public static final Biomes biomes = new Biomes();
     public static final Containers containers = new Containers();
+    public static final Features features = new Features();
     public static final Files files = new Files();
     public static final Screenshots screenshots = new Screenshots();
 
@@ -54,6 +55,18 @@ public class BignayConfig {
 
         private Containers() {
             super("containers");
+        }
+    }
+
+    public static final class Features extends ConfigCategory {
+
+        public final BooleanOption betterEndPodium = add(new BooleanOption.Builder("betterEndPodium", true)
+                .comment("Whether to generate better end podium")
+                .translation("config.bignay.better_end_podium")
+                .build());
+
+        private Features() {
+            super("features");
         }
     }
 
