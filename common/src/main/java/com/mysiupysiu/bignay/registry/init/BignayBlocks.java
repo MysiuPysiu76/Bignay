@@ -664,6 +664,7 @@ public class BignayBlocks {
     public static final RegistrySupplier<Block> SANDSTONE_VERTICAL_SLAB = block("sandstone_vertical_slab", () -> new VerticalSlabBlock(Blocks.SANDSTONE));
     public static final RegistrySupplier<Block> SMOOTH_SANDSTONE_VERTICAL_SLAB = block("smooth_sandstone_vertical_slab", () -> new VerticalSlabBlock(Blocks.SMOOTH_SANDSTONE));
     public static final RegistrySupplier<Block> RED_SANDSTONE_VERTICAL_SLAB = block("red_sandstone_vertical_slab", () -> new VerticalSlabBlock(Blocks.RED_SANDSTONE));
+    public static final RegistrySupplier<Block> SMOOTH_RED_SANDSTONE_VERTICAL_SLAB = block("smooth_red_sandstone_vertical_slab", () -> new VerticalSlabBlock(Blocks.SMOOTH_RED_SANDSTONE));
     public static final RegistrySupplier<Block> QUARTZ_VERTICAL_SLAB = block("quartz_vertical_slab", () -> new VerticalSlabBlock(Blocks.QUARTZ_BLOCK));
     public static final RegistrySupplier<Block> SMOOTH_QUARTZ_VERTICAL_SLAB = block("smooth_quartz_vertical_slab", () -> new VerticalSlabBlock(Blocks.SMOOTH_QUARTZ));
     public static final RegistrySupplier<Block> BLACKSTONE_VERTICAL_SLAB = block("blackstone_vertical_slab", () -> new VerticalSlabBlock(Blocks.BLACKSTONE));
