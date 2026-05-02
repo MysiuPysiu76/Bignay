@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "minecraft:desert",
+  "features": "bignay:patch_tall_dead_bush_2",
+  "step": "vegetal_decoration"
+}

@@ -7,14 +7,14 @@
           "feature": "minecraft:huge_red_mushroom",
           "placement": []
         },
-        "chance": 0.14
+        "chance": 0.145
       },
       {
         "feature": {
           "feature": "minecraft:huge_brown_mushroom",
           "placement": []
         },
-        "chance": 0.14
+        "chance": 0.145
       }
     ],
     "default": "bignay:empty"

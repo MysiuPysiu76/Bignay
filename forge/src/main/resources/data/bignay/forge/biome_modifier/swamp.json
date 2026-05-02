@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "minecraft:swamp",
+  "features": "#bignay:swamp_plants",
+  "step": "vegetal_decoration"
+}
