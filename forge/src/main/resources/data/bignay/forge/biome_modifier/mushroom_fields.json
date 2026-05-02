@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "minecraft:mushroom_fields",
+  "features": "#bignay:mushroom_fields_plants",
+  "step": "vegetal_decoration"
+}
