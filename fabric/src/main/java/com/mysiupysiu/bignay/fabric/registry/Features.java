@@ -15,12 +15,19 @@ public class Features {
         register(Biomes.SOUL_SAND_VALLEY, GenerationStep.Decoration.UNDERGROUND_ORES, BignayPlacedFeatures.AWAKENED_SOUL_SAND);
         register(Biomes.BADLANDS, GenerationStep.Decoration.VEGETAL_DECORATION, BignayPlacedFeatures.PATCH_TALL_DEAD_BUSH_BADLANDS);
         register(Biomes.BASALT_DELTAS, GenerationStep.Decoration.SURFACE_STRUCTURES, BignayPlacedFeatures.BASALTIC_LAVA);
+        register(Biomes.CRIMSON_FOREST, GenerationStep.Decoration.VEGETAL_DECORATION, BignayPlacedFeatures.PATCH_CRIMSON_SPROUTS);
         register(Biomes.DESERT, GenerationStep.Decoration.VEGETAL_DECORATION, BignayPlacedFeatures.PATCH_TALL_DEAD_BUSH_2);
+        register(Biomes.ERODED_BADLANDS, GenerationStep.Decoration.VEGETAL_DECORATION, BignayPlacedFeatures.PATCH_TALL_DEAD_BUSH_BADLANDS);
+        register(Biomes.MANGROVE_SWAMP, GenerationStep.Decoration.VEGETAL_DECORATION, BignayPlacedFeatures.PATCH_TALL_DEAD_BUSH);
         register(Biomes.MUSHROOM_FIELDS, GenerationStep.Decoration.VEGETAL_DECORATION, BignayPlacedFeatures.PATCH_PUFFBALLS);
         register(Biomes.MUSHROOM_FIELDS, GenerationStep.Decoration.VEGETAL_DECORATION, BignayPlacedFeatures.PATCH_MYCELIUM_ROOTS);
         register(Biomes.MUSHROOM_FIELDS, GenerationStep.Decoration.VEGETAL_DECORATION, BignayPlacedFeatures.PATCH_MYCELIUM_SPROUTS);
         register(Biomes.SWAMP, GenerationStep.Decoration.VEGETAL_DECORATION, BignayPlacedFeatures.SWAMP_MUSHROOM);
         register(Biomes.SWAMP, GenerationStep.Decoration.VEGETAL_DECORATION, BignayPlacedFeatures.PATCH_TALL_DEAD_BUSH);
+        register(Biomes.WOODED_BADLANDS, GenerationStep.Decoration.VEGETAL_DECORATION, BignayPlacedFeatures.PATCH_TALL_DEAD_BUSH_BADLANDS);
+        register(Biomes.OLD_GROWTH_PINE_TAIGA, GenerationStep.Decoration.VEGETAL_DECORATION, BignayPlacedFeatures.PATCH_TALL_DEAD_BUSH);
+        register(Biomes.OLD_GROWTH_SPRUCE_TAIGA, GenerationStep.Decoration.VEGETAL_DECORATION, BignayPlacedFeatures.PATCH_TALL_DEAD_BUSH);
+
     }
 
     private static void register(ResourceKey<Biome> biome, GenerationStep.Decoration generation, ResourceKey<PlacedFeature> feature) {
