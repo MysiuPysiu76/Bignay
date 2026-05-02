@@ -10,6 +10,7 @@ public class BignayPlacedFeatures {
 
     public static final ResourceKey<PlacedFeature> AWAKENED_SOUL_SAND = feature("awakened_soul_sand_patch");
     public static final ResourceKey<PlacedFeature> BASALTIC_LAVA = feature("basaltic_lava");
+    public static final ResourceKey<PlacedFeature> PATCH_CRIMSON_SPROUTS = feature("crimson_sprouts");
     public static final ResourceKey<PlacedFeature> PATCH_PUFFBALLS = feature("patch_puffballs");
     public static final ResourceKey<PlacedFeature> PATCH_MYCELIUM_ROOTS = feature("patch_mycelium_roots");
     public static final ResourceKey<PlacedFeature> PATCH_MYCELIUM_SPROUTS = feature("patch_mycelium_sprouts");
