@@ -9,9 +9,7 @@ The **Happy, Angry, Derpy, Skull, Ghost, Creeper and Anxious Carved Pumpkin** te
 
 The **Cobbled Basalt, Basalt Bricks, Chiseled Basalt and Basalt Pillar, Acacia, Birch, Crimson, Dark Oak, Jungle, Spruce, Warped Bookshelf and Prismarine Tiles** texture was created by [MCjossic](https://www.reddit.com/user/MCjossic/).  
 
-The **Andesite, Diorite, Granite, Dripstone, Calcite variants of Polished, Smooth, Bricks, Pillar and Chiseled block** textures come from [ImXR24](https://www.deviantart.com/imxr24)
-
-The **Ladders** textures come from [SmallBlueSlime](https://www.reddit.com/user/SmallBlueSlime/)
+The **Andesite, Diorite, Granite, Dripstone, Calcite, Bedrock variants of Polished, Smooth, Bricks, Pillar and Chiseled block** textures come from [ImXR24](https://www.deviantart.com/imxr24)
 
 The **Tree cavity, Charcoal Block, Hyacinth, Peony, Lilac, Lapis Lotus, Heliotrope, Mushroom Clusters, Tall Dead Bush, Blue Rose Bush, Puffballs, Rose, Cyan Rose, Golden Poppy, Mycelium Roots and Sprouts** textures come from [Turfnerf(BuildsZenith)](https://x.com/BuildsZenith)
 
@@ -19,8 +17,10 @@ Used in the Bignay mod with permission from the original creator - many thanks f
 
 The mosaic blocks were inspired by the work of people on Reddit and other mods, viewed on Google Images
 
+The **knife** texture was inspired by [Vanilla Knives](https://www.curseforge.com/minecraft-bedrock/addons/vanilla-knives)
+
 The Mojang animated logo texture comes from [Mojangs loading screen](https://www.curseforge.com/minecraft/texture-packs/the-mojangs-loading-screen)
 
-The Ancient vines texture comes from [Sniffer Lichen](https://www.planetminecraft.com/member/joaocomtil/)
+The **Ladders** textures come from [SmallBlueSlime](https://www.reddit.com/user/SmallBlueSlime/)
 
-The **knife** texture was inspired by [Vanilla Knives](https://www.curseforge.com/minecraft-bedrock/addons/vanilla-knives)
+The Ancient vines texture comes from [Sniffer Lichen](https://www.planetminecraft.com/member/joaocomtil/)
