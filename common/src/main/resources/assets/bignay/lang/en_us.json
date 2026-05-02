@@ -127,6 +127,7 @@
   "screenshotsViewer.loadingImage": "Loading image...",
   "screenshotsViewer.delete": "Delete",
   "screenshotsViewer.export": "Export",
+  "block.bignay.smooth_sandstone_vertical_slab": "Smooth Sandstone Vertical Slab",
   "screenshotsViewer.loadingError": "Error while loading",
   "screenshotsViewer.count": "Screenshots: %s",
   "screenshotsViewer.title": "Screenshots Viewer",
