@@ -22,41 +22,23 @@ public final class BignayPacketHandler {
     private static boolean registered = false;
     private static int id = 0;
 
-    private BignayPacketHandler() {}
+    private BignayPacketHandler() {
+    }
 
     public static void register() {
         if (registered) return;
         registered = true;
 
-        INSTANCE = ChannelBuilder.named(new ResourceLocation(BignayMod.MODID, "main"))
-                .networkProtocolVersion(PROTOCOL_VERSION)
-                .clientAcceptedVersions((status, version) -> version == PROTOCOL_VERSION)
-                .serverAcceptedVersions((status, version) -> version == PROTOCOL_VERSION)
-                .simpleChannel();
+        INSTANCE = ChannelBuilder.named(new ResourceLocation(BignayMod.MODID, "main")).networkProtocolVersion(PROTOCOL_VERSION).clientAcceptedVersions((status, version) ->
+                version == PROTOCOL_VERSION).serverAcceptedVersions((status, version) -> version == PROTOCOL_VERSION).simpleChannel();
 
-        INSTANCE.messageBuilder(SortPacket.class, id++, NetworkDirection.PLAY_TO_SERVER)
-                .encoder(SortPacket::encode)
-                .decoder(SortPacket::decode)
-                .consumerMainThread(SortPacket::handle)
-                .add();
+        INSTANCE.messageBuilder(SortPacket.class, id++, NetworkDirection.PLAY_TO_SERVER).encoder(SortPacket::encode).decoder(SortPacket::decode).consumerMainThread(SortPacket::handle).add();
 
-        INSTANCE.messageBuilder(TransferPacket.class, id++, NetworkDirection.PLAY_TO_SERVER)
-                .encoder(TransferPacket::encode)
-                .decoder(TransferPacket::decode)
-                .consumerMainThread(TransferPacket::handle)
-                .add();
+        INSTANCE.messageBuilder(TransferPacket.class, id++, NetworkDirection.PLAY_TO_SERVER).encoder(TransferPacket::encode).decoder(TransferPacket::decode).consumerMainThread(TransferPacket::handle).add();
 
-        INSTANCE.messageBuilder(WithdrawPacket.class, id++, NetworkDirection.PLAY_TO_SERVER)
-                .encoder(WithdrawPacket::encode)
-                .decoder(WithdrawPacket::decode)
-                .consumerMainThread(WithdrawPacket::handle)
-                .add();
+        INSTANCE.messageBuilder(WithdrawPacket.class, id++, NetworkDirection.PLAY_TO_SERVER).encoder(WithdrawPacket::encode).decoder(WithdrawPacket::decode).consumerMainThread(WithdrawPacket::handle).add();
 
-        INSTANCE.messageBuilder(TotemActivationPacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
-                .encoder(TotemActivationPacket::encode)
-                .decoder(TotemActivationPacket::decode)
-                .consumerMainThread(TotemActivationPacket::handle)
-                .add();
+        INSTANCE.messageBuilder(TotemActivationPacket.class, id++, NetworkDirection.PLAY_TO_CLIENT).encoder(TotemActivationPacket::encode).decoder(TotemActivationPacket::decode).consumerMainThread(TotemActivationPacket::handle).add();
 
         BignayNetworking.init(BignayPacketHandler::sendTotemActivation);
     }
@@ -69,9 +51,18 @@ public final class BignayPacketHandler {
 
     public static class SortPacket {
         private final boolean isPlayerInventory;
-        public SortPacket(boolean isPlayerInventory) { this.isPlayerInventory = isPlayerInventory; }
-        public static void encode(SortPacket msg, FriendlyByteBuf buf) { buf.writeBoolean(msg.isPlayerInventory); }
-        public static SortPacket decode(FriendlyByteBuf buf) { return new SortPacket(buf.readBoolean()); }
+
+        public SortPacket(boolean isPlayerInventory) {
+            this.isPlayerInventory = isPlayerInventory;
+        }
+
+        public static void encode(SortPacket msg, FriendlyByteBuf buf) {
+            buf.writeBoolean(msg.isPlayerInventory);
+        }
+
+        public static SortPacket decode(FriendlyByteBuf buf) {
+            return new SortPacket(buf.readBoolean());
+        }
 
         public static void handle(SortPacket msg, CustomPayloadEvent.Context ctx) {
             ServerPlayer player = ctx.getSender();
@@ -85,7 +76,10 @@ public final class BignayPacketHandler {
 
     public static class TransferPacket {
         public static void encode(TransferPacket msg, FriendlyByteBuf buf) {}
-        public static TransferPacket decode(FriendlyByteBuf buf) { return new TransferPacket(); }
+
+        public static TransferPacket decode(FriendlyByteBuf buf) {
+            return new TransferPacket();
+        }
 
         public static void handle(TransferPacket msg, CustomPayloadEvent.Context ctx) {
             ServerPlayer player = ctx.getSender();
@@ -99,7 +93,10 @@ public final class BignayPacketHandler {
 
     public static class WithdrawPacket {
         public static void encode(WithdrawPacket msg, FriendlyByteBuf buf) {}
-        public static WithdrawPacket decode(FriendlyByteBuf buf) { return new WithdrawPacket(); }
+
+        public static WithdrawPacket decode(FriendlyByteBuf buf) {
+            return new WithdrawPacket();
+        }
 
         public static void handle(WithdrawPacket msg, CustomPayloadEvent.Context ctx) {
             ServerPlayer player = ctx.getSender();
@@ -113,9 +110,18 @@ public final class BignayPacketHandler {
 
     public static class TotemActivationPacket {
         private final ItemStack stack;
-        public TotemActivationPacket(ItemStack stack) { this.stack = stack == null ? ItemStack.EMPTY : stack.copy(); }
-        public static void encode(TotemActivationPacket msg, FriendlyByteBuf buf) { buf.writeItemStack(msg.stack, false); }
-        public static TotemActivationPacket decode(FriendlyByteBuf buf) { return new TotemActivationPacket(buf.readItem()); }
+
+        public TotemActivationPacket(ItemStack stack) {
+            this.stack = stack == null ? ItemStack.EMPTY : stack.copy();
+        }
+
+        public static void encode(TotemActivationPacket msg, FriendlyByteBuf buf) {
+            buf.writeItemStack(msg.stack, false);
+        }
+
+        public static TotemActivationPacket decode(FriendlyByteBuf buf) {
+            return new TotemActivationPacket(buf.readItem());
+        }
 
         public static void handle(TotemActivationPacket msg, CustomPayloadEvent.Context ctx) {
             DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ForgeTotemClientHandler.play(msg.stack));
