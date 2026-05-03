@@ -283,8 +283,6 @@ public class WorldEditScreen extends Screen {
                     mc.setScreen(CreateWorldScreen.createFromExisting(mc, this, levelSettings, worldContext, path));
                 }
 
-            } catch (ContentValidationException e) {
-//                mc.setScreen(new SymlinkWarningScreen(this));
             } catch (Exception e) {
                 e.printStackTrace();
                 mc.setScreen(new AlertScreen(() -> mc.setScreen(this),

@@ -6,6 +6,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ObjectSelectionList;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.worldselection.EditWorldScreen;
 import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -27,13 +28,14 @@ public class WorldInfoScreen extends Screen {
 
     @Override
     protected void init() {
-        this.infoList = new WorldInfoList(this.minecraft, this.width, this.height, 40, this.height - 80, 18);
+        this.infoList = new WorldInfoList(this.minecraft, this.width, this.height, 40, this.height - 60, 18);
+        this.addRenderableWidget(this.infoList);
 
-        this.addWidget(this.infoList);
+        this.loadWorldInfo();
 
-        loadWorldInfo();
-
-        this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, b -> this.minecraft.setScreen(new WorldEditScreen(this.levelAccess))).bounds(this.width / 2 - 130, this.height - 60, 120, 20).build());
+        this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, b ->
+                this.minecraft.setScreen(new EditWorldScreen(result -> this.minecraft.setScreen(new SelectWorldScreen(null)), this.levelAccess))
+        ).bounds(this.width / 2 - 125, this.height - 40, 120, 20).build());
 
         this.addRenderableWidget(Button.builder(Component.translatable("selectWorld.backToMenu"), b -> {
             try {
@@ -42,16 +44,14 @@ public class WorldInfoScreen extends Screen {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        }).bounds(this.width / 2 + 10, this.height - 60, 120, 20).build());
+        }).bounds(this.width / 2 + 5, this.height - 40, 120, 20).build());
     }
 
     @Override
     public void render(GuiGraphics gfx, int mouseX, int mouseY, float delta) {
-        this.renderBackground(gfx, mouseX, mouseY, delta);
-
+        super.renderBackground(gfx, mouseX, mouseY, delta);
         this.infoList.render(gfx, mouseX, mouseY, delta);
         gfx.drawCenteredString(this.font, this.title, this.width / 2, 15, 0xFFFFFF);
-
         super.render(gfx, mouseX, mouseY, delta);
     }
 
@@ -59,7 +59,7 @@ public class WorldInfoScreen extends Screen {
         WorldInfoReader reader = new WorldInfoReader(this.levelAccess);
         this.infoList.refreshList();
 
-        addInfoLine("player", "-");
+        addSection("player");
         addInfoLine("time", reader.getPlayerTimePlayed());
         addInfoLine("mined", reader.getPlayerBlocksDestroyedCount());
         addInfoLine("mobsKilled", reader.getPlayerMobsKilledCount());
@@ -69,7 +69,7 @@ public class WorldInfoScreen extends Screen {
         addInfoLine("achievements", reader.getPlayerFinishedAdvancementsCount());
         addInfoLine("lastPlayed", formatDate(reader.getPlayerLastPlayed()));
 
-        addInfoLine("world", "-");
+        addSection("world");
         addInfoLine("worldName", reader.getWorldName());
         addInfoLine("createdDate", formatDate(reader.getWorldCreatedDate()));
         addInfoLine("seed", reader.getWorldSeed());
@@ -82,6 +82,10 @@ public class WorldInfoScreen extends Screen {
         addInfoLine("hardcore", reader.getWorldHardcore());
     }
 
+    private void addSection(String key) {
+        this.infoList.addEntry(new WorldInfoEntry(Component.translatable("selectWorld.info." + key).withStyle(s -> s.withBold(true).withColor(0xFFAA00))));
+    }
+
     private void addInfoLine(String name, Object value) {
         if (value != null) {
             Component text = Component.translatable("selectWorld.info." + name, "§e" + value);
@@ -90,7 +94,7 @@ public class WorldInfoScreen extends Screen {
     }
 
     private String formatDate(Long l) {
-        if (l == null) return null;
+        if (l == null || l <= 0) return "-";
         return Instant.ofEpochMilli(l).atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
     }
 
@@ -110,12 +114,12 @@ public class WorldInfoScreen extends Screen {
 
         @Override
         public int getRowWidth() {
-            return 300;
+            return 280;
         }
 
         @Override
         protected int getScrollbarPosition() {
-            return this.width / 2 + 150;
+            return this.width / 2 + 145;
         }
     }
 
@@ -128,7 +132,7 @@ public class WorldInfoScreen extends Screen {
 
         @Override
         public void render(GuiGraphics gfx, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean isHovered, float partialTicks) {
-            gfx.drawString(WorldInfoScreen.this.font, this.text, left, top + 2, 0xFFFFFF, false);
+            gfx.drawString(WorldInfoScreen.this.font, this.text, left, top + 2, 0xFFFFFF);
         }
 
         @Override
