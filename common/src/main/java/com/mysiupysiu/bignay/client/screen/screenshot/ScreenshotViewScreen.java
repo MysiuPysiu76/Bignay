@@ -73,8 +73,8 @@ public class ScreenshotViewScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTick) {
-        renderBackground(gui);
+    public void render(GuiGraphics gui, int mouseX, int mouseY, float delta) {
+        this.renderBackground(gui, mouseX, mouseY, delta);
 
         if (this.failed || this.texture == null) {
             gui.drawCenteredString(this.font, Component.translatable("screenshotsViewer.loadingError"), this.width / 2, this.height / 2, 0xFFFFFF);
@@ -97,7 +97,7 @@ public class ScreenshotViewScreen extends Screen {
 
         String title = BignayConfig.screenshots.showFileExtension.get() ? name : name.replace(".png", "");
         gui.drawCenteredString(this.font, title, this.width / 2, 7, 0xFFFFFF);
-        super.render(gui, mouseX, mouseY, partialTick);
+        super.render(gui, mouseX, mouseY, delta);
     }
 
     @Override

@@ -67,9 +67,9 @@ public class ScreenshotRenameScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTick) {
-        this.renderBackground(gui);
-        super.render(gui, mouseX, mouseY, partialTick);
+    public void render(GuiGraphics gui, int mouseX, int mouseY, float delta) {
+        this.renderBackground(gui, mouseX, mouseY, delta);
+        super.render(gui, mouseX, mouseY, delta);
         gui.drawCenteredString(this.font, Component.translatable("screenshotsViewer.rename.title"), this.width / 2, this.height / 2 - 50, 0xFFFFFF);
     }
 

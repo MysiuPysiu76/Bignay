@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[47,)"
+loaderVersion = "[48,)"
 license = "GNU GPL 3.0"
 issueTrackerURL = "https://github.com/MysiuPysiu76/Bignay/issues"
 logoFile = "pack.png"
@@ -14,13 +14,13 @@ logoFile = "pack.png"
 [[dependencies.bignay]]
     modId = "forge"
     mandatory = true
-    versionRange = "[47,)"
+    versionRange = "[48,)"
     ordering = "NONE"
     side = "BOTH"
 
 [[dependencies.bignay]]
     modId = "minecraft"
     mandatory = true
-    versionRange = "[1.20.1,1.21)"
+    versionRange = "[1.20.2,1.21)"
     ordering = "NONE"
     side = "BOTH"

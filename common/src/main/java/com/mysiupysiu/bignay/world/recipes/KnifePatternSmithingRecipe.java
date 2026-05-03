@@ -15,12 +15,10 @@ import net.minecraft.world.level.Level;
 
 public class KnifePatternSmithingRecipe implements SmithingRecipe {
 
-    private final ResourceLocation id;
     private final Ingredient base;
     private final Ingredient addition;
 
-    public KnifePatternSmithingRecipe(ResourceLocation id, Ingredient base, Ingredient addition) {
-        this.id = id;
+    public KnifePatternSmithingRecipe(Ingredient base, Ingredient addition) {
         this.base = base;
         this.addition = addition;
     }
@@ -69,11 +67,6 @@ public class KnifePatternSmithingRecipe implements SmithingRecipe {
     @Override
     public ItemStack getResultItem(RegistryAccess registryAccess) {
         return ItemStack.EMPTY;
-    }
-
-    @Override
-    public ResourceLocation getId() {
-        return id;
     }
 
     @Override

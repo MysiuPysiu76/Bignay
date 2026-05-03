@@ -46,13 +46,13 @@ public class WorldInfoScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics gfx, int mouseX, int mouseY, float partialTicks) {
-        this.renderBackground(gfx);
+    public void render(GuiGraphics gfx, int mouseX, int mouseY, float delta) {
+        this.renderBackground(gfx, mouseX, mouseY, delta);
 
-        this.infoList.render(gfx, mouseX, mouseY, partialTicks);
+        this.infoList.render(gfx, mouseX, mouseY, delta);
         gfx.drawCenteredString(this.font, this.title, this.width / 2, 15, 0xFFFFFF);
 
-        super.render(gfx, mouseX, mouseY, partialTicks);
+        super.render(gfx, mouseX, mouseY, delta);
     }
 
     private void loadWorldInfo() {

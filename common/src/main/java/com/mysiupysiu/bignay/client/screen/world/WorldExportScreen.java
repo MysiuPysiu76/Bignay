@@ -92,9 +92,15 @@ public class WorldExportScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
-        this.renderBackground(graphics);
-        graphics.drawCenteredString(this.font, this.title, this.width / 2, 15, 0xFFFFFF);
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+        this.renderBackground(graphics, mouseX, mouseY, delta);
+
+        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+
+        graphics.pose().pushPose();
+        graphics.pose().translate(0, 0, 100);
+
+        graphics.drawCenteredString(this.font, this.title, this.width / 2, 15, 0xFFFFFFFF);
 
         final int centerX = this.width / 2;
         int y = 60;
@@ -103,29 +109,28 @@ public class WorldExportScreen extends Screen {
         int inputX = centerX - inputWidth / 2;
 
         String sizeText = (this.worldSizeBytes >= 0) ? FileUtils.humanReadableByteCount(this.worldSizeBytes) : "-";
-        graphics.drawString(this.font, Component.translatable("exportWorld.size", sizeText), inputX, y, 0xFFFFFF, false);
+        graphics.drawString(this.font, Component.translatable("exportWorld.size", sizeText), inputX, y, 0xFFFFFFFF, false);
 
         int nameFieldY = y + rowGap + 12;
-        graphics.drawString(this.font, Component.translatable("selectWorld.enterName"), inputX, nameFieldY - 12, 0xAAAAAA, false);
+        graphics.drawString(this.font, Component.translatable("selectWorld.enterName"), inputX, nameFieldY - 12, 0xFFAAAAAA, false);
 
-        String label = Component.translatable("exportWorld.chosen-destination").getString();
-        graphics.drawString(this.font, label, inputX, nameFieldY + rowGap + 6, 0xFFFFFF, false);
+        Component labelComponent = Component.translatable("exportWorld.chosen-destination");
+        graphics.drawString(this.font, labelComponent, inputX, nameFieldY + rowGap + 6, 0xFFFFFFFF, false);
 
         String destinationInfo = (this.destinationFile != null) ? this.destinationFile.getAbsolutePath() : Component.translatable("exportWorld.chosen-destination.none").getString();
-
-        int pathX = inputX + this.font.width(label);
-        int inputRight = inputX + inputWidth;
+        int pathX = inputX + this.font.width(labelComponent);
         int buttonX = this.selectDestButton.getX();
-        int maxWidth = Math.max(buttonX - pathX - 8, inputRight - pathX);
+        int maxWidth = Math.max(buttonX - pathX - 8, (inputX + inputWidth) - pathX);
 
         String shortDest = destinationInfo;
         while (this.font.width(shortDest) > maxWidth && shortDest.length() > 5) {
             shortDest = "..." + shortDest.substring(4);
         }
 
-        graphics.drawString(this.font, shortDest, pathX, nameFieldY + rowGap + 6, 0xFFFFFF, false);
+        graphics.drawString(this.font, shortDest, pathX, nameFieldY + rowGap + 6, 0xFFFFFFFF, false);
+        graphics.pose().popPose();
 
-        super.render(graphics, mouseX, mouseY, partialTicks);
+        super.render(graphics, mouseX, mouseY, delta);
     }
 
     public void setDestinationFile(File destinationFile) {

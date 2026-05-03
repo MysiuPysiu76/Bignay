@@ -1,11 +1,11 @@
 plugins {
-    id "com.github.johnrengelman.shadow" version "7.1.2"
+    id "com.github.johnrengelman.shadow" version "8.1.1"
 }
 
 loom {
     accessWidenerPath = project(":common").file("src/main/resources/bignay.accesswidener")
-
     forge {
+        convertAccessWideners = true
         mixinConfig "bignay-common.mixins.json"
         mixinConfig "bignay.mixins.json"
     }
@@ -26,7 +26,7 @@ configurations {
 
 dependencies {
     forge "net.minecraftforge:forge:${rootProject.forge_version}"
-    modImplementation "maven.modrinth:terrablender:3.0.1.10-forge"
+    modImplementation "maven.modrinth:terrablender:3.2.0.14-forge"
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 }

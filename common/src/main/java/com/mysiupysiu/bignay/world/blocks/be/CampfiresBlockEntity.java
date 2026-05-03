@@ -130,14 +130,14 @@ public class CampfiresBlockEntity extends BlockEntity {
     private static int getCookTime(Level level, ItemStack stack) {
         return level.getRecipeManager()
                 .getRecipeFor(RecipeType.CAMPFIRE_COOKING, new SimpleContainer(stack), level)
-                .map(r -> r.getCookingTime())
+                .map(holder -> holder.value().getCookingTime())
                 .orElse(200);
     }
 
     private static ItemStack getCookingResult(Level level, ItemStack stack) {
         return level.getRecipeManager()
                 .getRecipeFor(RecipeType.CAMPFIRE_COOKING, new SimpleContainer(stack), level)
-                .map(r -> r.getResultItem(level.registryAccess()))
+                .map(holder -> holder.value().getResultItem(level.registryAccess()))
                 .orElse(ItemStack.EMPTY);
     }
 
@@ -149,20 +149,6 @@ public class CampfiresBlockEntity extends BlockEntity {
                         .getPlayers(serverLevel.getChunkAt(worldPosition).getPos(), false)
                         .forEach(player -> player.connection.send(packet));
             }
-        }
-    }
-
-    public void onDataPacket(net.minecraft.network.Connection net, net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket pkt) {
-        CompoundTag tag = pkt.getTag();
-        if (tag != null) {
-            this.handleUpdateTag(tag);
-        }
-    }
-
-    public void handleUpdateTag(CompoundTag tag) {
-        this.load(tag);
-        if (level != null && level.isClientSide) {
-            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
         }
     }
 

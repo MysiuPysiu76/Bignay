@@ -2,9 +2,11 @@ package com.mysiupysiu.bignay.fabric.mixin;
 
 import com.mysiupysiu.bignay.config.BignayConfig;
 import com.mysiupysiu.bignay.fabric.network.BignayPacketHandler;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Tooltip;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.*;
 import net.minecraft.network.chat.Component;
@@ -100,13 +102,15 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
 
     @Unique
     private void bignay$addSafeButton(int xOffset, int yOffset, String langKey, ResourceLocation icon, Button.OnPress onPress) {
-        ImageButton btn = new ImageButton(0, 0, 11, 11, 0, 0, 11, icon, 16, 32, onPress) {
+        WidgetSprites sprites = new WidgetSprites(icon, icon);
+        ImageButton btn = new ImageButton(0, 0, 11, 11, sprites, onPress, Component.translatable(langKey)) {
             @Override
-            public void renderWidget(net.minecraft.client.gui.GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-                this.setX(((AbstractContainerScreenMixin<?>) (Object) AbstractContainerScreenMixin.this).leftPos + xOffset);
-                this.setY(((AbstractContainerScreenMixin<?>) (Object) AbstractContainerScreenMixin.this).topPos + yOffset);
+            public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+                this.setX(AbstractContainerScreenMixin.this.leftPos + xOffset);
+                this.setY(AbstractContainerScreenMixin.this.topPos + yOffset);
 
-                super.renderWidget(guiGraphics, mouseX, mouseY, partialTick);
+                float v = this.isHoveredOrFocused() ? 11.0f : 0.0f;
+                guiGraphics.blit(icon, this.getX(), this.getY(), 0.0f, v, 11, 11, 16, 32);
             }
 
             @Override

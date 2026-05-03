@@ -101,15 +101,15 @@ public class WorldPruneScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics gui, int p_281550_, int p_282878_, float p_282465_) {
-        this.renderBackground(gui);
+    public void render(GuiGraphics gui, int mouseX, int mouseY, float delta) {
+        this.renderBackground(gui, mouseX, mouseY, delta);
         int centerX = this.width / 2;
 
         gui.drawCenteredString(this.font, this.title, centerX, 15, 16777215);
         gui.drawCenteredString(this.font, Component.translatable("selectWorld.edit.prune.settings"), centerX, 40, 16777215);
         gui.drawCenteredString(this.font, waring, centerX, this.height / 2, 10526880);
 
-        super.render(gui, p_281550_, p_282878_, p_282465_);
+        super.render(gui, mouseX, mouseY, delta);
     }
 
     private static boolean isOlderThan(Path path, Instant border) {

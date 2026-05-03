@@ -1,5 +1,6 @@
 package com.mysiupysiu.bignay.client.screen;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mysiupysiu.bignay.utils.ProgressListener;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -35,26 +36,39 @@ public abstract class AbstractProgressScreen extends Screen implements ProgressL
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
-        this.renderBackground(graphics);
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+        this.renderBackground(graphics, mouseX, mouseY, delta);
+
         int centerX = this.width / 2;
         int centerY = this.height / 2;
 
-        graphics.drawCenteredString(this.font, this.title, centerX, centerY - 110, 0xFFFFFF);
+        graphics.pose().pushPose();
+        graphics.pose().translate(0, 0, 100);
+
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+
+        graphics.drawCenteredString(this.font, this.title, centerX, centerY - 110, 0xFFFFFFFF);
 
         int barWidth = 222;
         int barHeight = 4;
-        int filled = (int) (barWidth * progress);
+        float clampedProgress = (float) Math.max(0.0, Math.min(1.0, progress));
+        int filled = (int) (barWidth * clampedProgress);
 
-        graphics.fill(centerX - barWidth / 2, centerY - 30, centerX + barWidth / 2, centerY + barHeight - 30, 0x88000000);
-        graphics.fill(centerX - barWidth / 2, centerY - 30, centerX - barWidth / 2 + filled, centerY + barHeight - 30, 0xFF00AA00);
+        graphics.fill(centerX - barWidth / 2, centerY - 30, centerX + barWidth / 2, centerY + barHeight - 30, 0xFF222222);
 
-        String percentText = String.format("%.0f%%", progress * 100);
-        graphics.drawCenteredString(this.font, Component.translatable("progressScreen.complete", percentText), centerX, centerY + 24, 0xFFFFFF);
+        if (filled > 0) {
+            graphics.fill(centerX - barWidth / 2, centerY - 30, centerX - barWidth / 2 + filled, centerY + barHeight - 30, 0xFF00AA00);
+        }
 
-        if (finished) Minecraft.getInstance().setScreen(this.afterFinishScreen);
+        String percentText = String.format("%.0f%%", clampedProgress * 100);
+        graphics.drawCenteredString(this.font, Component.translatable("progressScreen.complete", percentText), centerX, centerY + 24, 0xFFFFFFFF);
+        graphics.pose().popPose();
 
-        super.render(graphics, mouseX, mouseY, partialTicks);
+        if (finished && this.afterFinishScreen != null) {
+            Minecraft.getInstance().setScreen(this.afterFinishScreen);
+        }
+
+        super.render(graphics, mouseX, mouseY, delta);
     }
 
     @Override

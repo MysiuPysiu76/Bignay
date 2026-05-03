@@ -121,7 +121,7 @@ public class WorldEditScreen extends Screen {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-        this.renderBackground(graphics);
+        this.renderBackground(graphics, mouseX, mouseY, delta);
 
         graphics.drawCenteredString(this.font, this.title, this.width / 2, 15, 16777215);
         graphics.drawString(this.font, Component.translatable("selectWorld.enterName"), this.width / 2 - 100, 23, 10526880);
@@ -284,7 +284,7 @@ public class WorldEditScreen extends Screen {
                 }
 
             } catch (ContentValidationException e) {
-                mc.setScreen(new SymlinkWarningScreen(this));
+//                mc.setScreen(new SymlinkWarningScreen(this));
             } catch (Exception e) {
                 e.printStackTrace();
                 mc.setScreen(new AlertScreen(() -> mc.setScreen(this),

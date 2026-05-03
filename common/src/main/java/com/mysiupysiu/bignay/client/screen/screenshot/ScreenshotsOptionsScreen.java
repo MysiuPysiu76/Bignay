@@ -42,10 +42,10 @@ public class ScreenshotsOptionsScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTick) {
-        this.renderBackground(gui);
+    public void render(GuiGraphics gui, int mouseX, int mouseY, float delta) {
+        this.renderBackground(gui, mouseX, mouseY, delta);
         gui.drawCenteredString(this.font, this.title, this.width / 2, 20, 0xFFFFFF);
-        super.render(gui, mouseX, mouseY, partialTick);
+        super.render(gui, mouseX, mouseY, delta);
     }
 
     @Override

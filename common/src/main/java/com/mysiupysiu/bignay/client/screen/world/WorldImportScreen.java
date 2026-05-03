@@ -61,7 +61,7 @@ public class WorldImportScreen extends Screen {
 
     @Override
     public void render(GuiGraphics gui, int mouseX, int mouseY, float delta) {
-        this.renderBackground(gui);
+        this.renderBackground(gui, mouseX, mouseY, delta);
 
         gui.drawCenteredString(this.font, this.title, this.width / 2, 30, 0xFFFFFF);
 

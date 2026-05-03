@@ -86,7 +86,7 @@ public class WorldInfoReader {
     public Integer getPlayerFinishedAdvancementsCount() {
         try {
             File root = this.levelAccess.getLevelPath(LevelResource.ROOT).toFile().getCanonicalFile();
-            File file = new File(new File(root, "advancements"), Minecraft.getInstance().getUser().getUuid() + ".json");
+            File file = new File(new File(root, "advancements"), Minecraft.getInstance().getUser().getName() + ".json");
 
             int sum = 0;
             for (Map.Entry<String, JsonElement> entry : new Gson().fromJson(new FileReader(file), JsonObject.class).getAsJsonObject().entrySet()) {
@@ -237,7 +237,7 @@ public class WorldInfoReader {
     private void loadStats() {
         try {
             File root = this.levelAccess.getLevelPath(LevelResource.ROOT).toFile().getCanonicalFile();
-            File stats = new File(new File(root, "stats"), Minecraft.getInstance().getUser().getUuid() + ".json");
+            File stats = new File(new File(root, "stats"), Minecraft.getInstance().getUser().getXuid().get() + ".json");
 
             this.stats = new Gson().fromJson(new FileReader(stats), JsonObject.class).getAsJsonObject("stats");
         } catch (Exception ignored) {}

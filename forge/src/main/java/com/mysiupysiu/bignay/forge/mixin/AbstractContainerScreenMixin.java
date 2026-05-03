@@ -1,10 +1,12 @@
 package com.mysiupysiu.bignay.forge.mixin;
 
 import com.mysiupysiu.bignay.config.BignayConfig;
-import com.mysiupysiu.bignay.forge.network.BignayPacketHandler;
+//import com.mysiupysiu.bignay.forge.network.BignayPacketHandler;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Tooltip;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.*;
 import net.minecraft.network.chat.Component;
@@ -75,38 +77,42 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
 
         final int xOffset = invMaxX + 6;
 
-        if (BignayConfig.containers.showSortInventory.get()) {
-            this.bignay$addSafeButton(xOffset, invMinY - 13, "container.sort_inventory", SORT_TEXTURE, btn ->
-                    BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.SortPacket(true)));
-        }
-
-        if (isChest && hasContainer && contMinY != Integer.MAX_VALUE) {
-            if (BignayConfig.containers.showSortContainer.get()) {
-                this.bignay$addSafeButton(xOffset, contMinY - 13, "container.sort", SORT_TEXTURE, btn ->
-                        BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.SortPacket(false)));
-            }
-
-            if (BignayConfig.containers.showTransferToContainer.get()) {
-                this.bignay$addSafeButton(xOffset - 13, invMinY - 13, "container.up", UP_TEXTURE, btn ->
-                        BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.TransferPacket()));
-            }
-
-            if (BignayConfig.containers.showTransferToInventory.get()) {
-                this.bignay$addSafeButton(xOffset - 26, invMinY - 13, "container.down", DOWN_TEXTURE, btn ->
-                        BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.WithdrawPacket()));
-            }
-        }
+//        if (BignayConfig.containers.showSortInventory.get()) {
+//            this.bignay$addSafeButton(xOffset, invMinY - 13, "container.sort_inventory", SORT_TEXTURE, btn ->
+//                    BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.SortPacket(true)));
+//        }
+//
+//        if (isChest && hasContainer && contMinY != Integer.MAX_VALUE) {
+//            if (BignayConfig.containers.showSortContainer.get()) {
+//                this.bignay$addSafeButton(xOffset, contMinY - 13, "container.sort", SORT_TEXTURE, btn ->
+//                        BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.SortPacket(false)));
+//            }
+//
+//            if (BignayConfig.containers.showTransferToContainer.get()) {
+//                this.bignay$addSafeButton(xOffset - 13, invMinY - 13, "container.up", UP_TEXTURE, btn ->
+//                        BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.TransferPacket()));
+//            }
+//
+//            if (BignayConfig.containers.showTransferToInventory.get()) {
+//                this.bignay$addSafeButton(xOffset - 26, invMinY - 13, "container.down", DOWN_TEXTURE, btn ->
+//                        BignayPacketHandler.INSTANCE.sendToServer(new BignayPacketHandler.WithdrawPacket()));
+//            }
+//        }
     }
 
     @Unique
     private void bignay$addSafeButton(int xOffset, int yOffset, String langKey, ResourceLocation icon, Button.OnPress onPress) {
-        ImageButton btn = new ImageButton(0, 0, 11, 11, 0, 0, 11, icon, 16, 32, onPress) {
-            @Override
-            public void renderWidget(net.minecraft.client.gui.GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-                this.setX(((AbstractContainerScreenMixin<?>) (Object) AbstractContainerScreenMixin.this).leftPos + xOffset);
-                this.setY(((AbstractContainerScreenMixin<?>) (Object) AbstractContainerScreenMixin.this).topPos + yOffset);
+        WidgetSprites sprites = new WidgetSprites(icon, icon);
 
-                super.renderWidget(guiGraphics, mouseX, mouseY, partialTick);
+        ImageButton btn = new ImageButton(0, 0, 11, 11, sprites, onPress, Component.translatable(langKey)) {
+            @Override
+            public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+                this.setX(AbstractContainerScreenMixin.this.leftPos + xOffset);
+                this.setY(AbstractContainerScreenMixin.this.topPos + yOffset);
+
+                float v = this.isHoveredOrFocused() ? 11.0f : 0.0f;
+
+                guiGraphics.blit(icon, this.getX(), this.getY(), 0.0f, v, 11, 11, 16, 32);
             }
 
             @Override

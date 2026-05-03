@@ -25,17 +25,17 @@ public class InvalidFileScreen extends Screen {
         int spacing = 10;
 
         this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.choose_another.file"), b ->
-                Minecraft.getInstance().setScreen(parent)
-        ).bounds(centerX - buttonWidth - spacing / 2, centerY + 30, buttonWidth, buttonHeight).build());
+                Minecraft.getInstance().setScreen(parent))
+                .bounds(centerX - buttonWidth - spacing / 2, centerY + 30, buttonWidth, buttonHeight).build());
 
         this.addRenderableWidget(Button.builder(Component.translatable("gui.back_to_menu"), b ->
-                Minecraft.getInstance().setScreen(null)
-        ).bounds(centerX + spacing / 2, centerY + 30, buttonWidth, buttonHeight).build());
+                Minecraft.getInstance().setScreen(null))
+                .bounds(centerX + spacing / 2, centerY + 30, buttonWidth, buttonHeight).build());
     }
 
     @Override
     public void render(GuiGraphics gui, int mouseX, int mouseY, float delta) {
-        this.renderBackground(gui);
+        this.renderBackground(gui, mouseX, mouseY, delta);
 
         gui.drawCenteredString(this.font, this.title, this.width / 2, this.height / 2 - 40, 0xFF5555);
 

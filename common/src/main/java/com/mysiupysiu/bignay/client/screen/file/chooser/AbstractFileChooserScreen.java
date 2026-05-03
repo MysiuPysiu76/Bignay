@@ -91,7 +91,7 @@ abstract class AbstractFileChooserScreen extends Screen {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-        this.renderBackground(graphics);
+        this.renderBackground(graphics, mouseX, mouseY, delta);
         super.render(graphics, mouseX, mouseY, delta);
 
         graphics.drawCenteredString(this.font, this.title, this.width / 2, MARGIN - 10, 0xFFFFFF);

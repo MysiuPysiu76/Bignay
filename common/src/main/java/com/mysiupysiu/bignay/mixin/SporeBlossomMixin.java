@@ -20,7 +20,7 @@ public abstract class SporeBlossomMixin extends Block implements BonemealableBlo
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return true;
     }
 
