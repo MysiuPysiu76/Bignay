@@ -39,7 +39,7 @@ public class LootModifiers {
             }
 
             if (id.equals(IGLOO_CHEST)) {
-                addSingleItem(tableBuilder, BignayItems.ANXIOUS_PUMPKIN_PATTERN.get(), 0.33f);
+                addSingleItem(tableBuilder, BignayItems.HAPPY_PUMPKIN_PATTERN.get(), 0.33f);
             }
 
             if (id.equals(JUNGLE_TEMPLE)) {
