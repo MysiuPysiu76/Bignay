@@ -3,6 +3,7 @@ package com.mysiupysiu.bignay.forge.network;
 import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.client.containers.ContainersManager;
 import com.mysiupysiu.bignay.utils.BignayNetworking;
+import com.mysiupysiu.bignay.utils.TotemClientHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -124,7 +125,8 @@ public final class BignayPacketHandler {
         }
 
         public static void handle(TotemActivationPacket msg, CustomPayloadEvent.Context ctx) {
-            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ForgeTotemClientHandler.play(msg.stack));
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () ->
+                    TotemClientHandler.play(msg.stack));
             ctx.setPacketHandled(true);
         }
     }

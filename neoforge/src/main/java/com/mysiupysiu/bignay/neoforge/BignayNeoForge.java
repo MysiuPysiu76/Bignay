@@ -2,6 +2,7 @@ package com.mysiupysiu.bignay.neoforge;
 
 import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.neoforge.config.NeoForgeConfig;
+import com.mysiupysiu.bignay.neoforge.network.BignayPacketHandler;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 
@@ -11,5 +12,6 @@ public class BignayNeoForge {
         BignayMod.init();
 
         NeoForgeConfig.register(bus);
+        BignayPacketHandler.register();
     }
 }

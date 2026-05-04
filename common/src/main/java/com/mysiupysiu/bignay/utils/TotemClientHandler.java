@@ -1,11 +1,11 @@
-package com.mysiupysiu.bignay.forge.network;
+package com.mysiupysiu.bignay.utils;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
 
-public final class ForgeTotemClientHandler {
+public final class TotemClientHandler {
 
-    private ForgeTotemClientHandler() {}
+    private TotemClientHandler() {}
 
     public static void play(ItemStack stack) {
         if (stack == null || stack.isEmpty()) return;
