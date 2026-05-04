@@ -1,0 +1,32 @@
+modLoader="javafml"
+loaderVersion="[1,)"
+license="GNU GPL 3.0"
+issueTrackerURL = "https://github.com/MysiuPysiu76/Bignay/issues"
+logoFile = "pack.png"
+
+[[mods]]
+    modId="bignay"
+    version="${mod_version}"
+    displayName="Bignay"
+    authors="MysiuPysiu"
+    description="Small things, improving Minecraft bit by bit"
+
+[[dependencies.bignay]]
+    modId="neoforge"
+    mandatory=true
+    versionRange="[20.2.88,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.bignay]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.2, 1.21)"
+    ordering="NONE"
+    side="BOTH"
+
+[[mixins]]
+    config="bignay-common.mixins.json"
+
+[[mixins]]
+    config="bignay.mixins.json"

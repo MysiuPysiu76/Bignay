@@ -35,9 +35,17 @@ changelog
 /fabric/.gradle
 /fabric/build
 /fabric/client
+/fabric/run
 /fabric/server
 
 /forge/.gradle
 /forge/build
 /forge/client
+/forge/run
 /forge/server
+
+/neoforge/.gradle
+/neoforge/build
+/neoforge/client
+/neoforge/run
+/neoforge/server
