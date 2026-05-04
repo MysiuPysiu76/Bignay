@@ -9,12 +9,14 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Instrument;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -28,6 +30,8 @@ public class NeoForgeRegistry {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, BignayMod.MODID);
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, BignayMod.MODID);
     public static final DeferredRegister<Instrument> INSTRUMENTS = DeferredRegister.create(Registries.INSTRUMENT, BignayMod.MODID);
+    public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, BignayMod.MODID);
+    public static final DeferredRegister<TreeDecoratorType<?>> TREE_DECORATORS = DeferredRegister.create(Registries.TREE_DECORATOR_TYPE, BignayMod.MODID);
 
     public static void register(IEventBus bus) {
         block(bus);
@@ -36,6 +40,8 @@ public class NeoForgeRegistry {
         entities(bus);
         sounds(bus);
         instruments(bus);
+        menus(bus);
+        treeDecorators(bus);
 
         bus.addListener(NeoForgeRegistry::onBuildCreativeTabs);
     }
@@ -86,6 +92,22 @@ public class NeoForgeRegistry {
             entry.setSupplier(obj);
         }
         INSTRUMENTS.register(bus);
+    }
+
+    private static void menus(IEventBus bus) {
+        for (Registrar.Entry<MenuType<?>> entry : MenuInit.MENUS.getEntries()) {
+            DeferredHolder<MenuType<?>, MenuType<?>> obj = MENUS.register(entry.getId(), entry.getSupplier());
+            entry.setSupplier(obj);
+        }
+        MENUS.register(bus);
+    }
+
+    private static void treeDecorators(IEventBus bus) {
+        for (Registrar.Entry<TreeDecoratorType<?>> entry : BignayTreeDecorators.DECORATORS.getEntries()) {
+            DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<?>> obj = TREE_DECORATORS.register(entry.getId(), entry.getSupplier());
+            entry.setSupplier(obj);
+        }
+        TREE_DECORATORS.register(bus);
     }
 
     private static void onBuildCreativeTabs(BuildCreativeModeTabContentsEvent event) {
