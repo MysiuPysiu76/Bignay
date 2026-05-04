@@ -3,7 +3,10 @@ package com.mysiupysiu.bignay.neoforge.registry;
 import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.registry.Registrar;
 import com.mysiupysiu.bignay.registry.init.BignayBlocks;
+import com.mysiupysiu.bignay.registry.init.BignayEntities;
 import com.mysiupysiu.bignay.registry.init.BignayItems;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
@@ -14,10 +17,12 @@ public class NeoForgeRegistry {
 
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(BignayMod.MODID);
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(BignayMod.MODID);
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, BignayMod.MODID);
 
     public static void register(IEventBus bus) {
         block(bus);
         item(bus);
+        entities(bus);
     }
 
     private static void block(IEventBus bus) {
@@ -34,5 +39,13 @@ public class NeoForgeRegistry {
             entry.setSupplier(obj);
         }
         ITEMS.register(bus);
+    }
+
+    private static void entities(IEventBus bus) {
+        for (Registrar.Entry<EntityType<?>> entry : BignayEntities.ENTITIES.getEntries()) {
+            DeferredHolder<EntityType<?>, EntityType<?>> obj = ENTITY_TYPES.register(entry.getId(), entry.getSupplier());
+            entry.setSupplier(obj);
+        }
+        ENTITY_TYPES.register(bus);
     }
 }
