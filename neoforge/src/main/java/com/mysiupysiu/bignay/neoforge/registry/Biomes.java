@@ -1,6 +1,5 @@
 package com.mysiupysiu.bignay.neoforge.registry;
 
-
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 
