@@ -60,16 +60,12 @@ public class ForgeConfig {
 
     @SuppressWarnings("unchecked")
     public static void load() {
-        FORGE_VALUES.forEach((opt, forge) -> {
-            ((ConfigOption<Object>) opt).set(forge.get());
-        });
+        FORGE_VALUES.forEach((opt, forge) -> ((ConfigOption<Object>) opt).set(forge.get()));
     }
 
     @SuppressWarnings("unchecked")
     public static void updateForgeFromBignay() {
-        FORGE_VALUES.forEach((opt, forge) -> {
-            ((ForgeConfigSpec.ConfigValue<Object>) forge).set(opt.get());
-        });
+        FORGE_VALUES.forEach((opt, forge) -> ((ForgeConfigSpec.ConfigValue<Object>) forge).set(opt.get()));
     }
 
     public static void register(IEventBus bus) {

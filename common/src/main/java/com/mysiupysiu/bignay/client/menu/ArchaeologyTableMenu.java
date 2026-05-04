@@ -12,6 +12,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
 public class ArchaeologyTableMenu extends AbstractContainerMenu {
+
     private final SimpleContainer container = new SimpleContainer(3) {
         @Override
         public void setChanged() {

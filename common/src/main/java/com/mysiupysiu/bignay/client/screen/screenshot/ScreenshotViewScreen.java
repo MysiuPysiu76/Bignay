@@ -11,6 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -74,29 +75,38 @@ public class ScreenshotViewScreen extends Screen {
 
     @Override
     public void render(GuiGraphics gui, int mouseX, int mouseY, float delta) {
-        this.renderBackground(gui, mouseX, mouseY, delta);
+        gui.fill(0, 0, this.width, this.height, 0xFF000000);
 
-        if (this.failed || this.texture == null) {
+        if (this.failed || this.texture == null || this.imgW <= 0 || this.imgH <= 0) {
             gui.drawCenteredString(this.font, Component.translatable("screenshotsViewer.loadingError"), this.width / 2, this.height / 2, 0xFFFFFF);
+            super.render(gui, mouseX, mouseY, delta);
             return;
         }
 
         int maxW = this.width - 55;
         int maxH = this.height - 55;
 
-        double scale = Math.min((double) maxW / imgW, (double) maxH / imgH);
-
-        int drawW = (int) (imgW * scale);
-        int drawH = (int) (imgH * scale);
+        double scale = Math.min((double) maxW / this.imgW, (double) maxH / this.imgH);
+        int drawW = Math.max(1, (int) (this.imgW * scale));
+        int drawH = Math.max(1, (int) (this.imgH * scale));
 
         int x = (this.width - drawW) / 2;
         int y = (this.height - drawH) / 2;
 
-        RenderSystem.setShaderTexture(0, this.texture);
-        gui.blit(this.texture, x, y, 0, 0, drawW, drawH, drawW, drawH);
+        gui.pose().pushPose();
+        gui.pose().translate(x, y, 50.0F);
+        gui.pose().scale((float) scale, (float) scale, 1.0F);
 
-        String title = BignayConfig.screenshots.showFileExtension.get() ? name : name.replace(".png", "");
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+        RenderSystem.setShaderTexture(0, this.texture);
+
+        gui.blit(this.texture, 0, 0, 0, 0, this.imgW, this.imgH, this.imgW, this.imgH);
+        gui.pose().popPose();
+
+        String title = BignayConfig.screenshots.showFileExtension.get() ? this.name : this.name.replace(".png", "");
         gui.drawCenteredString(this.font, title, this.width / 2, 7, 0xFFFFFF);
+
         super.render(gui, mouseX, mouseY, delta);
     }
 
@@ -110,7 +120,7 @@ public class ScreenshotViewScreen extends Screen {
             Minecraft.getInstance().setScreen(new ScreenshotViewScreen(list, checkIndex(index - 1), parent));
             return true;
         }
-        if (key == 262 ) {
+        if (key == 262) {
             Minecraft.getInstance().setScreen(new ScreenshotViewScreen(list, checkIndex(index + 1), parent));
             return true;
         }
