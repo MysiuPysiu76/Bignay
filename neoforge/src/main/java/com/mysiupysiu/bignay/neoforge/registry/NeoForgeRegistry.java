@@ -3,6 +3,7 @@ package com.mysiupysiu.bignay.neoforge.registry;
 import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.registry.Registrar;
 import com.mysiupysiu.bignay.registry.init.*;
+import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -14,6 +15,7 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Instrument;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
@@ -29,7 +31,9 @@ public class NeoForgeRegistry {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, BignayMod.MODID);
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, BignayMod.MODID);
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, BignayMod.MODID);
+    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, BignayMod.MODID);
     public static final DeferredRegister<Instrument> INSTRUMENTS = DeferredRegister.create(Registries.INSTRUMENT, BignayMod.MODID);
+    public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(Registries.PARTICLE_TYPE, BignayMod.MODID);
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, BignayMod.MODID);
     public static final DeferredRegister<TreeDecoratorType<?>> TREE_DECORATORS = DeferredRegister.create(Registries.TREE_DECORATOR_TYPE, BignayMod.MODID);
 
@@ -39,7 +43,9 @@ public class NeoForgeRegistry {
         item(bus);
         entities(bus);
         sounds(bus);
+        recipes(bus);
         instruments(bus);
+        particles(bus);
         menus(bus);
         treeDecorators(bus);
 
@@ -86,12 +92,28 @@ public class NeoForgeRegistry {
         SOUNDS.register(bus);
     }
 
+    private static void recipes(IEventBus bus) {
+        for (Registrar.Entry<RecipeSerializer<?>> entry : BignayRecipes.RECIPES.getEntries()) {
+            DeferredHolder<RecipeSerializer<?>, RecipeSerializer<?>> obj = RECIPE_SERIALIZERS.register(entry.getId(), entry.getSupplier());
+            entry.setSupplier(obj);
+        }
+        RECIPE_SERIALIZERS.register(bus);
+    }
+
     private static void instruments(IEventBus bus) {
         for (Registrar.Entry<Instrument> entry : BignayInstruments.INSTRUMENTS.getEntries()) {
             DeferredHolder<Instrument, Instrument> obj = INSTRUMENTS.register(entry.getId(), entry.getSupplier());
             entry.setSupplier(obj);
         }
         INSTRUMENTS.register(bus);
+    }
+
+    private static void particles(IEventBus bus) {
+        for (Registrar.Entry<ParticleType<?>> entry : BignayParticles.PARTICLES.getEntries()) {
+            DeferredHolder<ParticleType<?>, ParticleType<?>> obj = PARTICLES.register(entry.getId(), entry.getSupplier());
+            entry.setSupplier(obj);
+        }
+        PARTICLES.register(bus);
     }
 
     private static void menus(IEventBus bus) {

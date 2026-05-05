@@ -14,10 +14,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid = BignayMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-public class Particles {
+public class Menus {
 
     @SubscribeEvent
-    public static void particles(RegisterParticleProvidersEvent event) {
-        event.registerSpriteSet((SimpleParticleType) BignayParticles.SMALL_SOUL_FLAME.get(), SmallSoulFlameParticle.Provider::new);
+    public static void onClientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(() -> MenuScreens.register(MenuInit.ARCHAEOLOGY_TABLE_MENU.get(), ArchaeologyTableScreen::new));
     }
 }
