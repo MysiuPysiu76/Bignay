@@ -28,7 +28,7 @@ public class BignayBlocks {
     public static final RegistrySupplier<Block> WAX_BLOCK = block("wax_block", WaxBlock::new);
     public static final RegistrySupplier<Block> WITHER_BONE_BLOCK = block("wither_bone_block", WitherBoneBlock::new);
     public static final RegistrySupplier<Block> ARCHAEOLOGY_TABLE_BLOCK = block("archaeology_table", ArchaeologyTableBlock::new);
-    public static final RegistrySupplier<Block> CHARCOAL_BLOCK = block("charcoal_block", () -> new BuildingBlock(Blocks.COAL_BLOCK));
+    public static final RegistrySupplier<Block> CHARCOAL_BLOCK = block("charcoal_block", () -> new BuildingBlock(Blocks.COAL_BLOCK), 16000);
     public static final RegistrySupplier<Block> COMPRESSED_STONE = block("compressed_stone", CompressedStone::new);
     public static final RegistrySupplier<Block> POT = block("pot", PotBlock::new);
     public static final RegistrySupplier<Block> GOLD_BARS = block("gold_bars", BarsBlock::new);
