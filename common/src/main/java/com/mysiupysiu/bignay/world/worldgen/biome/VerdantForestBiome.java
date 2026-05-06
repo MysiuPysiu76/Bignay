@@ -2,6 +2,7 @@ package com.mysiupysiu.bignay.world.worldgen.biome;
 
 import com.mojang.datafixers.util.Pair;
 import com.mysiupysiu.bignay.config.BignayConfig;
+import com.mysiupysiu.bignay.registry.BignayBiomes;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
