@@ -1,7 +1,7 @@
 package com.mysiupysiu.bignay.world.recipes;
 
-import com.mysiupysiu.bignay.registry.init.BignayItems;
-import com.mysiupysiu.bignay.registry.init.BignayRecipes;
+import com.mysiupysiu.bignay.registry.BignayItems;
+import com.mysiupysiu.bignay.registry.BignayRecipes;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.inventory.CraftingContainer;

@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.fabric.registry;
 
-import com.mysiupysiu.bignay.registry.init.BignayBlockEntities;
+import com.mysiupysiu.bignay.registry.BignayBlockEntities;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;

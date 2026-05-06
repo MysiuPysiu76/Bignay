@@ -1,7 +1,7 @@
 package com.mysiupysiu.bignay.world.worldgen.decoration.tree;
 
 import com.mojang.serialization.Codec;
-import com.mysiupysiu.bignay.registry.init.BignayTreeDecorators;
+import com.mysiupysiu.bignay.registry.BignayTreeDecorators;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 
 public class ForestTreeDecoration extends AbstractTrunkVineDecorator {

@@ -2,7 +2,6 @@ package com.mysiupysiu.bignay.forge.loot;
 
 import com.mojang.serialization.Codec;
 import com.mysiupysiu.bignay.BignayMod;
-import com.mysiupysiu.bignay.registry.Registrar;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;

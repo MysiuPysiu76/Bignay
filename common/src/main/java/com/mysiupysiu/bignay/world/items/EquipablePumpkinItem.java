@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.world.items;
 
-import com.mysiupysiu.bignay.registry.RegistrySupplier;
+import com.mysiupysiu.bignay.registry.core.RegistrySupplier;
 import com.mysiupysiu.bignay.world.items.tabs.NaturalBlocks;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;

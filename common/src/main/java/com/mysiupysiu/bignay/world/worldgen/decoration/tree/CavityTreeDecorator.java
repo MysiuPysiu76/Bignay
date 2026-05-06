@@ -2,8 +2,8 @@ package com.mysiupysiu.bignay.world.worldgen.decoration.tree;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.mysiupysiu.bignay.registry.init.BignayBlocks;
-import com.mysiupysiu.bignay.registry.init.BignayTreeDecorators;
+import com.mysiupysiu.bignay.registry.BignayBlocks;
+import com.mysiupysiu.bignay.registry.BignayTreeDecorators;
 import com.mysiupysiu.bignay.world.blocks.CavityLog;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

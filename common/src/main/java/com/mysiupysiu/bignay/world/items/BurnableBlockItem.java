@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.world.items;
 
-import com.mysiupysiu.bignay.registry.init.BignayItems;
+import com.mysiupysiu.bignay.registry.BignayItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;

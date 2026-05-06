@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.fabric.registry;
 
-import com.mysiupysiu.bignay.registry.init.BignayItems;
+import com.mysiupysiu.bignay.registry.BignayItems;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;

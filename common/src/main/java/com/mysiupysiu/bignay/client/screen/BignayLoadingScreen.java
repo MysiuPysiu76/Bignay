@@ -2,7 +2,7 @@ package com.mysiupysiu.bignay.client.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mysiupysiu.bignay.BignayMod;
-import com.mysiupysiu.bignay.registry.init.BignaySounds;
+import com.mysiupysiu.bignay.registry.BignaySounds;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;

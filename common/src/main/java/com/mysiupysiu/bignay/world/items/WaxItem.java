@@ -2,7 +2,7 @@ package com.mysiupysiu.bignay.world.items;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
-import com.mysiupysiu.bignay.registry.init.BignayBlocks;
+import com.mysiupysiu.bignay.registry.BignayBlocks;
 import com.mysiupysiu.bignay.world.items.tabs.Ingredients;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;

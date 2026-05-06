@@ -1,8 +1,8 @@
-package com.mysiupysiu.bignay.registry.init;
+package com.mysiupysiu.bignay.registry;
 
 import com.mysiupysiu.bignay.client.menu.ArchaeologyTableMenu;
-import com.mysiupysiu.bignay.registry.Registrar;
-import com.mysiupysiu.bignay.registry.RegistrySupplier;
+import com.mysiupysiu.bignay.registry.core.Registrar;
+import com.mysiupysiu.bignay.registry.core.RegistrySupplier;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
 

@@ -2,8 +2,8 @@ package com.mysiupysiu.bignay.world.blocks;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
-import com.mysiupysiu.bignay.registry.RegistrySupplier;
-import com.mysiupysiu.bignay.registry.init.BignayBlocks;
+import com.mysiupysiu.bignay.registry.core.RegistrySupplier;
+import com.mysiupysiu.bignay.registry.BignayBlocks;
 import com.mysiupysiu.bignay.world.items.tabs.BuildingBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

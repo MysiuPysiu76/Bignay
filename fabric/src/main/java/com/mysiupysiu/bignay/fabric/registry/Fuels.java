@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.fabric.registry;
 
-import com.mysiupysiu.bignay.registry.init.BignayItems;
+import com.mysiupysiu.bignay.registry.BignayItems;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 
 public class Fuels {

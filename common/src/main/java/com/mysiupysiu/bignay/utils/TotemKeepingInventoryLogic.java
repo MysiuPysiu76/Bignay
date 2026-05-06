@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.utils;
 
-import com.mysiupysiu.bignay.registry.init.BignayItems;
+import com.mysiupysiu.bignay.registry.BignayItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;

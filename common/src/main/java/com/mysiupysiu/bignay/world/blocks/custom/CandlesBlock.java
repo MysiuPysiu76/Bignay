@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.world.blocks.custom;
 
-import com.mysiupysiu.bignay.registry.init.BignayParticles;
+import com.mysiupysiu.bignay.registry.BignayParticles;
 import com.mysiupysiu.bignay.world.items.tabs.BignayTabs;
 import com.mysiupysiu.bignay.world.items.tabs.CreativeTabProvider;
 import com.mysiupysiu.bignay.world.tags.BignayTags;

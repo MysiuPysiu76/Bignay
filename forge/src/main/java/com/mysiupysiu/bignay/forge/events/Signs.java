@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.forge.events;
 
-import com.mysiupysiu.bignay.registry.init.BignayBlockEntities;
+import com.mysiupysiu.bignay.registry.BignayBlockEntities;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.world.level.block.entity.BlockEntityType;

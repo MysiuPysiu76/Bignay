@@ -1,4 +1,4 @@
-package com.mysiupysiu.bignay.registry;
+package com.mysiupysiu.bignay.registry.core;
 
 import java.util.function.Supplier;
 

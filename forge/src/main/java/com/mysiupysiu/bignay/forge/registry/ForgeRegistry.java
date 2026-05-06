@@ -1,8 +1,8 @@
 package com.mysiupysiu.bignay.forge.registry;
 
 import com.mysiupysiu.bignay.BignayMod;
-import com.mysiupysiu.bignay.registry.Registrar;
-import com.mysiupysiu.bignay.registry.init.*;
+import com.mysiupysiu.bignay.registry.*;
+import com.mysiupysiu.bignay.registry.core.Registrar;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;

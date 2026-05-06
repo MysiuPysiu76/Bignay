@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.mixin;
 
-import com.mysiupysiu.bignay.registry.init.BignayItems;
+import com.mysiupysiu.bignay.registry.BignayItems;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;

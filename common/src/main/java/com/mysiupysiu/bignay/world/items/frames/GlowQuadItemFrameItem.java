@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.world.items.frames;
 
-import com.mysiupysiu.bignay.registry.init.BignayEntities;
+import com.mysiupysiu.bignay.registry.BignayEntities;
 import com.mysiupysiu.bignay.world.entities.GlowQuadItemFrameEntity;
 import com.mysiupysiu.bignay.world.entities.QuadItemFrameEntity;
 import net.minecraft.world.entity.EntityType;

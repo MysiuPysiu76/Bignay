@@ -1,7 +1,7 @@
 package com.mysiupysiu.bignay.world.worldgen;
 
 import com.mysiupysiu.bignay.BignayMod;
-import com.mysiupysiu.bignay.registry.init.BignayBlocks;
+import com.mysiupysiu.bignay.registry.BignayBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;

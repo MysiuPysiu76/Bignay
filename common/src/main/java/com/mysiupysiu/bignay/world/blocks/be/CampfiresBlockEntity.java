@@ -1,7 +1,7 @@
 package com.mysiupysiu.bignay.world.blocks.be;
 
-import com.mysiupysiu.bignay.registry.init.BignayBlockEntities;
-import com.mysiupysiu.bignay.registry.init.BignayBlocks;
+import com.mysiupysiu.bignay.registry.BignayBlockEntities;
+import com.mysiupysiu.bignay.registry.BignayBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;

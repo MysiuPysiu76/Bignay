@@ -1,7 +1,7 @@
 package com.mysiupysiu.bignay.world.entities;
 
 import com.mojang.logging.LogUtils;
-import com.mysiupysiu.bignay.registry.init.BignayItems;
+import com.mysiupysiu.bignay.registry.BignayItems;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;

@@ -6,7 +6,7 @@ import com.mysiupysiu.bignay.client.models.GlowQuadItemFrameModel;
 import com.mysiupysiu.bignay.client.models.QuadItemFrameModel;
 import com.mysiupysiu.bignay.client.renderers.GlowQuadItemFrameRenderer;
 import com.mysiupysiu.bignay.client.renderers.QuadItemFrameRenderer;
-import com.mysiupysiu.bignay.registry.init.BignayEntities;
+import com.mysiupysiu.bignay.registry.BignayEntities;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;

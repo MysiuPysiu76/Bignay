@@ -1,8 +1,8 @@
 package com.mysiupysiu.bignay.forge.events;
 
 import com.mysiupysiu.bignay.client.renderers.CampfiresRenderer;
-import com.mysiupysiu.bignay.registry.RegistrySupplier;
-import com.mysiupysiu.bignay.registry.init.BignayBlockEntities;
+import com.mysiupysiu.bignay.registry.core.RegistrySupplier;
+import com.mysiupysiu.bignay.registry.BignayBlockEntities;
 import com.mysiupysiu.bignay.world.blocks.be.CampfiresBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;

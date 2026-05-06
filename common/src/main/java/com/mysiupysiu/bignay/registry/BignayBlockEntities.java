@@ -1,7 +1,7 @@
-package com.mysiupysiu.bignay.registry.init;
+package com.mysiupysiu.bignay.registry;
 
-import com.mysiupysiu.bignay.registry.Registrar;
-import com.mysiupysiu.bignay.registry.RegistrySupplier;
+import com.mysiupysiu.bignay.registry.core.Registrar;
+import com.mysiupysiu.bignay.registry.core.RegistrySupplier;
 import com.mysiupysiu.bignay.world.blocks.be.CampfiresBlockEntity;
 import com.mysiupysiu.bignay.world.blocks.be.HangingSignsBlockEntity;
 import com.mysiupysiu.bignay.world.blocks.be.SignsBlockEntity;

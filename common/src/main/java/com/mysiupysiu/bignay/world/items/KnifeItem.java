@@ -2,8 +2,8 @@ package com.mysiupysiu.bignay.world.items;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import com.mysiupysiu.bignay.registry.init.BignayBlocks;
-import com.mysiupysiu.bignay.registry.init.BignayItems;
+import com.mysiupysiu.bignay.registry.BignayBlocks;
+import com.mysiupysiu.bignay.registry.BignayItems;
 import com.mysiupysiu.bignay.world.items.tabs.BignayTabs;
 import com.mysiupysiu.bignay.world.items.tabs.CreativeTabProvider;
 import com.mysiupysiu.bignay.world.tags.BignayTags;

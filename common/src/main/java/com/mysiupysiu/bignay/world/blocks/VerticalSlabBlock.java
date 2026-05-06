@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.world.blocks;
 
-import com.mysiupysiu.bignay.registry.RegistrySupplier;
+import com.mysiupysiu.bignay.registry.core.RegistrySupplier;
 import com.mysiupysiu.bignay.world.items.tabs.BuildingBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

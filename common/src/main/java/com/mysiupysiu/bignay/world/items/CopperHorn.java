@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.world.items;
 
-import com.mysiupysiu.bignay.registry.init.BignaySounds;
+import com.mysiupysiu.bignay.registry.BignaySounds;
 import com.mysiupysiu.bignay.world.tags.BignayTags;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;

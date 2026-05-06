@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.world.blocks.custom;
 
-import com.mysiupysiu.bignay.registry.RegistrySupplier;
+import com.mysiupysiu.bignay.registry.core.RegistrySupplier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.AttachedStemBlock;
 import net.minecraft.world.level.block.Block;

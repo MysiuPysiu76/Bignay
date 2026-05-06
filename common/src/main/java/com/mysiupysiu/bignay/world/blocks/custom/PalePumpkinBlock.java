@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.world.blocks.custom;
 
-import com.mysiupysiu.bignay.registry.init.BignayBlocks;
+import com.mysiupysiu.bignay.registry.BignayBlocks;
 import com.mysiupysiu.bignay.world.items.tabs.NaturalBlocks;
 import net.minecraft.world.level.block.AttachedStemBlock;
 import net.minecraft.world.level.block.SoundType;

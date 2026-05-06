@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.world.recipes;
 
-import com.mysiupysiu.bignay.registry.init.BignayRecipes;
+import com.mysiupysiu.bignay.registry.BignayRecipes;
 import com.mysiupysiu.bignay.world.items.PumpkinPatternItem;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;

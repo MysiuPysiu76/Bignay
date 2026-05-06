@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.world.items.instruments;
 
-import com.mysiupysiu.bignay.registry.init.BignaySounds;
+import com.mysiupysiu.bignay.registry.BignaySounds;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvent;

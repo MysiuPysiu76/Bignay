@@ -1,6 +1,6 @@
 package com.mysiupysiu.bignay.world.items;
 
-import com.mysiupysiu.bignay.registry.RegistrySupplier;
+import com.mysiupysiu.bignay.registry.core.RegistrySupplier;
 import com.mysiupysiu.bignay.world.items.tabs.FunctionalBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.Rarity;
