@@ -27,7 +27,6 @@ public class Features {
         register(Biomes.WOODED_BADLANDS, GenerationStep.Decoration.VEGETAL_DECORATION, BignayPlacedFeatures.PATCH_TALL_DEAD_BUSH_BADLANDS);
         register(Biomes.OLD_GROWTH_PINE_TAIGA, GenerationStep.Decoration.VEGETAL_DECORATION, BignayPlacedFeatures.PATCH_TALL_DEAD_BUSH);
         register(Biomes.OLD_GROWTH_SPRUCE_TAIGA, GenerationStep.Decoration.VEGETAL_DECORATION, BignayPlacedFeatures.PATCH_TALL_DEAD_BUSH);
-
     }
 
     private static void register(ResourceKey<Biome> biome, GenerationStep.Decoration generation, ResourceKey<PlacedFeature> feature) {
