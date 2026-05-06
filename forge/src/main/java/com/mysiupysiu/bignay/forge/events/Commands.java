@@ -1,6 +1,7 @@
 package com.mysiupysiu.bignay.forge.events;
 
 import com.mysiupysiu.bignay.BignayMod;
+import com.mysiupysiu.bignay.registry.BignayCommands;
 import com.mysiupysiu.bignay.world.commands.LocateBlockCommand;
 import com.mysiupysiu.bignay.world.commands.LocateEntityCommand;
 import com.mysiupysiu.bignay.world.commands.NameCommand;
@@ -13,8 +14,6 @@ public class Commands {
 
     @SubscribeEvent
     public static void register(RegisterCommandsEvent event) {
-        LocateBlockCommand.register(event.getDispatcher());
-        LocateEntityCommand.register(event.getDispatcher());
-        NameCommand.register(event.getDispatcher());
+        BignayCommands.register(event.getDispatcher());
     }
 }
