@@ -55,6 +55,21 @@ public class WorldInfoScreen extends Screen {
         super.render(gfx, mouseX, mouseY, delta);
     }
 
+    @Override
+    public boolean keyPressed(int key, int scancode, int modifiers) {
+        if (key == 256) { // ESC
+            try {
+                this.levelAccess.close();
+                this.minecraft.setScreen(new SelectWorldScreen(null));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            return true;
+        }
+
+        return super.keyPressed(key, scancode, modifiers);
+    }
+
     private void loadWorldInfo() {
         WorldInfoReader reader = new WorldInfoReader(this.levelAccess);
         this.infoList.refreshList();
