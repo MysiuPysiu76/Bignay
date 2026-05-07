@@ -6,18 +6,32 @@ import net.minecraft.nbt.NbtIo;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.time.Instant;
 
 public class CreatedWorldDate {
 
-    public static void setCreatedDate(String levelId) throws IOException {
+    public static void setCreatedDate(String levelId) {
         try {
-            Path file = Minecraft.getInstance().gameDirectory.toPath().resolve("saves").resolve(levelId).resolve("data").resolve("bignay.dat");
-            file.toFile().getParentFile().mkdir();
+            Path world = Minecraft.getInstance().gameDirectory.toPath().resolve("saves").resolve(levelId);
+            Path dat = world.resolve("data").resolve("bignay.dat");
+            Path icon = world.resolve("icon.png");
+            long time;
+
+            try {
+                BasicFileAttributes attr = Files.readAttributes(icon, BasicFileAttributes.class);
+                time = attr.creationTime().toMillis();
+            } catch (Exception ex) {
+                time = Instant.now().toEpochMilli();
+            }
+
+            world.toFile().getParentFile().mkdir();
             CompoundTag root = new CompoundTag();
-            root.putLong("CreatedDate", Instant.now().toEpochMilli());
-            NbtIo.writeCompressed(root, file.toFile());
+
+            root.putLong("CreatedDate", time);
+            NbtIo.writeCompressed(root, dat.toFile());
         } catch (Exception e) {
             LoggerFactory.getLogger(CreatedWorldDate.class).error("Could not save created world date: ", e);
         }

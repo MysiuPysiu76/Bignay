@@ -25,7 +25,7 @@ public abstract class CreateWorldMixin {
             String folderName = this.storageSource.getLevelId();
             MinecraftServer server = (MinecraftServer) (Object) this;
 
-            if (server.isSingleplayer()) {
+            if (server.isSingleplayer() && CreatedWorldDate.getCreatedDate(folderName) == null) {
                 CreatedWorldDate.setCreatedDate(folderName);
             }
         } catch (Exception e) {
