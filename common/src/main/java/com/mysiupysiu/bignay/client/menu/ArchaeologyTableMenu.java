@@ -1,7 +1,7 @@
 package com.mysiupysiu.bignay.client.menu;
 
 import com.mysiupysiu.bignay.registry.BignayItems;
-import com.mysiupysiu.bignay.registry.MenuInit;
+import com.mysiupysiu.bignay.registry.BignayMenus;
 import com.mysiupysiu.bignay.world.tags.BignayTags;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.SimpleContainer;
@@ -26,7 +26,7 @@ public class ArchaeologyTableMenu extends AbstractContainerMenu {
     }
 
     public ArchaeologyTableMenu(int id, Inventory playerInventory) {
-        super(MenuInit.ARCHAEOLOGY_TABLE_MENU.get(), id);
+        super(BignayMenus.ARCHAEOLOGY_TABLE_MENU.get(), id);
 
         this.addSlot(new Slot(container, 0, 27, 23) {
             @Override

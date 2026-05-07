@@ -6,7 +6,7 @@ import com.mysiupysiu.bignay.registry.core.RegistrySupplier;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
 
-public class MenuInit {
+public class BignayMenus {
 
     public static final Registrar<MenuType<?>> MENUS = new Registrar<>();
 

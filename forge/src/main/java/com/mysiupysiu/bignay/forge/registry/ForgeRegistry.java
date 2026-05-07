@@ -118,7 +118,7 @@ public class ForgeRegistry {
     }
 
     private static void menus(IEventBus bus) {
-        for (Registrar.Entry<MenuType<?>> entry : MenuInit.MENUS.getEntries()) {
+        for (Registrar.Entry<MenuType<?>> entry : BignayMenus.MENUS.getEntries()) {
             RegistryObject<MenuType<?>> obj = MENUS.register(entry.getId(), entry.getSupplier());
             entry.setSupplier(obj);
         }

@@ -62,7 +62,7 @@ public class BignayFabricClient implements ClientModInitializer {
 
         Signs.register();
 
-        MenuScreens.register(MenuInit.ARCHAEOLOGY_TABLE_MENU.get(), ArchaeologyTableScreen::new);
+        MenuScreens.register(BignayMenus.ARCHAEOLOGY_TABLE_MENU.get(), ArchaeologyTableScreen::new);
 
         BignayFabricClientNetwork.register();
     }

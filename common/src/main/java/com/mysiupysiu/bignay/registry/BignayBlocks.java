@@ -361,6 +361,19 @@ public class BignayBlocks {
     public static final RegistrySupplier<Block> VERDANT_MOSAIC_SLAB = block("verdant_mosaic_slab", () -> new SlabsBlock(VERDANT_MOSAIC));
     public static final RegistrySupplier<Block> WARPED_MOSAIC_SLAB = block("warped_mosaic_slab", () -> new SlabsBlock(WARPED_MOSAIC));
 
+    public static final RegistrySupplier<Block> ACACIA_MOSAIC_VERTICAL_SLAB = block("acacia_mosaic_vertical_slab", () -> new VerticalSlabBlock(ACACIA_MOSAIC), 150);
+    public static final RegistrySupplier<Block> BAMBOO_MOSAIC_VERTICAL_SLAB = block("bamboo_mosaic_vertical_slab", () -> new VerticalSlabBlock(Blocks.BAMBOO_MOSAIC), 150);
+    public static final RegistrySupplier<Block> BIRCH_MOSAIC_VERTICAL_SLAB = block("birch_mosaic_vertical_slab", () -> new VerticalSlabBlock(BIRCH_MOSAIC), 150);
+    public static final RegistrySupplier<Block> CHERRY_MOSAIC_VERTICAL_SLAB = block("cherry_mosaic_vertical_slab", () -> new VerticalSlabBlock(CHERRY_MOSAIC), 150);
+    public static final RegistrySupplier<Block> CRIMSON_MOSAIC_VERTICAL_SLAB = block("crimson_mosaic_vertical_slab", () -> new VerticalSlabBlock(CRIMSON_MOSAIC));
+    public static final RegistrySupplier<Block> DARK_OAK_MOSAIC_VERTICAL_SLAB = block("dark_oak_mosaic_vertical_slab", () -> new VerticalSlabBlock(DARK_OAK_MOSAIC), 150);
+    public static final RegistrySupplier<Block> JUNGLE_MOSAIC_VERTICAL_SLAB = block("jungle_mosaic_vertical_slab", () -> new VerticalSlabBlock(JUNGLE_MOSAIC), 150);
+    public static final RegistrySupplier<Block> MANGROVE_MOSAIC_VERTICAL_SLAB = block("mangrove_mosaic_vertical_slab", () -> new VerticalSlabBlock(MANGROVE_MOSAIC), 150);
+    public static final RegistrySupplier<Block> OAK_MOSAIC_VERTICAL_SLAB = block("oak_mosaic_vertical_slab", () -> new VerticalSlabBlock(OAK_MOSAIC), 150);
+    public static final RegistrySupplier<Block> SPRUCE_MOSAIC_VERTICAL_SLAB = block("spruce_mosaic_vertical_slab", () -> new VerticalSlabBlock(SPRUCE_MOSAIC), 150);
+    public static final RegistrySupplier<Block> VERDANT_MOSAIC_VERTICAL_SLAB = block("verdant_mosaic_vertical_slab", () -> new VerticalSlabBlock(VERDANT_MOSAIC));
+    public static final RegistrySupplier<Block> WARPED_MOSAIC_VERTICAL_SLAB = block("warped_mosaic_vertical_slab", () -> new VerticalSlabBlock(WARPED_MOSAIC));
+
     public static final RegistrySupplier<Block> POLISHED_ANDESITE_WALL = block("polished_andesite_wall", () -> new WallsBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistrySupplier<Block> SMOOTH_ANDESITE = block("smooth_andesite", () -> new BuildingBlock(Blocks.POLISHED_ANDESITE));
     public static final RegistrySupplier<Block> SMOOTH_ANDESITE_SLAB = block("smooth_andesite_slab", () -> new SlabsBlock(Blocks.POLISHED_ANDESITE));
@@ -686,19 +699,6 @@ public class BignayBlocks {
     public static final RegistrySupplier<Block> VERTICAL_SPRUCE_PLANK_VERTICAL_SLAB = block("vertical_spruce_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.SPRUCE_PLANKS), 150);
     public static final RegistrySupplier<Block> VERTICAL_VERDANT_PLANK_VERTICAL_SLAB = block("vertical_verdant_plank_vertical_slab", () -> new VerticalSlabBlock(VERDANT_PLANKS));
     public static final RegistrySupplier<Block> VERTICAL_WARPED_PLANK_VERTICAL_SLAB = block("vertical_warped_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.WARPED_PLANKS));
-
-    public static final RegistrySupplier<Block> ACACIA_MOSAIC_VERTICAL_SLAB = block("acacia_mosaic_vertical_slab", () -> new VerticalSlabBlock(ACACIA_MOSAIC), 150);
-    public static final RegistrySupplier<Block> BAMBOO_MOSAIC_VERTICAL_SLAB = block("bamboo_mosaic_vertical_slab", () -> new VerticalSlabBlock(Blocks.BAMBOO_MOSAIC), 150);
-    public static final RegistrySupplier<Block> BIRCH_MOSAIC_VERTICAL_SLAB = block("birch_mosaic_vertical_slab", () -> new VerticalSlabBlock(BIRCH_MOSAIC), 150);
-    public static final RegistrySupplier<Block> CHERRY_MOSAIC_VERTICAL_SLAB = block("cherry_mosaic_vertical_slab", () -> new VerticalSlabBlock(CHERRY_MOSAIC), 150);
-    public static final RegistrySupplier<Block> CRIMSON_MOSAIC_VERTICAL_SLAB = block("crimson_mosaic_vertical_slab", () -> new VerticalSlabBlock(CRIMSON_MOSAIC));
-    public static final RegistrySupplier<Block> DARK_OAK_MOSAIC_VERTICAL_SLAB = block("dark_oak_mosaic_vertical_slab", () -> new VerticalSlabBlock(DARK_OAK_MOSAIC), 150);
-    public static final RegistrySupplier<Block> JUNGLE_MOSAIC_VERTICAL_SLAB = block("jungle_mosaic_vertical_slab", () -> new VerticalSlabBlock(JUNGLE_MOSAIC), 150);
-    public static final RegistrySupplier<Block> MANGROVE_MOSAIC_VERTICAL_SLAB = block("mangrove_mosaic_vertical_slab", () -> new VerticalSlabBlock(MANGROVE_MOSAIC), 150);
-    public static final RegistrySupplier<Block> OAK_MOSAIC_VERTICAL_SLAB = block("oak_mosaic_vertical_slab", () -> new VerticalSlabBlock(OAK_MOSAIC), 150);
-    public static final RegistrySupplier<Block> SPRUCE_MOSAIC_VERTICAL_SLAB = block("spruce_mosaic_vertical_slab", () -> new VerticalSlabBlock(SPRUCE_MOSAIC), 150);
-    public static final RegistrySupplier<Block> VERDANT_MOSAIC_VERTICAL_SLAB = block("verdant_mosaic_vertical_slab", () -> new VerticalSlabBlock(VERDANT_MOSAIC));
-    public static final RegistrySupplier<Block> WARPED_MOSAIC_VERTICAL_SLAB = block("warped_mosaic_vertical_slab", () -> new VerticalSlabBlock(WARPED_MOSAIC));
 
     public static final RegistrySupplier<Block> CUT_COPPER_VERTICAL_SLAB = block("cut_copper_vertical_slab", () -> new WeatheringCopperVerticalSlabBlock(WeatheringCopper.WeatherState.UNAFFECTED, Blocks.CUT_COPPER));
     public static final RegistrySupplier<Block> EXPOSED_CUT_COPPER_VERTICAL_SLAB = block("exposed_cut_copper_vertical_slab", () -> new WeatheringCopperVerticalSlabBlock(WeatheringCopper.WeatherState.EXPOSED, Blocks.EXPOSED_CUT_COPPER));

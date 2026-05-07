@@ -118,7 +118,7 @@ public class FabricRegistry {
     }
 
     private static void menus() {
-        for (Registrar.Entry<MenuType<?>> entry : MenuInit.MENUS.getEntries()) {
+        for (Registrar.Entry<MenuType<?>> entry : BignayMenus.MENUS.getEntries()) {
             MenuType<?> menuType = Registry.register(
                     BuiltInRegistries.MENU,
                     new ResourceLocation(BignayMod.MODID, entry.getId()),
