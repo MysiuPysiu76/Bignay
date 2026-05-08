@@ -29,6 +29,7 @@
     "bignay.mixins.json",
     "bignay-common.mixins.json"
   ],
+  "accessWidener": "bignay.fabric.accesswidener",
   "depends": {
     "fabricloader": ">=0.18.0",
     "minecraft": ">=1.20.2"

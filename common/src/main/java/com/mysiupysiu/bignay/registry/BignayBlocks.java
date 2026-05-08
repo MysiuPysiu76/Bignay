@@ -163,6 +163,19 @@ public class BignayBlocks {
     public static final RegistrySupplier<Block> VERTICAL_VERDANT_PLANK_SLAB = block("vertical_verdant_plank_slab", () -> new SlabsBlock(VERDANT_PLANKS));
     public static final RegistrySupplier<Block> VERTICAL_WARPED_PLANK_SLAB = block("vertical_warped_plank_slab", () -> new SlabsBlock(Blocks.WARPED_PLANKS));
 
+    public static final RegistrySupplier<Block> VERTICAL_ACACIA_PLANK_VERTICAL_SLAB = block("vertical_acacia_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.ACACIA_PLANKS), 150);
+    public static final RegistrySupplier<Block> VERTICAL_BAMBOO_PLANK_VERTICAL_SLAB = block("vertical_bamboo_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.BAMBOO_PLANKS), 150);
+    public static final RegistrySupplier<Block> VERTICAL_BIRCH_PLANK_VERTICAL_SLAB = block("vertical_birch_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.BIRCH_PLANKS), 150);
+    public static final RegistrySupplier<Block> VERTICAL_CHERRY_PLANK_VERTICAL_SLAB = block("vertical_cherry_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.CHERRY_PLANKS), 150);
+    public static final RegistrySupplier<Block> VERTICAL_CRIMSON_PLANK_VERTICAL_SLAB = block("vertical_crimson_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.CRIMSON_PLANKS));
+    public static final RegistrySupplier<Block> VERTICAL_DARK_OAK_PLANK_VERTICAL_SLAB = block("vertical_dark_oak_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.DARK_OAK_PLANKS), 150);
+    public static final RegistrySupplier<Block> VERTICAL_JUNGLE_PLANK_VERTICAL_SLAB = block("vertical_jungle_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.JUNGLE_PLANKS), 150);
+    public static final RegistrySupplier<Block> VERTICAL_MANGROVE_PLANK_VERTICAL_SLAB = block("vertical_mangrove_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.MANGROVE_PLANKS), 150);
+    public static final RegistrySupplier<Block> VERTICAL_OAK_PLANK_VERTICAL_SLAB = block("vertical_oak_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.OAK_PLANKS), 150);
+    public static final RegistrySupplier<Block> VERTICAL_SPRUCE_PLANK_VERTICAL_SLAB = block("vertical_spruce_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.SPRUCE_PLANKS), 150);
+    public static final RegistrySupplier<Block> VERTICAL_VERDANT_PLANK_VERTICAL_SLAB = block("vertical_verdant_plank_vertical_slab", () -> new VerticalSlabBlock(VERDANT_PLANKS));
+    public static final RegistrySupplier<Block> VERTICAL_WARPED_PLANK_VERTICAL_SLAB = block("vertical_warped_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.WARPED_PLANKS));
+
     public static final RegistrySupplier<Block> VERDANT_NYLIUM = block("verdant_nylium", () -> new NetherNyliumBlock(MapColor.COLOR_GREEN));
     public static final RegistrySupplier<Block> VERDANT_FUNGUS = block("verdant_fungus", () -> new NetherFungusBlock(BignayConfiguredFeatures.VERDANT_FUNGUS, VERDANT_NYLIUM.get()));
     public static final RegistrySupplier<Block> VERDANT_ROOTS = block("verdant_roots", () -> new NetherRootsBlock(MapColor.COLOR_GREEN));
@@ -686,19 +699,6 @@ public class BignayBlocks {
     public static final RegistrySupplier<Block> CRACKED_POLISHED_BLACKSTONE_BRICK_VERTICAL_SLAB = block("cracked_polished_blackstone_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS));
     public static final RegistrySupplier<Block> ENDSTONE_BRICK_VERTICAL_SLAB = block("end_stone_brick_vertical_slab", () -> new VerticalSlabBlock(Blocks.END_STONE_BRICKS));
     public static final RegistrySupplier<Block> PURPUR_VERTICAL_SLAB = block("purpur_vertical_slab", () -> new VerticalSlabBlock(Blocks.PURPUR_BLOCK));
-
-    public static final RegistrySupplier<Block> VERTICAL_ACACIA_PLANK_VERTICAL_SLAB = block("vertical_acacia_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.ACACIA_PLANKS), 150);
-    public static final RegistrySupplier<Block> VERTICAL_BAMBOO_PLANK_VERTICAL_SLAB = block("vertical_bamboo_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.BAMBOO_PLANKS), 150);
-    public static final RegistrySupplier<Block> VERTICAL_BIRCH_PLANK_VERTICAL_SLAB = block("vertical_birch_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.BIRCH_PLANKS), 150);
-    public static final RegistrySupplier<Block> VERTICAL_CHERRY_PLANK_VERTICAL_SLAB = block("vertical_cherry_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.CHERRY_PLANKS), 150);
-    public static final RegistrySupplier<Block> VERTICAL_CRIMSON_PLANK_VERTICAL_SLAB = block("vertical_crimson_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.CRIMSON_PLANKS));
-    public static final RegistrySupplier<Block> VERTICAL_DARK_OAK_PLANK_VERTICAL_SLAB = block("vertical_dark_oak_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.DARK_OAK_PLANKS), 150);
-    public static final RegistrySupplier<Block> VERTICAL_JUNGLE_PLANK_VERTICAL_SLAB = block("vertical_jungle_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.JUNGLE_PLANKS), 150);
-    public static final RegistrySupplier<Block> VERTICAL_MANGROVE_PLANK_VERTICAL_SLAB = block("vertical_mangrove_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.MANGROVE_PLANKS), 150);
-    public static final RegistrySupplier<Block> VERTICAL_OAK_PLANK_VERTICAL_SLAB = block("vertical_oak_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.OAK_PLANKS), 150);
-    public static final RegistrySupplier<Block> VERTICAL_SPRUCE_PLANK_VERTICAL_SLAB = block("vertical_spruce_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.SPRUCE_PLANKS), 150);
-    public static final RegistrySupplier<Block> VERTICAL_VERDANT_PLANK_VERTICAL_SLAB = block("vertical_verdant_plank_vertical_slab", () -> new VerticalSlabBlock(VERDANT_PLANKS));
-    public static final RegistrySupplier<Block> VERTICAL_WARPED_PLANK_VERTICAL_SLAB = block("vertical_warped_plank_vertical_slab", () -> new VerticalSlabBlock(Blocks.WARPED_PLANKS));
 
     public static final RegistrySupplier<Block> CUT_COPPER_VERTICAL_SLAB = block("cut_copper_vertical_slab", () -> new WeatheringCopperVerticalSlabBlock(WeatheringCopper.WeatherState.UNAFFECTED, Blocks.CUT_COPPER));
     public static final RegistrySupplier<Block> EXPOSED_CUT_COPPER_VERTICAL_SLAB = block("exposed_cut_copper_vertical_slab", () -> new WeatheringCopperVerticalSlabBlock(WeatheringCopper.WeatherState.EXPOSED, Blocks.EXPOSED_CUT_COPPER));

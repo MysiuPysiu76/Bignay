@@ -6,6 +6,7 @@ import com.mysiupysiu.bignay.forge.loot.BignayLootModifiers;
 import com.mysiupysiu.bignay.forge.network.BignayPacketHandler;
 import com.mysiupysiu.bignay.forge.registry.Biomes;
 import com.mysiupysiu.bignay.forge.registry.ForgeRegistry;
+import com.mysiupysiu.bignay.utils.Flameable;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;

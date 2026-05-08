@@ -4,6 +4,7 @@ import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.fabric.config.FabricConfig;
 import com.mysiupysiu.bignay.fabric.network.BignayPacketHandler;
 import com.mysiupysiu.bignay.fabric.registry.*;
+import com.mysiupysiu.bignay.utils.Flameable;
 import net.fabricmc.api.ModInitializer;
 
 public class BignayFabric implements ModInitializer {
@@ -16,6 +17,7 @@ public class BignayFabric implements ModInitializer {
 
         Commands.register();
         Fuels.register();
+        Flameable.init();
 
         BignayPacketHandler.register();
         FabricConfig.register();
