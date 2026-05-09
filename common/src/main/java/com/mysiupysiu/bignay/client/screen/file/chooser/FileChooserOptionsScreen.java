@@ -10,11 +10,10 @@ import net.minecraft.network.chat.Component;
 class FileChooserOptionsScreen extends Screen {
 
     private boolean showHidden = BignayConfig.files.showHidden.get();
-    private int columns = BignayConfig.files.columns.get();
 
     private final Screen parent;
     private Button showHiddenButton;
-    private Button columnsButton;
+    private ColumnsSliderButton columnsButton;
 
     public FileChooserOptionsScreen(Screen parent) {
         super(Component.translatable("fileChooser.options.title"));
@@ -25,7 +24,6 @@ class FileChooserOptionsScreen extends Screen {
     protected void init() {
         super.init();
         showHidden = BignayConfig.files.showHidden.get();
-        columns = BignayConfig.files.columns.get();
         int centerX = this.width / 2;
         int btnW = 160;
         int btnH = 21;
@@ -34,8 +32,8 @@ class FileChooserOptionsScreen extends Screen {
                 .bounds(centerX - 80, this.height / 2 - 60, btnW, btnH).build();
         this.addRenderableWidget(this.showHiddenButton);
 
-        this.columnsButton = Button.builder(Component.translatable("fileChooser.options.columns", columns), btn -> incrementColumns())
-                .bounds(centerX - 80, this.height / 2 - 30, btnW, btnH).build();
+        this.columnsButton = this.addRenderableWidget(new ColumnsSliderButton(centerX - 80, this.height / 2 - 30, btnW, btnH));
+
         this.addRenderableWidget(this.columnsButton);
 
         this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.options.reset"), btn -> resetSettings())
@@ -55,7 +53,7 @@ class FileChooserOptionsScreen extends Screen {
 
     @Override
     public void onClose() {
-        BignayConfig.files.columns.set(this.columns);
+        BignayConfig.files.columns.set(this.columnsButton.getPosition());
         BignayConfig.files.showHidden.set(this.showHidden);
         BignayConfig.save();
         Minecraft.getInstance().setScreen(this.parent);
@@ -66,18 +64,8 @@ class FileChooserOptionsScreen extends Screen {
         updateHiddenButton();
     }
 
-    private void incrementColumns() {
-        this.columns++;
-        if (this.columns > 7) this.columns = 4;
-        updateColumns();
-    }
-
     private void updateHiddenButton() {
         this.showHiddenButton.setMessage(getHiddenFilesButtonLabel());
-    }
-
-    private void updateColumns() {
-        this.columnsButton.setMessage(Component.translatable("fileChooser.options.columns", this.columns));
     }
 
     private Component getHiddenFilesButtonLabel() {
@@ -86,9 +74,8 @@ class FileChooserOptionsScreen extends Screen {
 
     private void resetSettings() {
         this.showHidden = BignayConfig.files.showHidden.reset();
-        this.columns = BignayConfig.files.columns.reset();
+        this.columnsButton.reset();
 
         updateHiddenButton();
-        updateColumns();
     }
 }
