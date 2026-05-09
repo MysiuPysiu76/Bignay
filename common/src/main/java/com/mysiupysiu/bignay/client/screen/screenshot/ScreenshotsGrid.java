@@ -80,10 +80,14 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
         super.render(gui, mouseX, mouseY, partialTick);
 
         if (allPaths.isEmpty()) {
-            gui.drawCenteredString(Minecraft.getInstance().font, Component.translatable("screenshotsViewer.empty"), this.width / 2, this.y0 + (this.y1 - this.y0) / 2, 0x777777);
+            gui.drawCenteredString(Minecraft.getInstance().font, Component.translatable("screenshotsViewer.empty", getKeyboardKey()), this.width / 2, this.y0 + (this.y1 - this.y0) / 2, 0x777777);
         } else {
             manageMemory();
         }
+    }
+
+    private String getKeyboardKey() {
+        return Minecraft.getInstance().options.keyScreenshot.getTranslatedKeyMessage().getString();
     }
 
     private void manageMemory() {
