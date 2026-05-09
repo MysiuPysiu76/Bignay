@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "minecraft:eroded_badlands",
+  "features": "bignay:patch_tall_dead_bush_badlands",
+  "step": "vegetal_decoration"
+}

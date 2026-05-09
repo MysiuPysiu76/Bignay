@@ -31,6 +31,8 @@ public class CreatedWorldDate {
             CompoundTag root = new CompoundTag();
 
             root.putLong("CreatedDate", time);
+            dat.toFile().getParentFile().mkdir();
+            dat.toFile().createNewFile();
             NbtIo.writeCompressed(root, dat.toFile());
         } catch (Exception e) {
             LoggerFactory.getLogger(CreatedWorldDate.class).error("Could not save created world date: ", e);
