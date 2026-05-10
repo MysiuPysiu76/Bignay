@@ -1,7 +1,9 @@
 package com.mysiupysiu.bignay.world.items;
 
 import com.mysiupysiu.bignay.registry.BignayItems;
+import com.mysiupysiu.bignay.utils.Fuels;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
@@ -11,10 +13,11 @@ public class BurnableBlockItem extends BlockItem {
 
     private final int burnTime;
 
-    public BurnableBlockItem(Block block, Properties properties, int burnTime) {
-        super(block, properties);
+    public BurnableBlockItem(Block block, int burnTime) {
+        super(block, new Item.Properties());
         this.burnTime = burnTime;
-        BignayItems.FUELS.add(this);
+        Fuels.FUELS_LIST.add(this);
+        Fuels.FUELS_MAP.put(block.asItem(), burnTime);
     }
 
     public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {

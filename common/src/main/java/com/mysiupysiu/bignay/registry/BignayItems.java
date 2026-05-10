@@ -18,7 +18,6 @@ import java.util.function.Supplier;
 public class BignayItems {
 
     public static final Registrar<Item> ITEMS = new Registrar<>();
-    public static final List<BurnableBlockItem> FUELS = new ArrayList<>();
 
     public static final RegistrySupplier<Item> WAX = item("wax", WaxItem::new);
     public static final RegistrySupplier<Item> WITHER_BONE = item("wither_bone", IngredientsDefaultItem::new);
