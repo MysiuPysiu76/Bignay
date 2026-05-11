@@ -4,6 +4,7 @@
     "1": "bignay:block/ancient_vines_growth",
     "particle": "bignay:block/ancient_vines_1"
   },
+  "render_type": "cutout",
   "elements": [
     {
       "from": [0, 0, 0.1],
