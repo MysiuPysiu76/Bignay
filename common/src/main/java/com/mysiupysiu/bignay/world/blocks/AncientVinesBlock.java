@@ -13,8 +13,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -24,7 +26,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
-public class AncientVinesBlock extends VineBlock implements NaturalBlocks {
+public class AncientVinesBlock extends VineBlock implements NaturalBlocks, BonemealableBlock {
 
     public static final IntegerProperty FLOWERS = IntegerProperty.create("flowers", 0, 2);
     public static final BooleanProperty CAN_GROW = BooleanProperty.create("can_grow");
@@ -50,6 +52,7 @@ public class AncientVinesBlock extends VineBlock implements NaturalBlocks {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ItemStack itemStack = player.getItemInHand(hand);
+
         if (itemStack.is(Items.SHEARS) && state.getValue(CAN_GROW)) {
             level.setBlock(pos, state.setValue(CAN_GROW, false), 2);
             level.playSound(player, pos, SoundEvents.GROWING_PLANT_CROP, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -62,10 +65,44 @@ public class AncientVinesBlock extends VineBlock implements NaturalBlocks {
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        boolean solidSupport = hasSolidSupport(state, level, pos);
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
+        return blockState.getValue(FLOWERS) < 2 || blockState.getValue(CAN_GROW);
+    }
 
-        if (!solidSupport) {
+    @Override
+    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
+        return true;
+    }
+
+    @Override
+    public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
+        int flowers = state.getValue(FLOWERS);
+
+        if (flowers < 2) {
+            level.setBlock(pos, state.setValue(FLOWERS, flowers + 1), 2);
+        } else if (state.getValue(CAN_GROW)) {
+            for (int i = 0; i < 6; i++) {
+                Direction randomDir = Direction.getRandom(random);
+                BlockPos targetPos = pos.relative(randomDir);
+
+                if (level.isEmptyBlock(targetPos)) {
+                    Direction wallDir = findSupport(level, targetPos, random);
+
+                    if (wallDir != null) {
+                        level.setBlock(targetPos, this.defaultBlockState()
+                                .setValue(getPropertyForFace(wallDir), true)
+                                .setValue(FLOWERS, 0)
+                                .setValue(CAN_GROW, true), 2);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (!hasSolidSupport(state, level, pos)) {
             if (state.getValue(FLOWERS) > 0) {
                 level.setBlock(pos, state.setValue(FLOWERS, 0), 2);
             }
@@ -73,19 +110,26 @@ public class AncientVinesBlock extends VineBlock implements NaturalBlocks {
         }
 
         int currentFlowers = state.getValue(FLOWERS);
-        if (currentFlowers < 2 && random.nextInt(5) == 0) {
-            level.setBlock(pos, state.setValue(FLOWERS, currentFlowers + 1), 2);
+
+        if (currentFlowers < 2 && random.nextInt(10) == 0) {
+            state = state.setValue(FLOWERS, currentFlowers + 1);
+            level.setBlock(pos, state, 2);
         }
 
-        if (state.getValue(CAN_GROW) && random.nextInt(4) == 0) {
-            Direction randomDir = Direction.getRandom(random);
-            BlockPos targetPos = pos.relative(randomDir);
+        if (state.getValue(CAN_GROW) && state.getValue(FLOWERS) == 2) {
+            if (random.nextInt(4) == 0) {
+                Direction randomDir = Direction.getRandom(random);
+                BlockPos targetPos = pos.relative(randomDir);
 
-            if (level.isEmptyBlock(targetPos)) {
-                Direction wallDir = findSupport(level, targetPos, random);
+                if (level.isEmptyBlock(targetPos)) {
+                    Direction wallDir = findSupport(level, targetPos, random);
 
-                if (wallDir != null) {
-                    level.setBlock(targetPos, this.defaultBlockState().setValue(getPropertyForFace(wallDir), true).setValue(FLOWERS, 0).setValue(CAN_GROW, true), 2);
+                    if (wallDir != null) {
+                        level.setBlock(targetPos, this.defaultBlockState()
+                                .setValue(getPropertyForFace(wallDir), true)
+                                .setValue(FLOWERS, 0)
+                                .setValue(CAN_GROW, true), 2);
+                    }
                 }
             }
         }
