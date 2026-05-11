@@ -12,42 +12,37 @@ import java.util.Map;
 
 public class NeoForgeConfig {
 
-    private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
     private static final Map<ConfigOption<?>, ModConfigSpec.ConfigValue<?>> FORGE_VALUES = new HashMap<>();
     private static ModConfigSpec SPEC;
+    private static ModConfig CONFIG_INSTANCE;
 
     public static ModConfigSpec build() {
+        ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
         FORGE_VALUES.clear();
+
         for (ConfigCategory category : BignayConfig.CATEGORIES) {
-            BUILDER.push(category.getName());
-
+            builder.push(category.getName());
             for (ConfigOption<?> option : category.getOptions()) {
-                registerOption(option);
+                registerOption(builder, option);
             }
-
-            BUILDER.pop();
+            builder.pop();
         }
-        SPEC = BUILDER.build();
+        SPEC = builder.build();
         return SPEC;
     }
 
-    private static void registerOption(ConfigOption<?> option) {
+    private static void registerOption(ModConfigSpec.Builder builder, ConfigOption<?> option) {
         if (option.getComment() != null && !option.getComment().isEmpty()) {
-            BUILDER.comment(option.getComment());
-        }
-
-        if (option.getTranslation() != null && !option.getTranslation().isEmpty()) {
-            BUILDER.translation(option.getTranslation());
+            builder.comment(option.getComment());
         }
 
         ModConfigSpec.ConfigValue<?> forgeValue;
-
         if (option instanceof BooleanOption boolOpt) {
-            forgeValue = BUILDER.define(boolOpt.getName(), boolOpt.getDefaultValue());
+            forgeValue = builder.define(boolOpt.getName(), boolOpt.getDefaultValue());
         } else if (option instanceof IntOption intOpt) {
-            forgeValue = BUILDER.defineInRange(intOpt.getName(), intOpt.getDefaultValue(), intOpt.getMin(), intOpt.getMax());
+            forgeValue = builder.defineInRange(intOpt.getName(), intOpt.getDefaultValue(), intOpt.getMin(), intOpt.getMax());
         } else {
-            forgeValue = BUILDER.define(option.getName(), option.getDefaultValue().toString());
+            forgeValue = builder.define(option.getName(), option.getDefaultValue().toString());
         }
 
         FORGE_VALUES.put(option, forgeValue);
@@ -62,18 +57,32 @@ public class NeoForgeConfig {
 
     @SuppressWarnings("unchecked")
     public static void syncToForge() {
-        FORGE_VALUES.forEach((opt, forge) -> {
-            ((ModConfigSpec.ConfigValue<Object>) forge).set(opt.get());
-            forge.save();
-        });
+        if (FORGE_VALUES.isEmpty()) return;
+
+        FORGE_VALUES.forEach((opt, forge) -> ((ModConfigSpec.ConfigValue<Object>) forge).set(opt.get()));
+
+        if (CONFIG_INSTANCE != null) {
+            CONFIG_INSTANCE.save();
+        }
     }
 
     public static void register(IEventBus bus) {
         ModConfigSpec spec = build();
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, spec);
 
-        bus.addListener((ModConfigEvent.Loading e) -> syncFromForge());
-        bus.addListener((ModConfigEvent.Reloading e) -> syncFromForge());
+        bus.addListener((ModConfigEvent.Loading event) -> {
+            if (event.getConfig().getSpec() == spec) {
+                CONFIG_INSTANCE = event.getConfig();
+                syncFromForge();
+            }
+        });
+
+        bus.addListener((ModConfigEvent.Reloading event) -> {
+            if (event.getConfig().getSpec() == spec) {
+                syncFromForge();
+            }
+        });
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, spec);
 
         BignayConfig.saveCallback = NeoForgeConfig::syncToForge;
     }
