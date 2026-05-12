@@ -2,6 +2,7 @@ package com.mysiupysiu.bignay.neoforge;
 
 import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.neoforge.config.NeoForgeConfig;
+import com.mysiupysiu.bignay.neoforge.loot.BignayLootModifiers;
 import com.mysiupysiu.bignay.neoforge.network.BignayPacketHandler;
 import com.mysiupysiu.bignay.neoforge.registry.Biomes;
 import com.mysiupysiu.bignay.neoforge.registry.NeoForgeRegistry;
@@ -16,6 +17,7 @@ public class BignayNeoForge {
         NeoForgeRegistry.register(bus);
         NeoForgeConfig.register(bus);
         BignayPacketHandler.register();
+        BignayLootModifiers.register(bus);
         bus.addListener(Biomes::setup);
     }
 }

@@ -50,9 +50,7 @@ public class NeoForgeConfig {
 
     @SuppressWarnings("unchecked")
     public static void syncFromForge() {
-        FORGE_VALUES.forEach((opt, forge) -> {
-            ((ConfigOption<Object>) opt).set(forge.get());
-        });
+        FORGE_VALUES.forEach((opt, forge) -> ((ConfigOption<Object>) opt).set(forge.get()));
     }
 
     @SuppressWarnings("unchecked")
