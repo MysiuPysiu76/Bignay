@@ -157,13 +157,13 @@ public class WorldImporter implements OperationWithProgress {
     }
 
     public void updateWorldName() throws IOException {
-        Path levelDatPath = this.target.resolve("level.dat");
-
-        CompoundTag levelData = NbtIo.readCompressed(Files.newInputStream(levelDatPath));
-        CompoundTag data = levelData.getCompound("Data");
-        data.putString("LevelName", this.worldName);
-
-        NbtIo.writeCompressed(levelData, Files.newOutputStream(levelDatPath, StandardOpenOption.WRITE));
+//        Path levelDatPath = this.target.resolve("level.dat");
+//
+//        CompoundTag levelData = NbtIo.readCompressed(Files.newInputStream(levelDatPath));
+//        CompoundTag data = levelData.getCompound("Data");
+//        data.putString("LevelName", this.worldName);
+//
+//        NbtIo.writeCompressed(levelData, Files.newOutputStream(levelDatPath, StandardOpenOption.WRITE));
     }
 
     public void setWorldName(String worldName) {

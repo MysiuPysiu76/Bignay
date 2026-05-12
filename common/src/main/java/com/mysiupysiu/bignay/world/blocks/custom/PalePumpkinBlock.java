@@ -3,28 +3,30 @@ package com.mysiupysiu.bignay.world.blocks.custom;
 import com.mysiupysiu.bignay.registry.BignayBlocks;
 import com.mysiupysiu.bignay.world.items.tabs.NaturalBlocks;
 import net.minecraft.world.level.block.AttachedStemBlock;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.StemBlock;
-import net.minecraft.world.level.block.StemGrownBlock;
+//import net.minecraft.world.level.block.StemGrownBlock;
+//import net.minecraft.world.level.block.StemGrownBlock;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 
-public class PalePumpkinBlock extends StemGrownBlock implements NaturalBlocks {
+public class PalePumpkinBlock extends Block implements NaturalBlocks {
 
     public PalePumpkinBlock(MapColor color) {
         super(Properties.of().mapColor(color).instrument(NoteBlockInstrument.DIDGERIDOO).strength(1.0F).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY));
     }
 
-    @Override
-    public StemBlock getStem() {
-        return (StemBlock) BignayBlocks.PALE_PUMPKIN_STEM.get();
-    }
-
-    @Override
-    public AttachedStemBlock getAttachedStem() {
-        return (AttachedStemBlock) BignayBlocks.ATTACHED_PALE_PUMPKIN_STEM.get();
-    }
+//    @Override
+//    public StemBlock getStem() {
+//        return (StemBlock) BignayBlocks.PALE_PUMPKIN_STEM.get();
+//    }
+//
+//    @Override
+//    public AttachedStemBlock getAttachedStem() {
+//        return (AttachedStemBlock) BignayBlocks.ATTACHED_PALE_PUMPKIN_STEM.get();
+//    }
 }
 
 //    public InteractionResult use(BlockState p_55289_, Level p_55290_, BlockPos p_55291_, Player p_55292_, InteractionHand p_55293_, BlockHitResult p_55294_) {

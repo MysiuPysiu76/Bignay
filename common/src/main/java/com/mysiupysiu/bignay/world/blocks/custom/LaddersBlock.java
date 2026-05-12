@@ -13,6 +13,6 @@ public class LaddersBlock extends LadderBlock implements FunctionalBlocks {
     }
 
     public LaddersBlock(Block block) {
-        super(BlockBehaviour.Properties.copy(block));
+        super(BlockBehaviour.Properties.ofFullCopy(block));
     }
 }

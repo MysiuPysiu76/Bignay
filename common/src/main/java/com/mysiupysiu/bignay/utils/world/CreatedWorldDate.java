@@ -33,7 +33,7 @@ public class CreatedWorldDate {
             root.putLong("CreatedDate", time);
             dat.toFile().getParentFile().mkdir();
             dat.toFile().createNewFile();
-            NbtIo.writeCompressed(root, dat.toFile());
+//            NbtIo.writeCompressed(root, dat.toFile());
         } catch (Exception e) {
             LoggerFactory.getLogger(CreatedWorldDate.class).error("Could not save created world date: ", e);
         }
@@ -45,12 +45,13 @@ public class CreatedWorldDate {
 
             if (!file.toFile().exists()) return null;
 
-            CompoundTag root = NbtIo.readCompressed(file.toFile());
+//            CompoundTag root = NbtIo.readCompressed(file.toFile());
 
-            return root.getLong("CreatedDate");
-        } catch (IOException e) {
+//            return root.getLong("CreatedDate");
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+        return null;
     }
 }

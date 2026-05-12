@@ -20,7 +20,7 @@ public class CavityLog extends Block implements NaturalBlocks {
     public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
 
     public CavityLog(Block b) {
-        super(BlockBehaviour.Properties.copy(b));
+        super(BlockBehaviour.Properties.ofFullCopy(b));
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, net.minecraft.core.Direction.NORTH));
     }
 

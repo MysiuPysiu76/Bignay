@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 public class WoodFenceBlock extends FenceBlock implements BuildingBlocks {
 
     public WoodFenceBlock(Block block) {
-        super(BlockBehaviour.Properties.copy(block).noOcclusion());
+        super(BlockBehaviour.Properties.ofFullCopy(block).noOcclusion());
     }
 
     public WoodFenceBlock(RegistrySupplier<Block> block) {

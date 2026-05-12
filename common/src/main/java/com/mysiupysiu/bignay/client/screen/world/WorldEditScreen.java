@@ -62,7 +62,7 @@ public class WorldEditScreen extends Screen {
         int centerX = this.width / 2;
 
         this.worldNameEdit = new EditBox(this.font, centerX - 100, 35, 200, 20, Component.literal("World name"));
-        this.worldNameEdit.setValue(this.levelAccess.getSummary().getLevelName());
+        this.worldNameEdit.setValue(this.levelAccess.getLevelId());
         this.addRenderableWidget(this.worldNameEdit);
 
         int columnWidth = 150;
@@ -225,20 +225,20 @@ public class WorldEditScreen extends Screen {
 
     private Button.Builder getOptimizeWorldButton() {
         return Button.builder(Component.translatable("selectWorld.edit.optimize"), btn -> {
-            this.minecraft.setScreen(new BackupConfirmScreen(this, (p_280911_, p_280912_) -> {
-                if (p_280911_) {
-                    makeBackupAndShowToast(this.levelAccess);
-                }
-
-                this.minecraft.setScreen(OptimizeWorldScreen.create(this.minecraft, b -> {
-                    try {
-                        levelAccess.close();
-                    } catch (IOException ex) {
-                        LoggerFactory.getLogger(WorldSelectionList.class).error("Failed to unlock level: ", ex);
-                    }
-                    this.minecraft.setScreen(this);
-                }, this.minecraft.getFixerUpper(), this.levelAccess, p_280912_));
-            }, Component.translatable("optimizeWorld.confirm.title"), Component.translatable("optimizeWorld.confirm.description"), true));
+//            this.minecraft.setScreen(new BackupConfirmScreen(this, (p_280911_, p_280912_) -> {
+//                if (p_280911_) {
+//                    makeBackupAndShowToast(this.levelAccess);
+//                }
+//
+//                this.minecraft.setScreen(OptimizeWorldScreen.create(this.minecraft, b -> {
+//                    try {
+//                        levelAccess.close();
+//                    } catch (IOException ex) {
+//                        LoggerFactory.getLogger(WorldSelectionList.class).error("Failed to unlock level: ", ex);
+//                    }
+//                    this.minecraft.setScreen(this);
+//                }, this.minecraft.getFixerUpper(), this.levelAccess, p_280912_));
+//            }, Component.translatable("optimizeWorld.confirm.title"), Component.translatable("optimizeWorld.confirm.description"), true));
         });
     }
 
@@ -312,7 +312,7 @@ public class WorldEditScreen extends Screen {
                 }
 
                 this.minecraft.setScreen(new SelectWorldScreen(null));
-            }, Component.translatable("selectWorld.deleteQuestion"), Component.translatable("selectWorld.deleteWarning", this.levelAccess.getSummary().getLevelName()), Component.translatable("selectWorld.deleteButton"), CommonComponents.GUI_CANCEL));
+            }, Component.translatable("selectWorld.deleteQuestion"), Component.translatable("selectWorld.deleteWarning", this.levelAccess.getLevelId()), Component.translatable("selectWorld.deleteButton"), CommonComponents.GUI_CANCEL));
         });
     }
 
@@ -340,7 +340,7 @@ public class WorldEditScreen extends Screen {
     }
 
     private void showToast(Component title, Component message) {
-        Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.WORLD_BACKUP, title, message));
+        Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastId.WORLD_BACKUP, title, message));
     }
 
     private void registerBackup() {

@@ -13,6 +13,6 @@ import net.minecraft.world.level.material.PushReaction;
 public class NetherFungusBlock extends FungusBlock implements NaturalBlocks {
 
     public NetherFungusBlock(ResourceKey<ConfiguredFeature<?, ?>> feature, Block block) {
-        super(BlockBehaviour.Properties.of().mapColor(MapColor.NETHER).instabreak().noCollission().sound(SoundType.FUNGUS).pushReaction(PushReaction.DESTROY), feature, block);
+        super(feature, block, Properties.of().mapColor(MapColor.NETHER).instabreak().noCollission().sound(SoundType.FUNGUS).pushReaction(PushReaction.DESTROY));
     }
 }

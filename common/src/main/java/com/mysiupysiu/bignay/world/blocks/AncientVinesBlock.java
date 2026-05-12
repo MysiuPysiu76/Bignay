@@ -32,7 +32,7 @@ public class AncientVinesBlock extends VineBlock implements NaturalBlocks, Bonem
     public static final BooleanProperty CAN_GROW = BooleanProperty.create("can_grow");
 
     public AncientVinesBlock() {
-        super(BlockBehaviour.Properties.copy(Blocks.VINE).randomTicks());
+        super(BlockBehaviour.Properties.ofFullCopy(Blocks.VINE).randomTicks());
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FLOWERS, 0)
                 .setValue(CAN_GROW, true)

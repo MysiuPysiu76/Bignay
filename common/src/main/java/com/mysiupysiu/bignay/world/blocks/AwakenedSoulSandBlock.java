@@ -8,6 +8,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 public class AwakenedSoulSandBlock extends SoulSandBlock implements NaturalBlocks {
 
     public AwakenedSoulSandBlock() {
-        super(BlockBehaviour.Properties.copy(Blocks.SOUL_SAND));
+        super(BlockBehaviour.Properties.ofFullCopy(Blocks.SOUL_SAND));
     }
 }

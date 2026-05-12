@@ -9,10 +9,10 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 public class PressurePlatesBock extends PressurePlateBlock implements BuildingBlocks {
 
     public PressurePlatesBock(Properties properties, BlockSetType blockSetType) {
-        super(PressurePlateBlock.Sensitivity.EVERYTHING, properties.noOcclusion(), blockSetType);
+        super(blockSetType, properties.noOcclusion());
     }
 
     public PressurePlatesBock(Block block, BlockSetType blockSetType) {
-        this(BlockBehaviour.Properties.copy(block), blockSetType);
+        this(BlockBehaviour.Properties.ofFullCopy(block), blockSetType);
     }
 }

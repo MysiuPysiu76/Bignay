@@ -33,7 +33,7 @@ public class CampfiresBlock extends CampfireBlock implements FunctionalBlocks {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public CampfiresBlock() {
-        super(false, 1, BlockBehaviour.Properties.copy(Blocks.CAMPFIRE));
+        super(false, 1, BlockBehaviour.Properties.ofFullCopy(Blocks.CAMPFIRE));
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(LIT, true)
                 .setValue(SIGNAL_FIRE, false)
@@ -42,7 +42,7 @@ public class CampfiresBlock extends CampfireBlock implements FunctionalBlocks {
     }
 
     public CampfiresBlock(Block block) {
-        super(false, 1, BlockBehaviour.Properties.copy(block));
+        super(false, 1, BlockBehaviour.Properties.ofFullCopy(block));
     }
 
     public static class SoulCampfire extends CampfiresBlock {

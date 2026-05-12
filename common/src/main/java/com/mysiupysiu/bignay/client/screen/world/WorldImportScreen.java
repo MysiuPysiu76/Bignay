@@ -107,38 +107,38 @@ public class WorldImportScreen extends Screen {
             if (levelDatEntry == null) return;
 
             try (InputStream is = zip.getInputStream(levelDatEntry)) {
-                CompoundTag levelData = NbtIo.readCompressed(is);
-                CompoundTag data = levelData.getCompound("Data");
+//                CompoundTag levelData = NbtIo.readCompressed(is);
+//                CompoundTag data = levelData.getCompound("Data");
+//
+//                this.levelName = data.getString("LevelName");
+//                this.version = levelData.getCompound("Data").getCompound("Version").getString("Name");
+//
+//                int gm = data.getInt("GameType");
+//                switch (gm) {
+//                    case 0 -> gameMode = "Survival";
+//                    case 1 -> gameMode = "Creative";
+//                    case 2 -> gameMode = "Adventure";
+//                    case 3 -> gameMode = "Spectator";
+//                    default -> gameMode = "Unknown";
+//                }
+//
+//                int diff = data.getInt("Difficulty");
+//                switch (diff) {
+//                    case 0 -> difficulty = "Peaceful";
+//                    case 1 -> difficulty = "Easy";
+//                    case 2 -> difficulty = "Normal";
+//                    case 3 -> difficulty = "Hard";
+//                    default -> difficulty = "Unknown";
+//                }
+//
+//                CompoundTag worldGen = data.getCompound("WorldGenSettings");
+//                if (worldGen.contains("seed")) {
+//                    this.seed = worldGen.getLong("seed");
+//                } else {
+//                    this.seed = 0L;
+//                }
 
-                this.levelName = data.getString("LevelName");
-                this.version = levelData.getCompound("Data").getCompound("Version").getString("Name");
-
-                int gm = data.getInt("GameType");
-                switch (gm) {
-                    case 0 -> gameMode = "Survival";
-                    case 1 -> gameMode = "Creative";
-                    case 2 -> gameMode = "Adventure";
-                    case 3 -> gameMode = "Spectator";
-                    default -> gameMode = "Unknown";
-                }
-
-                int diff = data.getInt("Difficulty");
-                switch (diff) {
-                    case 0 -> difficulty = "Peaceful";
-                    case 1 -> difficulty = "Easy";
-                    case 2 -> difficulty = "Normal";
-                    case 3 -> difficulty = "Hard";
-                    default -> difficulty = "Unknown";
-                }
-
-                CompoundTag worldGen = data.getCompound("WorldGenSettings");
-                if (worldGen.contains("seed")) {
-                    this.seed = worldGen.getLong("seed");
-                } else {
-                    this.seed = 0L;
-                }
-
-                daysPlayed = data.getLong("DayTime") / 24000;
+//                daysPlayed = data.getLong("DayTime") / 24000;
             }
         } catch (IOException e) {
             this.levelName = "Unknown";

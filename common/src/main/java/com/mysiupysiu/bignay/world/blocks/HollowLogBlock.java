@@ -45,12 +45,12 @@ public class HollowLogBlock extends RotatedPillarBlock implements SimpleWaterlog
     public static final Supplier<BiMap<Block, Block>> LOGS = HollowLogBlock::getLogs;
 
     public HollowLogBlock() {
-        super(Properties.copy(Blocks.STONE).noOcclusion());
+        super(Properties.ofFullCopy(Blocks.STONE).noOcclusion());
         this.registerDefaultState(this.defaultBlockState().setValue(AXIS, Direction.Axis.Y).setValue(WATERLOGGED, false));
     }
 
     public HollowLogBlock(Block block) {
-        super(Properties.copy(block).noOcclusion());
+        super(Properties.ofFullCopy(block).noOcclusion());
         this.registerDefaultState(this.defaultBlockState().setValue(AXIS, Direction.Axis.Y).setValue(WATERLOGGED, false));
     }
 

@@ -9,10 +9,10 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 public class DoorsBlock extends DoorBlock implements BuildingBlocks {
 
     public DoorsBlock(Properties properties, BlockSetType blockSetType) {
-        super(properties.noOcclusion(), blockSetType);
+        super(blockSetType, properties.noOcclusion());
     }
 
     public DoorsBlock(Block block,BlockSetType blockSetType) {
-        this(BlockBehaviour.Properties.copy(block), blockSetType);
+        this(BlockBehaviour.Properties.ofFullCopy(block), blockSetType);
     }
 }

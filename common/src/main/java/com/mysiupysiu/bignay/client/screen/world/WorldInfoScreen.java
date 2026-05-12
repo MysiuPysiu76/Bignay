@@ -11,7 +11,9 @@ import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.storage.LevelStorageSource;
+import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -28,14 +30,18 @@ public class WorldInfoScreen extends Screen {
 
     @Override
     protected void init() {
-        this.infoList = new WorldInfoList(this.minecraft, this.width, this.height, 40, this.height - 60, 18);
+        this.infoList = new WorldInfoList(this.width, this.height - 95);
         this.addRenderableWidget(this.infoList);
 
         this.loadWorldInfo();
 
-        this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, b ->
-                this.minecraft.setScreen(new EditWorldScreen(result -> this.minecraft.setScreen(new SelectWorldScreen(null)), this.levelAccess))
-        ).bounds(this.width / 2 - 125, this.height - 40, 120, 20).build());
+        this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, b -> {
+            try {
+                this.minecraft.setScreen(EditWorldScreen.create(Minecraft.getInstance(), this.levelAccess, null));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }).bounds(this.width / 2 - 125, this.height - 40, 120, 20).build());
 
         this.addRenderableWidget(Button.builder(Component.translatable("selectWorld.backToMenu"), b -> {
             try {
@@ -114,8 +120,9 @@ public class WorldInfoScreen extends Screen {
     }
 
     class WorldInfoList extends ObjectSelectionList<WorldInfoEntry> {
-        public WorldInfoList(Minecraft mc, int width, int height, int top, int bottom, int itemHeight) {
-            super(mc, width, height, top, bottom, itemHeight);
+
+        public WorldInfoList(int w, int h) {
+            super(Minecraft.getInstance(), w, h, 40, 18);
         }
 
         public void refreshList() {
@@ -151,7 +158,7 @@ public class WorldInfoScreen extends Screen {
         }
 
         @Override
-        public Component getNarration() {
+        public @NotNull Component getNarration() {
             return this.text;
         }
     }

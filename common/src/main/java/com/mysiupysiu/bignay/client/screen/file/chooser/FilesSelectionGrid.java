@@ -36,16 +36,22 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
     private boolean draggingScrollbar = false;
     private int columns = BignayConfig.files.columns.get();
 
-    public FilesSelectionGrid(int width, int height, int top, int bottom, AbstractFileChooserScreen screen) {
-        super(Minecraft.getInstance(), width, height, top, bottom, CELL_SIZE + CELL_GAP + 5);
-        this.rootScreen = screen;
+    public FilesSelectionGrid(Minecraft minecraft, int i, int j, int k, int l) {
+        super(minecraft, i, j, k, l);
+        rootScreen = null;
     }
+
+//    public FilesSelectionGrid(int width, int height, int top, int bottom, AbstractFileChooserScreen screen) {
+//        super(Minecraft.getInstance(), width, height, top, bottom, CELL_SIZE + CELL_GAP + 5);
+//        this.rootScreen = screen;
+//    }
 
     @Override
     protected int getScrollbarPosition() {
         int gridWidth = this.columns * CELL_SIZE + (this.columns - 1) * CELL_GAP;
-        int startX = this.getLeft() + (this.width - gridWidth) / 2;
-        return startX + gridWidth + 10;
+//        int startX = this.getLeft() + (this.width - gridWidth) / 2;
+//        return startX + gridWidth + 10;
+        return 4;
     }
 
     @Override
@@ -53,14 +59,14 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
         int mx = (int) Math.floor(mouseX);
         int my = (int) Math.floor(mouseY);
 
-        int viewTop = this.getTop();
-        int viewBottom = this.getBottom();
-        int viewLeft = this.getLeft();
+//        int viewTop = this.getTop();
+//        int viewBottom = this.getBottom();
+//        int viewLeft = this.getLeft();
         int viewRight = this.getRight() - 8;
 
-        if (mx < viewLeft || mx > viewRight || my < viewTop || my > viewBottom) {
-            return false;
-        }
+//        if (mx < viewLeft || mx > viewRight || my < viewTop || my > viewBottom) {
+//            return false;
+//        }
 
         int gridWidth = this.columns * CELL_SIZE + (this.columns - 1) * CELL_GAP;
         int startX = this.getRowLeft() + (this.getRowWidth() - gridWidth) / 2;
@@ -129,24 +135,24 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
 
     @Override
     public boolean mouseDragged(double mouseX, double mouseY, int button, double dx, double dy) {
-        if (super.mouseDragged(mouseY, mouseY, button, dx, dy)) {
-            return true;
-        } else if (button == 0 && this.draggingScrollbar) {
-            if (mouseY < (double)this.y0) {
-                this.setScrollAmount(0.0D);
-            } else if (mouseY > (double)this.y1) {
-                this.setScrollAmount(this.getMaxScroll());
-            } else {
-                double d0 = Math.max(1, this.getMaxScroll());
-                int i = this.y1 - this.y0;
-                int j = Mth.clamp((int)((float)(i * i) / (float)this.getMaxPosition()), 32, i - 8);
-                double d1 = Math.max(1.0D, d0 / (double)(i - j));
-                this.setScrollAmount(this.getScrollAmount() + dy * d1);
-            }
-            return true;
-        } else {
+//        if (super.mouseDragged(mouseY, mouseY, button, dx, dy)) {
+//            return true;
+//        } else if (button == 0 && this.draggingScrollbar) {
+//            if (mouseY < (double)this.y) {
+//                this.setScrollAmount(0.0D);
+//            } else if (mouseY > (double)this.y1) {
+//                this.setScrollAmount(this.getMaxScroll());
+//            } else {
+//                double d0 = Math.max(1, this.getMaxScroll());
+//                int i = this.y1 - this.y0;
+//                int j = Mth.clamp((int)((float)(i * i) / (float)this.getMaxPosition()), 32, i - 8);
+//                double d1 = Math.max(1.0D, d0 / (double)(i - j));
+//                this.setScrollAmount(this.getScrollAmount() + dy * d1);
+//            }
+//            return true;
+//        } else {
             return false;
-        }
+//        }
     }
 
     @Override
@@ -237,15 +243,15 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
         double targetBottom = targetTop + this.itemHeight;
 
         double visibleTop = this.getScrollAmount();
-        double visibleBottom = visibleTop + (this.getBottom() - this.getTop() - this.itemHeight);
-
-        if (targetTop < visibleTop) {
-            this.setScrollAmount(targetTop);
-        } else if (targetBottom > visibleBottom) {
-            double newScroll = targetBottom - (this.getBottom() - this.getTop() - this.itemHeight);
-            newScroll = Mth.clamp(newScroll, 0.0D, this.getMaxScroll());
-            this.setScrollAmount(newScroll);
-        }
+//        double visibleBottom = visibleTop + (this.getBottom() - this.getTop() - this.itemHeight);
+//
+//        if (targetTop < visibleTop) {
+//            this.setScrollAmount(targetTop);
+//        } else if (targetBottom > visibleBottom) {
+//            double newScroll = targetBottom - (this.getBottom() - this.getTop() - this.itemHeight);
+//            newScroll = Mth.clamp(newScroll, 0.0D, this.getMaxScroll());
+//            this.setScrollAmount(newScroll);
+//        }
 
         return true;
     }
@@ -267,15 +273,15 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
             var font = Minecraft.getInstance().font;
 
             int centerX = this.getRowLeft() + this.getRowWidth() / 2;
-            int centerY = this.getTop() + (this.getBottom() - this.getTop()) / 2;
+//            int centerY = this.getTop() + (this.getBottom() - this.getTop()) / 2;
 
-            g.drawCenteredString(font, Component.translatable("fileChooser.emptyFolder"), centerX, centerY, 0xFFFFFF);
+//            g.drawCenteredString(font, Component.translatable("fileChooser.emptyFolder"), centerX, centerY, 0xFFFFFF);
         }
 
         this.setFocused(wasFocused);
     }
 
-    public class RowEntry extends ObjectSelectionList.Entry<RowEntry> {
+    public class RowEntry extends Entry<RowEntry> {
         private final List<File> files;
 
         public RowEntry(List<File> files) {
@@ -357,15 +363,15 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
         double targetTop = row * (double) this.itemHeight;
         double targetBottom = targetTop + this.itemHeight;
         double visibleTop = this.getScrollAmount();
-        double visibleBottom = visibleTop + (this.getBottom() - this.getTop());
-
-        if (targetTop < visibleTop) {
-            this.setScrollAmount(Math.max(0.0D, Math.min(targetTop, this.getMaxScroll())));
-        } else if (targetBottom > visibleBottom) {
-            double newScroll = targetBottom - (this.getBottom() - this.getTop());
-            newScroll = Math.max(0.0D, Math.min(newScroll, this.getMaxScroll()));
-            this.setScrollAmount(newScroll);
-        }
+//        double visibleBottom = visibleTop + (this.getBottom() - this.get());
+//
+//        if (targetTop < visibleTop) {
+//            this.setScrollAmount(Math.max(0.0D, Math.min(targetTop, this.getMaxScroll())));
+//        } else if (targetBottom > visibleBottom) {
+//            double newScroll = targetBottom - (this.getBottom() - this.getTop());
+//            newScroll = Math.max(0.0D, Math.min(newScroll, this.getMaxScroll()));
+//            this.setScrollAmount(newScroll);
+//        }
     }
 
     public File getSelectedFile() {
@@ -418,19 +424,19 @@ public class FilesSelectionGrid extends ObjectSelectionList<FilesSelectionGrid.R
         if (!row.isEmpty()) addEntry(new RowEntry(new ArrayList<>(row)));
     }
 
-    public int getBottom() {
-        return this.y1;
-    }
-
-    public int getTop() {
-        return this.y0;
-    }
-
-    public int getLeft() {
-        return this.x0;
-    }
-
-    public int getRight() {
-        return this.x1;
-    }
+//    public int getBottom() {
+//        return this.y1;
+//    }
+//
+//    public int getTop() {
+//        return this.y0;
+//    }
+//
+//    public int getLeft() {
+//        return this.;
+//    }
+//
+//    public int getRight() {
+//        return this.x1;
+//    }
 }

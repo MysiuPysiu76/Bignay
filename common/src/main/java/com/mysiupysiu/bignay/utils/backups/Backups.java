@@ -26,12 +26,12 @@ public class Backups {
         try {
             if (!Files.exists(FILE)) return;
 
-            CompoundTag root = NbtIo.readCompressed(FILE.toFile());
-            ListTag list = root.getList("Backups", Tag.TAG_COMPOUND);
-
-            for (Tag t : list) {
-                BACKUPS.add(BackupEntry.load((CompoundTag) t));
-            }
+//            CompoundTag root = NbtIo.readCompressed(FILE.toFile());
+//            ListTag list = root.getList("Backups", Tag.TAG_COMPOUND);
+//
+//            for (Tag t : list) {
+//                BACKUPS.add(BackupEntry.load((CompoundTag) t));
+//            }
         } catch (Exception e) {
             throw new RuntimeException("Failed to load backups.dat", e);
         }
@@ -47,7 +47,7 @@ public class Backups {
             }
 
             root.put("Backups", list);
-            NbtIo.writeCompressed(root, FILE.toFile());
+//            NbtIo.writeCompressed(root, FILE.toFile());
         } catch (Exception e) {
             throw new RuntimeException("Failed to save backups.dat", e);
         }

@@ -54,7 +54,7 @@ abstract class AbstractFileChooserScreen extends Screen {
         int btnY = MARGIN + 4;
         int centerX = this.width / 2;
 
-        this.list = new FilesSelectionGrid(this.width, this.height, 65, this.height - 40, this);
+//        this.list = new FilesSelectionGrid(this.width, this.height, 65, this.height - 40, this);
         this.goHome();
         this.list.setPath(this.currentDir);
         this.list.setOnPathUpdate(file -> this.currentDir = file.toPath());

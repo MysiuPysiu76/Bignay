@@ -9,10 +9,10 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 public class TrapDoorsBlock extends TrapDoorBlock implements BuildingBlocks {
 
     public TrapDoorsBlock(Properties properties, BlockSetType blockSetType) {
-        super(properties.noOcclusion(), blockSetType);
+        super(blockSetType, properties.noOcclusion());
     }
 
     public TrapDoorsBlock(Block block, BlockSetType blockSetType) {
-        this(BlockBehaviour.Properties.copy(block), blockSetType);
+        this(BlockBehaviour.Properties.ofFullCopy(block), blockSetType);
     }
 }

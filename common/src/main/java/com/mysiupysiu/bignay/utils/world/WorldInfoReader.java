@@ -103,7 +103,8 @@ public class WorldInfoReader {
 
     public Long getPlayerLastPlayed() {
         try {
-            return levelAccess.getSummary().getLastPlayed();
+//            return levelAccess.getSummary().getLastPlayed();
+            return 3L;
         } catch (Exception e) {
             return null;
         }
@@ -139,7 +140,8 @@ public class WorldInfoReader {
 
     public String getWorldDifficulty() {
         try {
-            return this.levelAccess.getSummary().getSettings().difficulty().getDisplayName().getString();
+//            return this.levelAccess.getSummary().getSettings().difficulty().getDisplayName().getString();
+            return "";
         } catch (Exception e) {
             return null;
         }
@@ -147,7 +149,8 @@ public class WorldInfoReader {
 
     public String getWorldGameMode() {
         try {
-            return levelAccess.getSummary().getGameMode().getLongDisplayName().getString();
+//            return levelAccess.getSummary().getGameMode().getLongDisplayName().getString();
+            return "";
         } catch (Exception e) {
             return null;
         }
@@ -198,10 +201,10 @@ public class WorldInfoReader {
         Path file = worldDir.toPath().resolve("data").resolve("uuid.dat");
 
         if (Files.exists(file)) {
-            CompoundTag tag = NbtIo.readCompressed(file.toFile());
-            if (tag.hasUUID("UUID")) {
-                return tag.getUUID("UUID");
-            }
+//            CompoundTag tag = NbtIo.readCompressed(file.toFile());
+//            if (tag.hasUUID("UUID")) {
+//                return tag.getUUID("UUID");
+//            }
         }
 
         createWorldUUID(file.toFile());
@@ -213,25 +216,25 @@ public class WorldInfoReader {
             UUID uuid = UUID.randomUUID();
             CompoundTag tag = new CompoundTag();
             tag.putUUID("UUID", uuid);
-            NbtIo.writeCompressed(tag, file);
-        } catch (IOException e) {
+//            NbtIo.writeCompressed(tag, file);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     private void loadLevelDat() {
-        Path levelDatPath = this.levelAccess.getLevelPath(LevelResource.LEVEL_DATA_FILE);
-
-        if (levelDatPath.toString().endsWith(".zip")) {
-            try (ZipFile zip = new ZipFile(levelDatPath.toFile()); InputStream is = zip.getInputStream(zip.getEntry("level.dat"))) {
-                this.levelData = NbtIo.readCompressed(is);
-            } catch (Exception ignored) {}
-        } else {
-            try {
-                File levelDatFile = levelDatPath.toFile();
-                this.levelData = NbtIo.readCompressed(levelDatFile);
-            } catch (IOException ignored) {}
-        }
+//        Path levelDatPath = this.levelAccess.getLevelPath(LevelResource.LEVEL_DATA_FILE);
+//
+//        if (levelDatPath.toString().endsWith(".zip")) {
+//            try (ZipFile zip = new ZipFile(levelDatPath.toFile()); InputStream is = zip.getInputStream(zip.getEntry("level.dat"))) {
+//                this.levelData = NbtIo.readCompressed(is);
+//            } catch (Exception ignored) {}
+//        } else {
+//            try {
+//                File levelDatFile = levelDatPath.toFile();
+//                this.levelData = NbtIo.readCompressed(levelDatFile);
+//            } catch (IOException ignored) {}
+//        }
     }
 
     private void loadStats() {

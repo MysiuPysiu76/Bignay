@@ -12,11 +12,11 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 public class WallSignsBlock extends WallSignBlock {
 
     public WallSignsBlock(Properties properties, WoodType woodType) {
-        super(properties, woodType);
+        super(woodType, properties);
     }
 
     public WallSignsBlock(Block block, WoodType woodType) {
-        this(BlockBehaviour.Properties.copy(block), woodType);
+        this(BlockBehaviour.Properties.ofFullCopy(block), woodType);
     }
 
     @Override

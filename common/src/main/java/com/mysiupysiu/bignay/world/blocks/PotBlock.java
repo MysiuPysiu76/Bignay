@@ -32,7 +32,7 @@ public class PotBlock extends Block implements FunctionalBlocks {
             box(0, 14, 0, 16, 16, 16));
 
     public PotBlock() {
-        super(BlockBehaviour.Properties.copy(Blocks.DIRT));
+        super(BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT));
         this.registerDefaultState(this.stateDefinition.any().setValue(WATERED, false));
     }
 

@@ -9,10 +9,10 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 public class PillarBlock extends RotatedPillarBlock implements BuildingBlocks {
 
     public PillarBlock(Block block) {
-        super(BlockBehaviour.Properties.copy(block));
+        super(BlockBehaviour.Properties.ofFullCopy(block));
     }
 
     public PillarBlock(RegistrySupplier<Block> block) {
-        super(BlockBehaviour.Properties.copy(block.get()));
+        super(BlockBehaviour.Properties.ofFullCopy(block.get()));
     }
 }

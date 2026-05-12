@@ -11,6 +11,6 @@ public class BuildingBlock extends Block implements BuildingBlocks {
     }
 
     public BuildingBlock(Block b) {
-        super(BlockBehaviour.Properties.copy(b));
+        super(BlockBehaviour.Properties.ofFullCopy(b));
     }
 }

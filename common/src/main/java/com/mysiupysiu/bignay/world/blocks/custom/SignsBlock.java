@@ -12,11 +12,11 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 public class SignsBlock extends StandingSignBlock {
 
     public SignsBlock(Properties properties, WoodType woodType) {
-        super(properties, woodType);
+        super(woodType, properties);
     }
 
     public SignsBlock(Block block, WoodType woodType) {
-        this(BlockBehaviour.Properties.copy(block), woodType);
+        this(BlockBehaviour.Properties.ofFullCopy(block), woodType);
     }
 
     @Override

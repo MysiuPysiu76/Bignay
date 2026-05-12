@@ -46,7 +46,7 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
     });
 
     public ScreenshotsGrid(Minecraft mc, int width, int height, int top, int bottom, ScreenshotsViewerScreen parent) {
-        super(mc, width, height, top, bottom, (BignayConfig.screenshots.showFileName.get() ? Minecraft.getInstance().font.lineHeight + 4 : 0) + BignayConfig.screenshots.gap.get() + Math.max(1, (int)(Math.max(1, ((width - 50) - (BignayConfig.screenshots.columns.get() - 1) * BignayConfig.screenshots.gap.get()) / BignayConfig.screenshots.columns.get()) * (9.0f / 16.0f))));
+        super(mc, width, height, top, bottom);
         this.parent = parent;
         this.columns = BignayConfig.screenshots.columns.get();
         this.gap = BignayConfig.screenshots.gap.get();
@@ -75,16 +75,16 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
         }
     }
 
-    @Override
-    public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTick) {
-        super.render(gui, mouseX, mouseY, partialTick);
-
-        if (allPaths.isEmpty()) {
-            gui.drawCenteredString(Minecraft.getInstance().font, Component.translatable("screenshotsViewer.empty", getKeyboardKey()), this.width / 2, this.y0 + (this.y1 - this.y0) / 2, 0x777777);
-        } else {
-            manageMemory();
-        }
-    }
+//    @Override
+//    public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTick) {
+//        super.render(gui, mouseX, mouseY, partialTick);
+//
+//        if (allPaths.isEmpty()) {
+//            gui.drawCenteredString(Minecraft.getInstance().font, Component.translatable("screenshotsViewer.empty", getKeyboardKey()), this.width / 2, this.y0 + (this.y1 - this.y0) / 2, 0x777777);
+//        } else {
+//            manageMemory();
+//        }
+//    }
 
     private String getKeyboardKey() {
         return Minecraft.getInstance().options.keyScreenshot.getTranslatedKeyMessage().getString();

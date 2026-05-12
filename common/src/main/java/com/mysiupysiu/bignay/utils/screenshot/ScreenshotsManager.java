@@ -245,16 +245,16 @@ public class ScreenshotsManager {
 
             if (!levelDat.exists()) return worldFolderName;
 
-            CompoundTag rootTag = NbtIo.readCompressed(levelDat);
-            if (rootTag == null) return worldFolderName;
-
-            CompoundTag dataTag = rootTag.contains("Data") ? rootTag.getCompound("Data") : rootTag;
-            if (dataTag.contains("LevelName")) {
-                String levelName = dataTag.getString("LevelName");
-                if (!levelName.isEmpty()) {
-                    return levelName;
-                }
-            }
+//            CompoundTag rootTag = NbtIo.readCompressed(levelDat);
+//            if (rootTag == null) return worldFolderName;
+//
+//            CompoundTag dataTag = rootTag.contains("Data") ? rootTag.getCompound("Data") : rootTag;
+//            if (dataTag.contains("LevelName")) {
+//                String levelName = dataTag.getString("LevelName");
+//                if (!levelName.isEmpty()) {
+//                    return levelName;
+//                }
+//            }
 
             return worldFolderName;
         } catch (Exception e) {

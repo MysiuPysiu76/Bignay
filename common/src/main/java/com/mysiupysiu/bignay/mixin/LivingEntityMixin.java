@@ -32,15 +32,15 @@ public abstract class LivingEntityMixin {
 
     @Unique
     private ItemStack bignay$getHeadForMob(LivingEntity mob) {
-        if (mob instanceof Blaze) return new ItemStack(BignayItems.BLAZE_HEAD.get());
-        if (mob instanceof CaveSpider) return new ItemStack(BignayItems.CAVE_SPIDER_HEAD.get());
-        if (mob instanceof Drowned) return new ItemStack(BignayItems.DROWNED_HEAD.get());
-        if (mob instanceof EnderMan) return new ItemStack(BignayItems.ENDERMAN_HEAD.get());
-        if (mob instanceof Husk) return new ItemStack(BignayItems.HUSK_HEAD.get());
-        if (mob instanceof MagmaCube) return new ItemStack(BignayItems.MAGMA_CUBE_HEAD.get());
-        if (mob instanceof Slime) return new ItemStack(BignayItems.SLIME_HEAD.get());
-        if (mob instanceof Spider) return new ItemStack(BignayItems.SPIDER_HEAD.get());
-        if (mob instanceof Stray) return new ItemStack(BignayItems.STRAY_SKULL.get());
+//        if (mob instanceof Blaze) return new ItemStack(BignayItems.BLAZE_HEAD.get());
+//        if (mob instanceof CaveSpider) return new ItemStack(BignayItems.CAVE_SPIDER_HEAD.get());
+//        if (mob instanceof Drowned) return new ItemStack(BignayItems.DROWNED_HEAD.get());
+//        if (mob instanceof EnderMan) return new ItemStack(BignayItems.ENDERMAN_HEAD.get());
+//        if (mob instanceof Husk) return new ItemStack(BignayItems.HUSK_HEAD.get());
+//        if (mob instanceof MagmaCube) return new ItemStack(BignayItems.MAGMA_CUBE_HEAD.get());
+//        if (mob instanceof Slime) return new ItemStack(BignayItems.SLIME_HEAD.get());
+//        if (mob instanceof Spider) return new ItemStack(BignayItems.SPIDER_HEAD.get());
+//        if (mob instanceof Stray) return new ItemStack(BignayItems.STRAY_SKULL.get());
 
         return null;
     }

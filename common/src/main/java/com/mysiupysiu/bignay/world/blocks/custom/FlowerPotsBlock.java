@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 public class FlowerPotsBlock extends FlowerPotBlock {
 
     public FlowerPotsBlock(Block block) {
-        super(block, BlockBehaviour.Properties.copy(Blocks.POTTED_FERN));
+        super(block, BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_FERN));
     }
 
     public FlowerPotsBlock(RegistrySupplier<Block> block) {

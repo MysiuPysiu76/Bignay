@@ -36,7 +36,7 @@ public class WorldExportScreen extends Screen {
         this.previousScreen = previousScreen;
         this.sourceWorld = Path.of(System.getProperty("user.dir")).resolve("saves").resolve(levelAccess.getLevelId()).toFile();
         this.worldSizeBytes = FileUtils.computeFolderSize(sourceWorld.toPath());
-        this.worldName = levelAccess.getSummary().getLevelName();
+        this.worldName = levelAccess.getLevelId();
     }
 
     @Override

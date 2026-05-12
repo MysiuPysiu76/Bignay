@@ -20,20 +20,23 @@ import net.minecraft.world.level.material.MapColor;
 import java.util.List;
 
 public class BasalticLavaBlock extends Block implements CreativeTabProvider {
-
-    public BasalticLavaBlock() {
-        super(BlockBehaviour.Properties
-                .copy(Blocks.BASALT)
-                .mapColor(MapColor.NETHER)
-                .instrument(NoteBlockInstrument.BASEDRUM)
-                .requiresCorrectToolForDrops()
-                .lightLevel(bs -> 3)
-                .strength(1.25F, 4.2F)
-                .isValidSpawn((state, world, pos, entityType) -> entityType.fireImmune())
-                .hasPostProcess(BasalticLavaBlock::always)
-                .emissiveRendering(BasalticLavaBlock::always)
-        );
+    public BasalticLavaBlock(Properties properties) {
+        super(properties);
     }
+
+//    public BasalticLavaBlock() {
+//        super(BlockBehaviour.Properties
+//                .copy(Blocks.BASALT)
+//                .mapColor(MapColor.NETHER)
+//                .instrument(NoteBlockInstrument.BASEDRUM)
+//                .requiresCorrectToolForDrops()
+//                .lightLevel(bs -> 3)
+//                .strength(1.25F, 4.2F)
+//                .isValidSpawn((state, world, pos, entityType) -> entityType.fireImmune())
+//                .hasPostProcess(BasalticLavaBlock::always)
+//                .emissiveRendering(BasalticLavaBlock::always)
+//        );
+//    }
 
     private static boolean always(BlockState p_50775_, BlockGetter p_50776_, BlockPos p_50777_) {
         return true;

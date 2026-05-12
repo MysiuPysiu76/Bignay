@@ -36,12 +36,12 @@ public class VerticalSlabBlock extends Block implements BuildingBlocks, SimpleWa
     public static final EnumProperty<Type> TYPE = EnumProperty.create("type", Type.class);
 
     public VerticalSlabBlock() {
-        super(BlockBehaviour.Properties.copy(Blocks.STONE));
+        super(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE));
         this.registerDefaultState(this.stateDefinition.any().setValue(TYPE, Type.NORTH).setValue(WATERLOGGED, false));
     }
 
     public VerticalSlabBlock(Block block) {
-        super(BlockBehaviour.Properties.copy(block));
+        super(BlockBehaviour.Properties.ofFullCopy(block));
         this.registerDefaultState(this.stateDefinition.any().setValue(TYPE, Type.NORTH).setValue(WATERLOGGED, false));
     }
 

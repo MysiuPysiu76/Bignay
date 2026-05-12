@@ -9,10 +9,10 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 public class FenceGatesBlock extends FenceGateBlock implements BuildingBlocks {
 
     public FenceGatesBlock(Properties properties, WoodType woodType) {
-        super(properties, woodType);
+        super(woodType, properties);
     }
 
     public FenceGatesBlock(Block block, WoodType woodType) {
-        this(BlockBehaviour.Properties.copy(block), woodType);
+        this(BlockBehaviour.Properties.ofFullCopy(block), woodType);
     }
 }

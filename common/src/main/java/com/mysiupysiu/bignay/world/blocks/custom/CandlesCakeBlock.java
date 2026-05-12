@@ -26,7 +26,7 @@ import net.minecraft.world.phys.Vec3;
 public class CandlesCakeBlock extends CandleCakeBlock {
 
     public CandlesCakeBlock(RegistrySupplier<Block> candle) {
-        super(candle.get(), BlockBehaviour.Properties.copy(Blocks.CAKE).lightLevel(b -> 2));
+        super(candle.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE).lightLevel(b -> 2));
     }
 
     @Override

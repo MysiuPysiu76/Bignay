@@ -10,11 +10,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 public class StairsBlock extends StairBlock implements BuildingBlocks {
 
     public StairsBlock() {
-        super(Blocks.STONE.defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE).strength(2.0f).requiresCorrectToolForDrops());
+        super(Blocks.STONE.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(2.0f).requiresCorrectToolForDrops());
     }
 
     public StairsBlock(Block block) {
-        super(block.defaultBlockState(), BlockBehaviour.Properties.copy(block));
+        super(block.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(block));
     }
 
     public StairsBlock(RegistrySupplier<Block> block) {
