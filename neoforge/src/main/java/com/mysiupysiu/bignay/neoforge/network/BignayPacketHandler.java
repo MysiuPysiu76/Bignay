@@ -13,8 +13,6 @@ import net.neoforged.neoforge.network.simple.SimpleChannel;
 import net.neoforged.neoforge.network.NetworkRegistry;
 import net.neoforged.neoforge.network.NetworkEvent;
 
-import java.util.function.Supplier;
-
 public final class BignayPacketHandler {
 
     private static final String PROTOCOL_VERSION = "1";
@@ -22,13 +20,11 @@ public final class BignayPacketHandler {
     private static int id = 0;
 
     public static void register() {
-        INSTANCE = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(BignayMod.MODID, "main")).networkProtocolVersion(() ->
-                PROTOCOL_VERSION).clientAcceptedVersions(PROTOCOL_VERSION::equals).serverAcceptedVersions(PROTOCOL_VERSION::equals).simpleChannel();
+        INSTANCE = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(BignayMod.MODID, "main")).networkProtocolVersion(() -> PROTOCOL_VERSION).clientAcceptedVersions(PROTOCOL_VERSION::equals).serverAcceptedVersions(PROTOCOL_VERSION::equals).simpleChannel();
 
         INSTANCE.messageBuilder(SortPacket.class, id++).encoder(SortPacket::encode).decoder(SortPacket::decode).consumerMainThread(SortPacket::handle).add();
 
         INSTANCE.messageBuilder(TransferPacket.class, id++).encoder(TransferPacket::encode).decoder(TransferPacket::decode).consumerMainThread(TransferPacket::handle).add();
-
         INSTANCE.messageBuilder(WithdrawPacket.class, id++).encoder(WithdrawPacket::encode).decoder(WithdrawPacket::decode).consumerMainThread(WithdrawPacket::handle).add();
 
         INSTANCE.messageBuilder(TotemActivationPacket.class, id++).encoder(TotemActivationPacket::encode).decoder(TotemActivationPacket::decode).consumerMainThread(TotemActivationPacket::handle).add();
@@ -38,7 +34,7 @@ public final class BignayPacketHandler {
 
     public static void sendTotemActivation(ServerPlayer player, ItemStack stack) {
         if (player != null && INSTANCE != null) {
-            INSTANCE.send(PacketDistributor.PLAYER.with((Supplier<ServerPlayer>) player), new TotemActivationPacket(stack));
+            INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new TotemActivationPacket(stack));
         }
     }
 
@@ -70,8 +66,8 @@ public final class BignayPacketHandler {
     }
 
     public static class TransferPacket {
-        public static void encode(TransferPacket msg, FriendlyByteBuf buf) {
-        }
+
+        public static void encode(TransferPacket msg, FriendlyByteBuf buf) {}
 
         public static TransferPacket decode(FriendlyByteBuf buf) {
             return new TransferPacket();
@@ -90,8 +86,8 @@ public final class BignayPacketHandler {
     }
 
     public static class WithdrawPacket {
-        public static void encode(WithdrawPacket msg, FriendlyByteBuf buf) {
-        }
+
+        public static void encode(WithdrawPacket msg, FriendlyByteBuf buf) {}
 
         public static WithdrawPacket decode(FriendlyByteBuf buf) {
             return new WithdrawPacket();
@@ -113,7 +109,7 @@ public final class BignayPacketHandler {
         private final ItemStack stack;
 
         public TotemActivationPacket(ItemStack stack) {
-            this.stack = stack;
+            this.stack = stack == null ? ItemStack.EMPTY : stack.copy();
         }
 
         public static void encode(TotemActivationPacket msg, FriendlyByteBuf buf) {
@@ -126,7 +122,9 @@ public final class BignayPacketHandler {
 
         public static void handle(TotemActivationPacket msg, NetworkEvent.Context ctx) {
             ctx.enqueueWork(() -> {
-                TotemClientHandler.play(msg.stack);
+                if (ctx.getDirection().getReceptionSide().isClient()) {
+                    TotemClientHandler.play(msg.stack);
+                }
             });
             ctx.setPacketHandled(true);
         }
