@@ -252,7 +252,7 @@ public class BignayBlocks {
     public static final RegistrySupplier<Block> CRACKED_BASALT_BRICK_STAIRS = block("cracked_basalt_brick_stairs", () -> new StairsBlock(CRACKED_BASALT_BRICKS));
     public static final RegistrySupplier<Block> CRACKED_BASALT_BRICK_WALL = block("cracked_basalt_brick_wall", () -> new WallsBlock(CRACKED_BASALT_BRICKS));
     public static final RegistrySupplier<Block> CRACKED_BASALT_BRICK_VERTICAL_SLAB = block("cracked_basalt_brick_vertical_slab", () -> new VerticalSlabBlock(CRACKED_BASALT_BRICKS));
-//    public static final RegistrySupplier<Block> BASALTIC_LAVA = block("basaltic_lava", BasalticLavaBlock::new);
+    public static final RegistrySupplier<Block> BASALTIC_LAVA = block("basaltic_lava", BasalticLavaBlock::new);
 
     public static final RegistrySupplier<Block> IRON_HEAVY_CHAIN = block("iron_heavy_chain", HeavyChainBlock::new);
     public static final RegistrySupplier<Block> GOLDEN_CHAIN = block("golden_chain", ChainsBlock::new);
