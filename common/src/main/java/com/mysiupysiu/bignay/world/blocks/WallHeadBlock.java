@@ -22,8 +22,8 @@ public class WallHeadBlock extends Block {
     private static final VoxelShape SHAPE_WEST  = box(8, 4, 4, 16, 12, 12);
     private static final VoxelShape SHAPE_EAST  = box(0, 4, 4, 8, 12, 12);
 
-    public WallHeadBlock(BlockBehaviour.Properties props) {
-        super(props);
+    public WallHeadBlock(Block block) {
+        super(Properties.ofFullCopy(block));
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 

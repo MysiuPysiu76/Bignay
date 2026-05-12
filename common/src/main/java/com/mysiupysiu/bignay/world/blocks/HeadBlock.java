@@ -17,8 +17,8 @@ public class HeadBlock extends Block {
     public static final IntegerProperty ROTATION = IntegerProperty.create("rotation", 0, 15);
     private static final VoxelShape SHAPE = box(4.0, 0.0, 4.0, 12.0, 8.0, 12.0);
 
-    public HeadBlock(BlockBehaviour.Properties properties) {
-        super(properties);
+    public HeadBlock(Block block) {
+        super(Properties.ofFullCopy(block));
         this.registerDefaultState(this.stateDefinition.any().setValue(ROTATION, 0));
     }
 
