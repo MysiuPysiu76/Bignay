@@ -7,81 +7,115 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NeoForgeConfig {
+public final class NeoForgeConfig {
 
-    private static final Map<ConfigOption<?>, ModConfigSpec.ConfigValue<?>> FORGE_VALUES = new HashMap<>();
-    private static ModConfigSpec SPEC;
-    private static ModConfig CONFIG_INSTANCE;
+    private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
+    private static final Map<ConfigOption<?>, ModConfigSpec.ConfigValue<?>> VALUES = new HashMap<>();
 
-    public static ModConfigSpec build() {
-        ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
-        FORGE_VALUES.clear();
+    public static final ModConfigSpec SPEC = build();
+
+    private NeoForgeConfig() {}
+
+    private static ModConfigSpec build() {
+        VALUES.clear();
 
         for (ConfigCategory category : BignayConfig.CATEGORIES) {
-            builder.push(category.getName());
+            BUILDER.push(category.getName());
+
             for (ConfigOption<?> option : category.getOptions()) {
-                registerOption(builder, option);
+                register(option);
             }
-            builder.pop();
+
+            BUILDER.pop();
         }
-        SPEC = builder.build();
-        return SPEC;
+
+        return BUILDER.build();
     }
 
-    private static void registerOption(ModConfigSpec.Builder builder, ConfigOption<?> option) {
-        if (option.getComment() != null && !option.getComment().isEmpty()) {
-            builder.comment(option.getComment());
+    private static void register(ConfigOption<?> option) {
+        if (!option.getComment().isEmpty()) {
+            BUILDER.comment(option.getComment());
         }
 
-        ModConfigSpec.ConfigValue<?> forgeValue;
+        if (!option.getTranslation().isEmpty()) {
+            BUILDER.translation(option.getTranslation());
+        }
+
+        ModConfigSpec.ConfigValue<?> value;
+
         if (option instanceof BooleanOption boolOpt) {
-            forgeValue = builder.define(boolOpt.getName(), boolOpt.getDefaultValue());
+            value = BUILDER.define(option.getName(), boolOpt.getDefaultValue());
         } else if (option instanceof IntOption intOpt) {
-            forgeValue = builder.defineInRange(intOpt.getName(), intOpt.getDefaultValue(), intOpt.getMin(), intOpt.getMax());
+            value = BUILDER.defineInRange(
+                    option.getName(),
+                    intOpt.getDefaultValue(),
+                    intOpt.getMin(),
+                    intOpt.getMax()
+            );
+        } else if (option instanceof EnumOption<?> enumOpt) {
+            value = registerEnum(option.getName(), enumOpt);
         } else {
-            forgeValue = builder.define(option.getName(), option.getDefaultValue().toString());
+            value = BUILDER.define(option.getName(), option.getDefaultValue().toString());
         }
 
-        FORGE_VALUES.put(option, forgeValue);
+        VALUES.put(option, value);
     }
 
-    @SuppressWarnings("unchecked")
-    public static void syncFromForge() {
-        FORGE_VALUES.forEach((opt, forge) -> ((ConfigOption<Object>) opt).set(forge.get()));
-    }
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    private static ModConfigSpec.ConfigValue<?> registerEnum(String name, EnumOption<?> enumOpt) {
+        EnumOption raw = enumOpt;
 
-    @SuppressWarnings("unchecked")
-    public static void syncToForge() {
-        if (FORGE_VALUES.isEmpty()) return;
-
-        FORGE_VALUES.forEach((opt, forge) -> ((ModConfigSpec.ConfigValue<Object>) forge).set(opt.get()));
-
-        if (CONFIG_INSTANCE != null) {
-            CONFIG_INSTANCE.save();
-        }
+        return BUILDER.defineEnum(
+                name,
+                (Enum) raw.getDefaultValue(),
+                (java.util.Collection) Arrays.asList(raw.getValues())
+        );
     }
 
     public static void register(IEventBus bus) {
-        ModConfigSpec spec = build();
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, SPEC);
 
-        bus.addListener((ModConfigEvent.Loading event) -> {
-            if (event.getConfig().getSpec() == spec) {
-                CONFIG_INSTANCE = event.getConfig();
-                syncFromForge();
-            }
-        });
+        bus.addListener(NeoForgeConfig::onLoad);
+        bus.addListener(NeoForgeConfig::onReload);
 
-        bus.addListener((ModConfigEvent.Reloading event) -> {
-            if (event.getConfig().getSpec() == spec) {
-                syncFromForge();
-            }
-        });
+        bindAutoSave();
+    }
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, spec);
+    private static void onLoad(ModConfigEvent.Loading e) {
+        if (e.getConfig().getSpec() == SPEC) {
+            loadIntoCommon();
+        }
+    }
 
-        BignayConfig.saveCallback = NeoForgeConfig::syncToForge;
+    private static void onReload(ModConfigEvent.Reloading e) {
+        if (e.getConfig().getSpec() == SPEC) {
+            loadIntoCommon();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static void loadIntoCommon() {
+        for (var entry : VALUES.entrySet()) {
+            ConfigOption<Object> option = (ConfigOption<Object>) entry.getKey();
+            Object value = entry.getValue().get();
+            option.setSilently(value);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static void bindAutoSave() {
+        for (var entry : VALUES.entrySet()) {
+            ConfigOption<Object> option = (ConfigOption<Object>) entry.getKey();
+            ModConfigSpec.ConfigValue<Object> value = (ModConfigSpec.ConfigValue<Object>) entry.getValue();
+
+            option.bindOnChange(newValue -> {
+                value.set(newValue);
+                SPEC.save();
+            });
+        }
     }
 }

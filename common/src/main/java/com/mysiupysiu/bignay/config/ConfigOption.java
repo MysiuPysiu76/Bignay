@@ -1,5 +1,7 @@
 package com.mysiupysiu.bignay.config;
 
+import java.util.function.Consumer;
+
 public abstract class ConfigOption<T> {
 
     private final String name;
@@ -7,6 +9,8 @@ public abstract class ConfigOption<T> {
     private final String translation;
     private final T defaultValue;
     protected T value;
+
+    private Consumer<T> onChange = v -> {};
 
     protected ConfigOption(String name, String comment, String translation, T defaultValue) {
         this.name = name;
@@ -22,10 +26,20 @@ public abstract class ConfigOption<T> {
 
     public void set(T value) {
         this.value = value;
+        this.onChange.accept(value);
+    }
+
+    public void setSilently(T value) {
+        this.value = value;
+    }
+
+    public void bindOnChange(Consumer<T> onChange) {
+        this.onChange = onChange != null ? onChange : v -> {};
     }
 
     public T reset() {
         this.value = this.defaultValue;
+        this.onChange.accept(this.value);
         return this.value;
     }
 
@@ -58,11 +72,13 @@ public abstract class ConfigOption<T> {
 
         public abstract ConfigOption<T> build();
 
+        @SuppressWarnings("unchecked")
         public B comment(String comment) {
             this.comment = comment;
             return (B) this;
         }
 
+        @SuppressWarnings("unchecked")
         public B translation(String key) {
             this.translation = key;
             return (B) this;
