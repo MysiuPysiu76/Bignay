@@ -36,7 +36,7 @@ public class ScreenshotsViewerScreen extends Screen {
         int y = this.height - 24;
         int x = this.width / 2;
 
-        this.grid = new ScreenshotsGrid(this.minecraft, this.width, this.height, 32, this.height - 28, this);
+        this.grid = new ScreenshotsGrid(this.width, this.height, 32, this.height - 28, this);
         this.addRenderableWidget(grid);
 
         this.addRenderableWidget(Button.builder(Component.translatable("options.title"), btn ->

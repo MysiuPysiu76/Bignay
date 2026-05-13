@@ -2,6 +2,7 @@ package com.mysiupysiu.bignay.client.screen.screenshot;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.client.screen.file.chooser.FolderChooserScreen;
 import com.mysiupysiu.bignay.config.BignayConfig;
 import com.mysiupysiu.bignay.utils.FileUtils;
@@ -134,7 +135,7 @@ public class ScreenshotViewScreen extends Screen {
             this.imgH = img.getHeight();
 
             DynamicTexture dynamicTexture = new DynamicTexture(img);
-            this.texture = new ResourceLocation("bignay", "screenshot_full_" + UUID.randomUUID());
+            this.texture = new ResourceLocation(BignayMod.MODID, "screenshot_full_" + UUID.randomUUID());
 
             Minecraft.getInstance().getTextureManager().register(texture, dynamicTexture);
         } catch (Exception e) {

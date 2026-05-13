@@ -2,6 +2,7 @@ package com.mysiupysiu.bignay.client.models;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.world.entities.QuadItemFrameEntity;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -13,7 +14,7 @@ public class QuadItemFrameModel<T extends QuadItemFrameEntity> extends EntityMod
 
     private final ModelPart model;
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation("bignay", "textures/entity/quad_item_frame.png");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(BignayMod.MODID, "textures/entity/quad_item_frame.png");
 
     public QuadItemFrameModel(ModelPart root) {
         this.model = root.getChild("bb_main");

@@ -3,6 +3,7 @@ package com.mysiupysiu.bignay.client.renderers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.client.models.GlowQuadItemFrameModel;
 import com.mysiupysiu.bignay.client.models.QuadItemFrameModel;
 import com.mysiupysiu.bignay.world.entities.GlowQuadItemFrameEntity;
@@ -23,7 +24,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class QuadItemFrameRenderer extends EntityRenderer<QuadItemFrameEntity> {
 
-    public static final ModelLayerLocation QUAD_ITEM_FRAME_LAYER = new ModelLayerLocation(new ResourceLocation("bignay", "quad_item_frame"), "main");
+    public static final ModelLayerLocation QUAD_ITEM_FRAME_LAYER = new ModelLayerLocation(new ResourceLocation(BignayMod.MODID, "quad_item_frame"), "main");
 
     private final QuadItemFrameModel model;
 

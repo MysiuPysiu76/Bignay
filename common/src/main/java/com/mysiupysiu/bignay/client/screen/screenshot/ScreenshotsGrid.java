@@ -2,6 +2,7 @@ package com.mysiupysiu.bignay.client.screen.screenshot;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.config.BignayConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -45,14 +46,25 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
         return t;
     });
 
-    public ScreenshotsGrid(Minecraft mc, int width, int height, int top, int bottom, ScreenshotsViewerScreen parent) {
-        super(mc, width, height, top, bottom);
+    public ScreenshotsGrid(int width, int height, int top, int bottom, ScreenshotsViewerScreen parent) {
+        super(Minecraft.getInstance(), width, bottom - top, top, calculateItemHeight(width));
+
         this.parent = parent;
         this.columns = BignayConfig.screenshots.columns.get();
         this.gap = BignayConfig.screenshots.gap.get();
         this.thumbWidth = Math.max(1, ((width - 50) - (columns - 1) * gap) / columns);
         this.thumbHeight = Math.max(1, (int)(thumbWidth * (9.0f / 16.0f)));
         this.textHeight = Math.max(0, BignayConfig.screenshots.showFileName.get() ? this.minecraft.font.lineHeight + 4 : 0);
+    }
+
+    private static int calculateItemHeight(int width) {
+        int columns = BignayConfig.screenshots.columns.get();
+        int gap = BignayConfig.screenshots.gap.get();
+        int thumbWidth = Math.max(1, ((width - 50) - (columns - 1) * gap) / columns);
+        int thumbHeight = Math.max(1, (int)(thumbWidth * (9.0f / 16.0f)));
+        int textHeight = BignayConfig.screenshots.showFileName.get() ? Minecraft.getInstance().font.lineHeight + 4 : 0;
+
+        return thumbHeight + gap + textHeight;
     }
 
     @Override
@@ -75,16 +87,19 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
         }
     }
 
-//    @Override
-//    public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTick) {
-//        super.render(gui, mouseX, mouseY, partialTick);
-//
-//        if (allPaths.isEmpty()) {
-//            gui.drawCenteredString(Minecraft.getInstance().font, Component.translatable("screenshotsViewer.empty", getKeyboardKey()), this.width / 2, this.y0 + (this.y1 - this.y0) / 2, 0x777777);
-//        } else {
-//            manageMemory();
-//        }
-//    }
+    @Override
+    public void renderWidget(GuiGraphics gui, int mouseX, int mouseY, float partialTick) {
+        super.renderWidget(gui, mouseX, mouseY, partialTick);
+
+        if (allPaths.isEmpty()) {
+            int centerX = this.getX() + this.width / 2;
+            int centerY = this.getY() + (this.height / 2);
+
+            gui.drawCenteredString(this.minecraft.font, Component.translatable("screenshotsViewer.empty", getKeyboardKey()), centerX, centerY, 0x777777);
+        } else {
+            manageMemory();
+        }
+    }
 
     private String getKeyboardKey() {
         return Minecraft.getInstance().options.keyScreenshot.getTranslatedKeyMessage().getString();
@@ -93,8 +108,9 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
     private void manageMemory() {
         if (this.children().isEmpty()) return;
 
-        int firstVisibleRow = (int) (this.getScrollAmount() / this.itemHeight);
-        int visibleRows = this.height / this.itemHeight + 2;
+        int itemHeight = this.itemHeight;
+        int firstVisibleRow = (int) (this.getScrollAmount() / itemHeight);
+        int visibleRows = this.height / itemHeight + 2;
 
         int preloadStartRow = Math.max(0, firstVisibleRow - 5);
         int preloadEndRow = Math.min(this.children().size() - 1, firstVisibleRow + visibleRows + 5);
@@ -232,7 +248,7 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
                             loading = false;
                             return;
                         }
-                        resource = new ResourceLocation("bignay", "thumb_" + UUID.randomUUID());
+                        resource = new ResourceLocation(BignayMod.MODID, "thumb_" + UUID.randomUUID());
                         Minecraft.getInstance().getTextureManager().register(resource, new DynamicTexture(img));
                         loading = false;
                     });
