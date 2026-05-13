@@ -225,20 +225,15 @@ public class WorldEditScreen extends Screen {
 
     private Button.Builder getOptimizeWorldButton() {
         return Button.builder(Component.translatable("selectWorld.edit.optimize"), btn -> {
-//            this.minecraft.setScreen(new BackupConfirmScreen(this, (p_280911_, p_280912_) -> {
-//                if (p_280911_) {
-//                    makeBackupAndShowToast(this.levelAccess);
-//                }
-//
-//                this.minecraft.setScreen(OptimizeWorldScreen.create(this.minecraft, b -> {
-//                    try {
-//                        levelAccess.close();
-//                    } catch (IOException ex) {
-//                        LoggerFactory.getLogger(WorldSelectionList.class).error("Failed to unlock level: ", ex);
-//                    }
-//                    this.minecraft.setScreen(this);
-//                }, this.minecraft.getFixerUpper(), this.levelAccess, p_280912_));
-//            }, Component.translatable("optimizeWorld.confirm.title"), Component.translatable("optimizeWorld.confirm.description"), true));
+            this.minecraft.setScreen(new ConfirmScreen((confirmed) -> {
+                if (confirmed) {
+                    makeBackupAndShowToast(this.levelAccess);
+                }
+
+                this.minecraft.setScreen(OptimizeWorldScreen.create(this.minecraft, (finished) -> {
+                    this.minecraft.setScreen(this);
+                }, this.minecraft.getFixerUpper(), this.levelAccess, false));
+            }, Component.translatable("optimizeWorld.confirm.title"), Component.translatable("optimizeWorld.confirm.description")));
         });
     }
 
@@ -250,10 +245,7 @@ public class WorldEditScreen extends Screen {
                 } else {
                     this.minecraft.setScreen(this);
                 }
-            },
-                    Component.translatable("selectWorld.edit.prune.question"),
-                    Component.translatable("selectWorld.edit.prune.description"),
-                    CommonComponents.GUI_PROCEED, CommonComponents.GUI_CANCEL));
+            }, Component.translatable("selectWorld.edit.prune.question"), Component.translatable("selectWorld.edit.prune.description"), CommonComponents.GUI_PROCEED, CommonComponents.GUI_CANCEL));
         });
     }
 
