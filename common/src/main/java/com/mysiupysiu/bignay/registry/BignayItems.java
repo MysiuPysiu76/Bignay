@@ -28,7 +28,7 @@ public class BignayItems {
     public static final RegistrySupplier<Item> KNIFE = item("knife", KnifeItem::new);
     public static final RegistrySupplier<Item> COPPER_HORN = item("copper_horn", CopperHorn::new);
     public static final RegistrySupplier<Item> GOLDEN_BERRIES = item("golden_berries", GoldenBerriesItem::new);
-//    public static final RegistrySupplier<Item> PALE_PUMPKIN_SEEDS = item("pale_pumpkin_seeds", () -> new SeedsItem(BignayBlocks.PALE_PUMPKIN_STEM));
+    public static final RegistrySupplier<Item> PALE_PUMPKIN_SEEDS = item("pale_pumpkin_seeds", () -> new SeedsItem(BignayBlocks.PALE_PUMPKIN_STEM));
 
     public static final RegistrySupplier<Item> VERDANT_SIGN = item("verdant_sign", () -> new SignsItem(BignayBlocks.VERDANT_SIGN, BignayBlocks.VERDANT_WALL_SIGN));
 //    public static final RegistrySupplier<Item> VERDANT_HANGING_SIGN = item("verdant_hanging_sign", () -> new SignsItem(BignayBlocks.VERDANT_HANGING_SIGN, BignayBlocks.VERDANT_WALL_HANGING_SIGN));

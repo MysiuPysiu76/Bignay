@@ -135,7 +135,7 @@ public class KnifeItem extends Item implements CreativeTabProvider {
     }
 
     private Item getSeeds(Block block) {
-//        if (block.getDescriptionId().contains("pale")) return BignayItems.PALE_PUMPKIN_SEEDS.get();
+        if (block.getDescriptionId().contains("pale")) return BignayItems.PALE_PUMPKIN_SEEDS.get();
         return Items.PUMPKIN_SEEDS;
     }
 

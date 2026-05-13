@@ -187,8 +187,8 @@ public class BignayBlocks {
 
     public static final RegistrySupplier<Block> PALE_PUMPKIN = block("pale_pumpkin", () -> new PalePumpkinBlock(MapColor.COLOR_LIGHT_GRAY));
     public static final RegistrySupplier<Block> CARVED_PALE_PUMPKIN = equipablePumpkin("carved_pale_pumpkin", EquipablePumpkinBlock.PalePumpkin::new);
-//    public static final RegistrySupplier<Block> PALE_PUMPKIN_STEM = blockOnly("pale_pumpkin_stem", () -> new PumpkinStemBlock(PALE_PUMPKIN::get, BignayItems.PALE_PUMPKIN_SEEDS::get, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.HARD_CROP).pushReaction(PushReaction.DESTROY)));
-//    public static final RegistrySupplier<Block> ATTACHED_PALE_PUMPKIN_STEM = blockOnly("attached_pale_pumpkin_stem", () -> new AttachedPumpkinStemBlock(PALE_PUMPKIN::get, BignayItems.PALE_PUMPKIN_SEEDS::get, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.HARD_CROP).pushReaction(PushReaction.DESTROY)));
+    public static final RegistrySupplier<Block> PALE_PUMPKIN_STEM = blockOnly("pale_pumpkin_stem", () -> new PumpkinStemBlock("pale_pumpkin", "attached_pale_pumpkin_stem", "pale_pumpkin_seeds"));
+    public static final RegistrySupplier<Block> ATTACHED_PALE_PUMPKIN_STEM = blockOnly("attached_pale_pumpkin_stem", () -> new AttachedPumpkinStemBlock("pale_pumpkin_stem", "pale_pumpkin", "pale_pumpkin_seeds"));
     public static final RegistrySupplier<Block> PALE_JACK_O_LANTERN = block("pale_jack_o_lantern", JackOLantern.Pale::new);
     public static final RegistrySupplier<Block> SOUL_JACK_O_LANTERN = block("soul_jack_o_lantern", JackOLantern.Soul::new);
     public static final RegistrySupplier<Block> SOUL_PALE_JACK_O_LANTERN = block("soul_pale_jack_o_lantern", JackOLantern.SoulPale::new);
@@ -747,7 +747,7 @@ public class BignayBlocks {
 
     private static RegistrySupplier<Block> block(String id, Supplier<Block> blockSupplier) {
         RegistrySupplier<Block> block = BLOCKS.register(id, blockSupplier);
-        BignayItems.ITEMS.register(id, () -> new ItemForBlock(block::get));
+        BignayItems.ITEMS.register(id, () -> new ItemForBlock(block));
         return block;
     }
 
