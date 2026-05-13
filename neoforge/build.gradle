@@ -24,7 +24,7 @@ configurations {
 dependencies {
     neoForge "net.neoforged:neoforge:${rootProject.neoforge_version}"
 
-    modImplementation "maven.modrinth:terrablender:3.3.0.2-neoforge"
+    modImplementation "maven.modrinth:terrablender:${rootProject.terrablender_version}-neoforge"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionNeoForge")) { transitive = false }

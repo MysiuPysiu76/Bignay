@@ -18,6 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Gui.class)
 public abstract class PumpkinBlurMixin {
+
     @Shadow @Final private Minecraft minecraft;
     @Shadow @Final private static ResourceLocation PUMPKIN_BLUR_LOCATION;
 

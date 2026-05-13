@@ -33,7 +33,7 @@ dependencies {
     modRuntimeOnly "me.shedaniel.cloth:cloth-config-fabric:13.0.138"
     modRuntimeOnly "com.terraformersmc:modmenu:9.0.0"
 
-    modImplementation "maven.modrinth:terrablender:3.3.0.2-fabric"
+    modImplementation "maven.modrinth:terrablender:${rootProject.terrablender_version}-fabric"
 
     modRuntimeOnly "com.electronwill.night-config:core:3.6.4"
     modRuntimeOnly "com.electronwill.night-config:toml:3.6.4"
