@@ -29,7 +29,7 @@ public class LootModifiers {
             if (!source.isBuiltin()) return;
 
             if (id.equals(ABANDONED_MINESHAFT)) {
-//                addRangeItem(tableBuilder, BignayItems.PALE_PUMPKIN_SEEDS.get(), 0.25f, 2, 4);
+                addRangeItem(tableBuilder, BignayItems.PALE_PUMPKIN_SEEDS.get(), 0.25f, 2, 4);
                 addSingleItem(tableBuilder, BignayItems.ANXIOUS_PUMPKIN_PATTERN.get(), 0.25f);
             }
 
@@ -55,13 +55,13 @@ public class LootModifiers {
             }
 
             if (id.equals(PILLAGER_OUTPOST)) {
-//                addRangeItem(tableBuilder, BignayItems.PALE_PUMPKIN_SEEDS.get(), 0.15f, 2, 4);
+                addRangeItem(tableBuilder, BignayItems.PALE_PUMPKIN_SEEDS.get(), 0.15f, 2, 4);
                 addSingleItem(tableBuilder, BignayItems.ANGRY_PUMPKIN_PATTERN.get(), 0.1f);
                 addHornWithInstrument(tableBuilder, BignayItems.COPPER_HORN.get(), "bignay:lake_copper_horn", 0.1f);
             }
 
             if (id.equals(WOODLAND_MANSION)) {
-//                addRangeItem(tableBuilder, BignayItems.PALE_PUMPKIN_SEEDS.get(), 0.15f, 2, 4);
+                addRangeItem(tableBuilder, BignayItems.PALE_PUMPKIN_SEEDS.get(), 0.15f, 2, 4);
             }
         });
     }
