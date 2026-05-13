@@ -10,6 +10,7 @@ import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtAccounter;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.network.chat.Component;
 
@@ -26,9 +27,9 @@ public class WorldImportScreen extends Screen {
     private EditBox nameInput;
 
     private String levelName = "World name";
-    private String gameMode;
-    private String difficulty;
-    private String version;
+    private String gameMode = "Unknown";
+    private String difficulty = "Unknown";
+    private String version = "Unknown";
     private long seed;
     private long daysPlayed;
 
@@ -39,10 +40,10 @@ public class WorldImportScreen extends Screen {
 
     @Override
     protected void init() {
+        readLevelDat();
+
         int centerX = this.width / 2;
         int y = 200;
-
-        readLevelDat();
 
         this.nameInput = new EditBox(this.font, centerX - 100, 60, 200, 20, Component.literal(levelName));
         this.nameInput.setValue(levelName);
@@ -55,7 +56,9 @@ public class WorldImportScreen extends Screen {
         }).bounds(centerX - 110, y, 100, 20).build();
         this.addRenderableWidget(importButton);
 
-        Button cancelButton = Button.builder(Component.translatable("gui.cancel"), b -> Minecraft.getInstance().setScreen(new SelectWorldScreen(this))).bounds(centerX + 10, y, 100, 20).build();
+        Button cancelButton = Button.builder(Component.translatable("gui.cancel"), b ->
+                Minecraft.getInstance().setScreen(new SelectWorldScreen(this))
+        ).bounds(centerX + 10, y, 100, 20).build();
         this.addRenderableWidget(cancelButton);
     }
 
@@ -68,86 +71,91 @@ public class WorldImportScreen extends Screen {
         int centerX = this.width / 2;
         int boxY = 100;
 
-        gui.fill(0, boxY, this.width, boxY + 90, 0x88000000);
+        gui.fill(centerX - 130, boxY - 5, centerX + 130, boxY + 85, 0x88000000);
 
         int leftX = centerX - 120;
-        int rightX = centerX + 20;
-        int lineY = boxY + 10;
-        int dy = 20;
+        int rightX = centerX + 10;
+        int lineY = boxY + 5;
+        int dy = 15;
 
-        gui.drawCenteredString(this.font, Component.translatable("importWorld.file", source.getName()), this.width / 2, lineY, 0xFFFFFF);
-        gui.drawString(this.font, Component.translatable("importWorld.version", version), leftX, lineY + dy, 0xFFFFFF);
-        gui.drawString(this.font, Component.translatable("importWorld.gamemode", gameMode), leftX, lineY + dy * 2, 0xFFFFFF);
-        gui.drawString(this.font, Component.translatable("importWorld.difficulty", difficulty), leftX, lineY + dy * 3, 0xFFFFFF);
-        gui.drawString(this.font, Component.translatable("importWorld.seed", seed), rightX, lineY + dy, 0xFFFFFF);
-        gui.drawString(this.font, Component.translatable("importWorld.days", daysPlayed), rightX, lineY + dy * 2, 0xFFFFFF);
-        gui.drawString(this.font, Component.translatable("importWorld.size", FileUtils.humanReadableByteCount(source.length())), rightX, lineY + dy * 3, 0xFFFFFF);
+        gui.drawCenteredString(this.font, Component.literal(source.getName()).withStyle(s -> s.withItalic(true)), this.width / 2, lineY, 0xAAAAAA);
+
+        lineY += 20;
+        gui.drawString(this.font, Component.translatable("importWorld.version", version), leftX, lineY, 0xFFFFFF);
+        gui.drawString(this.font, Component.translatable("importWorld.gamemode", gameMode), leftX, lineY + dy, 0xFFFFFF);
+        gui.drawString(this.font, Component.translatable("importWorld.difficulty", difficulty), leftX, lineY + dy * 2, 0xFFFFFF);
+
+        gui.drawString(this.font, Component.translatable("importWorld.seed", seed), rightX, lineY, 0xFFFFFF);
+        gui.drawString(this.font, Component.translatable("importWorld.days", daysPlayed), rightX, lineY + dy, 0xFFFFFF);
+        gui.drawString(this.font, Component.translatable("importWorld.size", FileUtils.humanReadableByteCount(source.length())), rightX, lineY + dy * 2, 0xFFFFFF);
 
         super.render(gui, mouseX, mouseY, delta);
     }
 
     private void readLevelDat() {
         try (ZipFile zip = new ZipFile(source)) {
-            String topFolder = null;
-            Enumeration<? extends ZipEntry> entries = zip.entries();
-            while (entries.hasMoreElements()) {
-                ZipEntry entry = entries.nextElement();
-                if (entry.getName().equals("level.dat")) {
-                    topFolder = "";
-                    break;
-                }
-                int slash = entry.getName().indexOf('/');
-                if (slash > 0) topFolder = entry.getName().substring(0, slash + 1);
-            }
-
-            if (topFolder == null) return;
-
-            String path = topFolder + "level.dat";
-            ZipEntry levelDatEntry = zip.getEntry(path);
+            ZipEntry levelDatEntry = findLevelDat(zip);
             if (levelDatEntry == null) return;
 
             try (InputStream is = zip.getInputStream(levelDatEntry)) {
-//                CompoundTag levelData = NbtIo.readCompressed(is);
-//                CompoundTag data = levelData.getCompound("Data");
-//
-//                this.levelName = data.getString("LevelName");
-//                this.version = levelData.getCompound("Data").getCompound("Version").getString("Name");
-//
-//                int gm = data.getInt("GameType");
-//                switch (gm) {
-//                    case 0 -> gameMode = "Survival";
-//                    case 1 -> gameMode = "Creative";
-//                    case 2 -> gameMode = "Adventure";
-//                    case 3 -> gameMode = "Spectator";
-//                    default -> gameMode = "Unknown";
-//                }
-//
-//                int diff = data.getInt("Difficulty");
-//                switch (diff) {
-//                    case 0 -> difficulty = "Peaceful";
-//                    case 1 -> difficulty = "Easy";
-//                    case 2 -> difficulty = "Normal";
-//                    case 3 -> difficulty = "Hard";
-//                    default -> difficulty = "Unknown";
-//                }
-//
-//                CompoundTag worldGen = data.getCompound("WorldGenSettings");
-//                if (worldGen.contains("seed")) {
-//                    this.seed = worldGen.getLong("seed");
-//                } else {
-//                    this.seed = 0L;
-//                }
+                CompoundTag levelData = NbtIo.readCompressed(is, NbtAccounter.unlimitedHeap());
+                CompoundTag data = levelData.getCompound("Data");
 
-//                daysPlayed = data.getLong("DayTime") / 24000;
+                this.levelName = data.getString("LevelName");
+
+                if (data.contains("Version")) {
+                    this.version = data.getCompound("Version").getString("Name");
+                }
+
+                int gm = data.getInt("GameType");
+                this.gameMode = switch (gm) {
+                    case 0 -> "Survival";
+                    case 1 -> "Creative";
+                    case 2 -> "Adventure";
+                    case 3 -> "Spectator";
+                    default -> "Unknown";
+                };
+
+                int diff = data.getInt("Difficulty");
+                this.difficulty = switch (diff) {
+                    case 0 -> "Peaceful";
+                    case 1 -> "Easy";
+                    case 2 -> "Normal";
+                    case 3 -> "Hard";
+                    default -> "Unknown";
+                };
+
+                if (data.contains("WorldGenSettings")) {
+                    this.seed = data.getCompound("WorldGenSettings").getLong("seed");
+                } else if (data.contains("RandomSeed")) {
+                    this.seed = data.getLong("RandomSeed");
+                }
+
+                this.daysPlayed = data.getLong("DayTime") / 24000L;
             }
         } catch (IOException e) {
-            this.levelName = "Unknown";
-            this.gameMode = "Unknown";
-            this.difficulty = "Unknown";
-            this.seed = 0;
-            this.daysPlayed = 0;
-            this.version = "Unknown";
+            resetToUnknown();
         }
+    }
+
+    private ZipEntry findLevelDat(ZipFile zip) {
+        Enumeration<? extends ZipEntry> entries = zip.entries();
+        while (entries.hasMoreElements()) {
+            ZipEntry entry = entries.nextElement();
+            if (entry.getName().endsWith("level.dat")) {
+                return entry;
+            }
+        }
+        return null;
+    }
+
+    private void resetToUnknown() {
+        this.levelName = "Unknown";
+        this.gameMode = "Unknown";
+        this.difficulty = "Unknown";
+        this.seed = 0;
+        this.daysPlayed = 0;
+        this.version = "Unknown";
     }
 
     public File getSource() {
