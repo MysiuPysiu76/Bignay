@@ -37,7 +37,7 @@ public class BignayBlockEntities {
     public static final RegistrySupplier<BlockEntityType<?>> SOUL_VERDANT_CAMPFIRE = BLOCK_ENTITIES.register("soul_verdant_campfire", () -> BlockEntityType.Builder.of(CampfiresBlockEntity::new, BignayBlocks.SOUL_VERDANT_CAMPFIRE.get()).build(null));
 
     public static final RegistrySupplier<BlockEntityType<?>> VERDANT_SIGN = BLOCK_ENTITIES.register("verdant_sign", () -> BlockEntityType.Builder.of(SignsBlockEntity::new, BignayBlocks.VERDANT_SIGN.get(), BignayBlocks.VERDANT_WALL_SIGN.get()).build(null));
-//    public static final RegistrySupplier<BlockEntityType<?>> VERDANT_HANGING_SIGN = BLOCK_ENTITIES.register("verdant_hanging_sign", () -> BlockEntityType.Builder.of(HangingSignsBlockEntity::new, BignayBlocks.VERDANT_HANGING_SIGN.get(), BignayBlocks.VERDANT_WALL_HANGING_SIGN.get()).build(null));
+    public static final RegistrySupplier<BlockEntityType<?>> VERDANT_HANGING_SIGN = BLOCK_ENTITIES.register("verdant_hanging_sign", () -> BlockEntityType.Builder.of(HangingSignsBlockEntity::new, BignayBlocks.VERDANT_HANGING_SIGN.get(), BignayBlocks.VERDANT_WALL_HANGING_SIGN.get()).build(null));
 
     private static RegistrySupplier<BlockEntityType<?>> campfire(String id, RegistrySupplier<Block> block) {
         return BLOCK_ENTITIES.register(id, () -> BlockEntityType.Builder.of(CampfiresBlockEntity::new, block.get()).build(null));

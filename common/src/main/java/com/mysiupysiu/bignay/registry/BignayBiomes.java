@@ -1,5 +1,6 @@
 package com.mysiupysiu.bignay.registry;
 
+import com.mysiupysiu.bignay.BignayMod;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -9,7 +10,7 @@ import terrablender.api.Regions;
 
 public class BignayBiomes {
 
-    public static final ResourceKey<Biome> VERDANT_FOREST = ResourceKey.create(Registries.BIOME, new ResourceLocation("bignay", "verdant_forest"));
+    public static final ResourceKey<Biome> VERDANT_FOREST = ResourceKey.create(Registries.BIOME, new ResourceLocation(BignayMod.MODID, "verdant_forest"));
 
     public static void register() {
         Regions.register(new VerdantForestBiome());

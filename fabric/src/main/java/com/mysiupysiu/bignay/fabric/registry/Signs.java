@@ -12,6 +12,6 @@ public class Signs {
 
     public static void register() {
         BlockEntityRenderers.register((BlockEntityType<SignBlockEntity>) BignayBlockEntities.VERDANT_SIGN.get(), SignRenderer::new);
-//        BlockEntityRenderers.register((BlockEntityType<HangingSignBlockEntity>) BignayBlockEntities.VERDANT_HANGING_SIGN.get(), HangingSignRenderer::new);
+        BlockEntityRenderers.register((BlockEntityType<HangingSignBlockEntity>) BignayBlockEntities.VERDANT_HANGING_SIGN.get(), HangingSignRenderer::new);
     }
 }

@@ -51,8 +51,8 @@ public class BignayBlocks {
     public static final RegistrySupplier<Block> VERDANT_BUTTON = block("verdant_button", () -> new WoodButtonBlock(Blocks.WARPED_BUTTON, BignayWoodType.VERDANT.setType()));
     public static final RegistrySupplier<Block> VERDANT_SIGN = blockOnly("verdant_sign", () -> new SignsBlock(Blocks.WARPED_SIGN, BignayWoodType.VERDANT));
     public static final RegistrySupplier<Block> VERDANT_WALL_SIGN = blockOnly("verdant_wall_sign", () -> new WallSignsBlock(Blocks.WARPED_WALL_SIGN, BignayWoodType.VERDANT));
-//    public static final RegistrySupplier<Block> VERDANT_HANGING_SIGN = blockOnly("verdant_hanging_sign", () -> new HangingSignsBlock(BlockBehaviour.Properties.copy(Blocks.WARPED_HANGING_SIGN), BignayWoodType.VERDANT));
-//    public static final RegistrySupplier<Block> VERDANT_WALL_HANGING_SIGN = blockOnly("verdant_wall_hanging_sign", () -> new WallHangingSignsBlock(BlockBehaviour.Properties.copy(Blocks.WARPED_WALL_HANGING_SIGN), BignayWoodType.VERDANT));
+    public static final RegistrySupplier<Block> VERDANT_HANGING_SIGN = blockOnly("verdant_hanging_sign", () -> new HangingSignsBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_HANGING_SIGN), BignayWoodType.VERDANT));
+    public static final RegistrySupplier<Block> VERDANT_WALL_HANGING_SIGN = blockOnly("verdant_wall_hanging_sign", () -> new WallHangingSignsBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_WALL_HANGING_SIGN), BignayWoodType.VERDANT));
 
     public static final RegistrySupplier<Block> ACACIA_CAMPFIRE = block("acacia_campfire", CampfiresBlock::new);
     public static final RegistrySupplier<Block> BIRCH_CAMPFIRE = block("birch_campfire", CampfiresBlock::new);
