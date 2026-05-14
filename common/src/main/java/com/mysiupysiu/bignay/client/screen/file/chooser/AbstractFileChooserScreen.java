@@ -54,7 +54,7 @@ abstract class AbstractFileChooserScreen extends Screen {
         int btnY = MARGIN + 4;
         int centerX = this.width / 2;
 
-//        this.list = new FilesSelectionGrid(this.width, this.height, 65, this.height - 40, this);
+        this.list = new FilesSelectionGrid(this.width, this.height - 100, 65, this);
         this.goHome();
         this.list.setPath(this.currentDir);
         this.list.setOnPathUpdate(file -> this.currentDir = file.toPath());
@@ -82,11 +82,9 @@ abstract class AbstractFileChooserScreen extends Screen {
 
         int bottomY = this.height - 30;
 
-        this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.confirm"), b ->
-                this.fileConfirm()).bounds(centerX + 5, bottomY, btnWidth, btnHeight).build());
+        this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.confirm"), b -> this.fileConfirm()).bounds(centerX + 5, bottomY, btnWidth, btnHeight).build());
 
-        this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.cancel"), b ->
-                Minecraft.getInstance().setScreen(this.previousScreen)).bounds(centerX + 105, bottomY, btnWidth, btnHeight).build());
+        this.addRenderableWidget(Button.builder(Component.translatable("fileChooser.cancel"), b -> Minecraft.getInstance().setScreen(this.previousScreen)).bounds(centerX + 105, bottomY, btnWidth, btnHeight).build());
     }
 
     @Override

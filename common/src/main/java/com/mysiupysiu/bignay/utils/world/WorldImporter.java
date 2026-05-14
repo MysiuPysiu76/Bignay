@@ -4,11 +4,13 @@ import com.mysiupysiu.bignay.utils.FileUtils;
 import com.mysiupysiu.bignay.utils.OperationWithProgress;
 import com.mysiupysiu.bignay.utils.ProgressListener;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtAccounter;
 import net.minecraft.nbt.NbtIo;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -157,13 +159,19 @@ public class WorldImporter implements OperationWithProgress {
     }
 
     public void updateWorldName() throws IOException {
-//        Path levelDatPath = this.target.resolve("level.dat");
-//
-//        CompoundTag levelData = NbtIo.readCompressed(Files.newInputStream(levelDatPath));
-//        CompoundTag data = levelData.getCompound("Data");
-//        data.putString("LevelName", this.worldName);
-//
-//        NbtIo.writeCompressed(levelData, Files.newOutputStream(levelDatPath, StandardOpenOption.WRITE));
+        Path levelDatPath = this.target.resolve("level.dat");
+
+        CompoundTag levelData;
+        try (InputStream is = Files.newInputStream(levelDatPath)) {
+            levelData = NbtIo.readCompressed(is, NbtAccounter.unlimitedHeap());
+        }
+
+        CompoundTag data = levelData.getCompound("Data");
+        data.putString("LevelName", this.worldName);
+
+        try (OutputStream os = Files.newOutputStream(levelDatPath)) {
+            NbtIo.writeCompressed(levelData, os);
+        }
     }
 
     public void setWorldName(String worldName) {

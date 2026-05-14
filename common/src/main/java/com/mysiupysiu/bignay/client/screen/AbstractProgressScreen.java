@@ -83,6 +83,8 @@ public abstract class AbstractProgressScreen extends Screen implements ProgressL
 
     public final void finish() {
         this.finished = true;
+
+        Minecraft.getInstance().execute(() -> Minecraft.getInstance().setScreen(this.afterFinishScreen));
     }
 
     public void setAfterFinishScreen(Screen afterFinishScreen) {
