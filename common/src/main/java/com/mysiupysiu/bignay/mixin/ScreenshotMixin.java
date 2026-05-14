@@ -34,7 +34,7 @@ public abstract class ScreenshotMixin {
         try {
             if (mc.isLocalServer() && mc.getSingleplayerServer() != null) {
                 File worldDir = mc.getSingleplayerServer().getWorldPath(LevelResource.ROOT).normalize().toFile();
-                UUID worldUUID = WorldInfoReader.getWorldUUID(worldDir);
+                UUID worldUUID = WorldInfoReader.getWorldUUID(worldDir.toPath());
                 String folderName = worldDir.getName();
 
                 ScreenshotsManager.saveSingleplayerScreenshot(worldUUID, folderName, finalName);

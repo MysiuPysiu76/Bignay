@@ -6,20 +6,22 @@ import com.google.gson.JsonObject;
 import com.mysiupysiu.bignay.utils.FileUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtAccounter;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.world.level.storage.LevelResource;
 import net.minecraft.world.level.storage.LevelStorageSource;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Stream;
 import java.util.zip.ZipFile;
+import java.util.zip.ZipEntry;
 
 public class WorldInfoReader {
 
@@ -85,14 +87,24 @@ public class WorldInfoReader {
 
     public Integer getPlayerFinishedAdvancementsCount() {
         try {
-            File root = this.levelAccess.getLevelPath(LevelResource.ROOT).toFile().getCanonicalFile();
-            File file = new File(new File(root, "advancements"), Minecraft.getInstance().getUser().getName() + ".json");
+            Path advancementsDir = this.levelAccess.getLevelPath(LevelResource.ROOT).resolve("advancements");
+            Path file = advancementsDir.resolve(Minecraft.getInstance().getUser().getProfileId().toString() + ".json");
+
+            if (!Files.exists(file)) return 0;
 
             int sum = 0;
-            for (Map.Entry<String, JsonElement> entry : new Gson().fromJson(new FileReader(file), JsonObject.class).getAsJsonObject().entrySet()) {
-                if  (!(entry.getKey().contains("DataVersion") || entry.getKey().contains("recipes")))
-                    if (entry.getValue().getAsJsonObject().getAsJsonPrimitive("done").getAsBoolean())
-                        sum++;
+            try (Reader reader = Files.newBufferedReader(file)) {
+                JsonObject json = new Gson().fromJson(reader, JsonObject.class);
+                for (Map.Entry<String, JsonElement> entry : json.entrySet()) {
+                    if (entry.getKey().equals("DataVersion") || entry.getKey().startsWith("minecraft:recipes/")) continue;
+
+                    if (entry.getValue().isJsonObject()) {
+                        JsonObject obj = entry.getValue().getAsJsonObject();
+                        if (obj.has("done") && obj.get("done").getAsBoolean()) {
+                            sum++;
+                        }
+                    }
+                }
             }
 
             return sum;
@@ -103,8 +115,7 @@ public class WorldInfoReader {
 
     public Long getPlayerLastPlayed() {
         try {
-//            return levelAccess.getSummary().getLastPlayed();
-            return 3L;
+            return Files.getLastModifiedTime(this.levelAccess.getLevelPath(LevelResource.LEVEL_DATA_FILE)).toMillis();
         } catch (Exception e) {
             return null;
         }
@@ -140,17 +151,7 @@ public class WorldInfoReader {
 
     public String getWorldDifficulty() {
         try {
-//            return this.levelAccess.getSummary().getSettings().difficulty().getDisplayName().getString();
-            return "";
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public String getWorldGameMode() {
-        try {
-//            return levelAccess.getSummary().getGameMode().getLongDisplayName().getString();
-            return "";
+            return this.levelData.getCompound("Data").getString("Difficulty");
         } catch (Exception e) {
             return null;
         }
@@ -166,9 +167,9 @@ public class WorldInfoReader {
 
     public String getWorldSize() {
         try {
-            return FileUtils.humanReadableByteCount(this.levelAccess.getLevelPath(LevelResource.ROOT).toFile().getCanonicalFile().toPath());
-        } catch (IOException e) {
-            return "Error: " + e.getMessage();
+            return FileUtils.humanReadableByteCount(this.levelAccess.getLevelPath(LevelResource.ROOT));
+        } catch (Exception e) {
+            return "N/A";
         }
     }
 
@@ -180,78 +181,117 @@ public class WorldInfoReader {
         }
     }
 
-    public Boolean getWorldCheatsEnabled() {
-        try {
-            return this.levelData.getCompound("Data").getBoolean("allowCommands");
-
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
     public UUID getWorldUUID() {
         try {
-            return getWorldUUID(this.levelAccess.getLevelPath(LevelResource.ROOT).toFile());
+            return getWorldUUID(this.levelAccess.getLevelPath(LevelResource.ROOT));
         } catch (Exception e) {
-            throw new RuntimeException("Failed to read/create world UUID", e);
+            return UUID.randomUUID();
         }
     }
 
-    public static UUID getWorldUUID(File worldDir) throws IOException {
-        Path file = worldDir.toPath().resolve("data").resolve("uuid.dat");
+    public String getWorldGameMode() {
+        try {
+            if (this.levelData != null && this.levelData.contains("Data", 10)) {
+                CompoundTag data = this.levelData.getCompound("Data");
+                int mode = data.getInt("GameType");
+
+                return switch (mode) {
+                    case 0 -> "Survival";
+                    case 1 -> "Creative";
+                    case 2 -> "Adventure";
+                    case 3 -> "Spectator";
+                    default -> "Survival";
+                };
+            }
+        } catch (Exception e) {
+            return "Survival";
+        }
+        return "Survival";
+    }
+
+    public Boolean getWorldCheatsEnabled() {
+        try {
+            if (this.levelData != null && this.levelData.contains("Data", 10)) {
+                return this.levelData.getCompound("Data").getBoolean("allowCommands");
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return false;
+    }
+
+    public static UUID getWorldUUID(Path worldDir) throws IOException {
+        Path file = worldDir.resolve("data").resolve("uuid.dat");
 
         if (Files.exists(file)) {
-//            CompoundTag tag = NbtIo.readCompressed(file.toFile());
-//            if (tag.hasUUID("UUID")) {
-//                return tag.getUUID("UUID");
-//            }
+            try (InputStream is = Files.newInputStream(file)) {
+                CompoundTag tag = NbtIo.readCompressed(is, NbtAccounter.unlimitedHeap());
+                if (tag != null && tag.hasUUID("UUID")) {
+                    return tag.getUUID("UUID");
+                }
+            }
         }
 
-        createWorldUUID(file.toFile());
-        return getWorldUUID(worldDir);
+        return createWorldUUID(file);
     }
 
-    private static void createWorldUUID(File file) {
-        try {
-            UUID uuid = UUID.randomUUID();
-            CompoundTag tag = new CompoundTag();
-            tag.putUUID("UUID", uuid);
-//            NbtIo.writeCompressed(tag, file);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+    private static UUID createWorldUUID(Path file) throws IOException {
+        UUID uuid = UUID.randomUUID();
+        CompoundTag tag = new CompoundTag();
+        tag.putUUID("UUID", uuid);
+
+        Files.createDirectories(file.getParent());
+        try (OutputStream os = Files.newOutputStream(file)) {
+            NbtIo.writeCompressed(tag, os);
         }
+        return uuid;
     }
 
     private void loadLevelDat() {
-//        Path levelDatPath = this.levelAccess.getLevelPath(LevelResource.LEVEL_DATA_FILE);
-//
-//        if (levelDatPath.toString().endsWith(".zip")) {
-//            try (ZipFile zip = new ZipFile(levelDatPath.toFile()); InputStream is = zip.getInputStream(zip.getEntry("level.dat"))) {
-//                this.levelData = NbtIo.readCompressed(is);
-//            } catch (Exception ignored) {}
-//        } else {
-//            try {
-//                File levelDatFile = levelDatPath.toFile();
-//                this.levelData = NbtIo.readCompressed(levelDatFile);
-//            } catch (IOException ignored) {}
-//        }
+        Path levelDatPath = this.levelAccess.getLevelPath(LevelResource.LEVEL_DATA_FILE);
+
+        try {
+            if (Files.exists(levelDatPath)) {
+                if (levelDatPath.toString().endsWith(".zip")) {
+                    try (ZipFile zip = new ZipFile(levelDatPath.toFile())) {
+                        ZipEntry entry = zip.getEntry("level.dat");
+                        if (entry != null) {
+                            try (InputStream is = zip.getInputStream(entry)) {
+                                this.levelData = NbtIo.readCompressed(is, NbtAccounter.unlimitedHeap());
+                            }
+                        }
+                    }
+                } else {
+                    try (InputStream is = Files.newInputStream(levelDatPath)) {
+                        this.levelData = NbtIo.readCompressed(is, NbtAccounter.unlimitedHeap());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            this.levelData = new CompoundTag();
+        }
     }
 
     private void loadStats() {
         try {
-            File root = this.levelAccess.getLevelPath(LevelResource.ROOT).toFile().getCanonicalFile();
-            File stats = new File(new File(root, "stats"), Minecraft.getInstance().getUser().getXuid().get() + ".json");
+            Path statsDir = this.levelAccess.getLevelPath(LevelResource.ROOT).resolve("stats");
+            Path statsFile = statsDir.resolve(Minecraft.getInstance().getUser().getProfileId().toString() + ".json");
 
-            this.stats = new Gson().fromJson(new FileReader(stats), JsonObject.class).getAsJsonObject("stats");
-        } catch (Exception ignored) {}
+            if (Files.exists(statsFile)) {
+                try (Reader reader = Files.newBufferedReader(statsFile)) {
+                    this.stats = new Gson().fromJson(reader, JsonObject.class).getAsJsonObject("stats");
+                }
+            }
+        } catch (Exception e) {
+            this.stats = new JsonObject();
+        }
     }
 
     private Long getElementsCount(JsonObject object) {
+        if (object == null) return 0L;
         long sum = 0;
-
         for (Map.Entry<String, JsonElement> entry : object.entrySet()) {
             JsonElement elem = entry.getValue();
-
             if (elem.isJsonPrimitive() && elem.getAsJsonPrimitive().isNumber()) {
                 sum += elem.getAsInt();
             }
@@ -261,27 +301,18 @@ public class WorldInfoReader {
 
     private Long getDistanceByKey(String key) {
         try {
-            return this.stats.getAsJsonObject("minecraft:custom").getAsJsonPrimitive("minecraft:" + key + "_one_cm").getAsLong();
-        } catch (NullPointerException ex) {
+            JsonObject custom = this.stats.getAsJsonObject("minecraft:custom");
+            return custom.getAsJsonPrimitive("minecraft:" + key + "_one_cm").getAsLong();
+        } catch (Exception ex) {
             return 0L;
         }
     }
 
     public static String humanReadablePlayTime(long seconds) {
-        if (seconds < 0) return "-";
-
-        long[] units = {1, 60, 3600, 86400, 31536000};
-        String[] symbols = {"s", "m", "h", "d", "y"};
-
-        int exp = 0;
-
-        for (int i = units.length - 1; i >= 0; i--) {
-            if (seconds >= units[i]) {
-                exp = i;
-                break;
-            }
-        }
-
-        return String.format("%.2f%s", (double) seconds / units[exp], symbols[exp]);
+        if (seconds < 0) return "0s";
+        if (seconds < 60) return seconds + "s";
+        if (seconds < 3600) return (seconds / 60) + "m";
+        if (seconds < 86400) return (seconds / 3600) + "h";
+        return (seconds / 86400) + "d";
     }
 }
