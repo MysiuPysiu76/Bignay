@@ -6,13 +6,11 @@ import com.google.gson.GsonBuilder;
 import com.mysiupysiu.bignay.config.BignayConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtAccounter;
 import net.minecraft.nbt.NbtIo;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -239,23 +237,28 @@ public class ScreenshotsManager {
 
     public static String getSingleplayerWorldName(String worldFolderName) {
         try {
-            File savesFolder = new File(Minecraft.getInstance().gameDirectory, "saves");
-            File worldFolder = new File(savesFolder, worldFolderName);
-            File levelDat = new File(worldFolder, "level.dat");
+            Path savesFolder = Minecraft.getInstance().gameDirectory.toPath().resolve("saves");
+            Path worldFolder = savesFolder.resolve(worldFolderName);
+            Path levelDatPath = worldFolder.resolve("level.dat");
 
-            if (!levelDat.exists()) return worldFolderName;
+            if (!Files.exists(levelDatPath)) {
+                return worldFolderName;
+            }
 
-//            CompoundTag rootTag = NbtIo.readCompressed(levelDat);
-//            if (rootTag == null) return worldFolderName;
-//
-//            CompoundTag dataTag = rootTag.contains("Data") ? rootTag.getCompound("Data") : rootTag;
-//            if (dataTag.contains("LevelName")) {
-//                String levelName = dataTag.getString("LevelName");
-//                if (!levelName.isEmpty()) {
-//                    return levelName;
-//                }
-//            }
+            try (InputStream is = Files.newInputStream(levelDatPath)) {
+                CompoundTag rootTag = NbtIo.readCompressed(is, NbtAccounter.unlimitedHeap());
 
+                if (rootTag == null) return worldFolderName;
+
+                CompoundTag dataTag = rootTag.contains("Data", 10) ? rootTag.getCompound("Data") : rootTag;
+
+                if (dataTag.contains("LevelName", 8)) {
+                    String levelName = dataTag.getString("LevelName");
+                    if (!levelName.isEmpty()) {
+                        return levelName;
+                    }
+                }
+            }
             return worldFolderName;
         } catch (Exception e) {
             return worldFolderName;

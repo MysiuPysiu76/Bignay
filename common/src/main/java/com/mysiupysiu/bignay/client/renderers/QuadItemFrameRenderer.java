@@ -121,16 +121,7 @@ public class QuadItemFrameRenderer extends EntityRenderer<QuadItemFrameEntity> {
             poseStack.mulPose(Axis.ZP.rotationDegrees(rotDeg));
 
             int light = isGlow ? 0xF00080 : packedLight;
-            Minecraft.getInstance().getItemRenderer().renderStatic(
-                    stack,
-                    ItemDisplayContext.FIXED,
-                    light,
-                    OverlayTexture.NO_OVERLAY,
-                    poseStack,
-                    buffer,
-                    entity.level(),
-                    0
-            );
+            Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, light, OverlayTexture.NO_OVERLAY, poseStack, buffer, entity.level(), 0);
 
             poseStack.popPose();
         }
