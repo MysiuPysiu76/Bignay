@@ -1,11 +1,14 @@
 package com.mysiupysiu.bignay.utils.backups;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.nbt.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.Tag;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -26,12 +29,16 @@ public class Backups {
         try {
             if (!Files.exists(FILE)) return;
 
-//            CompoundTag root = NbtIo.readCompressed(FILE.toFile());
-//            ListTag list = root.getList("Backups", Tag.TAG_COMPOUND);
-//
-//            for (Tag t : list) {
-//                BACKUPS.add(BackupEntry.load((CompoundTag) t));
-//            }
+            try (InputStream is = Files.newInputStream(FILE)) {
+                CompoundTag root = NbtIo.readCompressed(is, NbtAccounter.unlimitedHeap());
+                if (root.contains("Backups", Tag.TAG_LIST)) {
+                    ListTag list = root.getList("Backups", Tag.TAG_COMPOUND);
+                    BACKUPS.clear();
+                    for (int i = 0; i < list.size(); i++) {
+                        BACKUPS.add(BackupEntry.load(list.getCompound(i)));
+                    }
+                }
+            }
         } catch (Exception e) {
             throw new RuntimeException("Failed to load backups.dat", e);
         }
@@ -47,7 +54,10 @@ public class Backups {
             }
 
             root.put("Backups", list);
-//            NbtIo.writeCompressed(root, FILE.toFile());
+
+            try (OutputStream os = Files.newOutputStream(FILE)) {
+                NbtIo.writeCompressed(root, os);
+            }
         } catch (Exception e) {
             throw new RuntimeException("Failed to save backups.dat", e);
         }
@@ -65,10 +75,6 @@ public class Backups {
     }
 
     public static BackupEntry getLatestBackupForWorld(UUID worldUUID) {
-        try {
-            return getBackupsForWorld(worldUUID).stream().max(Comparator.comparingLong(BackupEntry::created)).get();
-        } catch (Exception e) {
-            return null;
-        }
+        return getBackupsForWorld(worldUUID).stream().max(Comparator.comparingLong(BackupEntry::created)).orElse(null);
     }
 }

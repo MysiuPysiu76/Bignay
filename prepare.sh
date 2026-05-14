@@ -5,10 +5,10 @@ PROCESS=$!
 sleep 15
 kill $PROCESS
 
-./gradlew :forge:runClient &
-PROCESS=$!
-sleep 15
-kill $PROCESS
+#./gradlew :forge:runClient &
+#PROCESS=$!
+#sleep 15
+#kill $PROCESS
 
 ./gradlew :neoforge:runClient &
 PROCESS=$!
