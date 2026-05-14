@@ -2,10 +2,13 @@ package com.mysiupysiu.bignay.utils.world;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtAccounter;
 import net.minecraft.nbt.NbtIo;
+import net.minecraft.nbt.Tag;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -15,25 +18,35 @@ public class CreatedWorldDate {
 
     public static void setCreatedDate(String levelId) {
         try {
-            Path world = Minecraft.getInstance().gameDirectory.toPath().resolve("saves").resolve(levelId);
-            Path dat = world.resolve("data").resolve("bignay.dat");
-            Path icon = world.resolve("icon.png");
+            Path worldPath = Minecraft.getInstance().gameDirectory.toPath().resolve("saves").resolve(levelId);
+            Path dataFolder = worldPath.resolve("data");
+            Path bignayDat = dataFolder.resolve("bignay.dat");
+            Path icon = worldPath.resolve("icon.png");
+
             long time;
 
             try {
-                BasicFileAttributes attr = Files.readAttributes(icon, BasicFileAttributes.class);
-                time = attr.creationTime().toMillis();
+                if (Files.exists(icon)) {
+                    BasicFileAttributes attr = Files.readAttributes(icon, BasicFileAttributes.class);
+                    time = attr.creationTime().toMillis();
+                } else {
+                    time = Instant.now().toEpochMilli();
+                }
             } catch (Exception ex) {
                 time = Instant.now().toEpochMilli();
             }
 
-            world.toFile().getParentFile().mkdir();
-            CompoundTag root = new CompoundTag();
+            if (!Files.exists(dataFolder)) {
+                Files.createDirectories(dataFolder);
+            }
 
+            CompoundTag root = new CompoundTag();
             root.putLong("CreatedDate", time);
-            dat.toFile().getParentFile().mkdir();
-            dat.toFile().createNewFile();
-//            NbtIo.writeCompressed(root, dat.toFile());
+
+            try (OutputStream os = Files.newOutputStream(bignayDat)) {
+                NbtIo.writeCompressed(root, os);
+            }
+
         } catch (Exception e) {
             LoggerFactory.getLogger(CreatedWorldDate.class).error("Could not save created world date: ", e);
         }
@@ -43,13 +56,17 @@ public class CreatedWorldDate {
         try {
             Path file = Minecraft.getInstance().gameDirectory.toPath().resolve("saves").resolve(levelId).resolve("data").resolve("bignay.dat");
 
-            if (!file.toFile().exists()) return null;
+            if (!Files.exists(file)) return null;
 
-//            CompoundTag root = NbtIo.readCompressed(file.toFile());
+            try (InputStream is = Files.newInputStream(file)) {
+                CompoundTag root = NbtIo.readCompressed(is, NbtAccounter.unlimitedHeap());
 
-//            return root.getLong("CreatedDate");
+                if (root != null && root.contains("CreatedDate", Tag.TAG_LONG)) {
+                    return root.getLong("CreatedDate");
+                }
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            LoggerFactory.getLogger(CreatedWorldDate.class).error("Error reading created world date: ", e);
             return null;
         }
         return null;
