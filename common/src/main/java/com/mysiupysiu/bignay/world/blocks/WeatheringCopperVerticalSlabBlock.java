@@ -1,12 +1,16 @@
 package com.mysiupysiu.bignay.world.blocks;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.Optional;
 
 public class WeatheringCopperVerticalSlabBlock extends VerticalSlabBlock implements WeatheringCopper {
 
@@ -29,31 +33,35 @@ public class WeatheringCopperVerticalSlabBlock extends VerticalSlabBlock impleme
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
-        if (rand.nextFloat() < 0.025) {
-//            getNextStageBlock().ifPresent(nextBlock -> {
-//                BlockState newState = nextBlock.defaultBlockState().setValue(VerticalSlabBlock.TYPE, state.getValue(VerticalSlabBlock.TYPE)).setValue(VerticalSlabBlock.WATERLOGGED, state.getValue(VerticalSlabBlock.WATERLOGGED));
-//                level.setBlock(pos, newState, 3);
-//            });
+        if (rand.nextFloat() < 0.025F) {
+            getNextStageBlock().ifPresent(nextBlock -> {
+                BlockState newState = nextBlock.defaultBlockState()
+                        .setValue(VerticalSlabBlock.TYPE, state.getValue(VerticalSlabBlock.TYPE))
+                        .setValue(VerticalSlabBlock.WATERLOGGED, state.getValue(VerticalSlabBlock.WATERLOGGED));
+
+                level.setBlock(pos, newState, 3);
+            });
         }
     }
 
-//    private Optional<Block> getNextStageBlock() {
-//        ResourceLocation id = ForgeRegistries.BLOCKS.getKey(this);
-//        if (id == null) return Optional.empty();
-//
-//        String path = id.getPath();
-//        String nextPath = getNextPath(path);
-//
-//        if (nextPath != null) {
-//            ResourceLocation nextId = new ResourceLocation(id.getNamespace(), nextPath);
-//            Block nextBlock = ForgeRegistries.BLOCKS.getValue(nextId);
-//
-//            if (nextBlock != null && nextBlock != net.minecraft.world.level.block.Blocks.AIR) {
-//                return Optional.of(nextBlock);
-//            }
-//        }
-//        return Optional.empty();
-//    }
+    private Optional<Block> getNextStageBlock() {
+        ResourceLocation id = BuiltInRegistries.BLOCK.getKey(this);
+
+        if (id == BuiltInRegistries.BLOCK.getDefaultKey()) return Optional.empty();
+
+        String path = id.getPath();
+        String nextPath = getNextPath(path);
+
+        if (nextPath != null) {
+            ResourceLocation nextId = new ResourceLocation(id.getNamespace(), nextPath);
+            Block nextBlock = BuiltInRegistries.BLOCK.get(nextId);
+
+            if (nextBlock != Blocks.AIR) {
+                return Optional.of(nextBlock);
+            }
+        }
+        return Optional.empty();
+    }
 
     private static String getNextPath(String currentPath) {
         return switch (currentPath) {
