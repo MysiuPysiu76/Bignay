@@ -82,7 +82,8 @@
     "minecraft:goat_horn",
     "minecraft:gold_nugget",
     "minecraft:golden_carrot",
-    "minecraft:grass",
+    "minecraft:tall_grass",
+    "minecraft:short_grass",
     "minecraft:gunpowder",
     "minecraft:hanging_roots",
     "minecraft:heart_of_the_sea",
@@ -216,6 +217,7 @@
     "bignay:mycelium_roots",
     "bignay:copper_horn",
     "bignay:knife",
-    "bignay:gold_bars"
+    "bignay:gold_bars",
+    "bignay:ancient_vines"
   ]
 }
