@@ -74,7 +74,7 @@ minecraft {
 mixin {
     add sourceSets.main, "${mod_id}.refmap.json"
 
-    config "bignay-common.mixins.json"
+    config "bignay.common.mixins.json"
     config "bignay.mixins.json"
 }
 

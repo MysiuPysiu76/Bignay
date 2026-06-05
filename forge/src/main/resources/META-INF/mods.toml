@@ -24,3 +24,9 @@ logoFile = "pack.png"
     versionRange = "${minecraft_version_range}"
     ordering = "NONE"
     side = "BOTH"
+
+[[mixins]]
+    config = "bignay.common.mixins.json"
+
+[[mixins]]
+    config = "bignay.mixins.json"
