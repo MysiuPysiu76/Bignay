@@ -56,3 +56,7 @@ allprojects {
         withSourcesJar()
     }
 }
+
+dependencies {
+    implementation project(':common')
+}

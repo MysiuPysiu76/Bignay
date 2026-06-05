@@ -33,7 +33,8 @@ dependencies {
 processResources {
     filesMatching("META-INF/mods.toml") {
         filter { String line ->
-            line.replace('${mod_version}',  project.mod_version.toString())
+            line.replace('${mod_version}', project.mod_version.toString())
+               .replace('${minecraft_version}', rootProject.minecraft_version)
         }
     }
 }
