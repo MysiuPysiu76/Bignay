@@ -5,128 +5,157 @@ import com.mysiupysiu.bignay.client.containers.ContainersManager;
 import com.mysiupysiu.bignay.utils.BignayNetworking;
 import com.mysiupysiu.bignay.utils.TotemClientHandler;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.simple.SimpleChannel;
-import net.neoforged.neoforge.network.NetworkRegistry;
-import net.neoforged.neoforge.network.NetworkEvent;
+import net.neoforged.neoforge.network.handling.PlayPayloadContext;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlerEvent;
+import net.neoforged.neoforge.network.registration.IPayloadRegistrar;
 
 public final class BignayPacketHandler {
 
-    private static final String PROTOCOL_VERSION = "1";
-    public static SimpleChannel INSTANCE;
-    private static int id = 0;
+    private BignayPacketHandler() {}
 
     public static void register() {
-        INSTANCE = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(BignayMod.MODID, "main")).networkProtocolVersion(() -> PROTOCOL_VERSION).clientAcceptedVersions(PROTOCOL_VERSION::equals).serverAcceptedVersions(PROTOCOL_VERSION::equals).simpleChannel();
-
-        INSTANCE.messageBuilder(SortPacket.class, id++).encoder(SortPacket::encode).decoder(SortPacket::decode).consumerMainThread(SortPacket::handle).add();
-
-        INSTANCE.messageBuilder(TransferPacket.class, id++).encoder(TransferPacket::encode).decoder(TransferPacket::decode).consumerMainThread(TransferPacket::handle).add();
-        INSTANCE.messageBuilder(WithdrawPacket.class, id++).encoder(WithdrawPacket::encode).decoder(WithdrawPacket::decode).consumerMainThread(WithdrawPacket::handle).add();
-
-        INSTANCE.messageBuilder(TotemActivationPacket.class, id++).encoder(TotemActivationPacket::encode).decoder(TotemActivationPacket::decode).consumerMainThread(TotemActivationPacket::handle).add();
-
         BignayNetworking.init(BignayPacketHandler::sendTotemActivation);
     }
 
+    public static void onRegisterPayloads(final RegisterPayloadHandlerEvent event) {
+        final IPayloadRegistrar registrar = event.registrar(BignayMod.MODID);
+
+        registrar.play(SortPacket.ID, SortPacket::new, handler -> handler.server(SortPacket::handle));
+
+        registrar.play(TransferPacket.ID, TransferPacket::new, handler -> handler.server(TransferPacket::handle));
+
+        registrar.play(WithdrawPacket.ID, WithdrawPacket::new, handler -> handler.server(WithdrawPacket::handle));
+
+        registrar.play(TotemActivationPacket.ID, TotemActivationPacket::new, handler -> handler.client(TotemActivationPacket::handle));
+    }
+
+    public static void sendToServer(CustomPacketPayload payload) {
+        PacketDistributor.SERVER.noArg().send(payload);
+    }
+
     public static void sendTotemActivation(ServerPlayer player, ItemStack stack) {
-        if (player != null && INSTANCE != null) {
-            INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new TotemActivationPacket(stack));
+        if (player == null || stack == null || stack.isEmpty()) return;
+        player.connection.send(new ClientboundCustomPayloadPacket(new TotemActivationPacket(stack)));
+    }
+
+    public record SortPacket(boolean isPlayerInventory) implements CustomPacketPayload {
+
+        public static final ResourceLocation ID = new ResourceLocation(BignayMod.MODID, "sort");
+
+        public SortPacket(final FriendlyByteBuf buf) {
+            this(buf.readBoolean());
+        }
+
+        @Override
+        public void write(final FriendlyByteBuf buf) {
+            buf.writeBoolean(isPlayerInventory);
+        }
+
+        @Override
+        public ResourceLocation id() {
+            return ID;
+        }
+
+        public static void handle(final SortPacket packet, final PlayPayloadContext context) {
+            context.workHandler().submitAsync(() -> {
+                context.player().ifPresent(player -> {
+                    if (player.containerMenu != null) {
+                        ContainersManager.sort(player.containerMenu, packet.isPlayerInventory);
+                        player.containerMenu.sendAllDataToRemote();
+                    }
+                });
+            });
         }
     }
 
-    public static class SortPacket {
-        private final boolean isPlayerInventory;
+    public record TransferPacket() implements CustomPacketPayload {
 
-        public SortPacket(boolean isPlayerInventory) {
-            this.isPlayerInventory = isPlayerInventory;
+        public static final ResourceLocation ID = new ResourceLocation(BignayMod.MODID, "transfer");
+
+        public TransferPacket(final FriendlyByteBuf buf) {
+            this();
         }
 
-        public static void encode(SortPacket msg, FriendlyByteBuf buf) {
-            buf.writeBoolean(msg.isPlayerInventory);
+        @Override
+        public void write(final FriendlyByteBuf buf) {
         }
 
-        public static SortPacket decode(FriendlyByteBuf buf) {
-            return new SortPacket(buf.readBoolean());
+        @Override
+        public ResourceLocation id() {
+            return ID;
         }
 
-        public static void handle(SortPacket msg, NetworkEvent.Context ctx) {
-            ctx.enqueueWork(() -> {
-                ServerPlayer player = ctx.getSender();
-                if (player != null && player.containerMenu != null) {
-                    ContainersManager.sort(player.containerMenu, msg.isPlayerInventory);
-                    player.containerMenu.sendAllDataToRemote();
-                }
+        public static void handle(final TransferPacket packet, final PlayPayloadContext context) {
+            context.workHandler().submitAsync(() -> {
+                context.player().ifPresent(player -> {
+                    if (player.containerMenu != null) {
+                        ContainersManager.transferToContainer(player.containerMenu);
+                        player.containerMenu.sendAllDataToRemote();
+                    }
+                });
             });
-            ctx.setPacketHandled(true);
         }
     }
 
-    public static class TransferPacket {
+    public record WithdrawPacket() implements CustomPacketPayload {
 
-        public static void encode(TransferPacket msg, FriendlyByteBuf buf) {}
+        public static final ResourceLocation ID = new ResourceLocation(BignayMod.MODID, "withdraw");
 
-        public static TransferPacket decode(FriendlyByteBuf buf) {
-            return new TransferPacket();
+        public WithdrawPacket(final FriendlyByteBuf buf) {
+            this();
         }
 
-        public static void handle(TransferPacket msg, NetworkEvent.Context ctx) {
-            ctx.enqueueWork(() -> {
-                ServerPlayer player = ctx.getSender();
-                if (player != null && player.containerMenu != null) {
-                    ContainersManager.transferToContainer(player.containerMenu);
-                    player.containerMenu.sendAllDataToRemote();
-                }
+        @Override
+        public void write(final FriendlyByteBuf buf) {
+        }
+
+        @Override
+        public ResourceLocation id() {
+            return ID;
+        }
+
+        public static void handle(final WithdrawPacket packet, final PlayPayloadContext context) {
+            context.workHandler().submitAsync(() -> {
+                context.player().ifPresent(player -> {
+                    if (player.containerMenu != null) {
+                        ContainersManager.transferToPlayer(player.containerMenu);
+                        player.containerMenu.sendAllDataToRemote();
+                    }
+                });
             });
-            ctx.setPacketHandled(true);
         }
     }
 
-    public static class WithdrawPacket {
+    public record TotemActivationPacket(ItemStack stack) implements CustomPacketPayload {
 
-        public static void encode(WithdrawPacket msg, FriendlyByteBuf buf) {}
-
-        public static WithdrawPacket decode(FriendlyByteBuf buf) {
-            return new WithdrawPacket();
+        public TotemActivationPacket {
+            stack = stack == null ? ItemStack.EMPTY : stack.copy();
         }
 
-        public static void handle(WithdrawPacket msg, NetworkEvent.Context ctx) {
-            ctx.enqueueWork(() -> {
-                ServerPlayer player = ctx.getSender();
-                if (player != null && player.containerMenu != null) {
-                    ContainersManager.transferToPlayer(player.containerMenu);
-                    player.containerMenu.sendAllDataToRemote();
-                }
-            });
-            ctx.setPacketHandled(true);
-        }
-    }
+        public static final ResourceLocation ID = new ResourceLocation(BignayMod.MODID, "totem_activation");
 
-    public static class TotemActivationPacket {
-        private final ItemStack stack;
-
-        public TotemActivationPacket(ItemStack stack) {
-            this.stack = stack == null ? ItemStack.EMPTY : stack.copy();
+        public TotemActivationPacket(final FriendlyByteBuf buf) {
+            this(buf.readItem());
         }
 
-        public static void encode(TotemActivationPacket msg, FriendlyByteBuf buf) {
-            buf.writeItem(msg.stack);
+        @Override
+        public void write(final FriendlyByteBuf buf) {
+            buf.writeItem(stack);
         }
 
-        public static TotemActivationPacket decode(FriendlyByteBuf buf) {
-            return new TotemActivationPacket(buf.readItem());
+        @Override
+        public ResourceLocation id() {
+            return ID;
         }
 
-        public static void handle(TotemActivationPacket msg, NetworkEvent.Context ctx) {
-            ctx.enqueueWork(() -> {
-                if (ctx.getDirection().getReceptionSide().isClient()) {
-                    TotemClientHandler.play(msg.stack);
-                }
-            });
-            ctx.setPacketHandled(true);
+        public static void handle(final TotemActivationPacket packet, final PlayPayloadContext context) {
+            context.workHandler().submitAsync(() -> TotemClientHandler.play(packet.stack));
         }
     }
 }

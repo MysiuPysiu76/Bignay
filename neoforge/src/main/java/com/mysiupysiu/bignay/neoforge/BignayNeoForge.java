@@ -17,6 +17,7 @@ public class BignayNeoForge {
         NeoForgeRegistry.register(bus);
         NeoForgeConfig.register(bus);
         BignayPacketHandler.register();
+        bus.addListener(BignayPacketHandler::onRegisterPayloads);
         BignayLootModifiers.register(bus);
         bus.addListener(Biomes::setup);
     }

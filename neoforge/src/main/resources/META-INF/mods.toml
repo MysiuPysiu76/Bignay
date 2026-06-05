@@ -13,14 +13,14 @@ logoFile = "pack.png"
 
 [[dependencies.bignay]]
     modId="neoforge"
-    mandatory=true
+    type="required"
     versionRange="[20.3.8-beta,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.bignay]]
     modId="minecraft"
-    mandatory=true
+    type="required"
     versionRange="[${minecraft_version}, 1.21)"
     ordering="NONE"
     side="BOTH"
