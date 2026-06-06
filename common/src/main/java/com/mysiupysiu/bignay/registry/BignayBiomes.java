@@ -10,7 +10,7 @@ import terrablender.api.Regions;
 
 public class BignayBiomes {
 
-    public static final ResourceKey<Biome> VERDANT_FOREST = ResourceKey.create(Registries.BIOME, new ResourceLocation(BignayMod.MODID, "verdant_forest"));
+    public static final ResourceKey<Biome> VERDANT_FOREST = ResourceKey.create(Registries.BIOME, ResourceLocation.tryBuild(BignayMod.MODID, "verdant_forest"));
 
     public static void register() {
         Regions.register(new VerdantForestBiome());

@@ -1,5 +1,6 @@
 package com.mysiupysiu.bignay.mixin;
 
+import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.config.BignayConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -40,7 +41,7 @@ public abstract class EndPodiumMixin {
             ServerLevel serverLevel = level.getLevel();
             StructureTemplateManager manager = serverLevel.getServer().getStructureManager();
 
-            ResourceLocation structureLocation = new ResourceLocation("bignay", "end_fountain");
+            ResourceLocation structureLocation = ResourceLocation.tryBuild(BignayMod.MODID, "end_fountain");
             Optional<StructureTemplate> templateOpt = manager.get(structureLocation);
 
             if (templateOpt.isPresent()) {

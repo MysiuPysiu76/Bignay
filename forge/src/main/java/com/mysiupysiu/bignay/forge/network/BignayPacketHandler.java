@@ -30,7 +30,7 @@ public final class BignayPacketHandler {
         if (registered) return;
         registered = true;
 
-        INSTANCE = ChannelBuilder.named(new ResourceLocation(BignayMod.MODID, "main")).networkProtocolVersion(PROTOCOL_VERSION).clientAcceptedVersions((status, version) ->
+        INSTANCE = ChannelBuilder.named(ResourceLocation.tryBuild(BignayMod.MODID, "main")).networkProtocolVersion(PROTOCOL_VERSION).clientAcceptedVersions((status, version) ->
                 version == PROTOCOL_VERSION).serverAcceptedVersions((status, version) -> version == PROTOCOL_VERSION).simpleChannel();
 
         INSTANCE.messageBuilder(SortPacket.class, id++, NetworkDirection.PLAY_TO_SERVER).encoder(SortPacket::encode).decoder(SortPacket::decode).consumerMainThread(SortPacket::handle).add();

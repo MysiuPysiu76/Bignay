@@ -14,7 +14,7 @@ public class QuadItemFrameModel<T extends QuadItemFrameEntity> extends EntityMod
 
     private final ModelPart model;
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(BignayMod.MODID, "textures/entity/quad_item_frame.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.tryBuild(BignayMod.MODID, "textures/entity/quad_item_frame.png");
 
     public QuadItemFrameModel(ModelPart root) {
         this.model = root.getChild("bb_main");

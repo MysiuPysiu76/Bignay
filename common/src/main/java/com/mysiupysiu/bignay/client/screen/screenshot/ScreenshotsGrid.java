@@ -248,7 +248,7 @@ public class ScreenshotsGrid extends ObjectSelectionList<ScreenshotsGrid.RowEntr
                             loading = false;
                             return;
                         }
-                        resource = new ResourceLocation(BignayMod.MODID, "thumb_" + UUID.randomUUID());
+                        resource = ResourceLocation.tryBuild(BignayMod.MODID, "thumb_" + UUID.randomUUID());
                         Minecraft.getInstance().getTextureManager().register(resource, new DynamicTexture(img));
                         loading = false;
                     });

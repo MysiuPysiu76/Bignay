@@ -41,7 +41,7 @@ public class FabricRegistry {
         for (Registrar.Entry<Block> entry : BignayBlocks.BLOCKS.getEntries()) {
             Block block = Registry.register(
                     BuiltInRegistries.BLOCK,
-                    new ResourceLocation(BignayMod.MODID, entry.getId()),
+                    ResourceLocation.tryBuild(BignayMod.MODID, entry.getId()),
                     entry.getSupplier().get());
             entry.set(block);
         }
@@ -51,7 +51,7 @@ public class FabricRegistry {
         for (Registrar.Entry<BlockEntityType<?>> entry : BignayBlockEntities.BLOCK_ENTITIES.getEntries()) {
             BlockEntityType<?> type = Registry.register(
                     BuiltInRegistries.BLOCK_ENTITY_TYPE,
-                    new ResourceLocation(BignayMod.MODID, entry.getId()),
+                    ResourceLocation.tryBuild(BignayMod.MODID, entry.getId()),
                     entry.getSupplier().get());
             entry.set(type);
         }
@@ -61,7 +61,7 @@ public class FabricRegistry {
         for (Registrar.Entry<Item> entry : BignayItems.ITEMS.getEntries()) {
             Item item = Registry.register(
                     BuiltInRegistries.ITEM,
-                    new ResourceLocation(BignayMod.MODID, entry.getId()),
+                    ResourceLocation.tryBuild(BignayMod.MODID, entry.getId()),
                     entry.getSupplier().get());
             entry.set(item);
         }
@@ -71,7 +71,7 @@ public class FabricRegistry {
         for (Registrar.Entry<EntityType<?>> entry : BignayEntities.ENTITIES.getEntries()) {
             EntityType<?> type = Registry.register(
                     BuiltInRegistries.ENTITY_TYPE,
-                    new ResourceLocation(BignayMod.MODID, entry.getId()),
+                    ResourceLocation.tryBuild(BignayMod.MODID, entry.getId()),
                     entry.getSupplier().get());
             entry.set(type);
         }
@@ -81,7 +81,7 @@ public class FabricRegistry {
         for (Registrar.Entry<SoundEvent> entry : BignaySounds.SOUNDS.getEntries()) {
             SoundEvent sound = Registry.register(
                     BuiltInRegistries.SOUND_EVENT,
-                    new ResourceLocation(BignayMod.MODID, entry.getId()),
+                    ResourceLocation.tryBuild(BignayMod.MODID, entry.getId()),
                     entry.getSupplier().get());
             entry.set(sound);
         }
@@ -91,7 +91,7 @@ public class FabricRegistry {
         for (Registrar.Entry<RecipeSerializer<?>> entry : BignayRecipes.RECIPES.getEntries()) {
             RecipeSerializer<?> recipe = Registry.register(
                     BuiltInRegistries.RECIPE_SERIALIZER,
-                    new ResourceLocation(BignayMod.MODID, entry.getId()),
+                    ResourceLocation.tryBuild(BignayMod.MODID, entry.getId()),
                     entry.getSupplier().get());
             entry.set(recipe);
         }
@@ -101,7 +101,7 @@ public class FabricRegistry {
         for (Registrar.Entry<Instrument> entry : BignayInstruments.INSTRUMENTS.getEntries()) {
             Instrument instrument = Registry.register(
                     BuiltInRegistries.INSTRUMENT,
-                    new ResourceLocation(BignayMod.MODID, entry.getId()),
+                    ResourceLocation.tryBuild(BignayMod.MODID, entry.getId()),
                     entry.getSupplier().get());
             entry.set(instrument);
         }
@@ -111,7 +111,7 @@ public class FabricRegistry {
         for (Registrar.Entry<ParticleType<?>> entry : BignayParticles.PARTICLES.getEntries()) {
             ParticleType<?> type = Registry.register(
                     BuiltInRegistries.PARTICLE_TYPE,
-                    new ResourceLocation(BignayMod.MODID, entry.getId()),
+                    ResourceLocation.tryBuild(BignayMod.MODID, entry.getId()),
                     entry.getSupplier().get());
             entry.set(type);
         }
@@ -121,7 +121,7 @@ public class FabricRegistry {
         for (Registrar.Entry<MenuType<?>> entry : BignayMenus.MENUS.getEntries()) {
             MenuType<?> menuType = Registry.register(
                     BuiltInRegistries.MENU,
-                    new ResourceLocation(BignayMod.MODID, entry.getId()),
+                    ResourceLocation.tryBuild(BignayMod.MODID, entry.getId()),
                     entry.getSupplier().get());
 
             entry.set(menuType);
@@ -132,7 +132,7 @@ public class FabricRegistry {
         for (Registrar.Entry<TreeDecoratorType<?>> entry : BignayTreeDecorators.DECORATORS.getEntries()) {
             TreeDecoratorType<?> registeredType = Registry.register(
                     BuiltInRegistries.TREE_DECORATOR_TYPE,
-                    new ResourceLocation(BignayMod.MODID, entry.getId()),
+                    ResourceLocation.tryBuild(BignayMod.MODID, entry.getId()),
                     entry.getSupplier().get());
             entry.set(registeredType);
         }

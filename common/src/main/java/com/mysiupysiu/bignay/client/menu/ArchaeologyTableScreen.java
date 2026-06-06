@@ -1,6 +1,7 @@
 package com.mysiupysiu.bignay.client.menu;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mysiupysiu.bignay.BignayMod;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -10,7 +11,7 @@ import net.minecraft.world.inventory.Slot;
 
 public class ArchaeologyTableScreen extends AbstractContainerScreen<ArchaeologyTableMenu> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation("bignay", "textures/gui/archaeology_table.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.tryBuild(BignayMod.MODID, "textures/gui/archaeology_table.png");
 
     public ArchaeologyTableScreen(ArchaeologyTableMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);

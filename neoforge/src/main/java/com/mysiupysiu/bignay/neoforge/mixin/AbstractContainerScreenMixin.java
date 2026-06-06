@@ -1,5 +1,6 @@
 package com.mysiupysiu.bignay.neoforge.mixin;
 
+import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.config.BignayConfig;
 import com.mysiupysiu.bignay.neoforge.network.BignayPacketHandler;
 import net.minecraft.client.gui.GuiGraphics;
@@ -26,11 +27,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMenu> extends Screen {
 
     @Unique
-    private static final ResourceLocation SORT_TEXTURE = new ResourceLocation("bignay", "textures/gui/widget/sort.png");
+    private static final ResourceLocation SORT_TEXTURE = ResourceLocation.tryBuild(BignayMod.MODID, "textures/gui/widget/sort.png");
     @Unique
-    private static final ResourceLocation UP_TEXTURE = new ResourceLocation("bignay", "textures/gui/widget/up.png");
+    private static final ResourceLocation UP_TEXTURE = ResourceLocation.tryBuild(BignayMod.MODID, "textures/gui/widget/up.png");
     @Unique
-    private static final ResourceLocation DOWN_TEXTURE = new ResourceLocation("bignay", "textures/gui/widget/down.png");
+    private static final ResourceLocation DOWN_TEXTURE = ResourceLocation.tryBuild(BignayMod.MODID, "textures/gui/widget/down.png");
 
     @Shadow protected int leftPos;
     @Shadow protected int topPos;

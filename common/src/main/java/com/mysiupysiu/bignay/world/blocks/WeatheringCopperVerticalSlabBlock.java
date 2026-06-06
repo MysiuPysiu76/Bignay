@@ -53,7 +53,7 @@ public class WeatheringCopperVerticalSlabBlock extends VerticalSlabBlock impleme
         String nextPath = getNextPath(path);
 
         if (nextPath != null) {
-            ResourceLocation nextId = new ResourceLocation(id.getNamespace(), nextPath);
+            ResourceLocation nextId = ResourceLocation.tryBuild(id.getNamespace(), nextPath);
             Block nextBlock = BuiltInRegistries.BLOCK.get(nextId);
 
             if (nextBlock != Blocks.AIR) {

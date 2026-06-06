@@ -17,8 +17,8 @@ import java.util.stream.IntStream;
 
 public class BignayLoadingScreen {
 
-    private static final ResourceLocation MOJ = new ResourceLocation(BignayMod.MODID, "textures/gui/title/moj.png");
-    private static final ResourceLocation ANG = new ResourceLocation(BignayMod.MODID, "textures/gui/title/ang.png");
+    private static final ResourceLocation MOJ = ResourceLocation.tryBuild(BignayMod.MODID, "textures/gui/title/moj.png");
+    private static final ResourceLocation ANG = ResourceLocation.tryBuild(BignayMod.MODID, "textures/gui/title/ang.png");
     private static final List<Integer> SEQUENCE = IntStream.range(-38, 38).map(Math::abs).boxed().toList();
 
     private static final double FPS = 25.0;

@@ -2,6 +2,7 @@ package com.mysiupysiu.bignay.world.items;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.registry.BignayBlocks;
 import com.mysiupysiu.bignay.registry.BignayItems;
 import com.mysiupysiu.bignay.world.items.tabs.BignayTabs;
@@ -126,7 +127,7 @@ public class KnifeItem extends Item implements CreativeTabProvider {
 
         String pumpkin = state.getBlock().getDescriptionId();
         String name = pattern.getName() + "_carved_" + pumpkin.substring(pumpkin.lastIndexOf(".") + 1);
-        ResourceLocation id = new ResourceLocation("bignay", name.toLowerCase());
+        ResourceLocation id = ResourceLocation.tryBuild(BignayMod.MODID, name.toLowerCase());
         Block result = BuiltInRegistries.BLOCK.get(id);
 
         if (result == Blocks.AIR) return Blocks.CARVED_PUMPKIN;

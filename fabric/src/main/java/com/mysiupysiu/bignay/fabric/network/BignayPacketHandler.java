@@ -1,5 +1,6 @@
 package com.mysiupysiu.bignay.fabric.network;
 
+import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.client.containers.ContainersManager;
 import com.mysiupysiu.bignay.utils.BignayNetworking;
 import net.fabricmc.api.EnvType;
@@ -14,10 +15,10 @@ import net.minecraft.world.item.ItemStack;
 
 public class BignayPacketHandler {
 
-    public static final ResourceLocation SORT = new ResourceLocation("bignay", "sort");
-    public static final ResourceLocation TRANSFER = new ResourceLocation("bignay", "transfer");
-    public static final ResourceLocation WITHDRAW = new ResourceLocation("bignay", "withdraw");
-    public static final ResourceLocation TOTEM_ACTIVATION = new ResourceLocation("bignay", "totem_activation");
+    public static final ResourceLocation SORT = resource("sort");
+    public static final ResourceLocation TRANSFER = resource("transfer");
+    public static final ResourceLocation WITHDRAW = resource("withdraw");
+    public static final ResourceLocation TOTEM_ACTIVATION = resource("totem_activation");
 
     public static void register() {
         BignayNetworking.init(BignayPacketHandler::sendTotemActivation);
@@ -63,6 +64,10 @@ public class BignayPacketHandler {
         FriendlyByteBuf buf = PacketByteBufs.create();
         buf.writeItem(stack.copy());
         ServerPlayNetworking.send(player, TOTEM_ACTIVATION, buf);
+    }
+
+    public static ResourceLocation resource(String id) {
+        return ResourceLocation.tryBuild(BignayMod.MODID, id);
     }
 
     public static class SortPacket {

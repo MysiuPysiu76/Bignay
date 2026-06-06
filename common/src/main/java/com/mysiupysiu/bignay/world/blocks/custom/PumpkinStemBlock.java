@@ -18,9 +18,9 @@ import java.util.function.Supplier;
 public class PumpkinStemBlock extends StemBlock {
 
     public PumpkinStemBlock(String fruit, String stem, String seeds) {
-        super(ResourceKey.create(Registries.BLOCK, new ResourceLocation(BignayMod.MODID, fruit)),
-                ResourceKey.create(Registries.BLOCK, new ResourceLocation(BignayMod.MODID, stem)),
-                ResourceKey.create(Registries.ITEM, new ResourceLocation(BignayMod.MODID, seeds)),
+        super(ResourceKey.create(Registries.BLOCK, ResourceLocation.tryBuild(BignayMod.MODID, fruit)),
+                ResourceKey.create(Registries.BLOCK, ResourceLocation.tryBuild(BignayMod.MODID, stem)),
+                ResourceKey.create(Registries.ITEM, ResourceLocation.tryBuild(BignayMod.MODID, seeds)),
                 Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.HARD_CROP).pushReaction(PushReaction.DESTROY));
     }
 }

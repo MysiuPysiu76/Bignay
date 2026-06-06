@@ -43,7 +43,7 @@ public abstract class AxeItemMixin {
 
         if (path.startsWith("waxed_")) {
             String unwaxedPath = path.substring(6);
-            Block unwaxedBlock = BuiltInRegistries.BLOCK.get(new ResourceLocation(namespace, unwaxedPath));
+            Block unwaxedBlock = BuiltInRegistries.BLOCK.get(ResourceLocation.tryBuild(namespace, unwaxedPath));
 
             if (unwaxedBlock != Blocks.AIR) {
                 newState = bignay$copyProperties(state, unwaxedBlock.defaultBlockState());
@@ -52,7 +52,7 @@ public abstract class AxeItemMixin {
         } else if (state.getBlock() instanceof WeatheringCopperVerticalSlabBlock) {
             String previousPath = bignay$getPreviousStage(path);
             if (previousPath != null) {
-                Block previousBlock = BuiltInRegistries.BLOCK.get(new ResourceLocation(namespace, previousPath));
+                Block previousBlock = BuiltInRegistries.BLOCK.get(ResourceLocation.tryBuild(namespace, previousPath));
                 if (previousBlock != Blocks.AIR) {
                     newState = bignay$copyProperties(state, previousBlock.defaultBlockState());
                     particleEvent = 3005;

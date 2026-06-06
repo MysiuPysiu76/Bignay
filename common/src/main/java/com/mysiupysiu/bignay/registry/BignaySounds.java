@@ -28,6 +28,6 @@ public class BignaySounds {
     }
 
     private static RegistrySupplier<SoundEvent> registerSound(String name) {
-        return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(BignayMod.MODID, name)));
+        return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(ResourceLocation.tryBuild(BignayMod.MODID, name)));
     }
 }

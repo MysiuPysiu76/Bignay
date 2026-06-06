@@ -52,7 +52,7 @@ public class AddItemRangeModifier extends LootModifier {
 
     private Item resolveItem(LootContext context) {
         if (this.targetId.startsWith("#")) {
-            ResourceLocation tagLoc = new ResourceLocation(this.targetId.substring(1));
+            ResourceLocation tagLoc = ResourceLocation.tryParse(this.targetId.substring(1));
             TagKey<Item> tagKey = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), tagLoc);
             ITag<Item> tag = ForgeRegistries.ITEMS.tags().getTag(tagKey);
 
@@ -61,7 +61,7 @@ public class AddItemRangeModifier extends LootModifier {
                 return itemsInTag.get(context.getRandom().nextInt(itemsInTag.size()));
             }
         } else {
-            ResourceLocation itemLoc = new ResourceLocation(this.targetId);
+            ResourceLocation itemLoc = ResourceLocation.tryParse(this.targetId);
             if (ForgeRegistries.ITEMS.containsKey(itemLoc)) {
                 return ForgeRegistries.ITEMS.getValue(itemLoc);
             }

@@ -135,7 +135,7 @@ public class ScreenshotViewScreen extends Screen {
             this.imgH = img.getHeight();
 
             DynamicTexture dynamicTexture = new DynamicTexture(img);
-            this.texture = new ResourceLocation(BignayMod.MODID, "screenshot_full_" + UUID.randomUUID());
+            this.texture = ResourceLocation.tryBuild(BignayMod.MODID, "screenshot_full_" + UUID.randomUUID());
 
             Minecraft.getInstance().getTextureManager().register(texture, dynamicTexture);
         } catch (Exception e) {

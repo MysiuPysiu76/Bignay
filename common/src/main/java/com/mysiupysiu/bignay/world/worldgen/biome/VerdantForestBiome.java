@@ -1,6 +1,7 @@
 package com.mysiupysiu.bignay.world.worldgen.biome;
 
 import com.mojang.datafixers.util.Pair;
+import com.mysiupysiu.bignay.BignayMod;
 import com.mysiupysiu.bignay.config.BignayConfig;
 import com.mysiupysiu.bignay.registry.BignayBiomes;
 import net.minecraft.core.Registry;
@@ -16,7 +17,7 @@ import java.util.function.Consumer;
 public class VerdantForestBiome extends Region {
 
     public VerdantForestBiome() {
-        super(new ResourceLocation("bignay", "nether_region"), RegionType.NETHER, 1);
+        super(ResourceLocation.tryBuild(BignayMod.MODID, "nether_region"), RegionType.NETHER, 1);
     }
 
     @Override

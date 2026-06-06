@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class GlowQuadItemFrameRenderer extends QuadItemFrameRenderer {
 
-    public static final ModelLayerLocation GLOW_QUAD_ITEM_FRAME_LAYER = new ModelLayerLocation(new ResourceLocation(BignayMod.MODID, "glow_quad_item_frame"), "main");
+    public static final ModelLayerLocation GLOW_QUAD_ITEM_FRAME_LAYER = new ModelLayerLocation(ResourceLocation.tryBuild(BignayMod.MODID, "glow_quad_item_frame"), "main");
 
     public GlowQuadItemFrameRenderer(EntityRendererProvider.Context ctx) {
         super(ctx, new QuadItemFrameModel(ctx.bakeLayer(GLOW_QUAD_ITEM_FRAME_LAYER)));

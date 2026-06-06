@@ -46,7 +46,7 @@ public final class BignayPacketHandler {
 
     public record SortPacket(boolean isPlayerInventory) implements CustomPacketPayload {
 
-        public static final ResourceLocation ID = new ResourceLocation(BignayMod.MODID, "sort");
+        public static final ResourceLocation ID = ResourceLocation.tryBuild(BignayMod.MODID, "sort");
 
         public SortPacket(final FriendlyByteBuf buf) {
             this(buf.readBoolean());
@@ -76,7 +76,7 @@ public final class BignayPacketHandler {
 
     public record TransferPacket() implements CustomPacketPayload {
 
-        public static final ResourceLocation ID = new ResourceLocation(BignayMod.MODID, "transfer");
+        public static final ResourceLocation ID = ResourceLocation.tryBuild(BignayMod.MODID, "transfer");
 
         public TransferPacket(final FriendlyByteBuf buf) {
             this();
@@ -105,7 +105,7 @@ public final class BignayPacketHandler {
 
     public record WithdrawPacket() implements CustomPacketPayload {
 
-        public static final ResourceLocation ID = new ResourceLocation(BignayMod.MODID, "withdraw");
+        public static final ResourceLocation ID = ResourceLocation.tryBuild(BignayMod.MODID, "withdraw");
 
         public WithdrawPacket(final FriendlyByteBuf buf) {
             this();
@@ -138,7 +138,7 @@ public final class BignayPacketHandler {
             stack = stack == null ? ItemStack.EMPTY : stack.copy();
         }
 
-        public static final ResourceLocation ID = new ResourceLocation(BignayMod.MODID, "totem_activation");
+        public static final ResourceLocation ID = ResourceLocation.tryBuild(BignayMod.MODID, "totem_activation");
 
         public TotemActivationPacket(final FriendlyByteBuf buf) {
             this(buf.readItem());

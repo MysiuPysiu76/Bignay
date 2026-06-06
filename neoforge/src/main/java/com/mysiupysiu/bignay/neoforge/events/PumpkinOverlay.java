@@ -17,7 +17,7 @@ import net.neoforged.neoforge.client.gui.overlay.VanillaGuiOverlay;
 @Mod.EventBusSubscriber(modid = BignayMod.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class PumpkinOverlay {
 
-    private static final ResourceLocation PUMPKIN_BLUR = new ResourceLocation("textures/misc/pumpkinblur.png");
+    private static final ResourceLocation PUMPKIN_BLUR = ResourceLocation.tryParse("textures/misc/pumpkinblur.png");
 
     @SubscribeEvent
     public static void onRenderGuiLayer(RenderGuiOverlayEvent.Pre event) {

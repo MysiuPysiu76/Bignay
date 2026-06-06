@@ -20,6 +20,6 @@ public class BignayPlacedFeatures {
     public static final ResourceKey<PlacedFeature> SWAMP_MUSHROOM = feature("swamp_mushroom");
 
     private static ResourceKey<PlacedFeature> feature(String id) {
-        return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(BignayMod.MODID, id));
+        return ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.tryBuild(BignayMod.MODID, id));
     }
 }

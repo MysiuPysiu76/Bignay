@@ -15,14 +15,14 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 public class LootModifiers {
 
-    private static final ResourceLocation ABANDONED_MINESHAFT = new ResourceLocation("minecraft", "chests/abandoned_mineshaft");
-    private static final ResourceLocation ANCIENT_CITY = new ResourceLocation("minecraft", "chests/ancient_city");
-    private static final ResourceLocation IGLOO_CHEST = new ResourceLocation("minecraft", "chests/igloo_chest");
-    private static final ResourceLocation JUNGLE_TEMPLE = new ResourceLocation("minecraft", "chests/jungle_temple");
-    private static final ResourceLocation PILLAGER_OUTPOST = new ResourceLocation("minecraft", "chests/pillager_outpost");
-    private static final ResourceLocation NETHER_BRIDGE = new ResourceLocation("minecraft", "chests/nether_bridge");
-    private static final ResourceLocation SIMPLE_DUNGEON = new ResourceLocation("minecraft", "chests/simple_dungeon");
-    private static final ResourceLocation WOODLAND_MANSION = new ResourceLocation("minecraft", "chests/woodland_mansion");
+    private static final ResourceLocation ABANDONED_MINESHAFT = ResourceLocation.tryParse("chests/abandoned_mineshaft");
+    private static final ResourceLocation ANCIENT_CITY = ResourceLocation.tryParse("chests/ancient_city");
+    private static final ResourceLocation IGLOO_CHEST = ResourceLocation.tryParse("chests/igloo_chest");
+    private static final ResourceLocation JUNGLE_TEMPLE = ResourceLocation.tryParse("chests/jungle_temple");
+    private static final ResourceLocation PILLAGER_OUTPOST = ResourceLocation.tryParse("chests/pillager_outpost");
+    private static final ResourceLocation NETHER_BRIDGE = ResourceLocation.tryParse("chests/nether_bridge");
+    private static final ResourceLocation SIMPLE_DUNGEON = ResourceLocation.tryParse("chests/simple_dungeon");
+    private static final ResourceLocation WOODLAND_MANSION = ResourceLocation.tryParse("chests/woodland_mansion");
 
     public static void register() {
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {

@@ -24,7 +24,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class QuadItemFrameRenderer extends EntityRenderer<QuadItemFrameEntity> {
 
-    public static final ModelLayerLocation QUAD_ITEM_FRAME_LAYER = new ModelLayerLocation(new ResourceLocation(BignayMod.MODID, "quad_item_frame"), "main");
+    public static final ModelLayerLocation QUAD_ITEM_FRAME_LAYER = new ModelLayerLocation(ResourceLocation.tryBuild(BignayMod.MODID, "quad_item_frame"), "main");
 
     private final QuadItemFrameModel model;
 

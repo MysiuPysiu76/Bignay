@@ -25,7 +25,7 @@ public class BignayTabs {
     public static final ResourceKey<CreativeModeTab> OP_BLOCKS = createKey("op_blocks");
 
     private static ResourceKey<CreativeModeTab> createKey(String string) {
-        ResourceKey<CreativeModeTab> tab = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(string));
+        ResourceKey<CreativeModeTab> tab = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.tryParse(string));
         TABS.add(tab);
         return tab;
     }
