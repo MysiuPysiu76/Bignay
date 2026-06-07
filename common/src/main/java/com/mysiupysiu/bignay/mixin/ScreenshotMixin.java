@@ -26,23 +26,33 @@ public abstract class ScreenshotMixin {
 
         if (file2 == null) return;
 
-        String finalName = file2.getName();
         Minecraft mc = Minecraft.getInstance();
 
-        if (mc.level == null) return;
+        if (mc.level == null || mc.player == null) return;
 
         try {
+            int x = mc.player.blockPosition().getX();
+            int y = mc.player.blockPosition().getY();
+            int z = mc.player.blockPosition().getZ();
+
+            String dimension = mc.level.dimension().location().toString();
+
+            ScreenshotsManager.Meta meta = new ScreenshotsManager.Meta();
+            meta.timestamp = System.currentTimeMillis();
+            meta.name = file2.getName();
+            meta.pos = new ScreenshotsManager.Meta.Position(x, y, z, dimension);
+
             if (mc.isLocalServer() && mc.getSingleplayerServer() != null) {
                 File worldDir = mc.getSingleplayerServer().getWorldPath(LevelResource.ROOT).normalize().toFile();
                 UUID worldUUID = WorldInfoReader.getWorldUUID(worldDir.toPath());
                 String folderName = worldDir.getName();
 
-                ScreenshotsManager.saveSingleplayerScreenshot(worldUUID, folderName, finalName);
+                ScreenshotsManager.saveSingleplayerScreenshot(worldUUID, folderName, meta);
             } else if (mc.getCurrentServer() != null) {
                 String ip = mc.getCurrentServer().ip;
                 String name = mc.getCurrentServer().name;
 
-                ScreenshotsManager.saveMultiplayerScreenshot(ip, name, finalName);
+                ScreenshotsManager.saveMultiplayerScreenshot(ip, name, meta);
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -24,9 +24,11 @@ public class ScreenshotsManager {
     private static final File SCREENSHOTS = new File(Minecraft.getInstance().gameDirectory, "screenshots.json");
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
+    private static final int CURRENT_FORMAT_VERSION = 2;
+
     public static class WorldScreenshots {
         public String folder;
-        public List<String> screenshots = new ArrayList<>();
+        public List<Meta> screenshots = new ArrayList<>();
     }
 
     private static class Sections {
@@ -35,18 +37,43 @@ public class ScreenshotsManager {
     }
 
     private static class Root {
+        public int version = CURRENT_FORMAT_VERSION;
         public Sections screenshots = new Sections();
     }
 
-    public static void saveSingleplayerScreenshot(UUID uuid, String folderName, String screenshotName) {
-        if (uuid == null || screenshotName == null) return;
+    public static class Meta {
+
+        public long timestamp;
+        public String name;
+        public Position pos;
+
+        public static class Position {
+
+            public int x;
+            public int y;
+            public int z;
+            public String dimension;
+
+            public Position() {}
+
+            public Position(int x, int y, int z, String dimension) {
+                this.x = x;
+                this.y = y;
+                this.z = z;
+                this.dimension = dimension;
+            }
+        }
+    }
+
+    public static void saveSingleplayerScreenshot(UUID uuid, String folderName, Meta meta) {
+        if (uuid == null || meta == null) return;
         String key = uuid.toString();
         try {
             Root root = readRoot();
             WorldScreenshots ws = root.screenshots.singleplayer.getOrDefault(key, new WorldScreenshots());
             ws.folder = folderName;
             if (ws.screenshots == null) ws.screenshots = new ArrayList<>();
-            ws.screenshots.add(screenshotName);
+            ws.screenshots.add(meta);
             root.screenshots.singleplayer.put(key, ws);
             writeRoot(root);
         } catch (IOException e) {
@@ -54,15 +81,15 @@ public class ScreenshotsManager {
         }
     }
 
-    public static void saveMultiplayerScreenshot(String ip, String name, String screenshotName) {
-        if (ip == null || screenshotName == null) return;
+    public static void saveMultiplayerScreenshot(String ip, String name, Meta meta) {
+        if (ip == null || meta == null) return;
         String key = normalizeIpKey(ip);
         try {
             Root root = readRoot();
             WorldScreenshots ws = root.screenshots.multiplayer.getOrDefault(key, new WorldScreenshots());
             ws.folder = name;
             if (ws.screenshots == null) ws.screenshots = new ArrayList<>();
-            ws.screenshots.add(screenshotName);
+            ws.screenshots.add(meta);
             root.screenshots.multiplayer.put(key, ws);
             writeRoot(root);
         } catch (IOException e) {
@@ -78,14 +105,16 @@ public class ScreenshotsManager {
         try {
             if (!Files.exists(SCREENSHOTS_DIR)) return Collections.emptyList();
             try (Stream<Path> stream = Files.list(SCREENSHOTS_DIR)) {
-                return stream.filter(p -> p.getFileName().toString().toLowerCase(Locale.ROOT).endsWith(".png")).sorted(getPathComparator()).collect(Collectors.toList());
+                return stream.filter(p -> p.getFileName().toString().toLowerCase(Locale.ROOT).endsWith(".png"))
+                        .sorted(getPathComparator())
+                        .collect(Collectors.toList());
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static List<String> getPerSingleplayer(UUID uuid) {
+    public static List<Meta> getPerSingleplayer(UUID uuid) {
         if (uuid == null) return Collections.emptyList();
         Root root = readRootNoThrow();
         WorldScreenshots ws = root.screenshots.singleplayer.get(uuid.toString());
@@ -93,7 +122,7 @@ public class ScreenshotsManager {
         return Collections.emptyList();
     }
 
-    public static List<String> getPerMultiplayer(String ip) {
+    public static List<Meta> getPerMultiplayer(String ip) {
         if (ip == null) return Collections.emptyList();
         String key = normalizeIpKey(ip);
         Root root = readRootNoThrow();
@@ -103,12 +132,14 @@ public class ScreenshotsManager {
     }
 
     public static List<Path> getPathsForSingleplayer(UUID uuid) {
-        List<String> names = getPerSingleplayer(uuid);
+        List<Meta> metas = getPerSingleplayer(uuid);
+        List<String> names = metas.stream().map(m -> m.name).collect(Collectors.toList());
         return namesToExistingPaths(names);
     }
 
     public static List<Path> getPathsForMultiplayer(String ip) {
-        List<String> names = getPerMultiplayer(ip);
+        List<Meta> metas = getPerMultiplayer(ip);
+        List<String> names = metas.stream().map(m -> m.name).collect(Collectors.toList());
         return namesToExistingPaths(names);
     }
 
@@ -134,7 +165,7 @@ public class ScreenshotsManager {
         return entries;
     }
 
-    public static int safeSize(List<String> l) {
+    public static int safeSize(List<?> l) {
         return l == null ? 0 : l.size();
     }
 
@@ -146,11 +177,10 @@ public class ScreenshotsManager {
 
             for (WorldScreenshots ws : root.screenshots.singleplayer.values()) {
                 if (ws.screenshots != null) {
-                    for (int i = 0; i < ws.screenshots.size(); i++) {
-                        if (oldName.equals(ws.screenshots.get(i))) {
-                            ws.screenshots.set(i, newName);
+                    for (Meta meta : ws.screenshots) {
+                        if (oldName.equals(meta.name)) {
+                            meta.name = newName;
                             changed = true;
-                            break;
                         }
                     }
                 }
@@ -158,11 +188,10 @@ public class ScreenshotsManager {
 
             for (WorldScreenshots ws : root.screenshots.multiplayer.values()) {
                 if (ws.screenshots != null) {
-                    for (int i = 0; i < ws.screenshots.size(); i++) {
-                        if (oldName.equals(ws.screenshots.get(i))) {
-                            ws.screenshots.set(i, newName);
+                    for (Meta meta : ws.screenshots) {
+                        if (oldName.equals(meta.name)) {
+                            meta.name = newName;
                             changed = true;
-                            break;
                         }
                     }
                 }
@@ -184,13 +213,13 @@ public class ScreenshotsManager {
 
             for (WorldScreenshots ws : root.screenshots.singleplayer.values()) {
                 if (ws.screenshots != null) {
-                    if (ws.screenshots.removeIf(toDelete::contains)) changed = true;
+                    if (ws.screenshots.removeIf(meta -> toDelete.contains(meta.name))) changed = true;
                 }
             }
 
             for (WorldScreenshots ws : root.screenshots.multiplayer.values()) {
                 if (ws.screenshots != null) {
-                    if (ws.screenshots.removeIf(toDelete::contains)) changed = true;
+                    if (ws.screenshots.removeIf(meta -> toDelete.contains(meta.name))) changed = true;
                 }
             }
 
@@ -204,7 +233,6 @@ public class ScreenshotsManager {
         tryDelete(List.of(name));
     }
 
-
     private static Root readRootNoThrow() {
         try {
             return readRoot();
@@ -217,20 +245,25 @@ public class ScreenshotsManager {
         if (!SCREENSHOTS.exists()) return new Root();
 
         try (FileReader reader = new FileReader(SCREENSHOTS)) {
-            Type type = new TypeToken<Root>() {
-            }.getType();
+            Type type = new TypeToken<Root>() {}.getType();
             Root data = GSON.fromJson(reader, type);
             if (data == null) return new Root();
+
+            if (data.version < CURRENT_FORMAT_VERSION) {
+                // Migration?
+                data.version = CURRENT_FORMAT_VERSION;
+            }
+
             if (data.screenshots == null) data.screenshots = new Sections();
             if (data.screenshots.singleplayer == null) data.screenshots.singleplayer = new HashMap<>();
             if (data.screenshots.multiplayer == null) data.screenshots.multiplayer = new HashMap<>();
+
             return data;
         } catch (Exception e) {
             try {
                 File backup = new File(SCREENSHOTS.getParentFile(), "screenshots_broken.json");
                 SCREENSHOTS.renameTo(backup);
-            } catch (Exception ignored) {
-            }
+            } catch (Exception ignored) {}
             return new Root();
         }
     }
@@ -268,6 +301,8 @@ public class ScreenshotsManager {
     private static void writeRoot(Root root) throws IOException {
         File parent = SCREENSHOTS.getParentFile();
         if (parent != null && !parent.exists()) parent.mkdirs();
+
+        root.version = CURRENT_FORMAT_VERSION;
 
         try (FileWriter writer = new FileWriter(SCREENSHOTS)) {
             GSON.toJson(root, writer);
