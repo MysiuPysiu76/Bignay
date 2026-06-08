@@ -1,8 +1,7 @@
 package com.mysiupysiu.bignay.utils.screenshot;
 
 import com.google.common.reflect.TypeToken;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import com.mysiupysiu.bignay.config.BignayConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
@@ -245,18 +244,32 @@ public class ScreenshotsManager {
         if (!SCREENSHOTS.exists()) return new Root();
 
         try (FileReader reader = new FileReader(SCREENSHOTS)) {
-            Type type = new TypeToken<Root>() {}.getType();
-            Root data = GSON.fromJson(reader, type);
-            if (data == null) return new Root();
+            JsonObject jsonObject = GSON.fromJson(reader, JsonObject.class);
+            if (jsonObject == null) return new Root();
 
-            if (data.version < CURRENT_FORMAT_VERSION) {
-                // Migration?
-                data.version = CURRENT_FORMAT_VERSION;
+            int version = jsonObject.has("version") ? jsonObject.get("version").getAsInt() : 1;
+
+            boolean migration = false;
+            if (version < CURRENT_FORMAT_VERSION && jsonObject.has("screenshots")) {
+                JsonObject screenshotsObj = jsonObject.getAsJsonObject("screenshots");
+
+                if (screenshotsObj.has("singleplayer")) {
+                    migration |= migrateSection(screenshotsObj.getAsJsonObject("singleplayer"));
+                }
+                if (screenshotsObj.has("multiplayer")) {
+                    migration |= migrateSection(screenshotsObj.getAsJsonObject("multiplayer"));
+                }
             }
 
+            Root data = GSON.fromJson(jsonObject, Root.class);
+            if (data == null) return new Root();
+
+            data.version = CURRENT_FORMAT_VERSION;
             if (data.screenshots == null) data.screenshots = new Sections();
             if (data.screenshots.singleplayer == null) data.screenshots.singleplayer = new HashMap<>();
             if (data.screenshots.multiplayer == null) data.screenshots.multiplayer = new HashMap<>();
+
+            if (migration) writeRoot(data);
 
             return data;
         } catch (Exception e) {
@@ -266,6 +279,50 @@ public class ScreenshotsManager {
             } catch (Exception ignored) {}
             return new Root();
         }
+    }
+
+    // Transform old String to new Meta object;
+    private static boolean migrateSection(JsonObject sectionObj) {
+        boolean anyChanges = false;
+
+        for (Map.Entry<String, JsonElement> entry : sectionObj.entrySet()) {
+            JsonObject worldObj = entry.getValue().getAsJsonObject();
+
+            if (worldObj.has("screenshots")) {
+                JsonArray oldScreenshots = worldObj.getAsJsonArray("screenshots");
+                JsonArray newScreenshots = new JsonArray();
+                boolean worldChanged = false;
+
+                for (JsonElement element : oldScreenshots) {
+                    if (element.isJsonPrimitive() && element.getAsJsonPrimitive().isString()) {
+                        String fileName = element.getAsString();
+
+                        JsonObject metaObj = new JsonObject();
+                        metaObj.addProperty("name", fileName);
+
+                        long timestamp = System.currentTimeMillis();
+                        Path filePath = SCREENSHOTS_DIR.resolve(fileName);
+                        if (Files.exists(filePath)) {
+                            try {
+                                timestamp = Files.getLastModifiedTime(filePath).toMillis();
+                            } catch (IOException ignored) {}
+                        }
+                        metaObj.addProperty("timestamp", timestamp);
+
+                        newScreenshots.add(metaObj);
+                        worldChanged = true;
+                        anyChanges = true;
+                    } else {
+                        newScreenshots.add(element);
+                    }
+                }
+
+                if (worldChanged) {
+                    worldObj.add("screenshots", newScreenshots);
+                }
+            }
+        }
+        return anyChanges;
     }
 
     public static String getSingleplayerWorldName(String worldFolderName) {
